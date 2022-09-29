@@ -145,7 +145,8 @@ const SalesCard = ({
                     // y: {
                     //   alias: '销售金额',
                     // },
-                    y: { sync: 'my' },
+                    y: {alias: '销售金额', 
+                        sync: 'my' },
                     my: { sync: true },
                   }}
                 />
