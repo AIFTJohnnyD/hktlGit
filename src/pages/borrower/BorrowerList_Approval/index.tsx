@@ -1,4 +1,4 @@
-import { Card, message, Row, Col, Table, Button, Descriptions } from 'antd';
+import { Card, message, Row, Col, Table, Button, Descriptions, Checkbox} from 'antd';
 import ProForm, {
   ProFormDateRangePicker,
   ProFormDependency,
@@ -21,7 +21,8 @@ import { parse } from 'querystring';
 import { CheckCircleTwoTone, ExclamationCircleTwoTone, CloseCircleTwoTone } from '@ant-design/icons';
 
 import type { BorrowerAmount, TableListItem, Shareholder_Person, Shareholder_Company, Director_Person, Director_Company } from './data';
-
+//引入状态控制
+import { useState } from 'react';
 
 const columns_views_doc: ProColumns<Shareholder_Person>[] = [
   {
@@ -240,6 +241,12 @@ var dictStatusAmount: any = {
 };
 
 const ApprovalForm: FC<Record<string, any>> = () => {
+  //控制提交按钮的disabled属性
+  const [disabled, setDisabled] = useState(true);
+  const onCheckboxChange = () => {
+    console.log('checked = ');
+    setDisabled(!disabled);}
+
   const { run } = useRequest(updateLoanApplication, {
     manual: true,
     onSuccess: () => {
@@ -250,7 +257,7 @@ const ApprovalForm: FC<Record<string, any>> = () => {
       });      
     },
   });
-
+   
   const waitTime = (time: number = 100) => {
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -306,10 +313,17 @@ const ApprovalForm: FC<Record<string, any>> = () => {
       submitter={{
         render: (props, doms) => {
           return [
-            <Button htmlType="button" onClick={onExit} key="exit">
-              退出
-            </Button>,
-            ...doms,
+            <button type="button" key="rest" onClick={() => props.form?.resetFields()}>
+              重置
+            </button>,
+            <button disabled ={disabled}
+              type="button" key="submit" onClick={() => props.form?.submit?.()}>
+              提交
+            </button>,
+            // <Button htmlType="button" onClick={onExit} key="exit">
+            //   退出
+            // </Button>,
+            // ...doms,
           ];
         },
       }}            
@@ -625,11 +639,35 @@ const ApprovalForm: FC<Record<string, any>> = () => {
                 rules={[{ required: false, message: '' }]}
               /> 
             </Col>            
-          </Row>          
+          </Row> 
+          {/* 用于添加新的button和box */}
+          <Row gutter={16}>
+            <Col xl={6} lg={6} md={12} sm={24}>
+            
+              <Button type="default" 
+                  // href="http://localhost:8000/application/borrower-analysis?borrower_id=1"
+                  onClick={() => {
+                    window.open("/application/borrower-analysis?borrower_id=1","KYCKYPWindow", "popup")
+                    // window.open("/application/borrower-analysis?borrower_id=1",'newwindow','height=800, width=1500, top=160, left=350, toolbar=no, menubar=no, status=no')
+                  }}>
+                  点击后查看KYCKYP然后才可以提交
+              </Button>
+            </Col>
+            <Col xl={{ span: 6, offset: 2 }} lg={{ span: 6 }} md={{ span: 12 }} sm={24}>
+              <Checkbox  
+                // hecked={checked} disabled={disabled} 
+                onChange={onCheckboxChange}
+                >
+                确认已经阅读KYCKYP
+              </Checkbox>
+            </Col>
+            <Col xl={{ span: 6, offset: 2 }} lg={{ span: 6 }} md={{ span: 24 }} sm={24}>
+            </Col>
+            
+          </Row>       
         </Card>      
 
       </Card>      
-
     </ProForm>
   );
 };
