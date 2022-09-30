@@ -26,7 +26,14 @@ import type { TableListItem } from './data';
 import { company} from './service';
 
 //打印company所产生的数据 最后修改完可以注释或者删除
-const dataSource_company = company();
+let dataSource_company = Array(0);
+
+company({}).then(res => {
+  console.log("获取promise中的值",res.data);
+  dataSource_company = res.data.slice(0,1);
+});
+
+
 console.log("dataSource_company",dataSource_company);
 
 function translate_index_name(index_name: string) {
@@ -130,20 +137,7 @@ const GD_LGD_index: ProColumns<TableListItem>[] = [
   {
     title: (<FormattedMessage id='pages.util.id'/>),
     dataIndex: 'key',
-    /*
-    render: (dom, entity) => {
-      return (
-        <a
-          onClick={() => {
-            setCurrentRow(entity);
-            setShowDetail(true);
-          }}
-        >
-          {dom}
-        </a>
-      );
-    },
-    */
+    
     sorter: (a, b) => a.key - b.key,
     readonly: true,
     width: '4%',
@@ -850,10 +844,13 @@ const ApprovalForm: FC<Record<string, any>> = () => {
             <div style={{ margin: 'auto', width: 1300 }}>
               <ProTable
                 columns={GD_LGD_index}
-                request={company}
+                dataSource = {dataSource_company}
+                // request={company}
                 // dataSource={data?.list_company_index}
                 size={'small'}
                 pagination={false}
+                toolBarRender={false}
+                search = {false}
               />
             </div>
           </Card>
