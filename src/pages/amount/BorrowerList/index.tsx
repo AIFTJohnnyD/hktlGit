@@ -17,6 +17,11 @@ import { request, FormattedMessage } from 'umi';
 import { EditTwoTone, ProfileTwoTone } from '@ant-design/icons';
 import { EditableProTable } from '@ant-design/pro-table';
 
+
+//打印company所产生的数据 最后修改完可以注释或者删除
+const dataSource_company = company();
+console.log("dataSource_company",dataSource_company);
+
 const handleUpdate = async (fields: FormValueType, currentRow?: TableListItem) => {
   const hide = message.loading('Updating');
 
@@ -382,7 +387,7 @@ const TableList: React.FC = () => {
             )            
           },
           onChange: setEditableRowKeys,
-          deleteText: " ",
+          deleteText: " ", 
         }}
         recordCreatorProps={false}                 
       />

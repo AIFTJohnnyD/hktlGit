@@ -16,11 +16,18 @@ import { PageContainer } from '@ant-design/pro-layout';
 import { updateLoanApplication } from './service';
 import styles from './style.less';
 
-import type { ProColumns } from '@ant-design/pro-table';
+import { ProColumns, ProTable } from '@ant-design/pro-table';
 import { parse } from 'querystring';
 import { CheckCircleTwoTone, ExclamationCircleTwoTone, CloseCircleTwoTone } from '@ant-design/icons';
 
 import type { ProductListItem } from './data';
+//增加的引入
+import type { TableListItem } from './data';
+import { company} from './service';
+
+//打印company所产生的数据 最后修改完可以注释或者删除
+const dataSource_company = company();
+console.log("dataSource_company",dataSource_company);
 
 function translate_index_name(index_name: string) {
   return <FormattedMessage id={'pages.application.index_name.' + index_name}/>;
@@ -112,6 +119,253 @@ const columns_index: ProColumns<ProductListItem>[] = [
       }
     },
   },
+];
+
+//新增的类型
+function translate_amount_status(status: string) {
+  return <FormattedMessage id={'pages.amount.borrower_list.amount_status.' + status}/>;
+}
+
+const GD_LGD_index: ProColumns<TableListItem>[] = [
+  {
+    title: (<FormattedMessage id='pages.util.id'/>),
+    dataIndex: 'key',
+    /*
+    render: (dom, entity) => {
+      return (
+        <a
+          onClick={() => {
+            setCurrentRow(entity);
+            setShowDetail(true);
+          }}
+        >
+          {dom}
+        </a>
+      );
+    },
+    */
+    sorter: (a, b) => a.key - b.key,
+    readonly: true,
+    width: '4%',
+  },
+  {
+    title: (<FormattedMessage id='pages.lender_form.company_name'/>),
+    dataIndex: 'name_cn',
+    valueType: 'textarea',
+    readonly: true,
+    width: '15%',
+    render: (dom, entity) => {
+      return (
+        <a href={"/application/borrower-analysis?borrower_id=" + entity.id}>
+          {dom}
+        </a>
+      );
+    },
+  },
+
+  {
+    title: (<FormattedMessage id='pages.amount.borrower_list.amount_limit'/>),
+    dataIndex: 'amount_limit',
+    valueType: {type: 'money', locale: "en-US"},
+    fieldProps: {precision: 0},
+    readonly: true,
+    width: '8%',
+  },
+
+  {
+    title: (<FormattedMessage id='pages.amount.borrower_list.half_month_cash_flow'/>),
+    dataIndex: 'half_month_cash_flow',
+    valueType: 'digit',
+    fieldProps: {precision: 0},
+    width: '8%',      
+  },
+
+  {
+    title: (<FormattedMessage id='pages.amount.borrower_list.approved_amount'/>),
+    dataIndex: 'approved_amount',
+    valueType: 'digit',
+    fieldProps: {precision: 0},
+    width: '8%',
+  },
+  {
+    title: (<FormattedMessage id='pages.amount.borrower_list.approved_number'/>),
+    dataIndex: 'approved_number',
+    valueType: 'digit',
+    readonly: true,
+    width: '4%',
+  },
+
+  {
+    title: (<FormattedMessage id='pages.amount.borrower_list.delinquent_amount'/>),
+    dataIndex: 'delinquent_amount',
+    valueType: {type: 'money', locale: "en-US"},
+    fieldProps: {precision: 0},
+    readonly: true,
+    width: '6%',
+  },
+  {
+    title: (<FormattedMessage id='pages.amount.borrower_list.delinquent_number'/>),
+    dataIndex: 'delinquent_number',
+    valueType: 'digit',
+    readonly: true,
+    width: '4%',      
+  },
+  
+  {
+    title: (<FormattedMessage id='pages.amount.borrower_list.repay_amount'/>),
+    dataIndex: 'repay_amount',
+    valueType: {type: 'money', locale: "en-US"},
+    fieldProps: {precision: 0},
+    readonly: true,
+    width: '6%',
+  },
+  {
+    title: (<FormattedMessage id='pages.amount.borrower_list.repay_number'/>),
+    dataIndex: 'repay_number',
+    valueType: 'digit',
+    readonly: true,
+    width: '4%',      
+  },
+
+  {
+    title: (<FormattedMessage id='pages.amount.borrower_list.available_amount'/>),
+    dataIndex: 'available_amount',
+    valueType: {type: 'money', locale: "en-US"},
+    fieldProps: {precision: 0},
+    readonly: true,
+    width: '6%',      
+  },
+  /*
+  {
+    title: (<FormattedMessage id='pages.util.status'/>),
+    dataIndex: 'status',
+    valueType: 'textarea',
+    render: (text, record, index) => {
+      return (translate_status(record?.status))
+    },      
+  },
+  */
+
+  {
+    title: (<FormattedMessage id='pages.amount.borrower_list.probability_of_default'/>),
+    dataIndex: 'probability_of_default',
+    valueType: 'digit',
+    readonly: true,
+    width: '4%',      
+  },
+  {
+    title: (<FormattedMessage id='pages.amount.borrower_list.loss_given_default'/>),
+    dataIndex: 'loss_given_default',
+    valueType: 'digit',
+    readonly: true,
+    width: '6%',      
+  },
+  {
+    title: (<FormattedMessage id='pages.amount.borrower_list.product_competitiveness'/>),
+    dataIndex: 'product_competitiveness',
+    valueType: 'digit',
+    readonly: true,
+    width: '4%',      
+  },
+
+  {
+    title: (<FormattedMessage id='pages.amount.borrower_list.amount_status'/>),
+    dataIndex: 'amount_status',
+    valueType: 'textarea',
+    render: (text, record, index) => {
+      return (translate_amount_status(record?.amount_status))
+    },
+    readonly: true,
+    width: '8%',              
+  },    
+
+  {
+    title: (<FormattedMessage id='pages.amount.borrower_list.loan_settlement_amount'/>),
+    dataIndex: 'loan_settlement_amount',
+    valueType: {type: 'money', locale: "en-US"},
+    readonly: true,
+    width: '5%',  
+  },
+  {
+    title: (<FormattedMessage id='pages.amount.borrower_list.loan_settlement_number'/>),
+    dataIndex: 'loan_settlement_number',
+    valueType: 'digit',
+    readonly: true,
+    width: '5%',  
+  },
+
+  {
+    title: (<FormattedMessage id='pages.amount.borrower_list.liquidated_amount'/>),
+    dataIndex: 'liquidated_amount',
+    valueType: {type: 'money', locale: "en-US"},
+    readonly: true,
+    width: '5%',  
+  },
+  {
+    title: (<FormattedMessage id='pages.amount.borrower_list.liquidated_number'/>),
+    dataIndex: 'liquidated_number',
+    valueType: 'digit',
+    readonly: true,
+    width: '5%',  
+  },
+
+  {
+    title: (<FormattedMessage id='pages.amount.borrower_list.created_date'/>),
+    dataIndex: 'created_date',
+    valueType: 'textarea',
+    readonly: true,
+    width: '5%',  
+  },  
+  {
+    title: (<FormattedMessage id='pages.amount.borrower_list.approved_date'/>),
+    dataIndex: 'approved_date',
+    valueType: 'textarea',
+    readonly: true,
+    width: '5%',  
+  },  
+
+  {
+    title: (<FormattedMessage id='pages.util.operation'/>),
+    dataIndex: 'option',
+    valueType: 'option',
+    width: '5%',
+    align: 'center',
+    render: (text, record, _, action) => [
+      <a
+        key="editable"
+        onClick={() => {
+          action?.startEditable?.(record.key);
+        }}
+      >
+        {/* <EditTwoTone /> */}
+        {/* <font color="red"> */}
+          {/* 编辑 */}
+          {/* <FormattedMessage id='pages.util.edit'/> */}
+        {/* </font> */}
+      </a>,
+    ],
+  },
+/*
+  {
+    title: (<FormattedMessage id='pages.util.operation'/>),
+    dataIndex: 'option',
+    valueType: 'option',
+    render: (_, record) => [
+      <a
+        key="config"
+        onClick={() => {
+          handleUpdateModalVisible(true);
+          setCurrentRow(record);
+        }}
+      >
+        <ProfileTwoTone />
+        <font color="red">
+          <FormattedMessage id='pages.util.approve'/>
+        </font>
+      </a>,
+    ],
+  },
+*/    
 ];
 
 const columns_sales_through: ProColumns<ProductListItem>[] = [
@@ -251,7 +505,8 @@ const ApprovalForm: FC<Record<string, any>> = () => {
       '/api/loan_application/get_loan_application_from_id?application_id=' + loan_application_id,
     );
   });
-  console.log(data)
+
+  console.log("从useRequest传来的data",data)
 
   const access = useAccess();
 
@@ -562,25 +817,7 @@ const ApprovalForm: FC<Record<string, any>> = () => {
         </Card>
         <p></p>          
         
-        {/* <Card
-          title="财务指标"
-          className={styles.card}
-          bordered={false}
-          size="small"
-          headStyle = {{color:'#2f54eb', fontSize: 16, fontWeight:'bold'}}
-        >
-          <Card title="" className={styles.card} bordered={false}>
-            <div style={{ margin: 'auto', width: 1300 }}>
-              <Table
-                columns={columns_index}
-                dataSource={data?.list_financial_index}
-                size={'small'}
-                pagination={false}
-              />
-            </div>
-          </Card>
-        </Card>
-        <p></p>           */}
+        
         <Card
           title="贷款表现指标"
           className={styles.card}
@@ -599,7 +836,33 @@ const ApprovalForm: FC<Record<string, any>> = () => {
             </div>
           </Card>
         </Card>
-        <p></p>          
+        <p></p>    
+
+
+        <Card
+          title="商户GD_LGD"
+          className={styles.card}
+          bordered={false}
+          size="small"
+          headStyle = {{color:'#2f54eb', fontSize: 16, fontWeight:'bold'}}
+        >
+          <Card title="" className={styles.card} bordered={false}>
+            <div style={{ margin: 'auto', width: 1300 }}>
+              <ProTable
+                columns={GD_LGD_index}
+                request={company}
+                // dataSource={data?.list_company_index}
+                size={'small'}
+                pagination={false}
+              />
+            </div>
+          </Card>
+        </Card>
+        <p></p>
+
+
+
+
         <Card 
           title="审批" 
           className={styles.card} 
