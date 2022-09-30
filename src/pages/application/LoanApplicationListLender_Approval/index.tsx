@@ -480,7 +480,7 @@ const ApprovalForm: FC<Record<string, any>> = () => {
   const onFinish = async (values: Record<string, any>) => {
     console.log(values)
     run(values);
-    await waitTime(1500);
+    await waitTime(15000);
     window.close();    
   };
   
