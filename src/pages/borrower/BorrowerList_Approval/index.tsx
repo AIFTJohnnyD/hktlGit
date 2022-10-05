@@ -279,11 +279,7 @@ const ApprovalForm: FC<Record<string, any>> = () => {
     window.close();    
   };
   
-  const onExit = () => {
-    window.opener = null;
-    window.open('', '_self');
-    window.close();
-  };
+
 
   let urlParams = parse(window.location.href.split('?')[1]);
   const borrower_id = urlParams.borrower_id;
@@ -322,10 +318,7 @@ const ApprovalForm: FC<Record<string, any>> = () => {
               type="button" key="submit" onClick={() => props.form?.submit?.()}>
               提交
             </button>,
-            // <Button htmlType="button" onClick={onExit} key="exit">
-            //   退出
-            // </Button>,
-            // ...doms,
+            
           ];
         },
       }}            
@@ -653,7 +646,7 @@ const ApprovalForm: FC<Record<string, any>> = () => {
                     if(checkBoxDisabled){
                       setCheckBoxDisabled(!checkBoxDisabled);
                     }
-                    window.open("/application/borrower-analysis?borrower_id=2","KYCKYPWindow", "popup")
+                    window.open('/application/borrower-analysis?borrower_id=1','KYCKYPwindow','height=800, width=1500, top=160, left=350, scrollbars =0 toolbar=no, menubar=no, status=no')
                     // window.open("/application/borrower-analysis?borrower_id=1",'newwindow','height=800, width=1500, top=160, left=350, toolbar=no, menubar=no, status=no')
                   }}>
                   点击后查看KYCKYP然后才可以提交

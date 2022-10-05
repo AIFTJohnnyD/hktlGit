@@ -140,7 +140,8 @@ const TableList: React.FC = () => {
           }}
           */
           onClick={() => {
-            window.open("/borrower/borrower-approval?borrower_id=" + record?.key,'newwindow','height=800, width=1500, top=160, left=350, toolbar=no, menubar=no, status=no')
+            window.open("/borrower/borrower-approval?borrower_id=" + record?.key,'newwindow','height=800, width=1500, top=160, left=350, toolbar=yes, menubar=yes, status=no')
+            // window.open("/application/borrower-analysis?borrower_id=1" ,'newwindow','height=800, width=1500, top=160, left=350, toolbar=yes, menubar=yes, status=no')
           }}         
         >
           <FormattedMessage id='pages.util.review'/>
