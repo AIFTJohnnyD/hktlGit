@@ -1,9 +1,5 @@
 import { Card, message, Row, Col, Table, Button } from 'antd';
 import ProForm, {
-  ProFormDateRangePicker,
-  ProFormDependency,
-  ProFormDigit,
-  ProFormRadio,
   ProFormSelect,
   ProFormText,
   ProFormTextArea,
@@ -12,14 +8,13 @@ import ProForm, {
 } from '@ant-design/pro-form';
 import { useRequest, history, request, FormattedMessage, useAccess } from 'umi';
 import type { FC } from 'react';
-import { PageContainer } from '@ant-design/pro-layout';
 import { updateLoanApplication } from './service';
 import styles from './style.less';
-
 import { ProColumns, ProTable } from '@ant-design/pro-table';
 import { parse } from 'querystring';
 import { CheckCircleTwoTone, ExclamationCircleTwoTone, CloseCircleTwoTone } from '@ant-design/icons';
 
+//ProductListItem  TableListItem 为数据类型
 import type { ProductListItem } from './data';
 //增加的引入
 import type { TableListItem } from './data';
@@ -845,7 +840,7 @@ const ApprovalForm: FC<Record<string, any>> = () => {
               <ProTable
                 columns={GD_LGD_index}
                 dataSource = {dataSource_company}
-                // request={company}
+                request={company}
                 // dataSource={data?.list_company_index}
                 size={'small'}
                 pagination={false}

@@ -243,6 +243,8 @@ var dictStatusAmount: any = {
 const ApprovalForm: FC<Record<string, any>> = () => {
   //控制提交按钮的disabled属性
   const [disabled, setDisabled] = useState(true);
+  const [checkBoxDisabled, setCheckBoxDisabled] = useState(true);
+
   const onCheckboxChange = () => {
     console.log('checked = ');
     setDisabled(!disabled);}
@@ -647,7 +649,11 @@ const ApprovalForm: FC<Record<string, any>> = () => {
               <Button type="default" 
                   // href="http://localhost:8000/application/borrower-analysis?borrower_id=1"
                   onClick={() => {
-                    window.open("/application/borrower-analysis?borrower_id=1","KYCKYPWindow", "popup")
+                    //点击按钮后保持checkBoxDisabled为false
+                    if(checkBoxDisabled){
+                      setCheckBoxDisabled(!checkBoxDisabled);
+                    }
+                    window.open("/application/borrower-analysis?borrower_id=2","KYCKYPWindow", "popup")
                     // window.open("/application/borrower-analysis?borrower_id=1",'newwindow','height=800, width=1500, top=160, left=350, toolbar=no, menubar=no, status=no')
                   }}>
                   点击后查看KYCKYP然后才可以提交
@@ -655,7 +661,8 @@ const ApprovalForm: FC<Record<string, any>> = () => {
             </Col>
             <Col xl={{ span: 6, offset: 2 }} lg={{ span: 6 }} md={{ span: 12 }} sm={24}>
               <Checkbox  
-                // hecked={checked} disabled={disabled} 
+                // hecked={checked} 
+                disabled={checkBoxDisabled} 
                 onChange={onCheckboxChange}
                 >
                 确认已经阅读KYCKYP
