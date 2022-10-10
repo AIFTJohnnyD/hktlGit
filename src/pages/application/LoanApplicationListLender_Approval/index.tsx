@@ -1,13 +1,14 @@
-import { Card, message, Row, Col, Table, Button } from 'antd';
+import { Card, message, Row, Col, Table, Button, InputNumber } from 'antd';
 import ProForm, {
   ProFormSelect,
   ProFormText,
   ProFormTextArea,
   ProFormMoney,
-  ProFormDatePicker,  
+  ProFormDatePicker,
+  ProFormInstance,  
 } from '@ant-design/pro-form';
 import { useRequest, history, request, FormattedMessage, useAccess } from 'umi';
-import type { FC } from 'react';
+import { FC, useRef } from 'react';
 import { updateLoanApplication } from './service';
 import styles from './style.less';
 import { ProColumns, ProTable } from '@ant-design/pro-table';
@@ -15,23 +16,15 @@ import { parse } from 'querystring';
 import { CheckCircleTwoTone, ExclamationCircleTwoTone, CloseCircleTwoTone } from '@ant-design/icons';
 
 //ProductListItem  TableListItem 为数据类型
-import type { ProductListItem } from './data';
+import type { ProductListItem, TableListItem } from './data';
 //增加的引入
-import type { TableListItem } from './data';
 import { company} from './service';
 
-//打印company所产生的数据 最后修改完可以注释或者删除
-let dataSource_company = Array(0);
-
-company({}).then(res => {
-  console.log("获取promise中的值",res.data);
-  dataSource_company = res.data.slice(0,1);
-});
 
 
-console.log("dataSource_company",dataSource_company);
-
+//对指标进行翻译
 function translate_index_name(index_name: string) {
+  console.log("translate_index_name的index_name:",index_name)
   return <FormattedMessage id={'pages.application.index_name.' + index_name}/>;
 }
 
@@ -77,7 +70,7 @@ const columns: ProColumns<ProductListItem>[] = [
     valueType: 'digit',
   }
 ];
-
+//第二个card 的列名称
 const columns_index: ProColumns<ProductListItem>[] = [
   {
     title: (<FormattedMessage id='pages.application.index_table.parameter_name'/>),
@@ -121,240 +114,6 @@ const columns_index: ProColumns<ProductListItem>[] = [
       }
     },
   },
-];
-
-//新增的类型
-function translate_amount_status(status: string) {
-  return <FormattedMessage id={'pages.amount.borrower_list.amount_status.' + status}/>;
-}
-
-const GD_LGD_index: ProColumns<TableListItem>[] = [
-  {
-    title: (<FormattedMessage id='pages.util.id'/>),
-    dataIndex: 'key',
-    
-    sorter: (a, b) => a.key - b.key,
-    readonly: true,
-    width: '4%',
-  },
-  {
-    title: (<FormattedMessage id='pages.lender_form.company_name'/>),
-    dataIndex: 'name_cn',
-    valueType: 'textarea',
-    readonly: true,
-    width: '15%',
-    render: (dom, entity) => {
-      return (
-        <a href={"/application/borrower-analysis?borrower_id=" + entity.id}>
-          {dom}
-        </a>
-      );
-    },
-  },
-
-  {
-    title: (<FormattedMessage id='pages.amount.borrower_list.amount_limit'/>),
-    dataIndex: 'amount_limit',
-    valueType: {type: 'money', locale: "en-US"},
-    fieldProps: {precision: 0},
-    readonly: true,
-    width: '8%',
-  },
-
-  {
-    title: (<FormattedMessage id='pages.amount.borrower_list.half_month_cash_flow'/>),
-    dataIndex: 'half_month_cash_flow',
-    valueType: 'digit',
-    fieldProps: {precision: 0},
-    width: '8%',      
-  },
-
-  {
-    title: (<FormattedMessage id='pages.amount.borrower_list.approved_amount'/>),
-    dataIndex: 'approved_amount',
-    valueType: 'digit',
-    fieldProps: {precision: 0},
-    width: '8%',
-  },
-  {
-    title: (<FormattedMessage id='pages.amount.borrower_list.approved_number'/>),
-    dataIndex: 'approved_number',
-    valueType: 'digit',
-    readonly: true,
-    width: '4%',
-  },
-
-  {
-    title: (<FormattedMessage id='pages.amount.borrower_list.delinquent_amount'/>),
-    dataIndex: 'delinquent_amount',
-    valueType: {type: 'money', locale: "en-US"},
-    fieldProps: {precision: 0},
-    readonly: true,
-    width: '6%',
-  },
-  {
-    title: (<FormattedMessage id='pages.amount.borrower_list.delinquent_number'/>),
-    dataIndex: 'delinquent_number',
-    valueType: 'digit',
-    readonly: true,
-    width: '4%',      
-  },
-  
-  {
-    title: (<FormattedMessage id='pages.amount.borrower_list.repay_amount'/>),
-    dataIndex: 'repay_amount',
-    valueType: {type: 'money', locale: "en-US"},
-    fieldProps: {precision: 0},
-    readonly: true,
-    width: '6%',
-  },
-  {
-    title: (<FormattedMessage id='pages.amount.borrower_list.repay_number'/>),
-    dataIndex: 'repay_number',
-    valueType: 'digit',
-    readonly: true,
-    width: '4%',      
-  },
-
-  {
-    title: (<FormattedMessage id='pages.amount.borrower_list.available_amount'/>),
-    dataIndex: 'available_amount',
-    valueType: {type: 'money', locale: "en-US"},
-    fieldProps: {precision: 0},
-    readonly: true,
-    width: '6%',      
-  },
-  /*
-  {
-    title: (<FormattedMessage id='pages.util.status'/>),
-    dataIndex: 'status',
-    valueType: 'textarea',
-    render: (text, record, index) => {
-      return (translate_status(record?.status))
-    },      
-  },
-  */
-
-  {
-    title: (<FormattedMessage id='pages.amount.borrower_list.probability_of_default'/>),
-    dataIndex: 'probability_of_default',
-    valueType: 'digit',
-    readonly: true,
-    width: '4%',      
-  },
-  {
-    title: (<FormattedMessage id='pages.amount.borrower_list.loss_given_default'/>),
-    dataIndex: 'loss_given_default',
-    valueType: 'digit',
-    readonly: true,
-    width: '6%',      
-  },
-  {
-    title: (<FormattedMessage id='pages.amount.borrower_list.product_competitiveness'/>),
-    dataIndex: 'product_competitiveness',
-    valueType: 'digit',
-    readonly: true,
-    width: '4%',      
-  },
-
-  {
-    title: (<FormattedMessage id='pages.amount.borrower_list.amount_status'/>),
-    dataIndex: 'amount_status',
-    valueType: 'textarea',
-    render: (text, record, index) => {
-      return (translate_amount_status(record?.amount_status))
-    },
-    readonly: true,
-    width: '8%',              
-  },    
-
-  {
-    title: (<FormattedMessage id='pages.amount.borrower_list.loan_settlement_amount'/>),
-    dataIndex: 'loan_settlement_amount',
-    valueType: {type: 'money', locale: "en-US"},
-    readonly: true,
-    width: '5%',  
-  },
-  {
-    title: (<FormattedMessage id='pages.amount.borrower_list.loan_settlement_number'/>),
-    dataIndex: 'loan_settlement_number',
-    valueType: 'digit',
-    readonly: true,
-    width: '5%',  
-  },
-
-  {
-    title: (<FormattedMessage id='pages.amount.borrower_list.liquidated_amount'/>),
-    dataIndex: 'liquidated_amount',
-    valueType: {type: 'money', locale: "en-US"},
-    readonly: true,
-    width: '5%',  
-  },
-  {
-    title: (<FormattedMessage id='pages.amount.borrower_list.liquidated_number'/>),
-    dataIndex: 'liquidated_number',
-    valueType: 'digit',
-    readonly: true,
-    width: '5%',  
-  },
-
-  {
-    title: (<FormattedMessage id='pages.amount.borrower_list.created_date'/>),
-    dataIndex: 'created_date',
-    valueType: 'textarea',
-    readonly: true,
-    width: '5%',  
-  },  
-  {
-    title: (<FormattedMessage id='pages.amount.borrower_list.approved_date'/>),
-    dataIndex: 'approved_date',
-    valueType: 'textarea',
-    readonly: true,
-    width: '5%',  
-  },  
-
-  {
-    title: (<FormattedMessage id='pages.util.operation'/>),
-    dataIndex: 'option',
-    valueType: 'option',
-    width: '5%',
-    align: 'center',
-    render: (text, record, _, action) => [
-      <a
-        key="editable"
-        onClick={() => {
-          action?.startEditable?.(record.key);
-        }}
-      >
-        {/* <EditTwoTone /> */}
-        {/* <font color="red"> */}
-          {/* 编辑 */}
-          {/* <FormattedMessage id='pages.util.edit'/> */}
-        {/* </font> */}
-      </a>,
-    ],
-  },
-/*
-  {
-    title: (<FormattedMessage id='pages.util.operation'/>),
-    dataIndex: 'option',
-    valueType: 'option',
-    render: (_, record) => [
-      <a
-        key="config"
-        onClick={() => {
-          handleUpdateModalVisible(true);
-          setCurrentRow(record);
-        }}
-      >
-        <ProfileTwoTone />
-        <font color="red">
-          <FormattedMessage id='pages.util.approve'/>
-        </font>
-      </a>,
-    ],
-  },
-*/    
 ];
 
 const columns_sales_through: ProColumns<ProductListItem>[] = [
@@ -452,7 +211,7 @@ const columns_sales_through: ProColumns<ProductListItem>[] = [
 
 ];
 
-const ApprovalForm: FC<Record<string, any>> = () => {
+const ApprovalForm: FC<Record<string, any>> =  () => {
   const { run } = useRequest(updateLoanApplication, {
     manual: true,
     onSuccess: () => {
@@ -487,7 +246,7 @@ const ApprovalForm: FC<Record<string, any>> = () => {
 
   let urlParams = parse(window.location.href.split('?')[1]);
   const loan_application_id = urlParams.loan_application_id;
-  console.log(loan_application_id);
+  console.log("loan_application_id",loan_application_id);
 
   const { data, error, loading } = useRequest(() => {
     return request(
@@ -496,6 +255,40 @@ const ApprovalForm: FC<Record<string, any>> = () => {
   });
 
   console.log("从useRequest传来的data",data)
+
+
+
+
+  const resulttest = useRequest(() => {
+    return request(
+      '/api/amount/list',
+    );
+  });
+  console.log("外面获取的resulttest",resulttest)
+
+let dataSource_company2 = {}
+let dataSource_company = resulttest.data;
+let approved_amount = 1211;
+const formRef = useRef<ProFormInstance>();
+//页面渲染的时间周期导致 approved_amount虽然更新了但是 页面并没有更新
+//react 生命周期
+if(typeof dataSource_company == "object"){
+dataSource_company = dataSource_company[0]
+approved_amount = dataSource_company.approved_amount
+formRef?.current?.setFieldsValue({
+  approved_amount: dataSource_company.approved_amount,
+  approved_number: dataSource_company.approved_number,
+  delinquent_amount: dataSource_company.approved_amount,
+  delinquent_number: dataSource_company.delinquent_number,
+  repay_amount: dataSource_company.repay_amount,
+  repay_number: dataSource_company.repay_number,
+  available_amount: dataSource_company.available_amount,
+  probability_of_default: dataSource_company.probability_of_default,
+  loss_given_default: dataSource_company.loss_given_default,
+});
+}
+
+
 
   const access = useAccess();
 
@@ -659,7 +452,6 @@ const ApprovalForm: FC<Record<string, any>> = () => {
       <ProForm
         layout="vertical"
         onFinish={onFinish}
-
         initialValues={data}
         params={data}
         request={(params) => {
@@ -806,7 +598,128 @@ const ApprovalForm: FC<Record<string, any>> = () => {
         </Card>
         <p></p>          
         
-        
+        <ProForm
+        layout="vertical"
+        formRef={formRef}
+        // value={dataSource_company}
+        initialValues={dataSource_company2}
+        name = "dataSource_company2"
+        // params={dataSource_company}
+        // request={(params) => {
+        //   return Promise.resolve({
+        //     data: params,
+        //     success: true,
+        //   })
+        // }}
+        // request={company}
+        // onFinish={onFinish}
+        >
+          <Card
+            title="GD_LGD"
+            className="styles.card"
+            bordered={false}
+            size= "small"
+            headStyle = {{color:'#2f54eb', fontSize: 16, fontWeight:'bold'}}
+            //style={{ width: 500 }}
+          >
+            <Row gutter={16}>
+              <Col span={6} push={1}>
+                <ProFormText
+                  initialValue={approved_amount}
+                  name="approved_amount"
+                  label={<FormattedMessage id='pages.amount.borrower_list.approved_amount'/>}
+                  width="md"
+                  disabled
+                />
+              </Col>
+              <Col span={6} push={1}>
+                <ProFormText
+                  name="approved_number"
+                  label={<FormattedMessage id="pages.amount.borrower_list.approved_number" />}
+                  width="md"
+                  disabled
+                // placeholder = {props.values.borrower_id?.toString()}
+                />
+              </Col>
+              <Col span={6} push={1}>
+                <ProFormText
+                  name="delinquent_amount"
+                  label={<FormattedMessage id="pages.amount.borrower_list.delinquent_amount" />}
+                  width="md"
+                  disabled
+                // placeholder = {props.values.borrower_name}
+                />
+              </Col>
+            </Row>
+
+            <Row gutter={16}>
+              <Col span={6} push={1}>
+                <ProFormText
+                  name="delinquent_number"
+                  label={<FormattedMessage id="pages.amount.borrower_list.delinquent_number" />}
+                  width="md"
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Please input the amount.',
+                    },
+                  ]}
+                  disabled
+                // placeholder = {props.values.amount?.toFixed(2)}
+                />
+              </Col>
+              <Col span={6} push={1}>
+                <ProFormText
+                  name="repay_amount"
+                  label={<FormattedMessage id="pages.amount.borrower_list.repay_amount" />}
+                  width="md"
+                  rules={[{ required: true, message: 'Please input the currency.' }]}
+                  disabled
+                // placeholder = {props.values.currency}
+                />
+              </Col>
+              <Col span={6} push={1}>
+                <ProFormText
+                  name="repay_number"
+                  label={<FormattedMessage id="pages.amount.borrower_list.repay_number" />}
+                  width="md"
+                  disabled
+                // placeholder = {props.values.purpose}
+                />
+              </Col>
+            </Row>
+
+            <Row gutter={16}>
+              <Col span={6} push={1}>
+                <ProFormText
+                  name="available_amount"
+                  label={<FormattedMessage id="pages.amount.borrower_list.available_amount" />}
+                  width="md"
+                  disabled
+                // placeholder = {props.values.created_date}
+                />
+              </Col>
+              <Col span={6} push={1}>
+                <ProFormText
+                  name="probability_of_default"
+                  width="md"
+                  label={<FormattedMessage id="pages.amount.borrower_list.probability_of_default" />}
+                  disabled
+                />
+              </Col>
+              <Col span={6} push={1}>
+                <ProFormText
+                  name="loss_given_default"
+                  width="md"
+                  label={<FormattedMessage id="pages.amount.borrower_list.loss_given_default" />}
+                  disabled
+                />
+              </Col>
+            </Row>
+          </Card>
+          <p></p> 
+        </ProForm>
+
         <Card
           title="贷款表现指标"
           className={styles.card}
@@ -826,34 +739,6 @@ const ApprovalForm: FC<Record<string, any>> = () => {
           </Card>
         </Card>
         <p></p>    
-
-
-        <Card
-          title="商户GD_LGD"
-          className={styles.card}
-          bordered={false}
-          size="small"
-          headStyle = {{color:'#2f54eb', fontSize: 16, fontWeight:'bold'}}
-        >
-          <Card title="" className={styles.card} bordered={false}>
-            <div style={{ margin: 'auto', width: 1300 }}>
-              <ProTable
-                columns={GD_LGD_index}
-                dataSource = {dataSource_company}
-                request={company}
-                // dataSource={data?.list_company_index}
-                size={'small'}
-                pagination={false}
-                toolBarRender={false}
-                search = {false}
-              />
-            </div>
-          </Card>
-        </Card>
-        <p></p>
-
-
-
 
         <Card 
           title="审批" 

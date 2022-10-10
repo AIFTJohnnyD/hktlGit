@@ -220,6 +220,25 @@ export default [
         path: '/application/borrower-analysis',
         component: './application/BorrowerAnalysis',
         access: 'canLenderAndAdmin',
+        // layout: {
+        //   hideMenu: true,
+        //   hideNav: true,
+        //   hideFooter: true,
+        // }, 
+      }, 
+      //用于给hktl展示的商户信息页面：隐藏菜单栏等      
+      {
+        name: 'analysis',
+        hideInMenu: true,
+        icon: 'smile',
+        path: '/application/borrower-analysis-test',
+        component: './application/BorrowerAnalysis',
+        access: 'canLenderAndAdmin',
+        layout: {
+          hideMenu: true,
+          hideNav: true,
+          hideFooter: true,
+        }, 
       },      
       {
         name: 'approval',

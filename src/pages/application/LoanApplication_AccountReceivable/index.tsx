@@ -66,12 +66,12 @@ const CompanyForm: FC<Record<string, any>> = () => {
     history.push('/application/loan-application-list-borrower');
   };
 
-  const { data, error, loading } = useRequest(() => {
+  var { data, error, loading } = useRequest(() => {
     return request(
       '/api/borrower/get_borrower_from_id',
     );
   });
-  console.log(data)
+  
   const access = useAccess();
 
   var checkMoney = (rule, value, callback) => {

@@ -646,7 +646,7 @@ const ApprovalForm: FC<Record<string, any>> = () => {
                     if(checkBoxDisabled){
                       setCheckBoxDisabled(!checkBoxDisabled);
                     }
-                    window.open('/application/borrower-analysis?borrower_id=1','KYCKYPwindow','height=800, width=1500, top=160, left=350, scrollbars =0 toolbar=no, menubar=no, status=no')
+                    window.open('/application/borrower-analysis-test?borrower_id=1','KYCKYPwindow','height=800, width=1500, top=160, left=350, scrollbars =no,toolbar=no, menuRender=false, status=no')
                     // window.open("/application/borrower-analysis?borrower_id=1",'newwindow','height=800, width=1500, top=160, left=350, toolbar=no, menubar=no, status=no')
                   }}>
                   点击后查看KYCKYP然后才可以提交
