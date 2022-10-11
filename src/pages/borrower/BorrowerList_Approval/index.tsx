@@ -24,6 +24,7 @@ import type { BorrowerAmount, TableListItem, Shareholder_Person, Shareholder_Com
 //引入状态控制
 import { useState } from 'react';
 
+
 const columns_views_doc: ProColumns<Shareholder_Person>[] = [
   {
     title: (<FormattedMessage id='pages.borrower_form.sha'  defaultMessage='文件类型'/>),
@@ -241,6 +242,8 @@ var dictStatusAmount: any = {
 };
 
 const ApprovalForm: FC<Record<string, any>> = () => {
+  //用于修改按钮的样式
+  const [Style, setStyle] = useState(false);
   //控制提交按钮的disabled属性
   const [disabled, setDisabled] = useState(true);
   const [checkBoxDisabled, setCheckBoxDisabled] = useState(true);
@@ -639,9 +642,10 @@ const ApprovalForm: FC<Record<string, any>> = () => {
           <Row gutter={16}>
             <Col xl={6} lg={6} md={12} sm={24}>
             
-              <Button type="default" 
+              <Button type={Style? 'default':'primary'} 
                   // href="http://localhost:8000/application/borrower-analysis?borrower_id=1"
                   onClick={() => {
+                    setStyle(!Style)
                     //点击按钮后保持checkBoxDisabled为false
                     if(checkBoxDisabled){
                       setCheckBoxDisabled(!checkBoxDisabled);
