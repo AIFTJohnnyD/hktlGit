@@ -307,7 +307,24 @@ export default {
   'pages.loan_application.repayment_plan': "還款安排",
   'pages.loan_application.repayment_installment_id': "分期編號",
   'pages.loan_application.repayment_amount': "金額",
-    
+
+  'pages.loan_application.repayment_status' : "還款狀態",
+  'pages.loan_application.repayment_id' : "融資編號",
+  'pages.loan_application.last_date' : "到期日",
+  'pages.loan_application.repayment_date' : "還款日期",
+  'pages.loan_application.interest_today' : "截至今天本息",
+  'pages.loan_application.interest_full' : "利息金額（截至全額還款日）",  
+  'pages.loan_application.interest_on_repayment' : "到期利息",
+  'pages.loan_application.overdue_penalty' : "罰息 (如果改貸款逾期)",
+  'pages.loan_application.repayment_history' : "還款記錄",
+  'pages.loan_application.outstanding_balance' : "未結餘額",
+  'pages.loan_application.repayment_repayment_amount' : "還款金額",
+  'pages.loan_application.repayment_proof' : "還款憑證",
+  'pages.loan_application.upload_proof' : "上傳",
+  'pages.loan_application.match_outstanding_amount' : "全部還款",
+  'pages.loan_application.please_enter_repayment_amount' : "請輸入還款金額",
+  'pages.loan_application.please_upload_payment_proof' : "請上傳還款憑證",
+  'pages.loan_application.repayment_installment_date' : "分期還款日期",
 
   'pages.loan_application.otb_plan': "採購計劃列表/貸款用途",
 
@@ -346,12 +363,13 @@ export default {
   'pages.loan_application_list.purpose': "貸款用途",
   'pages.loan_application_list.days': "貸款期限（天）",
   'pages.loan_application_list.amount_approved': "審批貸款金額",
-  'pages.loan_application_list.outstanding_balance': "未償貸款金額",
+  'pages.loan_application_list.outstanding_balance': "未償貸款本息",
   'pages.loan_application_list.day_approved': "審批貸款期限 (天)",
   //'pages.loan_application_list.loan_approval': "貸款批核",
 
   'pages.loan_application_list.annual_interest_rate_approved': "審批年利率",
   'pages.loan_application_list.number_of_installments_approved': "審批還款期數",
+  'pages.loan_application_list.penalty_annual_interest_rate': "罚息率",
 
   'pages.loan_application_list.loan_overdue': "是否逾期",
   'pages.loan_application_list.loan_overdue_amount': "逾期金額",
@@ -405,7 +423,7 @@ export default {
   'pages.application.DRAWDOWN': "放款",
 
   'pages.application.REPAID': "回款",
-  'pages.application.DELINQUENT': "欠款",
+  'pages.application.DELINQUENT': "逾期",
 
   'pages.application.LIQUIDATED': "清算",
   'pages.application.LOAN_SETTLEMENT': "結算完成",
@@ -414,6 +432,11 @@ export default {
 
   'pages.application.SUBMITTED': "提交",
   'pages.application.UNSUBMITTED': "取消",
+
+  'pages.application.PARTIAL_REPAYMENT' : "部分還款",
+  'pages.application.EARLY_REPAYMENT' : "提前還款",
+  'pages.application.FULL_REPAYMENT' : "到期日全額還款",
+  'pages.application.OVERDUE_REPAYMENT' : "逾期還款",
     
   //borrower-form
   //step 1
@@ -511,6 +534,7 @@ export default {
   'pages.borrower_form.store_info.seller_id': "賣家ID",
   'pages.borrower_form.store_info.mws_code': "MWS授權碼",
   'pages.borrower_form.store_info.area': "區域",
+  'pages.borrower_form.store_info.authorize': "亞馬遜API授信管理",
   'pages.borrower_form.store_info.payment_platform': "第三方支付平臺",
   'pages.borrower_form.store_info.bank_num': "店鋪對應之收款平臺賬號銀行戶口號碼",
   'pages.borrower_form.store_info.add_store': "添加店鋪",
@@ -584,6 +608,17 @@ export default {
   'pages.borrower_form.director.company.business_register_code': "內地公司統一社會信用代碼/香港公司商業登記號碼",
 
   'pages.borrower_form.director.company.address': "辦公地址",
+
+  //Borrower_Lender
+  'pages.borrower_form.account_receivable.amount_setting': "應收賬款融資審批",
+  'pages.borrower_form.account_receivable.amount_monthly_ratio': "額度和月平均銷售比例",
+  'pages.borrower_form.account_receivable.amount_limit': "審批額度",
+  'pages.borrower_form.account_receivable.amount_remain': "剩餘額度",
+  'pages.borrower_form.account_receivable.currency': "幣種",
+
+  'pages.borrower_form.account_receivable.duration': "期限 (天)",
+  'pages.borrower_form.account_receivable.annual_interest_rate': "年利率",
+  'pages.borrower_form.account_receivable.penalty_annual_interest_rate': "罰息率 (年)",
 
   //borrower-list
   'pages.borrower_list.borrower_list': "電商列表",
@@ -669,7 +704,7 @@ export default {
   'pages.platform.borrower.history_apply_times': "歷史申請貸款次數",  
   'pages.platform.borrower.history_apply_approval_times': "歷史申請貸款通過次數",  
 
-  'pages.postloan.repayment_installment': "分期還款",  
+  'pages.postloan.repayment_installment': "還款",  
   'pages.postloan.repayment_amount': "還款金額",  
 
   'pages.postloan.repayment_approval': "還款審批",  

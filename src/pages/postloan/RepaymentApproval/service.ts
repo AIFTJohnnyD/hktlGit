@@ -3,6 +3,32 @@
 import { request } from 'umi';
 import { TableListItem } from './data';
 
+/** 获取列表 GET /api/loan_application/repayment_approval */
+// export async function loanRepaymentApproval(
+//   params: {
+//     // query
+//     /** 当前的页码 */
+//     current?: number;
+//     /** 页面的容量 */
+//     pageSize?: number;
+//   },
+//   options?: { [key: string]: any },
+// ) {
+//   return request<{
+//     data: TableListItem[];
+//     /** 列表的内容总数 */
+//     total?: number;
+//     success?: boolean;
+//   }>('/api/loan_application/repayment_approval', {
+//     method: 'GET',
+//     params: {
+//       ...params,
+//     },
+//     ...(options || {}),
+//   });
+// }
+
+
 /** 获取列表 GET /api/loan_application/postloan */
 export async function loanApplicationPostloan(
   params: {

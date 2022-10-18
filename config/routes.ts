@@ -44,6 +44,12 @@ export default [
     redirect: '/welcome',
   },
   {
+    path: '/chatroom',
+    name: 'chatroom',
+    icon: 'smile',
+    component: './Chatroom',
+  },
+  {
     path: '/lender',
     name: 'lender',
     icon: 'table',
@@ -101,8 +107,8 @@ export default [
           hideMenu: true,
           hideNav: true,
           hideFooter: true,
-        },        
-      },      
+        },
+      },
     ],
   },
 
@@ -220,18 +226,13 @@ export default [
         path: '/application/borrower-analysis',
         component: './application/BorrowerAnalysis',
         access: 'canLenderAndAdmin',
-        // layout: {
-        //   hideMenu: true,
-        //   hideNav: true,
-        //   hideFooter: true,
-        // }, 
-      }, 
-      //用于给hktl展示的商户信息页面：隐藏菜单栏等      
+      },
+      //用于先查看KYC再审批额度，隐藏菜单栏显示
       {
         name: 'analysis',
         hideInMenu: true,
         icon: 'smile',
-        path: '/application/borrower-analysis-test',
+        path: '/application/borrower-analysis-amount-approval',
         component: './application/BorrowerAnalysis',
         access: 'canLenderAndAdmin',
         layout: {
@@ -239,7 +240,7 @@ export default [
           hideNav: true,
           hideFooter: true,
         }, 
-      },      
+      },         
       {
         name: 'approval',
         hideInMenu: true,
@@ -298,6 +299,22 @@ export default [
         access: 'canLender',
         path: '/postloan/repayment-approval',
         component: './postloan/RepaymentApproval',
+      },
+    ],
+  },
+
+  {
+    path: '/testing',
+    name: 'testing',
+    icon: 'table',
+    access: 'canLenderAndBorrowerAndAdmin',
+    routes: [
+      {
+        name: 'testing',
+        icon: 'table',
+        access: 'canLenderAndBorrowerAndAdmin',
+        path: '/testing',
+        component: './testing/testing',
       },
     ],
   },

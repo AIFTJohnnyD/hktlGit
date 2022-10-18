@@ -511,7 +511,6 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
                 valueEnum={{
                   USD: 'USD',
                   HKD: 'HKD',
-                  CNY: 'CNY',
                 }}
               />
             </Col>            

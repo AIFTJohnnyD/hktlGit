@@ -121,10 +121,8 @@ const SalesCard = ({
                       min: 0,
                       max: max
                     },
-                    //配合148行的meta实现隐藏右边轴
                     my: false
                   }}
-                  //修改图例的名字
                   legend={{
                     itemValue: {
                       formatter: (text, item) => {
@@ -142,11 +140,10 @@ const SalesCard = ({
                     }
                   }}
                   meta={{
-                    // y: {
-                    //   alias: '销售金额',
-                    // },
-                    y: {alias: '销售金额', 
-                        sync: 'my' },
+                    y: {
+                       alias: '销售金额',
+                       sync: 'my'
+                     },
                     my: { sync: true },
                   }}
                 />

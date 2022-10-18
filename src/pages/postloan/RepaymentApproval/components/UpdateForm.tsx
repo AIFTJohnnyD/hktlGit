@@ -1,5 +1,5 @@
-import React from 'react';
-import { Modal } from 'antd';
+import React, { useEffect, useRef, useState } from 'react';
+import { Form, Input, Modal } from 'antd';
 import ProForm, {
   ProFormSelect,
   ProFormText,
@@ -9,6 +9,7 @@ import ProForm, {
   ProFormDigit,
   ProFormMoney,
   ProFormDependency,
+  ProFormField,
 } from '@ant-design/pro-form';
 import type { TableListItem, RepaymentListItem } from '../data';
 
@@ -20,6 +21,7 @@ import ProTable from '@ant-design/pro-table';
 
 import { FormattedMessage } from 'umi';
 import { useAccess } from 'umi';
+import moment from 'moment';
 
 export type FormValueType = {
   target?: string;
@@ -38,7 +40,10 @@ export type UpdateFormProps = {
 
 function translate_status(status: string) {
   return <FormattedMessage id={'pages.application.' + status}/>;
-}  
+}
+function translate_boolean(strBool: string) {
+  return <FormattedMessage id={'pages.util.' + strBool}/>;
+}
 
 const columns_repayment: ProColumns<RepaymentListItem>[] = [
   {
@@ -50,43 +55,89 @@ const columns_repayment: ProColumns<RepaymentListItem>[] = [
     title: (<FormattedMessage id='pages.loan_application.repayment_amount'/>),
     dataIndex: 'amount',
     valueType: 'digit',
-  },         
-
+  },
   {
-    title: (<FormattedMessage id='pages.util.start_date'/>),
-    dataIndex: 'start_date',
+    title: (<FormattedMessage id='pages.loan_application.repayment_installment_date'/>),
+    dataIndex: 'created_datetime',
     valueType: 'textarea',
-  },         
-  {
-    title: (<FormattedMessage id='pages.util.end_date'/>),
-    dataIndex: 'end_date',
-    valueType: 'textarea',
-  },         
-
+    render: (text, record, index) => {
+      return moment(text).format("YYYY-MM-DD");
+    }
+  },
   {
     title: (<FormattedMessage id='pages.util.status'/>),
     dataIndex: 'status',
     valueType: 'textarea',
     render: (text, record, index) => {
       return (translate_status(record?.status))
-    },    
-  },         
+    },
+  },
   {
-    title: (<FormattedMessage id='pages.util.remark'/>),
-    dataIndex: 'remark',
-    valueType: 'textarea',
-  },           
+    title: (<FormattedMessage id='pages.loan_application.repayment_proof'/>),
+    dataIndex: 'name',
+    valueType: 'option',
+    render: (dom, obj) => {
+      obj.file_url = "http://localhost:8000/api/borrower/download_file?file_id=br_hk__9"
+      obj.file_name = "还款凭证.png"
+      return (
+        <>
+          <a href={obj.file_url} download={obj.file_name}>
+            {obj.file_name}
+          </a>
+          {/* <br/>
+          <a href={obj.file_url} download={obj.file_name}>
+            {obj.file_name}
+          </a> */}
+        </>
+      );
+    }, 
+  },    
 ];
 
 const UpdateForm: React.FC<UpdateFormProps> = (props) => {
-  var dictInstallment:any = {};
 
+  var pendingForApproval: any[] = [];
+  var installmentsApproved: any[] = [];
   for (let i = 0; i < props.values.list_replayment?.length; i++) {
     let item = props.values.list_replayment[i];
-    if (item.status != "ACCEPTED") {
-      dictInstallment[item.installment] = item.installment;
+    if (item.status !="ACCEPTED") {
+      pendingForApproval.push(item);
+      installmentsApproved.push(item.installment.toString())
     }
   }
+
+  function roundNumber(number: number) {
+    return Math.round(number * 100) / 100
+  }
+
+  function formatNumber(number: number) {
+    return "$"+roundNumber(number);
+  }
+
+  function isFullyRepaid() {
+    const statusesFullyRepaid = ["EARLY_REPAYMENT", "FULL_REPAYMENT", "OVERDUE_REPAYMENT"];
+    //const statusesNotFullyRepaid = ["DRAWDOWN", "PARTIAL REPAYMENT"];
+    return statusesFullyRepaid.includes(props.values.status);
+  }
+
+  function isOverdue() {
+    const statusesOverDue = ["DELINQUENT", "OVERDUE_REPAYMENT"];
+    return statusesOverDue.includes(props.values.status);
+  }
+
+  const year = 360;
+  const amountWithInterestRepayment = props.values.amount_approved + ((props.values.amount_approved * props.values.annual_interest_rate_approved * ((moment(props.values.end_date).diff(moment(props.values.start_date), 'days')) + 1)) / year);
+  
+  var outstandingBalance = props.values.today_balance;
+  var totalAmountApproved = outstandingBalance;
+  if (!isFullyRepaid()) {
+    for (let i = 0; i < props.values.list_replayment?.length; i++) {
+      let item = props.values.list_replayment[i];
+      if (item.status == "ACCEPTED") {
+        totalAmountApproved += item.amount;
+      }
+    }
+  }  
 
   return (
     <StepsForm
@@ -115,7 +166,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
       onFinish={props.onSubmit}
     >
 
-      <StepsForm.StepForm
+      {/* <StepsForm.StepForm
         title={<FormattedMessage id='pages.postloan.repayment_application'/>}
       >
         <Card title="" className={styles.card} bordered={false}>
@@ -132,6 +183,56 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
             </Col>
           </Row>
         </Card>
+      </StepsForm.StepForm> */}
+
+      <StepsForm.StepForm
+        title={<FormattedMessage id='pages.loan_application.repayment_plan'/>}
+      >
+        <Card title="" className={styles.card} bordered={false}>
+          <Row gutter={[16,24]}>
+            <Col span={12}>
+                <b><FormattedMessage id='pages.util.status'/></b><br/>{translate_status(props.values.status)}
+            </Col>
+            <Col span={12}>
+                <b>{<FormattedMessage id='pages.loan_application.repayment_id'/>}</b><br/>{props.values.key}
+            </Col>
+            <Col span={12}>
+                <b>{<FormattedMessage id='pages.loan_application.application_amount'/>}</b><br/>{formatNumber(props.values.amount_approved)}
+            </Col>
+            <Col span={12}>
+                <b>{<FormattedMessage id='pages.util.start_date'/>}</b><br/>{props.values.start_date_approved}
+            </Col>
+            <Col span={12}>
+                <b>{<FormattedMessage id='pages.loan_application_list.loan_overdue'/>}</b><br/>{translate_boolean(props.values.loan_overdue)}
+            </Col>
+            <Col span={12}>
+                <b>{<FormattedMessage id='pages.loan_application.repayment_date'/>}</b><br/>{props.values.end_date_approved}
+            </Col>
+            <Col span={12}>
+              <b>{<FormattedMessage id='pages.loan_application.interest_today'/>}</b><br/>{ formatNumber(totalAmountApproved) }
+            </Col>
+            <Col span={12}>
+              <b>{<FormattedMessage id='pages.loan_application.interest_on_repayment'/>}</b><br/>{formatNumber(amountWithInterestRepayment)}
+            </Col>
+            {(props.values.status == "DELINQUENT" || props.values.status == "OVERDUE_REPAYMENT") &&
+              <Col span={24}>
+                <b>{<FormattedMessage id='pages.loan_application.overdue_penalty'/>}</b><br/>{formatNumber(outstandingBalance)}
+              </Col>
+            }
+            <Col span={24}>
+                <b>{<FormattedMessage id='pages.loan_application.repayment_history'/>}</b>
+                <Table 
+                  columns={columns_repayment} 
+                  dataSource={props.values.list_replayment} 
+                  size={"small"}
+                  pagination={false}
+                />
+            </Col>
+            <Col span={24}>
+              <b>{<FormattedMessage id='pages.loan_application.outstanding_balance'/>}</b><br/>{formatNumber(outstandingBalance)}
+            </Col>
+          </Row>
+        </Card>
       </StepsForm.StepForm>
 
       <StepsForm.StepForm
@@ -141,91 +242,26 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
         title={<FormattedMessage id='pages.postloan.repayment_confirm_approved'/>}
       >            
         <Card title={<FormattedMessage id='pages.util.approved'/>} className={styles.card} bordered={false}>
-        <Row gutter={16}>
-            <Col xl={{ span: 16, offset: 0 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
-              <ProFormDependency name={['installments_approved']}>
-                  {({ installments_approved }) => {                      
-                      let totalAmount = 0;
-                      for (let i = 0; i < installments_approved?.length; i++) {
-                        totalAmount = totalAmount + props.values.list_replayment[installments_approved[i] - 1].amount;
-                      }
-
-                      if (totalAmount == 0) {
-                        totalAmount = null;
-                      }
-
-                      return (
-                        <div>
-                          <p>{<FormattedMessage id='pages.postloan.repayment_amount'/>} : {totalAmount}</p>
-                        </div>
-                      );
-                  }}
-              </ProFormDependency>              
-            </Col>            
-          </Row>			
-
-          <Row gutter={16}>
-            <Col xl={{ span: 16, offset: 0 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
-              <ProFormSelect
-                label={<FormattedMessage id='pages.loan_application.repayment_installment_id'/>}
-                width="md"
-                name="installments_approved"
-                rules={[{ required: false, message: '' }]}
-                valueEnum={dictInstallment}
-                mode="multiple"
-              />
+          <Row gutter={[16,24]}>
+            <Col span={24}>
+              <b>{<FormattedMessage id='pages.loan_application.outstanding_balance'/>}</b><br/>{formatNumber(outstandingBalance)}
             </Col>
-          </Row>
+            <Col span={24}>
+                <b>{<FormattedMessage id='pages.loan_application.pending_for_approval'/>}</b>
+                <Table 
+                  columns={columns_repayment} 
+                  dataSource={pendingForApproval} 
+                  size={"small"}
+                  pagination={false}
+                />
+                <Form.Item name="installments_approved" noStyle initialValue={installmentsApproved}>
+                  <Input type="hidden"></Input>
+                </Form.Item>
+            </Col>
+          </Row>			
         </Card>      
 
       </StepsForm.StepForm>
-
-      <StepsForm.StepForm
-        initialValues={{
-          remark: props.values.remark,
-        }}
-        title={<FormattedMessage id='pages.postloan.repayment_confirm_unapproved'/>}
-      >            
-        <Card title={<FormattedMessage id='pages.util.unapproved'/>} className={styles.card} bordered={false}>
-        <Row gutter={16}>
-            <Col xl={{ span: 16, offset: 0 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
-              <ProFormDependency name={['installments_unapproved']}>
-                  {({ installments_unapproved }) => {                      
-                      let totalAmount = 0;
-                      for (let i = 0; i < installments_unapproved?.length; i++) {
-                        totalAmount = totalAmount + props.values.list_replayment[installments_unapproved[i] - 1].amount;
-                      }
-
-                      if (totalAmount == 0) {
-                        totalAmount = null;
-                      }
-
-                      return (
-                        <div>
-                          <p>{<FormattedMessage id='pages.postloan.repayment_amount'/>} : {totalAmount}</p>
-                        </div>
-                      );
-                  }}
-              </ProFormDependency>              
-            </Col>            
-          </Row>			
-
-          <Row gutter={16}>
-            <Col xl={{ span: 16, offset: 0 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
-              <ProFormSelect
-                label={<FormattedMessage id='pages.loan_application.repayment_installment_id'/>}
-                width="md"
-                name="installments_unapproved"
-                rules={[{ required: false, message: '' }]}
-                valueEnum={dictInstallment}
-                mode="multiple"
-              />
-            </Col>
-          </Row>
-        </Card>      
-
-      </StepsForm.StepForm>
-
     </StepsForm>
   );
 };

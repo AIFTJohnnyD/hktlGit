@@ -21,9 +21,8 @@ import { parse } from 'querystring';
 import { CheckCircleTwoTone, ExclamationCircleTwoTone, CloseCircleTwoTone } from '@ant-design/icons';
 
 import type { BorrowerAmount, TableListItem, Shareholder_Person, Shareholder_Company, Director_Person, Director_Company } from './data';
-//引入状态控制
-import { useState } from 'react';
 
+import { useState } from 'react';
 
 const columns_views_doc: ProColumns<Shareholder_Person>[] = [
   {
@@ -262,7 +261,7 @@ const ApprovalForm: FC<Record<string, any>> = () => {
       });      
     },
   });
-   
+
   const waitTime = (time: number = 100) => {
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -282,20 +281,24 @@ const ApprovalForm: FC<Record<string, any>> = () => {
     window.close();    
   };
   
-
+  const onExit = () => {
+    window.opener = null;
+    window.open('', '_self');
+    window.close();
+  };
 
   let urlParams = parse(window.location.href.split('?')[1]);
   const borrower_id = urlParams.borrower_id;
-  console.log(borrower_id);
+  //console.log(borrower_id);
 
   const { data, error, loading } = useRequest(() => {
     return request(
       '/api/borrower/get_borrower_from_id?borrower_id=' + borrower_id,
     );
   });
-  console.log(data)
+  //console.log(data)
 
-  const access = useAccess();
+  //const access = useAccess();
 
   return (
     <ProForm
@@ -545,7 +548,6 @@ const ApprovalForm: FC<Record<string, any>> = () => {
                 valueEnum={{
                   USD: 'USD',
                   HKD: 'HKD',
-                  CNY: 'CNY',
                 }}
               />
             </Col>            
@@ -638,22 +640,19 @@ const ApprovalForm: FC<Record<string, any>> = () => {
               /> 
             </Col>            
           </Row> 
-          {/* 用于添加新的button和box */}
+
           <Row gutter={16}>
-            <Col xl={6} lg={6} md={12} sm={24}>
-            
+            <Col xl={6} lg={6} md={12} sm={24}>            
               <Button type={Style? 'default':'primary'} 
-                  // href="http://localhost:8000/application/borrower-analysis?borrower_id=1"
                   onClick={() => {
                     setStyle(!Style)
                     //点击按钮后保持checkBoxDisabled为false
                     if(checkBoxDisabled){
                       setCheckBoxDisabled(!checkBoxDisabled);
                     }
-                    window.open('/application/borrower-analysis-test?borrower_id=1','KYCKYPwindow','height=800, width=1500, top=160, left=350, scrollbars =no,toolbar=no, menuRender=false, status=no')
-                    // window.open("/application/borrower-analysis?borrower_id=1",'newwindow','height=800, width=1500, top=160, left=350, toolbar=no, menubar=no, status=no')
+                    window.open('/application/borrower-analysis-amount-approval?borrower_id=1','KYCKYPwindow','height=900, width=1720, top=80, left=200, scrollbars =no,toolbar=no, menuRender=false, status=no')
                   }}>
-                  点击后查看KYCKYP然后才可以提交
+                  请查看并确认客户KYC_KYP
               </Button>
             </Col>
             <Col xl={{ span: 6, offset: 2 }} lg={{ span: 6 }} md={{ span: 12 }} sm={24}>
@@ -662,7 +661,7 @@ const ApprovalForm: FC<Record<string, any>> = () => {
                 disabled={checkBoxDisabled} 
                 onChange={onCheckboxChange}
                 >
-                确认已经阅读KYCKYP
+                确认KYC_KYP
               </Checkbox>
             </Col>
             <Col xl={{ span: 6, offset: 2 }} lg={{ span: 6 }} md={{ span: 24 }} sm={24}>
@@ -672,6 +671,7 @@ const ApprovalForm: FC<Record<string, any>> = () => {
         </Card>      
 
       </Card>      
+
     </ProForm>
   );
 };

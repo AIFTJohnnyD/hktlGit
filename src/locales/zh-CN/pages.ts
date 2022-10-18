@@ -318,6 +318,24 @@ export default {
   'pages.loan_application.repayment_installment_id': "分期编号",
   'pages.loan_application.repayment_amount': "金额",
 
+  'pages.loan_application.repayment_status' : "还款状态",
+  'pages.loan_application.repayment_id' : "融资编号",
+  'pages.loan_application.last_date' : "到期日",
+  'pages.loan_application.repayment_date' : "还款日期",
+  'pages.loan_application.interest_today' : "截至今天本息",
+  'pages.loan_application.interest_full' : "全额还款日利息",
+  'pages.loan_application.interest_on_repayment' : "到期利息",
+  'pages.loan_application.overdue_penalty' : "罚息 (如果改贷款逾期)",
+  'pages.loan_application.repayment_history' : "还款记录",
+  'pages.loan_application.outstanding_balance' : "未结余额",
+  'pages.loan_application.repayment_repayment_amount' : "还款金额",
+  'pages.loan_application.repayment_proof' : "还款凭证",
+  'pages.loan_application.upload_proof' : "上传",
+  'pages.loan_application.match_outstanding_amount' : "全部还款",
+  'pages.loan_application.please_enter_repayment_amount' : "请输入还款金额",
+  'pages.loan_application.please_upload_payment_proof' : "请上传还款凭证",
+  'pages.loan_application.repayment_installment_date' : "分期还款日期",
+
   //loan-application-list
   'pages.loan_application_list.company_id': "公司编号",
   'pages.loan_application_list.loan_id': "贷款产品编号",
@@ -344,12 +362,13 @@ export default {
   'pages.loan_application_list.purpose': "贷款用途",
   'pages.loan_application_list.days': "贷款期限（天）",
   'pages.loan_application_list.amount_approved': "审批贷款金额",
-  'pages.loan_application_list.outstanding_balance': "未偿贷款金额",
+  'pages.loan_application_list.outstanding_balance': "未偿贷款本息",
   'pages.loan_application_list.day_approved': "审批贷款期限 (天)",
   //'pages.loan_application_list.loan_approval': "贷款批核",
   
   'pages.loan_application_list.annual_interest_rate_approved': "审批年利率",
   'pages.loan_application_list.number_of_installments_approved': "审批还款期数",
+  'pages.loan_application_list.penalty_annual_interest_rate': "罚息率",
 
   'pages.loan_application_list.loan_overdue': "是否逾期",
   'pages.loan_application_list.loan_overdue_amount': "逾期金额",
@@ -403,7 +422,7 @@ export default {
   'pages.application.DRAWDOWN': "放款",
 
   'pages.application.REPAID': "回款",
-  'pages.application.DELINQUENT': "欠款",
+  'pages.application.DELINQUENT': "逾期",
 
   'pages.application.LIQUIDATED': "清算",
   'pages.application.LOAN_SETTLEMENT': "结算完成",
@@ -412,6 +431,13 @@ export default {
 
   'pages.application.SUBMITTED': "提交",
   'pages.application.UNSUBMITTED': "取消",
+
+  'pages.application.PARTIAL_REPAYMENT' : "部分还款",
+  'pages.application.EARLY_REPAYMENT' : "提前还款",
+  'pages.application.FULL_REPAYMENT' : "到期日全额还款",
+  'pages.application.OVERDUE_REPAYMENT' : "逾期还款",
+
+
 
   //borrower-form
   //step 1
@@ -509,6 +535,7 @@ export default {
   'pages.borrower_form.store_info.seller_id': "卖家ID",
   'pages.borrower_form.store_info.mws_code': "MWS授权码",
   'pages.borrower_form.store_info.area': "区域",
+  'pages.borrower_form.store_info.authorize': "亚马逊API授信管理",
   'pages.borrower_form.store_info.payment_platform': "第三方支付平台",
   'pages.borrower_form.store_info.bank_num': "店铺对应之收款平台账号银行户口号码",
   'pages.borrower_form.store_info.add_store': "添加店铺",
@@ -678,7 +705,7 @@ export default {
   'pages.platform.borrower.history_apply_times': "历史申请贷款次数",  
   'pages.platform.borrower.history_apply_approval_times': "历史申请贷款通过次数",  
 
-  'pages.postloan.repayment_installment': "分期还款",  
+  'pages.postloan.repayment_installment': "还款",  
   'pages.postloan.repayment_amount': "还款金额",  
 
   'pages.postloan.repayment_approval': "还款审批",  

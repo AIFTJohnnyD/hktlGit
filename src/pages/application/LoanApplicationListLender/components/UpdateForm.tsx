@@ -544,9 +544,8 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
                 width="md"
                 rules={[{ required: true, message: 'Please input the currency.' }]}
                 valueEnum={{
-                  HKD: 'HKD',
-                  CNY: 'CNY',
                   USD: 'USD',
+                  HKD: 'HKD',
                 }}
                 disabled
               />              
@@ -742,9 +741,8 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
                 width="md"
                 rules={[{ required: true, message: 'Please input the currency.' }]}
                 valueEnum={{
-                  HKD: 'HKD',
-                  CNY: 'CNY',
                   USD: 'USD',
+                  HKD: 'HKD',
                 }}
                 disabled={bApproved}
               />              

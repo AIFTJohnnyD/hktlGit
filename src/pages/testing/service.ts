@@ -3,8 +3,8 @@
 import { request } from 'umi';
 import { TableListItem } from './data';
 
-/** 获取列表 GET /api/company */
-export async function company(
+/** 获取列表 GET /api/platform/loan_application_list */
+export async function borrowerList(
   params: {
     // query
     /** 当前的页码 */
@@ -19,7 +19,7 @@ export async function company(
     /** 列表的内容总数 */
     total?: number;
     success?: boolean;
-  }>('/api/amount/list', {
+  }>('/api/platform/borrower_list', {
     method: 'GET',
     params: {
       ...params,

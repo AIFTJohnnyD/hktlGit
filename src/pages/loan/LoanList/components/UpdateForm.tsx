@@ -149,9 +149,8 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
                 name="currency"
                 rules={[{ required: true, message: 'Please input the currency.' }]}
                 valueEnum={{
-                  HKD: 'HKD',
-                  CNY: 'CNY',
                   USD: 'USD',
+                  HKD: 'HKD',
                 }}
               />
             </Col>

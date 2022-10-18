@@ -218,10 +218,14 @@ const TableList: React.FC = () => {
       },
       {
         title: (<FormattedMessage id='pages.loan_application_list.outstanding_balance'/>),
-        dataIndex: 'outstanding_balance',
+        dataIndex: 'today_balance',
         valueType: {type: 'money', locale: "en-US"},
       },
-
+      {
+        title: (<FormattedMessage id='pages.util.start_date'/>),
+        dataIndex: 'start_date_approved',
+        valueType: 'textarea',
+      },
       {
         title: (<FormattedMessage id='pages.loan_application_list.day_approved'/>),
         dataIndex: 'day_approved',
@@ -233,8 +237,8 @@ const TableList: React.FC = () => {
         valueType: 'digit',
       },
       {
-        title: (<FormattedMessage id='pages.loan_application_list.number_of_installments'/>),
-        dataIndex: 'number_of_installments_approved',
+        title: (<FormattedMessage id='pages.loan_application_list.penalty_annual_interest_rate'/>),
+        dataIndex: 'penalty_annual_interest_rate',
         valueType: 'digit',
       },
 
@@ -246,11 +250,11 @@ const TableList: React.FC = () => {
           return (translate_boolean(record?.loan_overdue))
         },  
       },
-      {
-        title: (<FormattedMessage id='pages.loan_application_list.loan_overdue_amount'/>),
-        dataIndex: 'loan_overdue_amount',
-        valueType: 'textarea',
-      },
+      // {
+      //   title: (<FormattedMessage id='pages.loan_application_list.loan_overdue_amount'/>),
+      //   dataIndex: 'loan_overdue_amount',
+      //   valueType: 'textarea',
+      // },
       
       {
         title: (<FormattedMessage id='pages.util.status'/>),
@@ -296,9 +300,9 @@ const TableList: React.FC = () => {
           if (record?.status == "ACCEPTED" || record?.status == "UNACCEPTED"
             || record?.status == "GOODS_RECEIVED" || record?.status == "GOODS_DELIVERY"
             || record?.status == "ACCOUNT_RECEIVABLE_CONTROL" || record?.status == "ACCOUNT_RECEIVABLE_RELEASE"
-            || record?.status == "DRAWDOWN" 
             || record?.status == "REPAID" || record?.status == "DELINQUENT" 
             || record?.status == "LIQUIDATED" || record?.status == "LOAN_SETTLEMENT"
+            || record?.loan_overdue == "True"
             ) {
             return (
             <a

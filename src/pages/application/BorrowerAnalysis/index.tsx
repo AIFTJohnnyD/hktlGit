@@ -2,11 +2,23 @@ import type { FC } from 'react';
 import { useRequest } from 'umi';
 import { Suspense, useState } from 'react';
 import { EllipsisOutlined } from '@ant-design/icons';
-import { Col, Descriptions, Dropdown, Menu, Row, Card } from 'antd';
+import { Col, Descriptions, Dropdown, Menu, Row, Card, Slider } from 'antd';
 import { GridContent } from '@ant-design/pro-layout';
 import type { RadioChangeEvent } from 'antd/es/radio';
 import type { RangePickerProps } from 'antd/es/date-picker/generatePicker';
 import type moment from 'moment';
+
+import ProForm, {
+  ProFormSelect,
+  ProFormText,
+  ProFormTextArea,
+  ProFormMoney,
+  ProFormDatePicker,
+  ProFormDigit,
+  ProFormSlider,
+  ProFormInstance,
+  ProFormDependency,
+} from '@ant-design/pro-form';
 
 import OpenToBuyBank from './components/OpenToBuyBank';
 import OpenToBuyRow from './components/OpenToBuyRow';
@@ -34,9 +46,10 @@ import type { AnalysisData } from './data.d';
 import styles from './style.less';
 
 import {parse} from 'querystring'
-import { request } from 'umi';
+import { request, history } from 'umi';
 
 import { FormattedMessage } from 'umi';
+import { ptBRIntl } from '@ant-design/pro-table';
 
 type ProductAnalysisProps = {
   productAnalysis: AnalysisData;
@@ -48,11 +61,32 @@ const ProductAnalysis: FC<ProductAnalysisProps> = () => {
   //http://localhost:8000/company/company-analysis?seller_id=A1057FBD44ECMO
   //const { loading, data } = useRequest(fakeChartData);
   let urlParams = parse(window.location.href.split('?')[1])
+  console.log(urlParams)
   const borrower_id = urlParams.borrower_id;
-  //console.log(company_id);
-  const { data, error, loading } = useRequest(() => {
-    return request('/api/kyc/get_kyc?borrower_id='+ borrower_id);
+  let history = 0;
+  
+  if('history' in urlParams)
+    history = Number(urlParams.history);
+
+  console.log(borrower_id, history);
+  let { data, error, loading } = useRequest(() => {
+    //return request('/api/kyc/get_kyc?borrower_id='+ borrower_id);
+    return request('/api/kyc/get_kyc?borrower_id='+ borrower_id+'&history='+ history);
   });
+
+  // const SlideronChange = (newValue: number) => {
+  //   data = useRequest(() => {
+  //       return request('/api/kyc/get_kyc?borrower_id='+ borrower_id+'&history='+ newValue);
+  //   });
+  //   console.log(newValue);
+  //   console.log(data);
+  // };
+
+  const onSliderChange = async (values: Record<string, any>) => {
+    window.open("/application/loan-application-list-borrower", "_self");
+    //history.push('/application/loan-application-list-borrower');
+  };
+
   //console.log(data);
   if (data?.message == "Error") {
     return (
@@ -72,15 +106,80 @@ const ProductAnalysis: FC<ProductAnalysisProps> = () => {
     }
 
     return (
-      <GridContent>
-        <>      
+      <GridContent>        
+        <div>      
           <Suspense fallback={<PageLoading />}>
             <Descriptions title={company_name} />
           </Suspense>
+          <div className={styles.divline}></div>
+          <p></p>
 
-          {data?.list_otb_plan.length > 0 && <div>
-            <div className={styles.divline}></div>
+          <div style={{width:"1200px",height:"100px",margin:'20px'}}> 
+          <h3>请选择月份</h3>
+          <Slider
+            min = {0}
+            max = {12}
+            defaultValue = {12 - history}
+            onChange={async(newValue: number) => {
+              const months = 12 - newValue
+              window.open('/application/borrower-analysis?borrower_id='+ borrower_id+'&history='+ months, "_self");
+              // let newdata = request('/api/kyc/get_kyc?borrower_id='+ borrower_id);
+              // console.log(newdata);
+              // console.log(newValue);
+              // data.otb_plan_bank.profit_margin = newValue/12;
+              // console.log(data.otb_plan_bank.profit_margin);
+            }}
+            marks={{
+              0: 'Aug.2021',
+              1: 'Sep.2021',
+              2: 'Oct.2021',
+              3: 'Nov.2021',
+              4: 'Dec.2021',
+              5: 'Jan.2022',
+              6: 'Fub.2022',
+              7: 'Mar.2022',
+              8: 'Arp.2022',
+              9: 'May.2022',
+              10: 'Jun.2022',
+              11: 'Jul.2022',
+              12: 'Aug.2022',
+            }}
+          />
+          </div>
+       
+        {/* <ProFormSlider
+            name="请选择月份"
+            label="Slider"
+            width="lg"   
+            fieldProps={{
+              defaultValue: 12,         
+            }}
+            min = {0}
+            max = {12}
+            // onChange={onChange}
+            marks={{
+              0: 'Aug.2021',
+              1: 'Sep.2021',
+              2: 'Oct.2021',
+              3: 'Nov.2021',
+              4: 'Dec.2021',
+              5: 'Jan.2022',
+              6: 'Fub.2022',
+              7: 'Mar.2022',
+              8: 'Arp.2022',
+              9: 'May.2022',
+              10: 'Jun.2022',
+              11: 'Jul.2022',
+              12: 'Aug.2022',
+            }}            
+        /> */}
 
+          <p></p>
+          <Suspense fallback={<PageLoading />}>
+            <Descriptions title={"KYC"} />
+          </Suspense>
+          
+          {data?.list_otb_plan.length > 0 && <div>       
             <Suspense fallback={null}>
               <OpenToBuyBank
                 loading={loading}
@@ -222,7 +321,7 @@ const ProductAnalysis: FC<ProductAnalysisProps> = () => {
             />
           </Suspense>
 
-        </>
+        </div>
       </GridContent>
     );
   }

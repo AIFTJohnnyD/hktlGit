@@ -50,7 +50,11 @@ const TableList: React.FC = () => {
 
   function translate_status(status: string) {
     return <FormattedMessage id={'pages.application.' + status}/>;
-  }  
+  }
+
+  function translate_boolean(strBool: string) {
+    return <FormattedMessage id={'pages.util.' + strBool}/>;
+  } 
 
   const columns: ProColumns<TableListItem>[] = [
     {
@@ -119,6 +123,11 @@ const TableList: React.FC = () => {
       valueType: {type: 'money', locale: "en-US"}
     },
     {
+      title: (<FormattedMessage id='pages.loan_application_list.outstanding_balance'/>),
+      dataIndex: 'today_balance',
+      valueType: {type: 'money', locale: "en-US"},
+    },
+    {
       title: (<FormattedMessage id='pages.util.currency'/>),
       dataIndex: 'currency',
       valueType: 'textarea',
@@ -133,7 +142,15 @@ const TableList: React.FC = () => {
       title: (<FormattedMessage id='pages.util.end_date'/>),
       dataIndex: 'end_date',
       valueType: 'textarea',
-    },    
+    },  
+    {
+      title: (<FormattedMessage id='pages.loan_application_list.loan_overdue'/>),
+      dataIndex: 'loan_overdue',
+      valueType: 'textarea',
+      render: (text, record, index) => {
+        return (translate_boolean(record?.loan_overdue))
+      },  
+    },  
     {
       title: (<FormattedMessage id='pages.util.status'/>),
       dataIndex: 'status',

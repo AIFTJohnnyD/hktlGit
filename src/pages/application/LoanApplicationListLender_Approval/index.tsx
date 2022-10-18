@@ -1,5 +1,9 @@
 import { Card, message, Row, Col, Table, Button, InputNumber } from 'antd';
 import ProForm, {
+  ProFormDateRangePicker,
+  ProFormDependency,
+  ProFormDigit,
+  ProFormRadio,
   ProFormSelect,
   ProFormText,
   ProFormTextArea,
@@ -9,22 +13,18 @@ import ProForm, {
 } from '@ant-design/pro-form';
 import { useRequest, history, request, FormattedMessage, useAccess } from 'umi';
 import { FC, useRef } from 'react';
+import { PageContainer } from '@ant-design/pro-layout';
 import { updateLoanApplication } from './service';
 import styles from './style.less';
 import { ProColumns, ProTable } from '@ant-design/pro-table';
 import { parse } from 'querystring';
 import { CheckCircleTwoTone, ExclamationCircleTwoTone, CloseCircleTwoTone } from '@ant-design/icons';
 
-//ProductListItem  TableListItem 为数据类型
+import { company } from './service';
+
 import type { ProductListItem, TableListItem } from './data';
-//增加的引入
-import { company} from './service';
 
-
-
-//对指标进行翻译
 function translate_index_name(index_name: string) {
-  console.log("translate_index_name的index_name:",index_name)
   return <FormattedMessage id={'pages.application.index_name.' + index_name}/>;
 }
 
@@ -70,7 +70,7 @@ const columns: ProColumns<ProductListItem>[] = [
     valueType: 'digit',
   }
 ];
-//第二个card 的列名称
+
 const columns_index: ProColumns<ProductListItem>[] = [
   {
     title: (<FormattedMessage id='pages.application.index_table.parameter_name'/>),
@@ -211,7 +211,7 @@ const columns_sales_through: ProColumns<ProductListItem>[] = [
 
 ];
 
-const ApprovalForm: FC<Record<string, any>> =  () => {
+const ApprovalForm: FC<Record<string, any>> = () => {
   const { run } = useRequest(updateLoanApplication, {
     manual: true,
     onSuccess: () => {
@@ -234,7 +234,7 @@ const ApprovalForm: FC<Record<string, any>> =  () => {
   const onFinish = async (values: Record<string, any>) => {
     console.log(values)
     run(values);
-    await waitTime(15000);
+    await waitTime(1500);
     window.close();    
   };
   
@@ -246,55 +246,51 @@ const ApprovalForm: FC<Record<string, any>> =  () => {
 
   let urlParams = parse(window.location.href.split('?')[1]);
   const loan_application_id = urlParams.loan_application_id;
-  console.log("loan_application_id",loan_application_id);
+  console.log(loan_application_id);
 
   const { data, error, loading } = useRequest(() => {
     return request(
       '/api/loan_application/get_loan_application_from_id?application_id=' + loan_application_id,
     );
   });
+  console.log(data)
 
-  console.log("从useRequest传来的data",data)
-
-
-
-
-  const resulttest = useRequest(() => {
+  const result_LGD = useRequest(() => {
     return request(
       '/api/amount/list',
     );
   });
-  console.log("外面获取的resulttest",resulttest)
 
-let dataSource_company2 = {}
-let dataSource_company = resulttest.data;
-let approved_amount = 1211;
-const formRef = useRef<ProFormInstance>();
-//页面渲染的时间周期导致 approved_amount虽然更新了但是 页面并没有更新
-//react 生命周期
-if(typeof dataSource_company == "object"){
-dataSource_company = dataSource_company[0]
-approved_amount = dataSource_company.approved_amount
-formRef?.current?.setFieldsValue({
-  approved_amount: dataSource_company.approved_amount,
-  approved_number: dataSource_company.approved_number,
-  delinquent_amount: dataSource_company.approved_amount,
-  delinquent_number: dataSource_company.delinquent_number,
-  repay_amount: dataSource_company.repay_amount,
-  repay_number: dataSource_company.repay_number,
-  available_amount: dataSource_company.available_amount,
-  probability_of_default: dataSource_company.probability_of_default,
-  loss_given_default: dataSource_company.loss_given_default,
-});
-}
+  console.log(result_LGD.data)
 
+  let dataSource_company2 = {}
+  let dataSource_company = result_LGD.data;
+  let approved_amount = 1211;
+  const formRef = useRef<ProFormInstance>();
 
+  if(typeof dataSource_company == "object"){
+    dataSource_company = dataSource_company[0]
+    approved_amount = dataSource_company.approved_amount
+    formRef?.current?.setFieldsValue({
+      approved_amount: dataSource_company.approved_amount,
+      approved_number: dataSource_company.approved_number,
+      delinquent_amount: dataSource_company.approved_amount,
+      delinquent_number: dataSource_company.delinquent_number,
+      repay_amount: dataSource_company.repay_amount,
+      repay_number: dataSource_company.repay_number,
+      available_amount: dataSource_company.available_amount,
+      probability_of_default: dataSource_company.probability_of_default,
+      loss_given_default: dataSource_company.loss_given_default,
+    });
+  }
 
   const access = useAccess();
 
   var dictStatus:any = {};
 
   var bApproved:boolean = false;
+
+  var disableStatusSelect: boolean = false;
 
   switch (data?.status) {
     case 'CREATED':
@@ -381,10 +377,10 @@ formRef?.current?.setFieldsValue({
       dictStatus = {
         DRAWDOWN: <FormattedMessage id='pages.application.DRAWDOWN'/>,
         
-        REPAID: <FormattedMessage id='pages.application.REPAID'/>,
+        //REPAID: <FormattedMessage id='pages.application.REPAID'/>,
         DELINQUENT: <FormattedMessage id='pages.application.DELINQUENT'/>,
       };
-      
+      disableStatusSelect = true;
       bApproved = true;
 
       break;
@@ -442,16 +438,45 @@ formRef?.current?.setFieldsValue({
       bApproved = true;
 
       break;
-
+    case 'PARTIAL_REPAYMENT':
+      dictStatus = {
+        PARTIAL_REPAYMENT: <FormattedMessage id='pages.application.PARTIAL_REPAYMENT'/>
+      }
+      disableStatusSelect = true;
+      break;
+    case 'EARLY_REPAYMENT':
+      dictStatus = {
+        EARLY_REPAYMENT: <FormattedMessage id='pages.application.EARLY_REPAYMENT'/>  
+      }
+      break;
+    case 'FULL_REPAYMENT': 
+      dictStatus = {
+        FULL_REPAYMENT: <FormattedMessage id='pages.application.FULL_REPAYMENT'/>
+      }
+      disableStatusSelect = true;
+      break;
+    case 'DELINQUENT':
+      dictStatus = {
+        DELINQUENT: <FormattedMessage id='pages.application.DELINQUENT'/>
+      }
+      disableStatusSelect = true;
+      break;
+    case 'OVERDUE_REPAYMENT':
+      dictStatus = {
+        OVERDUE_REPAYMENT: <FormattedMessage id='pages.application.OVERDUE_REPAYMENT'/>
+      }
+      disableStatusSelect = true;
+      break;
     default:
       break;
   }
 
-  if((data?.finance_type) === "ACCOUNT_RECEIVABLE_FINANCE"){
+  if((data?.finance_type) === "ACCOUNT_RECEIVABLE_FINANCE"){   //应收账款贷款审批
     return (
       <ProForm
         layout="vertical"
         onFinish={onFinish}
+
         initialValues={data}
         params={data}
         request={(params) => {
@@ -518,12 +543,6 @@ formRef?.current?.setFieldsValue({
                 label={<FormattedMessage id="pages.loan_application.application_amount" />}
                 width="md"
                 locale="en-US"
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please input the amount.',
-                  },
-                ]}
                 disabled
               // placeholder = {props.values.amount?.toFixed(2)}
               />
@@ -569,12 +588,6 @@ formRef?.current?.setFieldsValue({
                 name="start_date"
                 width="md"
                 label={<FormattedMessage id="pages.util.start_date" />}
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please select the start date',
-                  },
-                ]}
                 disabled
               // placeholder = {props.values.start_date}
               />
@@ -584,12 +597,6 @@ formRef?.current?.setFieldsValue({
                 name="end_date"
                 width="md"
                 label={<FormattedMessage id="pages.util.end_date" />}
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please select the end date',
-                  },
-                ]}
                 disabled
               // placeholder = {props.values.end_date}
               />
@@ -599,20 +606,20 @@ formRef?.current?.setFieldsValue({
         <p></p>          
         
         <ProForm
-        layout="vertical"
-        formRef={formRef}
-        // value={dataSource_company}
-        initialValues={dataSource_company2}
-        name = "dataSource_company2"
-        // params={dataSource_company}
-        // request={(params) => {
-        //   return Promise.resolve({
-        //     data: params,
-        //     success: true,
-        //   })
-        // }}
-        // request={company}
-        // onFinish={onFinish}
+	        layout="vertical"
+	        formRef={formRef}
+	        // value={dataSource_company}
+	        initialValues={dataSource_company2}
+	        name = "dataSource_company2"
+	        // params={dataSource_company}
+	        // request={(params) => {
+	        //   return Promise.resolve({
+	        //     data: params,
+	        //     success: true,
+	        //   })
+	        // }}
+	        // request={company}
+	        // onFinish={onFinish}
         >
           <Card
             title="GD_LGD"
@@ -720,6 +727,27 @@ formRef?.current?.setFieldsValue({
           <p></p> 
         </ProForm>
 
+
+        
+        {/* <Card
+          title="财务指标"
+          className={styles.card}
+          bordered={false}
+          size="small"
+          headStyle = {{color:'#2f54eb', fontSize: 16, fontWeight:'bold'}}
+        >
+          <Card title="" className={styles.card} bordered={false}>
+            <div style={{ margin: 'auto', width: 1300 }}>
+              <Table
+                columns={columns_index}
+                dataSource={data?.list_financial_index}
+                size={'small'}
+                pagination={false}
+              />
+            </div>
+          </Card>
+        </Card>
+        <p></p>           */}
         <Card
           title="贷款表现指标"
           className={styles.card}
@@ -738,8 +766,7 @@ formRef?.current?.setFieldsValue({
             </div>
           </Card>
         </Card>
-        <p></p>    
-
+        <p></p>          
         <Card 
           title="审批" 
           className={styles.card} 
@@ -830,6 +857,20 @@ formRef?.current?.setFieldsValue({
             </Col>
             <Col span={6} push={1}>
               <ProFormText
+                name="penalty_annual_interest_rate"
+                label={
+                  <FormattedMessage id="pages.loan_application_list.penalty_annual_interest_rate" />
+                }
+                width="md"
+                rules={[
+                  {
+                    required: true,
+                    message: '',
+                  },
+                ]}
+                disabled={bApproved}
+              />
+              {/* <ProFormText
                 name="number_of_installments_approved"
                 label={
                   <FormattedMessage id="pages.loan_application_list.number_of_installments_approved" />
@@ -842,7 +883,7 @@ formRef?.current?.setFieldsValue({
                   },
                 ]}
                 disabled={bApproved}
-              />
+              /> */}
             </Col>
           </Row>
           <Row gutter={16}>
@@ -869,7 +910,7 @@ formRef?.current?.setFieldsValue({
       </ProForm>
     );
   }
-  else {
+  else {   //采购计划货物抵押贷款审批
     return (
       <ProForm
         layout="vertical"
@@ -1207,6 +1248,20 @@ formRef?.current?.setFieldsValue({
             </Col>
             <Col span={6} push={1}>
               <ProFormText
+                name="penalty_annual_interest_rate"
+                label={
+                  <FormattedMessage id="pages.loan_application_list.penalty_annual_interest_rate" />
+                }
+                width="md"
+                rules={[
+                  {
+                    required: true,
+                    message: '',
+                  },
+                ]}
+                disabled={bApproved}
+              />
+              {/* <ProFormText
                 name="number_of_installments_approved"
                 label={
                   <FormattedMessage id="pages.loan_application_list.number_of_installments_approved" />
@@ -1219,7 +1274,7 @@ formRef?.current?.setFieldsValue({
                   },
                 ]}
                 disabled={bApproved}
-              />
+              /> */}
             </Col>
           </Row>
           <Row gutter={16}>

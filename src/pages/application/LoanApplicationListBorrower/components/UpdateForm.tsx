@@ -237,9 +237,8 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
                 width="md"
                 rules={[{ required: true, message: 'Please input the currency.' }]}
                 valueEnum={{
-                  HKD: 'HKD',
-                  CNY: 'CNY',
                   USD: 'USD',
+                  HKD: 'HKD',
                 }}
                 disabled={bApproved}
               />            
@@ -277,7 +276,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
             </Col>
           </Row>
 
-          <Row gutter={16}>
+          {/* <Row gutter={16}>
             <Col span={24}>
               <h4><FormattedMessage id='pages.loan_application.repayment_plan'/></h4>
               <Table 
@@ -287,7 +286,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
                 pagination={false}
               />
             </Col>
-          </Row>
+          </Row> */}
         </Card>
       </StepsForm.StepForm>
 

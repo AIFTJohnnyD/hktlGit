@@ -306,7 +306,7 @@ const SelectProduct = ({
         columns={columns}
         request={async () => ({
           data: listOtbPlan_default,
-          total: 100,
+          total: listOtbPlan_default?.length,
           success: true,
         })}
         value={listOtbPlan}
@@ -397,7 +397,10 @@ const SelectProduct = ({
             }
 
           },          
-        }}          
+        }}
+        pagination={{
+          pageSize: 10,
+        }}        
       />
       
       </ProForm>

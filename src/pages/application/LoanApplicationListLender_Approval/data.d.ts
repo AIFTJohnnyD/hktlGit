@@ -24,6 +24,7 @@ export type TableListItem = {
   
     amount_approved: number;
     outstanding_balance: number;
+    balance_interest_date: string;
   
     day_approved: number;
   

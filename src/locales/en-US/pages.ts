@@ -66,7 +66,7 @@ export default {
   'pages.util.currency': "Currency",
   'pages.util.loan_term': "Loan Days",
   'pages.util.start_date': "Start Date",
-  'pages.util.end_date': "Last Date",
+  'pages.util.end_date': "End Date",
 
   'pages.util.analysis': "Analysis",
 
@@ -322,6 +322,24 @@ export default {
   'pages.loan_application.repayment_installment_id': "Installment",
   'pages.loan_application.repayment_amount': "Amount",
 
+  'pages.loan_application.repayment_status' : "Repayment Status",
+  'pages.loan_application.repayment_id' : "ID",
+  'pages.loan_application.last_date' : "Last Date",
+  'pages.loan_application.repayment_date' : "Repayment Date",
+  'pages.loan_application.interest_today' : "Amount with Interest (As of Today)",
+  'pages.loan_application.interest_full' : "Amount with Interest (As of Full Repayment Date)",
+  'pages.loan_application.interest_on_repayment' : "Amount with Interest (On Repayment Date)",
+  'pages.loan_application.overdue_penalty' : "Penalty Interest",
+  'pages.loan_application.repayment_history' : "Repayment History",
+  'pages.loan_application.outstanding_balance' : "Outstanding Balance",
+  'pages.loan_application.repayment_repayment_amount' : "Repayment Amount",
+  'pages.loan_application.repayment_proof' : "Repayment Proof",
+  'pages.loan_application.upload_proof' : "Upload",
+  'pages.loan_application.match_outstanding_amount' : "Match Outstanding Amount",
+  'pages.loan_application.please_enter_repayment_amount' : "Please Enter Repayment Amount",
+  'pages.loan_application.please_upload_payment_proof' : "Please upload Payment Proof",
+  'pages.loan_application.repayment_installment_date' : "Installment Repayment Date",
+
   //loan-application-list
   'pages.loan_application_list.company_id': "Company ID",
   'pages.loan_application_list.loan_id': "Loan ID",
@@ -352,6 +370,7 @@ export default {
 
   'pages.loan_application_list.annual_interest_rate_approved': "Approved Annual Interest Rate",
   'pages.loan_application_list.number_of_installments_approved': "Approved Number of Installments",
+  'pages.loan_application_list.penalty_annual_interest_rate': "Penalty Annual Interest Rate",
   //'pages.loan_application_list.loan_rate_approved': "Approved Loan Rate",
   //'pages.loan_application_list.loan_repayment_method_approved': "Approved Repayment Method",
 
@@ -416,6 +435,11 @@ export default {
 
   'pages.application.SUBMITTED': "SUBMITTED",
   'pages.application.UNSUBMITTED': "UNSUBMITTED",
+
+  'pages.application.PARTIAL_REPAYMENT' : "PARTIAL REPAYMENT",
+  'pages.application.EARLY_REPAYMENT' : "EARLY REPAYMENT",
+  'pages.application.FULL_REPAYMENT' : "FULL REPAYMENT",
+  'pages.application.OVERDUE_REPAYMENT' : "OVERDUE REPAYMENT",
 
   //borrower-form
   //step 1
@@ -513,6 +537,7 @@ export default {
   'pages.borrower_form.store_info.seller_id': "Seller ID",
   'pages.borrower_form.store_info.mws_code': "MWS authorization code",
   'pages.borrower_form.store_info.area': "Area",
+  'pages.borrower_form.store_info.authorize': "Amazon API Authorized",
   'pages.borrower_form.store_info.payment_platform': "Third-party payment platform",
   'pages.borrower_form.store_info.bank_num': "Bank account number of the payment platform account corresponding to the store.",
   'pages.borrower_form.store_info.add_store': "Add Store",
@@ -590,6 +615,14 @@ If the company's statement is false, the company agrees to bear all legal Liabil
 
   //Borrower_Lender
   'pages.borrower_form.account_receivable.amount_setting': "Amount Setting",
+  'pages.borrower_form.account_receivable.amount_monthly_ratio': "Amount Monthly Ratio",
+  'pages.borrower_form.account_receivable.amount_limit': "Amount Limited",
+  'pages.borrower_form.account_receivable.amount_remain': "Amount Remained",
+  'pages.borrower_form.account_receivable.currency': "Currency",
+
+  'pages.borrower_form.account_receivable.duration': "Duration (Day)",
+  'pages.borrower_form.account_receivable.annual_interest_rate': "Annual Interest Rate",
+  'pages.borrower_form.account_receivable.penalty_annual_interest_rate': "Penalty Annual Interest Rate",
 
   //borrower-list
   'pages.borrower_list.borrower_list': "Merchant List",
@@ -674,7 +707,7 @@ If the company's statement is false, the company agrees to bear all legal Liabil
   'pages.platform.borrower.history_apply_times': "History Applied Times",  
   'pages.platform.borrower.history_apply_approval_times': "History Applied Approval Times",  
 
-  'pages.postloan.repayment_installment': "Repayment Installment",  
+  'pages.postloan.repayment_installment': "Repayment",  
   'pages.postloan.repayment_amount': "Repayment Amount",  
 
   'pages.postloan.repayment_approval': "Repayment Approval",
