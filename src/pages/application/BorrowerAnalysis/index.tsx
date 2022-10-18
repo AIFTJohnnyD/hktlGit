@@ -147,33 +147,6 @@ const ProductAnalysis: FC<ProductAnalysisProps> = () => {
           />
           </div>
        
-        {/* <ProFormSlider
-            name="请选择月份"
-            label="Slider"
-            width="lg"   
-            fieldProps={{
-              defaultValue: 12,         
-            }}
-            min = {0}
-            max = {12}
-            // onChange={onChange}
-            marks={{
-              0: 'Aug.2021',
-              1: 'Sep.2021',
-              2: 'Oct.2021',
-              3: 'Nov.2021',
-              4: 'Dec.2021',
-              5: 'Jan.2022',
-              6: 'Fub.2022',
-              7: 'Mar.2022',
-              8: 'Arp.2022',
-              9: 'May.2022',
-              10: 'Jun.2022',
-              11: 'Jul.2022',
-              12: 'Aug.2022',
-            }}            
-        /> */}
-
           <p></p>
           <Suspense fallback={<PageLoading />}>
             <Descriptions title={"KYC"} />
