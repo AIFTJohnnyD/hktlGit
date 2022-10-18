@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { useRequest } from 'umi';
 import { Suspense, useState } from 'react';
 import { EllipsisOutlined } from '@ant-design/icons';
@@ -57,37 +57,30 @@ type ProductAnalysisProps = {
 };
 
 const ProductAnalysis: FC<ProductAnalysisProps> = () => {
-  //khwu
-  //http://localhost:8000/company/company-analysis?seller_id=A1057FBD44ECMO
-  //const { loading, data } = useRequest(fakeChartData);
   let urlParams = parse(window.location.href.split('?')[1])
-  console.log(urlParams)
+  console.log("urlParams",urlParams)
   const borrower_id = urlParams.borrower_id;
-  let history = 0;
-  
-  if('history' in urlParams)
-    history = Number(urlParams.history);
-
   console.log(borrower_id, history);
-  let { data, error, loading } = useRequest(() => {
-    //return request('/api/kyc/get_kyc?borrower_id='+ borrower_id);
-    return request('/api/kyc/get_kyc?borrower_id='+ borrower_id+'&history='+ history);
+  const [trigger,setTrigger] = useState(1);
+  let result = {}
+  result= useRequest(() => {
+    return request('/api/kyc/get_kyc?borrower_id='+ borrower_id+'&history='+ trigger);
   });
 
-  // const SlideronChange = (newValue: number) => {
-  //   data = useRequest(() => {
-  //       return request('/api/kyc/get_kyc?borrower_id='+ borrower_id+'&history='+ newValue);
-  //   });
-  //   console.log(newValue);
-  //   console.log(data);
-  // };
+  useEffect(()=>{
+    result.run();
+    console.log("通过onSliderChange 事件trigger引发了useEffect");
+  },[trigger]);
+
+  let data = result.data
+  let loading = result.loading
+  let error = result.error
 
   const onSliderChange = async (values: Record<string, any>) => {
-    window.open("/application/loan-application-list-borrower", "_self");
-    //history.push('/application/loan-application-list-borrower');
+    //通过Slider传来的value进行修改trigger
+    setTrigger(values-1);
   };
 
-  //console.log(data);
   if (data?.message == "Error") {
     return (
       <GridContent>
@@ -119,16 +112,8 @@ const ProductAnalysis: FC<ProductAnalysisProps> = () => {
           <Slider
             min = {0}
             max = {12}
-            defaultValue = {12 - history}
-            onChange={async(newValue: number) => {
-              const months = 12 - newValue
-              window.open('/application/borrower-analysis?borrower_id='+ borrower_id+'&history='+ months, "_self");
-              // let newdata = request('/api/kyc/get_kyc?borrower_id='+ borrower_id);
-              // console.log(newdata);
-              // console.log(newValue);
-              // data.otb_plan_bank.profit_margin = newValue/12;
-              // console.log(data.otb_plan_bank.profit_margin);
-            }}
+            defaultValue = {12 - trigger}
+            onChange = {onSliderChange}
             marks={{
               0: 'Aug.2021',
               1: 'Sep.2021',
