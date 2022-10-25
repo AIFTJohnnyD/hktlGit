@@ -448,10 +448,12 @@ export default {
     'pages.borrower_form.basic_information.mainland_company':"Mainland Company",
     'pages.borrower_form.basic_information.mainland_company_name':"Name of mainland company",
     'pages.borrower_form.basic_information.mainland_unified_social_credit_code':"Mainland Company Unified Social Credit Code",
+    'pages.borrower_form.basic_information.mainland_compnay_establishment_date':"Mainland Compnay Establishment Date",
     'pages.borrower_form.basic_information.mainland_company_address':"Office Address of Mainland Company",
     'pages.borrower_form.basic_information.HongKong_company':'Hong Kong Company',
     'pages.borrower_form.basic_information.HongKong_company_name':"Name of Hong Kong Company",
     'pages.borrower_form.basic_information.HongKong_unified_social_credit_code':"Hong Kong Company Business Registration Number",
+    'pages.borrower_form.basic_information.HongKong_compnay_establishment_date':"Hong Kong Compnay Establishment Date",
     'pages.borrower_form.basic_information.HongKong_company_address':"Hong Kong Office/Registered Address",
 
   //step 2

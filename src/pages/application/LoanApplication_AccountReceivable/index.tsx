@@ -182,7 +182,6 @@ const CompanyForm: FC<Record<string, any>> = () => {
                       message: 'Please select the start date',
                     },
                   ]}
-                  //initialValue={moment().format('YYYY-MM-DD')}
                 />
               </Col>
 

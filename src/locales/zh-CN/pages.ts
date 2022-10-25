@@ -442,14 +442,24 @@ export default {
   //borrower-form
   //step 1
   'pages.borrower_form.base_info': "公司基本信息",
+    'pages.borrower_form.basic_information.company_country':"所属国家或者地区",
+    'pages.borrower_form.basic_information.company_business':"企业属性",
+    'pages.borrower_form.basic_information.mainland_unified_social_credit_code':"内地公司统一社会信用代码",
+    'pages.borrower_form.basic_information.mainland_company_name':"内地公司名称",
+    'pages.borrower_form.basic_information.mainland_store_link':"店铺链接",
+    'pages.borrower_form.basic_information.mainland_company_contact_name':"企业联系人姓名",
+    'pages.borrower_form.basic_information.mainland_company_contact_phone':"企业联系人电话",
+    'pages.borrower_form.basic_information.mainland_company_contact_email':"企业联系邮箱",
+    'pages.borrower_form.basic_information.mainland_company_address':"内地公司办公地址",
+    'pages.borrower_form.basic_information.mainland_company_postalcode':"邮政编码",
+    'pages.borrower_form.basic_information.business_license':"营业执照",
     'pages.borrower_form.basic_information.business_proof':"营业证明",
     'pages.borrower_form.basic_information.mainland_company':"内地公司",
-    'pages.borrower_form.basic_information.mainland_company_name':"内地公司名称",
-    'pages.borrower_form.basic_information.mainland_unified_social_credit_code':"内地公司统一社会信用代码",
-    'pages.borrower_form.basic_information.mainland_company_address':"内地公司办公地址",
+    'pages.borrower_form.basic_information.mainland_compnay_establishment_date':"内地公司成立日期",
     'pages.borrower_form.basic_information.HongKong_company':'香港公司',
     'pages.borrower_form.basic_information.HongKong_company_name':"香港公司名称",
     'pages.borrower_form.basic_information.HongKong_unified_social_credit_code':"香港公司商业登记号码",
+    'pages.borrower_form.basic_information.HongKong_compnay_establishment_date':"香港公司成立日期",
     'pages.borrower_form.basic_information.HongKong_company_address':"香港办公室/注册地址",
 
   //step 2

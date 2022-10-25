@@ -15,6 +15,8 @@ const InputGroup = Input.Group;
 
 const { TabPane } = Tabs;
 
+
+//函数组件
 const ShareHolderDirector = (
   { 
     country, 

@@ -445,10 +445,13 @@ export default {
     'pages.borrower_form.basic_information.mainland_company':"內地公司",
     'pages.borrower_form.basic_information.mainland_company_name':"內地公司名稱",
     'pages.borrower_form.basic_information.mainland_unified_social_credit_code':"內地公司統一社會信用代碼",
+    'pages.borrower_form.basic_information.mainland_compnay_establishment_date':"內地公司成立日期",
+
     'pages.borrower_form.basic_information.mainland_company_address':"內地公司辦公地址",
     'pages.borrower_form.basic_information.HongKong_company':'香港公司',
     'pages.borrower_form.basic_information.HongKong_company_name':"香港公司名稱",
     'pages.borrower_form.basic_information.HongKong_unified_social_credit_code':"香港公司商業登記號碼",
+    'pages.borrower_form.basic_information.HongKong_compnay_establishment_date':"香港公司成立日期",
     'pages.borrower_form.basic_information.HongKong_company_address':"香港辦公室/註冊地址",
 
   //step 2

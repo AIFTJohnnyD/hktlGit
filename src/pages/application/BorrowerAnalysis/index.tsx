@@ -158,15 +158,6 @@ const ProductAnalysis: FC<ProductAnalysisProps> = () => {
             </Suspense>
           </div>}
 
-  {/*
-          <Suspense fallback={<PageLoading />}>
-            <OpenToBuyRow loading={loading} 
-                  product={data?.product} 
-                  statistic={data?.statistic}
-                  openToBuy={data?.open_to_buy} />
-          </Suspense>  
-  */}
-
           <Suspense fallback={<PageLoading />}>
             <Descriptions title={"商家信息"} />
           </Suspense>
