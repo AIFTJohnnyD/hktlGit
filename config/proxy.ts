@@ -15,6 +15,13 @@ export default {
       changeOrigin: true,
       pathRewrite: { '^': '' },
     },
+    '/local/': {
+      //target: 'https://preview.pro.ant.design',
+      //target: 'http://localhost:8001',
+      target: 'http://localhost:5010',
+      changeOrigin: true,
+      pathRewrite: { '^': '' },
+    },
   },
   test: {
     '/api/': {

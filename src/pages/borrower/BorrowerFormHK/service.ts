@@ -9,7 +9,7 @@ import { request } from 'umi';
 
 
 export async function submitForm(path:string, params: any) {
-  return request('/local/seller/base_info', {
+  return request('/api/borrower/' + path, {
     method: 'POST',
     data: params,
   });

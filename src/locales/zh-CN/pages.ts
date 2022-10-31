@@ -465,16 +465,42 @@ export default {
   //step 2
   'pages.borrower_form.shareholder_info': "法人、股东及董事资料",
     'pages.borrower_form.shareholder_info.mainland_legal_person':"内地公司法人资料",
+    
     'pages.borrower_form.shareholder_info.mainland_legal_person_name':"內地公司法定代表人名称",
     'pages.borrower_form.shareholder_info.please_input_mainland_legal_person_name':"请输入內地公司法定代表人名称",
-    'pages.borrower_form.shareholder_info.nationality':"国籍",
-    'pages.borrower_form.shareholder_info.please_input_nationality':"请输入国籍!",
     'pages.borrower_form.shareholder_info.phone':"手提电话号码",
     'pages.borrower_form.shareholder_info.please_input_phone':"请输入手机号码!",
     'pages.borrower_form.shareholder_info.wrong_phone':"手机号码格式错误!",
+    'pages.borrower_form.shareholder_info.nationality':"国籍",
+    'pages.borrower_form.shareholder_info.please_input_nationality':"请输入国籍!",
+
+    'pages.borrower_form.shareholder_info.documents_class':"证件类型",
+    'pages.borrower_form.shareholder_info.documents_photo':"证件照片",
     'pages.borrower_form.shareholder_info.email':"电邮",
     'pages.borrower_form.shareholder_info.please_input_email':"请输入电邮!",
     'pages.borrower_form.shareholder_info.wrong_email':"邮箱地址格式错误!",
+
+    'pages.borrower_form.companyPublic_account.companyPublic_account_information_or_private_oneClass_account_information':"企业公户信息或个人一类户信息(仅融资主体企业提供)",
+    'pages.borrower_form.companyPublic_account.companyPublic_account_name':"企业公户户名(持卡人姓名)",
+    'pages.borrower_form.companyPublic_account.bank_account':"银行账户",
+    'pages.borrower_form.companyPublic_account.bank_name':"银行名称",
+    'pages.borrower_form.companyPublic_account.openAccount_bank':"开户行全称",
+    'pages.borrower_form.companyPublic_account.bankKey':"联行号",
+    'pages.borrower_form.companyPublic_account.bank_reserved_phone':"银行预留手机号(仅个人一类户提供)",
+    //最终受益人
+    'pages.borrower_form.ultimate_beneficial_owner':"最终受益人(持有公司25%以上股份的人)",
+    'pages.borrower_form.ultimate_beneficial_owner.ultimate_beneficial_owner_name':"姓名",
+    'pages.borrower_form.ultimate_beneficial_owner.ultimate_beneficial_owner_countryOrDistrict':"证件所属国家/地区",
+    'pages.borrower_form.ultimate_beneficial_owner.ultimate_beneficial_owner_documentClass':"证件类型",
+    'pages.borrower_form.ultimate_beneficial_owner.ultimate_beneficial_owner_document_photo':"证件照片",
+
+
+
+
+
+
+
+
     'pages.borrower_form.shareholder_info.address':"住宅地址",
     'pages.borrower_form.shareholder_info.please_input_address':"请输入住宅地址!",
     //'pages.borrower_form.shareholder_info.':"内地",

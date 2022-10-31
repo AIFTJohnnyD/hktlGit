@@ -82,12 +82,28 @@ export default [
     name: 'borrower',
     icon: 'table',
     routes: [
+      //大陆公司输入信息
       {
         name: 'input',
         icon: 'table',
         path: '/borrower/borrower-form',
         component: './borrower/BorrowerForm',
         access: 'canBorrowerNew',
+      },
+      //香港公司输入信息
+      {
+        name: 'HKinput',
+        icon: 'table',
+        path: '/borrower/borrower-form',
+        component: './borrower/BorrowerFormHK',
+        access: 'canBorrowerNew',
+      },
+      {
+        name: '原来的输入(更新)信息',
+        icon: 'table',
+        path: '/borrower/borrower-form1',
+        component: './borrower/BorrowerForm1',
+        access: 'canBorrowerNew1',
       },
       {
         name: 'list',
