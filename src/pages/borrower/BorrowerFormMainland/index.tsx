@@ -195,7 +195,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
     >
-      <PageContainer content="中国企业和中国香港企业信息提交">
+      <PageContainer content="">
         <Card title={<FormattedMessage id='pages.borrower_form.base_info'/>} className={styles.card} bordered={false}>
           <Row gutter={16}>
             <Col lg={6} md={12} sm={24}>

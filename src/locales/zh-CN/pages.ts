@@ -441,7 +441,7 @@ export default {
 
   //borrower-form
   //step 1
-  'pages.borrower_form.base_info': "公司基本信息",
+  'pages.borrower_form.base_info': "企业基础资料",
     'pages.borrower_form.basic_information.company_country':"所属国家或者地区",
     'pages.borrower_form.basic_information.company_business':"企业属性",
     'pages.borrower_form.basic_information.mainland_unified_social_credit_code':"内地公司统一社会信用代码",
@@ -482,7 +482,7 @@ export default {
 
     'pages.borrower_form.companyPublic_account.companyPublic_account_information_or_private_oneClass_account_information':"企业公户信息或个人一类户信息(仅融资主体企业提供)",
     'pages.borrower_form.companyPublic_account.companyPublic_account_name':"企业公户户名(持卡人姓名)",
-    'pages.borrower_form.companyPublic_account.bank_account':"银行账户",
+    'pages.borrower_form.companyPublic_account.bank_account':"银行账号",
     'pages.borrower_form.companyPublic_account.bank_name':"银行名称",
     'pages.borrower_form.companyPublic_account.openAccount_bank':"开户行全称",
     'pages.borrower_form.companyPublic_account.bankKey':"联行号",
@@ -494,9 +494,72 @@ export default {
     'pages.borrower_form.ultimate_beneficial_owner.ultimate_beneficial_owner_documentClass':"证件类型",
     'pages.borrower_form.ultimate_beneficial_owner.ultimate_beneficial_owner_document_photo':"证件照片",
 
+    //香港企业信息输入
+  'pages.borrower_form.HKbase_info': "企业基础资料",
+    //////////////
+    'pages.borrower_form.HKbasic_information.company_country':"所属国家或者地区",
+    'pages.borrower_form.HKbasic_information.business_registration_certificate_number':"商业登记证号码",
+    'pages.borrower_form.HKbasic_information.company_registration_number':"企业注册证书号码",
+    //////////
+    'pages.borrower_form.HKbasic_information.hk_company_name':"企业名称",
+    'pages.borrower_form.HKbasic_information.hk_store_link':"店铺链接",
+    'pages.borrower_form.HKbasic_information.hk_company_contact_name':"企业联系人姓名",
+    //////////
+    'pages.borrower_form.HKbasic_information.hk_company_contact_phone':"企业联系人电话",
+    'pages.borrower_form.HKbasic_information.hk_company_contact_email':"企业联系邮箱",
+    'pages.borrower_form.HKbasic_information.hk_company_address':"企业经营地址",
+
+  'pages.borrower_form.HKshareholder_info': "董事信息",
+
+    'pages.borrower_form.HKshareholder_info.HKshareholder_info_name':"董事姓名",
+    'pages.borrower_form.HKshareholder_info.HKshareholder_info_phone_number':"联系电话",
+    'pages.borrower_form.HKshareholder_info.HKshareholder_info_document_country_district':"证件所属国家或者地区",
+
+    'pages.borrower_form.HKshareholder_info.HKshareholder_info_document_class':"证件类型",
+
+  'pages.borrower_form.HKcompanyPublic_account.HKcompanyPublic_account_information_or_private_oneClass_account_information':"企业公户信息(仅融资主体企业提供)",
+    'pages.borrower_form.HKcompanyPublic_account.HKcompanyPublic_account_name':"企业公户户名",
+    'pages.borrower_form.HKcompanyPublic_account.HKbank_account':"银行账号",
+    'pages.borrower_form.HKcompanyPublic_account.HKbank_name':"银行名称",
+    
+    'pages.borrower_form.HKcompanyPublic_account.HKcompanyPublic_account_SwiftCode':"企业公户SwiftCode",
+
+//最终受益人
+  'pages.borrower_form.HKultimate_beneficial_owner':"最终受益人(持有公司25%以上股份的人)",
+    'pages.borrower_form.HKultimate_beneficial_owner.HKultimate_beneficial_owner_name':"姓名",
+    'pages.borrower_form.HKultimate_beneficial_owner.HKultimate_beneficial_owner_countryOrDistrict':"证件所属国家/地区",
+    'pages.borrower_form.HKultimate_beneficial_owner.HKultimate_beneficial_owner_documentClass':"证件类型",
+    // 'pages.borrower_form.HKultimate_beneficial_owner.HKultimate_beneficial_owner_document_photo':"证件照片",
+
+//香港文件上传
+ 'pages.borrower_form.HKfile_upload':"香港文件上传",
+    'pages.borrower_form.HKfile_upload.business_registration_certificate':"商业登记证(BR)",
+    'pages.borrower_form.HKfile_upload.company_registration':"公司注册证书(CI)",
+    'pages.borrower_form.HKfile_upload.annual_return':"周年申报表(NAR1)",
+
+    'pages.borrower_form.HKfile_upload.corporation_by_laws':"公司章程",
+    'pages.borrower_form.HKfile_upload.shareholder_document':" 公司股东/实控人(超过25%股份)身份证明文件",
+    'pages.borrower_form.HKfile_upload.director_document':"董事身份证明文件+手持证件照片",
+
+    'pages.borrower_form.HKfile_upload.shareholder_address_document':"公司股东/实控人(超过25%股份)地址证明",
+    'pages.borrower_form.HKfile_upload.shareholder_credit_history':"公司股东/实控人人行信贷报告",
+    'pages.borrower_form.HKfile_upload.hk_company_financial_statements':"香港公司财务报表(审计报表/管理报表)",
+    
+    'pages.borrower_form.HKfile_upload.other_documents':"其他文件",
 
 
+//大陆关联企业文件上传
+'pages.borrower_form.Mainlandfile_upload':"大陆关联企业文件上传",
 
+    'pages.borrower_form.Mainlandfile_upload.business_license':"营业执照",
+    'pages.borrower_form.Mainlandfile_upload.bylaws':"章程",
+    'pages.borrower_form.Mainlandfile_upload.legal_person_id':"法人身份证",
+
+    'pages.borrower_form.Mainlandfile_upload.shareholder_document':"股东/实控人(超过25% 以上股份/实控人身份证明)",
+    'pages.borrower_form.Mainlandfile_upload.shareholder_credit_history':"人行信贷报告",
+    'pages.borrower_form.Mainlandfile_upload.mainland_company_financial_statements':"境内公司财务报表(审计报表/管理报表)",
+    
+    'pages.borrower_form.Mainlandfile_upload.other_documents':"其他文件",
 
 
 
@@ -542,68 +605,68 @@ export default {
     'pages.borrower_form.shareholder_info.director_address':"办公地址",
 
   //step 3
-  'pages.borrower_form.document_upload': "上载文档",
-    'pages.borrower_form.upload_doc.format':"只接受上传.jpeg/.jpg/.png/.xls/.xlsx/.doc/.docx/.odt/.pdf/.ppt/.pptx 格式的档案",
-    'pages.borrower_form.upload_doc.proof':"营业证明",
-    'pages.borrower_form.upload_doc.certificate':"*商业登记证(香港公司)",
-    'pages.borrower_form.upload_doc.business_license':"*企业法人营业执照(中国公司)",
-    'pages.borrower_form.upload_doc.Association':"*公司章程(中国公司)",
-    'pages.borrower_form.upload_doc.identity':"法人、自然人股东和董事身份证明*",
-    'pages.borrower_form.upload_doc.passport':"*股东和董事身份证或护照(香港公司)",
-    'pages.borrower_form.upload_doc.id_card':"*法人、自然人股东和董事身份证正反面(中国公司)",
-    'pages.borrower_form.upload_doc.declaration1':"1. 如公司拥有多于一名董事，等于或过半数的董事都需要提供文件。",
-    'pages.borrower_form.upload_doc.declaration2':"2. 如公司拥有多于一名股东，请提供持股占比等于或多于50%的股东的文件 (包括最大股东)。",
-    'pages.borrower_form.upload_doc.upload_file':"点击或将文件拖拽到这里上传",
+//   'pages.borrower_form.document_upload': "上载文档",
+//     'pages.borrower_form.upload_doc.format':"只接受上传.jpeg/.jpg/.png/.xls/.xlsx/.doc/.docx/.odt/.pdf/.ppt/.pptx 格式的档案",
+//     'pages.borrower_form.upload_doc.proof':"营业证明",
+//     'pages.borrower_form.upload_doc.certificate':"*商业登记证(香港公司)",
+//     'pages.borrower_form.upload_doc.business_license':"*企业法人营业执照(中国公司)",
+//     'pages.borrower_form.upload_doc.Association':"*公司章程(中国公司)",
+//     'pages.borrower_form.upload_doc.identity':"法人、自然人股东和董事身份证明*",
+//     'pages.borrower_form.upload_doc.passport':"*股东和董事身份证或护照(香港公司)",
+//     'pages.borrower_form.upload_doc.id_card':"*法人、自然人股东和董事身份证正反面(中国公司)",
+//     'pages.borrower_form.upload_doc.declaration1':"1. 如公司拥有多于一名董事，等于或过半数的董事都需要提供文件。",
+//     'pages.borrower_form.upload_doc.declaration2':"2. 如公司拥有多于一名股东，请提供持股占比等于或多于50%的股东的文件 (包括最大股东)。",
+//     'pages.borrower_form.upload_doc.upload_file':"点击或将文件拖拽到这里上传",
 
-  //step 4  
-  'pages.borrower_form.contact_info': "联络人资料",
-    'pages.borrower_form.contact_info.name':"名称",
-    'pages.borrower_form.contact_info.position':"职位",
-    'pages.borrower_form.contact_info.photo':"手提电话号码",
-    'pages.borrower_form.contact_info.email':"电邮",
-    'pages.borrower_form.contact_info.wrong_email':"邮箱地址格式错误！",
-    'pages.borrower_form.contact_info.add_contact':"添加联络人",
+//   //step 4  
+//   'pages.borrower_form.contact_info': "联络人资料",
+//     'pages.borrower_form.contact_info.name':"名称",
+//     'pages.borrower_form.contact_info.position':"职位",
+//     'pages.borrower_form.contact_info.photo':"手提电话号码",
+//     'pages.borrower_form.contact_info.email':"电邮",
+//     'pages.borrower_form.contact_info.wrong_email':"邮箱地址格式错误！",
+//     'pages.borrower_form.contact_info.add_contact':"添加联络人",
 
-  //step 5
-  'pages.borrower_form.store_info': "店铺资料",
-  'pages.borrower_form.store_info.store_name': "店铺名称",
-  'pages.borrower_form.store_info.Amazon_name': "亚马逊店铺名称",
-  'pages.borrower_form.store_info.seller_id': "卖家ID",
-  'pages.borrower_form.store_info.mws_code': "MWS授权码",
-  'pages.borrower_form.store_info.area': "区域",
-  'pages.borrower_form.store_info.authorize': "亚马逊API授信管理",
-  'pages.borrower_form.store_info.payment_platform': "第三方支付平台",
-  'pages.borrower_form.store_info.bank_num': "店铺对应之收款平台账号银行户口号码",
-  'pages.borrower_form.store_info.add_store': "添加店铺",
-  'pages.borrower_form.store_info.declaration':"我们会以贵公司月均销售额的三到四成作为审批额度的基础。例如，贵公司的月均销售为三十万美元，\
-我司的额度审批将会以九万美元至十二万美元作为基础。最终额度会因应贵公司的运营表现进行调整。 \
-本公司知悉及授权XXXXX获取及使用本公司在电商平台上的店铺资料和数据作分析之用。",
+//   //step 5
+//   'pages.borrower_form.store_info': "店铺资料",
+//   'pages.borrower_form.store_info.store_name': "店铺名称",
+//   'pages.borrower_form.store_info.Amazon_name': "亚马逊店铺名称",
+//   'pages.borrower_form.store_info.seller_id': "卖家ID",
+//   'pages.borrower_form.store_info.mws_code': "MWS授权码",
+//   'pages.borrower_form.store_info.area': "区域",
+//   'pages.borrower_form.store_info.authorize': "亚马逊API授信管理",
+//   'pages.borrower_form.store_info.payment_platform': "第三方支付平台",
+//   'pages.borrower_form.store_info.bank_num': "店铺对应之收款平台账号银行户口号码",
+//   'pages.borrower_form.store_info.add_store': "添加店铺",
+//   'pages.borrower_form.store_info.declaration':"我们会以贵公司月均销售额的三到四成作为审批额度的基础。例如，贵公司的月均销售为三十万美元，\
+// 我司的额度审批将会以九万美元至十二万美元作为基础。最终额度会因应贵公司的运营表现进行调整。 \
+// 本公司知悉及授权XXXXX获取及使用本公司在电商平台上的店铺资料和数据作分析之用。",
 
-  //step 6
-  'pages.borrower_form.confirm_info': "确认申请",
-    'pages.borrower_form.confirm_info.amount': "预计信用额度",
-    'pages.borrower_form.confirm_info.interest': "每笔贷款利息约0.049% /日",
-    'pages.borrower_form.confirm_info.handling_fee': "* 以上利息已包含手续费。",
-    'pages.borrower_form.confirm_info.declaration1': "** 以上信息不构成本平台对任何人作出的任何陈述，保证，承诺或要约。如有任何争议，本平台保留一切最终决定权。",
+//   //step 6
+//   'pages.borrower_form.confirm_info': "确认申请",
+//     'pages.borrower_form.confirm_info.amount': "预计信用额度",
+//     'pages.borrower_form.confirm_info.interest': "每笔贷款利息约0.049% /日",
+//     'pages.borrower_form.confirm_info.handling_fee': "* 以上利息已包含手续费。",
+//     'pages.borrower_form.confirm_info.declaration1': "** 以上信息不构成本平台对任何人作出的任何陈述，保证，承诺或要约。如有任何争议，本平台保留一切最终决定权。",
     
-    'pages.borrower_form.confirm_info.declaration2': "[请输入香港公司名称]以及[请输入香港公司名称] (以下合称“本公司”) 向XXXXX 确认并保证本贷款申请(“本申请”)内所载资料均是真实无讹、准确并完整。\
-本公司同意XXXXX有权随时向任何第叁者索取有关本公司的资料，包括但不限于向信贷资料服务机构进行查阅。本公司确认提交本申请之人士已获得本公司授权进行一切与本申请有关之事项。\
-本公司谨此声明本公司具偿债能力，现时没有涉及任何破产、诉讼或行政程序，或此等待决事项，或按本公司在作出一切合理查询后所知，威胁会展开该等事项。本公司声明本公司并无与其他贷款人\
-作出任何对本公司偿还XXXXX就此申请批出的贷款 (如有) 构成阻碍的安排。此外，本公司确认及同意在本公司完全偿还XXXXX贷款之前，不会自愿性申请破产。本公司明白申请贷款批核乃参考本公司提供之申请资料及文件，\
-贷款审批结果最终由XXXXX决定，而XXXXX没有责任就拒绝此贷款申请提供任何原因。XXXXX对本申请及由其直接或间接引起的一切的争议拥有最终决定权。本公司明白并同意在收到XXXXX通知成功获批结果后，\
-本公司须确认接受XXXXX的条款及细则，当中包括《XXXXX平台条款及细则》(“平台条款”)。本公司确认已详阅并明白平台条款，并同意受平台条款所约束。本公司确认已经详阅并明白附载于本申请页面的XXXXX收集个人资料声明（“个人资料声明”），\
-并且同意受XXXXX私隐政策约束，包括但不限于，XXXXX按个人资料声明及私隐政策收集、使用及披露本公司的个人资料。本公司明白为向本公司提供服务，XXXXX可能把本申请中的个人资料转移至香港境外，交予XXXXX位于中国的集团公司及/或XXXXX的代理人\
-(包括, 但不限于, XXXXX聘用来追讨XXXXX的客户过期的贷款的第三方公司)。该地区可能没有与《个人资料(私隐)条例》(香港法例第四八六章)大体上相似或达致与此条例的目的相同目的之法律，亦即是说，本申请中的个人资料未必可以获得与在香港相同或类似程度的保障。\
-本公司确认本公司并未与XXXXX以外的任何人(“第三方”)因促致、洽商、取得或申请此笔贷款，及/或因担保或保证此笔贷款的偿还，或由于与该等事务有关，达成或签订任何协议（本公司与本公司委任的律师纯粹为提供法律服务而达成或签订的协议除外）。\
-本公司明白此确认的目的是确保本公司不会被任何第叁方另行征收费用。本公司根据《电子交易条例》(香港法例第五五叁章)第十五条同意XXXXX以电子纪录或以电子方式向本公司提供借香港法律(包括但不限于放债人条例(香港法例第一六叁章)) 须以书面形式提供之资料。\
-本公司明白XXXXX可不时向为XXXXX推荐客户的业务合作伙伴提供费用或佣金，且本公司同意XXXXX此等安排。",
+//     'pages.borrower_form.confirm_info.declaration2': "[请输入香港公司名称]以及[请输入香港公司名称] (以下合称“本公司”) 向XXXXX 确认并保证本贷款申请(“本申请”)内所载资料均是真实无讹、准确并完整。\
+// 本公司同意XXXXX有权随时向任何第叁者索取有关本公司的资料，包括但不限于向信贷资料服务机构进行查阅。本公司确认提交本申请之人士已获得本公司授权进行一切与本申请有关之事项。\
+// 本公司谨此声明本公司具偿债能力，现时没有涉及任何破产、诉讼或行政程序，或此等待决事项，或按本公司在作出一切合理查询后所知，威胁会展开该等事项。本公司声明本公司并无与其他贷款人\
+// 作出任何对本公司偿还XXXXX就此申请批出的贷款 (如有) 构成阻碍的安排。此外，本公司确认及同意在本公司完全偿还XXXXX贷款之前，不会自愿性申请破产。本公司明白申请贷款批核乃参考本公司提供之申请资料及文件，\
+// 贷款审批结果最终由XXXXX决定，而XXXXX没有责任就拒绝此贷款申请提供任何原因。XXXXX对本申请及由其直接或间接引起的一切的争议拥有最终决定权。本公司明白并同意在收到XXXXX通知成功获批结果后，\
+// 本公司须确认接受XXXXX的条款及细则，当中包括《XXXXX平台条款及细则》(“平台条款”)。本公司确认已详阅并明白平台条款，并同意受平台条款所约束。本公司确认已经详阅并明白附载于本申请页面的XXXXX收集个人资料声明（“个人资料声明”），\
+// 并且同意受XXXXX私隐政策约束，包括但不限于，XXXXX按个人资料声明及私隐政策收集、使用及披露本公司的个人资料。本公司明白为向本公司提供服务，XXXXX可能把本申请中的个人资料转移至香港境外，交予XXXXX位于中国的集团公司及/或XXXXX的代理人\
+// (包括, 但不限于, XXXXX聘用来追讨XXXXX的客户过期的贷款的第三方公司)。该地区可能没有与《个人资料(私隐)条例》(香港法例第四八六章)大体上相似或达致与此条例的目的相同目的之法律，亦即是说，本申请中的个人资料未必可以获得与在香港相同或类似程度的保障。\
+// 本公司确认本公司并未与XXXXX以外的任何人(“第三方”)因促致、洽商、取得或申请此笔贷款，及/或因担保或保证此笔贷款的偿还，或由于与该等事务有关，达成或签订任何协议（本公司与本公司委任的律师纯粹为提供法律服务而达成或签订的协议除外）。\
+// 本公司明白此确认的目的是确保本公司不会被任何第叁方另行征收费用。本公司根据《电子交易条例》(香港法例第五五叁章)第十五条同意XXXXX以电子纪录或以电子方式向本公司提供借香港法律(包括但不限于放债人条例(香港法例第一六叁章)) 须以书面形式提供之资料。\
+// 本公司明白XXXXX可不时向为XXXXX推荐客户的业务合作伙伴提供费用或佣金，且本公司同意XXXXX此等安排。",
 
 
-    'pages.borrower_form.confirm_info.declaration3': "收集个人资料声明",
-    'pages.borrower_form.confirm_info.check_box': "请勾选",
-    'pages.borrower_form.confirm_info.check_box1': "本公司明白及同意以上条款",
-    'pages.borrower_form.confirm_info.check_box2': "本公司已详阅并同意以上声明真实及正确。本公司同意受以上声明所列的所有条款约束。如本公司声明不实，本公司同意承担所有法律责任以及向XXXXX赔偿一切直接或间接引起的损失。",
-  'pages.borrower_form.must_provide': "*必须提供",
+//     'pages.borrower_form.confirm_info.declaration3': "收集个人资料声明",
+//     'pages.borrower_form.confirm_info.check_box': "请勾选",
+//     'pages.borrower_form.confirm_info.check_box1': "本公司明白及同意以上条款",
+//     'pages.borrower_form.confirm_info.check_box2': "本公司已详阅并同意以上声明真实及正确。本公司同意受以上声明所列的所有条款约束。如本公司声明不实，本公司同意承担所有法律责任以及向XXXXX赔偿一切直接或间接引起的损失。",
+//   'pages.borrower_form.must_provide': "*必须提供",
   
  //Shareholder_Person
  'pages.borrower_form.shareholder.person.name': "名称",

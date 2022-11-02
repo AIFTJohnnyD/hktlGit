@@ -82,29 +82,46 @@ export default [
     name: 'borrower',
     icon: 'table',
     routes: [
-      //大陆公司输入信息
-      {
-        name: 'input',
-        icon: 'table',
-        path: '/borrower/borrower-form',
-        component: './borrower/BorrowerForm',
-        access: 'canBorrowerNew',
-      },
       //香港公司输入信息
       {
-        name: 'HKinput',
+        name: 'hk_input',
         icon: 'table',
-        path: '/borrower/borrower-form',
+        path: '/borrower/borrower-formhk',
         component: './borrower/BorrowerFormHK',
         access: 'canBorrowerNew',
       },
+      //关联公司输入信息
       {
-        name: '原来的输入(更新)信息',
+        name: 'mainland_input',
         icon: 'table',
-        path: '/borrower/borrower-form1',
-        component: './borrower/BorrowerForm1',
-        access: 'canBorrowerNew1',
+        path: '/borrower/borrower-form',
+        component: './borrower/BorrowerFormMainland',
+        access: 'canBorrowerNew',
       },
+      //香港公司文件上传
+      {
+        name: 'hk_file_upload',
+        icon: 'table',
+        path: '/borrower/borrower-form-hk_file_upload',
+        component: './borrower/BorrowerFormHKFileUpload',
+        access: 'canBorrowerNew',
+      },
+      //关联公司文件上传
+      {
+        name: 'mainland_file_upload',
+        icon: 'table',
+        path: '/borrower/borrower-form-mainland_file_upload',
+        component: './borrower/BorrowerFormMainlandFileUpload',
+        access: 'canBorrowerNew',
+      },
+      
+      // {
+      //   name: '原来的输入(更新)信息',
+      //   icon: 'table',
+      //   path: '/borrower/borrower-form1',
+      //   component: './borrower/BorrowerForm1',
+      //   access: 'canBorrowerNew1',
+      // },
       {
         name: 'list',
         icon: 'table',
