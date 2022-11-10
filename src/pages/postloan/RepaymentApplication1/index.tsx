@@ -59,7 +59,7 @@ const TableList: React.FC = () => {
   const columns: ProColumns<TableListItem>[] = [
     {
       title: (<FormattedMessage id='pages.util.id'/>),
-      dataIndex: 'id_str',
+      dataIndex: 'key',
       render: (dom, entity) => {
         return (
           <a
@@ -134,13 +134,13 @@ const TableList: React.FC = () => {
     },
 
     {
-      title: (<FormattedMessage id='pages.util.start_date_approved'/>),
-      dataIndex: 'start_date_approved',
+      title: (<FormattedMessage id='pages.util.start_date'/>),
+      dataIndex: 'start_date',
       valueType: 'textarea',
     },
     {
-      title: (<FormattedMessage id='pages.util.end_date_approved'/>),
-      dataIndex: 'end_date_approved',
+      title: (<FormattedMessage id='pages.util.end_date'/>),
+      dataIndex: 'end_date',
       valueType: 'textarea',
     },  
     {
@@ -171,6 +171,8 @@ const TableList: React.FC = () => {
             onClick={() => {
               handleUpdateModalVisible(true);
               setCurrentRow(record);
+              console.log("uploadrecord",record);
+              
             }}
           >
             <FormattedMessage id='pages.postloan.repayment_installment'/>
@@ -234,11 +236,12 @@ const TableList: React.FC = () => {
           if (success) {
             handleUpdateModalVisible(false);
             setCurrentRow(undefined);
-
+            console.log("uploadSuccess文件已经上传")
             if (actionRef.current) {
               actionRef.current.reload();
             }
           }
+
           return true;
         }}
         onCancel={() => {
@@ -246,7 +249,10 @@ const TableList: React.FC = () => {
           setCurrentRow(undefined);
         }}
         updateModalVisible={updateModalVisible}
-        values={currentRow || {}}
+        values={
+          currentRow 
+          ||
+           {}}
       />
 
       <Drawer

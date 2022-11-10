@@ -82,6 +82,15 @@ export default [
     name: 'borrower',
     icon: 'table',
     routes: [
+
+      //香港公司输入信息
+      {
+        name: 'tableUpload',
+        icon: 'table',
+        path: '/borrower/tableUpload',
+        component: './borrower/tableUpload',
+        access: 'canBorrowerNew',
+      },
       //香港公司输入信息
       {
         name: 'hk_input',

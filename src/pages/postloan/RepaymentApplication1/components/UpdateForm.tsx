@@ -80,19 +80,22 @@ const columns_repayment: ProColumns<RepaymentListItem>[] = [
     title: (<FormattedMessage id='pages.loan_application.repayment_proof'/>),
     dataIndex: 'name',
     valueType: 'option',
-    render: (dom, record, obj) => {
-      // console.log(record?.attached_files)
-      var attached_files = record?.attached_files;
-      const listItems = attached_files.map((file_name:string) => (
-        <>
-        <a href={'http://localhost:8000/api/loan_application/download_proof_file?file_name=' + file_name} download={file_name.split('_')[2]}>
-          {file_name.split('_')[2]}
-        </a><br/>
-        </>
-      ));      
+    render: (dom, obj) => {
+      obj.file_url = "http://localhost:8000/api/borrower/download_file?file_id=br_hk__9"
+      obj.file_name = "还款凭证.png"
       return (
         <>
-          {listItems}
+          <a 
+          href={obj.file_url} 
+          download={obj.file_name}>
+            {obj.file_name}
+          </a>
+          {/* <ProFormUploadButton label="upload" name="upload" action="upload.do" /> */}
+
+          {/* <br/>
+          <a href={obj.file_url} download={obj.file_name}>
+            {obj.file_name}
+          </a> */}
         </>
       );
     }, 
@@ -101,15 +104,14 @@ const columns_repayment: ProColumns<RepaymentListItem>[] = [
 
 const UpdateForm: React.FC<UpdateFormProps> = (props) => {
   const [fileList, setFileList] = useState<UploadFile[]>([]);
-  const [currentStep, setCurrentStep] = useState(0);
   const form = useRef();
-
+  console.log("uploadprops",props )
   function roundNumber(number: number) {
     return Math.round(number * 100) / 100
   }
 
-  function formatMoney(number: number) {
-    return "$"+roundNumber(number).toLocaleString();
+  function formatNumber(number: number) {
+    return "$"+roundNumber(number);
   }
 
   function isFullyRepaid() {
@@ -134,24 +136,12 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
     return false;
   }
 
-  function getNextInstallment(list) {
-    var next = 0;
-    list.forEach((index, val) => {
-      if (val.installment > next) {
-        next = val.installment;
-      }
-    })
-    return next + 1;
-  }
-
   function submitForm(values: FormValueType) {
     const formData = new FormData();
     fileList.forEach(file => {
       formData.append('files', file as RcFile);
     });
-    formData.append('application_key', props.values.key);
-    formData.append('repayment_installment', getNextInstallment(props.values.list_replayment));
-    fetch('/api/loan_application/upload_proof_file', {
+    fetch('/api/loan_application/upload_file', {
       method: 'POST',
       body: formData,
     })
@@ -169,7 +159,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
 
   const year = 360;
   const amountWithInterestRepayment = props.values.amount_approved + ((props.values.amount_approved * props.values.annual_interest_rate_approved * ((moment(props.values.end_date).diff(moment(props.values.start_date), 'days')) + 1)) / year);
-    
+  
   var outstandingBalance = props.values.today_balance;
   var totalAmountApproved = outstandingBalance;
   if (!isFullyRepaid()) {
@@ -199,7 +189,6 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
             visible={props.updateModalVisible}
             footer={submitter}
             onCancel={() => {
-              setCurrentStep(0);
               props.onCancel();
             }}
           >
@@ -209,99 +198,44 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
       }}
       //onFinish={props.onSubmit}
       onFinish={submitForm}
-      current={currentStep}
-      submitter={{
-        render: (props) => {
-          if (props.step === 0) {
-            return (
-              <Button 
-                type="primary" 
-                key="next" 
-                onClick={() => props.onSubmit?.()}
-              >
-                {<FormattedMessage id='pages.util.next_step'/>}
-              </Button>
-            );
-          }
-          return [
-            <Button
-              key="previous"
-              onClick={() => setCurrentStep((currentStep) => currentStep - 1)}
-            >
-              {<FormattedMessage id='pages.util.previous_step'/>}
-            </Button>,
-            <Button
-              type="primary"
-              key="submit"
-              onClick={() => props.onSubmit?.()}
-            >
-              {<FormattedMessage id='pages.util.finish'/>}
-            </Button>
-          ];
-        }
-      }}
     >
 
       <StepsForm.StepForm
         title={<FormattedMessage id='pages.loan_application.repayment_plan'/>}
-        onFinish={async () => {
-          setCurrentStep((currentStep) => currentStep + 1);
-          return true;
-        }}
       >
         <Card title="" className={styles.card} bordered={false}>
-          <Row gutter={[16,12]}>
+          <Row gutter={[16,24]}>
             <Col span={12}>
-              <b>{<FormattedMessage id='pages.util.status'/>}&nbsp;:</b>
-              <br/><p style={{color:'blue', marginLeft:30}}> {translate_status(props.values.status)}</p>
+                <b><FormattedMessage id='pages.util.status'/></b><br/>{translate_status(props.values.status)}
             </Col>
             <Col span={12}>
-              <b>{<FormattedMessage id='pages.loan_application.repayment_id'/>}&nbsp;:</b>
-              <br/><p style={{color:'blue', marginLeft:30}}> {props.values.id_str}</p>
+                <b>{<FormattedMessage id='pages.loan_application.repayment_id'/>}</b><br/>{props.values.key}
             </Col>
             <Col span={12}>
-              <b>{<FormattedMessage id='pages.loan_application.repayment_application_amout'/>}&nbsp;:</b>
-              <br/><p style={{color:'blue', marginLeft:30}}> {formatMoney(props.values.amount_approved)}</p>
+                <b>{<FormattedMessage id='pages.loan_application.application_amount'/>}</b><br/>{formatNumber(props.values.amount_approved)}
             </Col>
             <Col span={12}>
-              <b>{<FormattedMessage id='pages.util.start_date'/>}&nbsp;:</b>
-              <br/><p style={{color:'blue', marginLeft:30}}> {props.values.start_date_approved}</p>
-              {/* <br/> <b>{<FormattedMessage id='pages.loan_application_list.penalty_annual_interest_rate'/>}&nbsp;:</b> {props.values.penalty_annual_interest_rate} */}
+                <b>{<FormattedMessage id='pages.util.start_date'/>}</b><br/>{props.values.start_date_approved}
             </Col>
             <Col span={12}>
-              <b>{<FormattedMessage id='pages.loan_application_list.loan_overdue'/>}&nbsp;:</b>
-              <br/><p style={{color:'blue', marginLeft:30}}> {translate_boolean(props.values.loan_overdue)}
-              {props.values.loan_overdue == "True" && <b style={{color:'red'}}>&nbsp;&nbsp;&nbsp;{<FormattedMessage id='pages.loan_application_list.penalty_annual_interest_rate'/>}&nbsp;:&nbsp;{props.values.penalty_annual_interest_rate*100}%</b>}
-              </p>
+                <b>{<FormattedMessage id='pages.loan_application_list.loan_overdue'/>}</b><br/>{translate_boolean(props.values.loan_overdue)}
             </Col>
             <Col span={12}>
-              <b>{<FormattedMessage id='pages.loan_application.repayment_date'/>}&nbsp;:</b>
-              <br/><p style={{color:'blue', marginLeft:30}}> {props.values.end_date_approved}</p>
+                <b>{<FormattedMessage id='pages.loan_application.repayment_date'/>}</b><br/>{props.values.end_date_approved}
             </Col>
             <Col span={12}>
-              <b>{<FormattedMessage id='pages.loan_application.interest_today'/>}&nbsp;:</b>
-              <br/> <p style={{color:'blue', marginLeft:30}}> { formatMoney(totalAmountApproved) }</p>
+              <b>{<FormattedMessage id='pages.loan_application.interest_today'/>}</b><br/>{ formatNumber(totalAmountApproved) }
             </Col>
             <Col span={12}>
-              <b>{<FormattedMessage id='pages.loan_application.interest_on_repayment'/>}&nbsp;:</b>
-              <br/><p style={{color:'blue', marginLeft:30}}> {formatMoney(amountWithInterestRepayment)}</p>
+              <b>{<FormattedMessage id='pages.loan_application.interest_on_repayment'/>}</b><br/>{formatNumber(amountWithInterestRepayment)}
             </Col>
-            <Col span={12}>
-              <b>{<FormattedMessage id='pages.loan_application.outstanding_balance'/>}&nbsp;:</b>
-              <br/><p style={{color:'blue', marginLeft:30}}> {formatMoney(outstandingBalance)}</p>
-            </Col>
-            <Col span={12}>
-              <b>{<FormattedMessage id='pages.loan_application_list.annual_interest_rate_approved'/>}&nbsp;:</b>
-              <br/><p style={{color:'blue', marginLeft:30}}> {props.values.annual_interest_rate_approved * 100}%</p>
-            </Col>
-            {/* {(props.values.status == "DELINQUENT" || props.values.status == "OVERDUE_REPAYMENT") &&
-              <Col span={12}>
-                <b>{<FormattedMessage id='pages.loan_application.overdue_penalty'/>}&nbsp;:</b>
-                <br/><p style={{color:'blue', marginLeft:30}}> {formatMoney(outstandingBalance)}</p>
+            {(props.values.status == "DELINQUENT" || props.values.status == "OVERDUE_REPAYMENT") &&
+              <Col span={24}>
+                <b>{<FormattedMessage id='pages.loan_application.overdue_penalty'/>}</b><br/>{formatNumber(outstandingBalance)}
               </Col>
-            } */}
+            }
             <Col span={24}>
-                <b>{<FormattedMessage id='pages.loan_application.repayment_history'/>}&nbsp;:</b>
+                <b>{<FormattedMessage id='pages.loan_application.repayment_history'/>}</b>
                 <Table 
                   columns={columns_repayment} 
                   dataSource={props.values.list_replayment} 
@@ -309,15 +243,14 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
                   pagination={false}
                 />
             </Col>
-            
+            <Col span={24}>
+              <b>{<FormattedMessage id='pages.loan_application.outstanding_balance'/>}</b><br/>{formatNumber(outstandingBalance)}
+            </Col>
           </Row>
         </Card>
       </StepsForm.StepForm>
       <StepsForm.StepForm
         title={<FormattedMessage id='pages.postloan.repayment_amount'/>}
-        onFinish={async () => {
-          setCurrentStep(0);
-        }}
       >
         <Card title="" className={styles.card} bordered={false}>
           <Row gutter={[16,24]}>
@@ -338,8 +271,8 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
                 label={<FormattedMessage id='pages.loan_application.repayment_proof'/>}
                 name="proof_files"
                 title={<FormattedMessage id='pages.loan_application.upload_proof'/>}
-                //action = "/api/loan_application/upload_proof_file"
-                //rules={[{ required: true, message: <FormattedMessage id='pages.loan_application.please_upload_payment_proof'/> }]}
+                //action = "/api/loan_application/upload_file"
+                // rules={[{ required: true, message: <FormattedMessage id='pages.loan_application.please_upload_payment_proof'/> }]}
                 fieldProps = {{beforeUpload: beforeFileUpload}}
               />
             </Col>

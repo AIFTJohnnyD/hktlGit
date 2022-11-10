@@ -513,7 +513,7 @@ export default {
 
     'pages.borrower_form.HKshareholder_info.HKshareholder_info_name':"董事姓名",
     'pages.borrower_form.HKshareholder_info.HKshareholder_info_phone_number':"联系电话",
-    'pages.borrower_form.HKshareholder_info.HKshareholder_info_document_country_district':"证件所属国家或者地区",
+    'pages.borrower_form.HKshareholder_info.HKshareholder_info_document_country_district':"国籍",
 
     'pages.borrower_form.HKshareholder_info.HKshareholder_info_document_class':"证件类型",
 
