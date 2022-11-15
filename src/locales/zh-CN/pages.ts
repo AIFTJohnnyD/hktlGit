@@ -538,7 +538,7 @@ export default {
     'pages.borrower_form.HKfile_upload.annual_return':"周年申报表(NAR1)",
 
     'pages.borrower_form.HKfile_upload.corporation_by_laws':"公司章程",
-    'pages.borrower_form.HKfile_upload.shareholder_document':" 公司股东/实控人(超过25%股份)身份证明文件",
+    'pages.borrower_form.HKfile_upload.shareholder_document':"公司股东/实控人(超过25%股份)身份证明文件",
     'pages.borrower_form.HKfile_upload.director_document':"董事身份证明文件+手持证件照片",
 
     'pages.borrower_form.HKfile_upload.shareholder_address_document':"公司股东/实控人(超过25%股份)地址证明",
@@ -548,8 +548,8 @@ export default {
     'pages.borrower_form.HKfile_upload.other_documents':"其他文件",
 
 
-//大陆关联企业文件上传
-'pages.borrower_form.Mainlandfile_upload':"大陆关联企业文件上传",
+//关联企业文件上传
+'pages.borrower_form.Mainlandfile_upload':"关联企业文件上传",
 
     'pages.borrower_form.Mainlandfile_upload.business_license':"营业执照",
     'pages.borrower_form.Mainlandfile_upload.bylaws':"章程",

@@ -58,10 +58,10 @@ export default {
   'menu.lender.list': '投资机构列表',
 
   'menu.borrower': '电商管理',
-  'menu.borrower.hk_input': '香港公司输入(更新)信息',
-  'menu.borrower.mainland_input': '大陆关联公司输入(更新)信息',
+  'menu.borrower.hk_input': '电商卖家/客户信息录入',
+  'menu.borrower.mainland_input': '关联公司信息录入',
   'menu.borrower.hk_file_upload': '香港公司文件上传',
-  'menu.borrower.mainland_file_upload': '大陆关联公司文件上传',
+  'menu.borrower.mainland_file_upload': '关联公司文件上传',
   'menu.borrower.list': '电商列表',
   'menu.borrower.analysis': '电商分析',
 

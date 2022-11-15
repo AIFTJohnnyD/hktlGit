@@ -3,6 +3,14 @@
 import { request } from 'umi';
 import { TableListItem } from './data';
 
+export async function submitForm( params: any) {
+  return request('/local/seller/base_info', {
+    method: 'POST',
+    data: params,
+  });
+}
+
+
 /** 获取规则列表 GET /api/rule */
 export async function rule(
   params: {
