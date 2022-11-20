@@ -1,15 +1,11 @@
 import { CloseCircleOutlined } from '@ant-design/icons';
-import { Card, Col, Popover, Row, message } from 'antd';
-
-import type { FC } from 'react';
+import { Card, Col, Popover, Row, message, Button } from 'antd';
+import { FC, useRef } from 'react';
 import { useState } from 'react';
 import ProForm, {
-  ProFormDatePicker,
-  ProFormDateRangePicker,
+  ProFormInstance,
   ProFormSelect,
   ProFormText,
-  ProFormTimePicker,
-  ProFormUploadButton,
 } from '@ant-design/pro-form';
 import type { ProColumnType } from '@ant-design/pro-table';
 import { EditableProTable } from '@ant-design/pro-table';
@@ -71,7 +67,22 @@ interface ErrorField {
 }
 
 const AdvancedForm: FC<Record<string, any>> = () => {
+// 初始化数据
+function submitInfo(){
+  try {
+    console.log("valueserrorInfosubmitInfoformRef.current",formRef.current?.getFieldsValue?.());
+    submitForm(formRef.current?.getFieldsValue?.());
+    message.success('提交成功');
+  } catch {
+    console.log("onFinisherrorInfo提交失败")
+  }
+}
 
+const formRef = useRef<ProFormInstance>();
+  const { data, error1, loading } = useRequest(() => {
+    return request('/api/borrower/get_borrower');
+  });
+  console.log("valueserrorInfoget_borrower_data",data);
 
   const [error, setError] = useState<ErrorField[]>([]);
   const getErrorInfo = (errors: ErrorField[]) => {
@@ -124,9 +135,8 @@ const AdvancedForm: FC<Record<string, any>> = () => {
   const onFinish = async (values: Record<string, any>) => {
     setError([]);
     console.log("valueserrorInfo",values);
-    
     try {
-      await submitForm("full",values);
+      await submitForm(values);
       message.success('提交成功');
     } catch {
       console.log("onFinisherrorInfo提交失败")
@@ -177,6 +187,142 @@ const AdvancedForm: FC<Record<string, any>> = () => {
     },
   ];
 
+  const columnsDirector: ProColumnType<TableFormDateType>[] = [
+    {
+      title:<FormattedMessage id='pages.borrower_form.director_person_hk.director_person_name'/>,
+      dataIndex: 'director_person_name',
+      key: 'director_person_name',
+      width: '20%',
+    },
+    {
+      title:<FormattedMessage id='pages.borrower_form.director_person_hk.director_person_name_english'/>,
+      dataIndex: 'director_person_name_english',
+      key: 'director_person_name_english',
+      width: '20%',
+    },
+    {
+      title:<FormattedMessage id='pages.borrower_form.director_person_hk.director_person_nationality'/>,
+      dataIndex: 'director_person_nationality',
+      key: 'director_person_nationality',
+      width: '20%',
+    },
+    {
+      title:<FormattedMessage id='pages.borrower_form.director_person_hk.director_person_position'/>,
+      dataIndex: 'director_person_position',
+      key: 'director_person_position',
+      width: '20%',
+    },
+    {
+      title:<FormattedMessage id='pages.borrower_form.director_person_hk.director_person_phone'/>,
+      dataIndex: 'director_person_phone',
+      key: 'director_person_phone',
+      width: '20%',
+    },
+    {
+      title:<FormattedMessage id='pages.borrower_form.director_person_hk.director_person_email'/>,
+      dataIndex: 'director_person_email',
+      key: 'director_person_email',
+      width: '20%',
+    },
+    {
+      title:<FormattedMessage id='pages.borrower_form.director_person_hk.director_person_address'/>,
+      dataIndex: 'director_person_address',
+      key: 'director_person_address',
+      width: '20%',
+    },
+    {
+      title: '操作',
+      key: 'action',
+      valueType: 'option',
+      width: '20%',
+      render: (_, record: TableFormDateType, index, action) => {
+        return [
+          <a
+            key="eidit"
+            onClick={() => {
+              console.log("record.key",record);
+              action?.startEditable(record.key);
+            }}
+          >
+
+            编辑
+          </a>,
+          // <ProFormUploadButton label="upload" name="upload" action="upload.do" />
+        ];
+      },
+    },
+  ];
+  const columnsSharholder: ProColumnType<TableFormDateType>[] = [
+    {
+      title:<FormattedMessage id='pages.borrower_form.shareholder_person_hk.shareholder_person_name'/>,
+      dataIndex: 'shareholder_person_name',
+      key: 'shareholder_person_name',
+      width: '20%',
+    },
+    {
+      title:<FormattedMessage id='pages.borrower_form.shareholder_person_hk.shareholder_person_name_english'/>,
+      dataIndex: 'shareholder_person_name_english',
+      key: 'shareholder_person_name_english',
+      width: '20%',
+    },
+    {
+      title:<FormattedMessage id='pages.borrower_form.shareholder_person_hk.shareholder_person_nationality'/>,
+      dataIndex: 'shareholder_person_nationality',
+      key: 'shareholder_person_nationality',
+      width: '20%',
+    },
+    {
+      title:<FormattedMessage id='pages.borrower_form.shareholder_person_hk.shareholder_person_position'/>,
+      dataIndex: 'shareholder_person_position',
+      key: 'shareholder_person_position',
+      width: '20%',
+    },
+    {
+      title:<FormattedMessage id='pages.borrower_form.shareholder_person_hk.shareholder_person_phone'/>,
+      dataIndex: 'shareholder_person_phone',
+      key: 'shareholder_person_phone',
+      width: '20%',
+    },
+    {
+      title:<FormattedMessage id='pages.borrower_form.shareholder_person_hk.shareholder_person_email'/>,
+      dataIndex: 'shareholder_person_email',
+      key: 'shareholder_person_email',
+      width: '20%',
+    },
+    {
+      title:<FormattedMessage id='pages.borrower_form.shareholder_person_hk.shareholder_person_address'/>,
+      dataIndex: 'shareholder_person_address',
+      key: 'shareholder_person_address',
+      width: '20%',
+    },
+    {
+      title:<FormattedMessage id='pages.borrower_form.shareholder_person_hk.shareholder_person_rate'/>,
+      dataIndex: 'shareholder_person_rate',
+      key: 'shareholder_person_rate',
+      width: '20%',
+    },
+    {
+      title: '操作',
+      key: 'action',
+      valueType: 'option',
+      width: '20%',
+      render: (_, record: TableFormDateType, index, action) => {
+        return [
+          <a
+            key="eidit"
+            onClick={() => {
+              console.log("record.key",record);
+              action?.startEditable(record.key);
+            }}
+          >
+
+            编辑
+          </a>,
+          // <ProFormUploadButton label="upload" name="upload" action="upload.do" />
+        ];
+      },
+    },
+  ];
   return (
     <ProForm
       layout="vertical"
@@ -191,19 +337,26 @@ const AdvancedForm: FC<Record<string, any>> = () => {
           );
         },
       }}
+      formRef={formRef}
       initialValues={{ members: tableData }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
+      request={async () => {           
+        const { data, error, loading } = await request('/api/borrower/get_borrower');
+        return data;
+      }}
     >
       <PageContainer content="">
-        <Card title={<FormattedMessage id='pages.borrower_form.base_info'/>} className={styles.card} bordered={false}>
+        <Card title={<FormattedMessage id='pages.borrower_form.basic_information_cn'/>} className={styles.card} bordered={false} 
+        extra={ <Button type="primary" onClick={submitInfo}>提交</Button>}
+        >
           <Row gutter={16}>
             <Col lg={6} md={12} sm={24}>
               <ProFormSelect
-                label={<FormattedMessage id="pages.borrower_form.basic_information.company_country" />}
-                name="company_country"
-                rules={[{ required: false, message: 'Please input the company_country.' }]}
-                placeholder="Please input the company_country."
+                label={<FormattedMessage id="pages.borrower_form.basic_information_cn.location_cn" />}
+                name="location_cn"
+                rules={[{ required: false, message: 'Please input the location_cn.' }]}
+                placeholder="Please input the location_cn."
                 valueEnum={{
                   中国大陆: '中国大陆',
                   中国香港: '中国香港',
@@ -212,20 +365,20 @@ const AdvancedForm: FC<Record<string, any>> = () => {
             </Col>
             <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
               <ProFormSelect
-                label={<FormattedMessage id="pages.borrower_form.basic_information.company_business" />}
+                label={<FormattedMessage id="pages.borrower_form.basic_information_cn.company_type_cn" />}
                 width="md"
-                name="company_business"
-                rules={[{ required: false, message: 'Please input the company_business.' }]}
+                name="company_type_cn"
+                rules={[{ required: false, message: 'Please input the company_type_cn.' }]}
                 valueEnum={{
                   电商: '电商',
                   非电商: '非电商',
                 }}
-                placeholder="Please input the company_business."
+                placeholder="Please input the company_type_cn."
               />
             </Col>
             <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
               <ProFormText
-                label={<FormattedMessage id='pages.borrower_form.basic_information.mainland_unified_social_credit_code'/>}
+                label={<FormattedMessage id='pages.borrower_form.basic_information_cn.credit_code_cn'/>}
                 width="md"
                 name="credit_code_cn"
                 rules={[{ required: false, message: '' }]}
@@ -235,7 +388,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
           <Row gutter={16}>
             <Col lg={6} md={12} sm={24}>
               <ProFormText
-                label={<FormattedMessage id='pages.borrower_form.basic_information.mainland_company_name'/>}
+                label={<FormattedMessage id='pages.borrower_form.basic_information_cn.name_cn'/>}
                 width="md"
                 name="name_cn"
                 rules={[{ required: false, message: '请输入公司名称' }]}
@@ -244,256 +397,154 @@ const AdvancedForm: FC<Record<string, any>> = () => {
             </Col>
             <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
               <ProFormText
-                label={<FormattedMessage id='pages.borrower_form.basic_information.mainland_company_contact_name'/>}
+                label={<FormattedMessage id='pages.borrower_form.basic_information_cn.address_cn'/>}
                 width="md"
-                name="company_contact_name"
-                rules={[{ required: false, message: '请输入公司联系人名称' }]}
+                name="address_cn"
+                rules={[{ required: false, message: '请输入企业经营地址' }]}
               />
             </Col>
             <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
               <ProFormText
-                  label={<FormattedMessage id='pages.borrower_form.basic_information.mainland_company_contact_phone'/>}
+                  label={<FormattedMessage id='pages.borrower_form.basic_information_cn.post_code_cn'/>}
                   width="md"
-                  name="company_contact_phone"
-                  rules={[{ required: false, message: '请输入公司联系人电话' }]}
+                  name="post_code_cn"
+                  rules={[{ required: false, message: '请输入公司地址邮编' }]}
               />
             </Col>
           </Row>
           <Row gutter={16}>
             <Col lg={6} md={12} sm={24}>
               <ProFormText
-                label={<FormattedMessage id='pages.borrower_form.basic_information.mainland_company_contact_email'/>}
+                label={<FormattedMessage id='pages.borrower_form.basic_information_cn.establishment_date_cn'/>}
                 width="md"
-                name="company_contact_email"
-                rules={[{ required: false, message: '请输入企业联系邮箱' }]}
+                name="establishment_date_cn"
+                rules={[{ required: false, message: '请输入成立日期' }]}
               /> 
             </Col>
             <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
               <ProFormText
-                label={<FormattedMessage id='pages.borrower_form.basic_information.mainland_company_address'/>}
+                label={<FormattedMessage id='pages.borrower_form.basic_information_cn.company_link_cn'/>}
                 width="md"
-                name="company_address"
-                rules={[{ required: false, message: '请输入办公地址' }]}
+                name="company_link_cn"
+                rules={[{ required: false, message: '请输入公司网址' }]}
               /> 
             </Col>
             <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
-              <ProFormText
-                label={<FormattedMessage id='pages.borrower_form.basic_information.mainland_company_postalcode'/>}
-                width="md"
-                name="company_postalcode"
-                rules={[{ required: false, message: '请输入邮政编码' }]}
-              /> 
+            <ProFormText
+                  label={<FormattedMessage id='pages.borrower_form.basic_information_cn.contact_cn.position'/>}
+                  width="md"
+                  name={['contact_cn', 0, 'position']}
+                  rules={[{ required: false, message: '请输入企业联系人职位' }]}
+                /> 
             </Col>
           </Row>
           <Row gutter={16}>
-            <Col lg={6} md={12} sm={24}>
-              <ProFormUploadButton
-                name="upload"
-                label={<FormattedMessage id='pages.borrower_form.basic_information.business_license'/>}
-                max={2}
-                fieldProps={{
-                  name: 'business_license',
-                }}
-                rules={[{ required: false, message: '请上传营业执照' }]}
-                action="/upload.do"
-              /> 
-            </Col>
-            <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
-              <ProFormDatePicker
-                label={<FormattedMessage id="pages.borrower_form.basic_information.mainland_compnay_establishment_date" />}
-                width="md"
-                name="mainland_compnay_establishment_date"
-                rules={[
-                  {
-                    required: false,
-                    message: 'Please select the establishment_date',
-                  },
-                ]}
-              /> 
-            </Col>
-            <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
-              <ProFormText
-                initialValue={"Amazon.com"}
-                label={<FormattedMessage id='pages.borrower_form.basic_information.mainland_store_link'/>}
-                width="md"
-                name="store_link"
-                rules={[{ required: false, message: '请输入店铺链接,无则为亚马逊Amazon.com' }]}
-              />
-            </Col>
-          </Row>
+              <Col lg={6} md={12} sm={24}>
+                <ProFormText
+                  label={<FormattedMessage id='pages.borrower_form.basic_information_cn.contact_cn.name'/>}
+                  width="md"
+                  name={['contact_cn', 0, 'name']}
+                  rules={[{ required: false, message: '请输入企业联系人姓名' }]}
+                /> 
+              </Col>
+              <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
+                <ProFormText
+                  label={<FormattedMessage id='pages.borrower_form.basic_information_cn.contact_cn.phone'/>}
+                  width="md"
+                  name={['contact_cn', 0, 'phone']}
+                  rules={[{ required: false, message: '请输入企业联系人电话' }]}
+                /> 
+              </Col>
+              <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
+                <ProFormText
+                    label={<FormattedMessage id='pages.borrower_form.basic_information_cn.contact_cn.email'/>}
+                    width="md"
+                    name={['contact_cn', 0, 'email']}
+                    rules={[{ required: false, message: '请输入公司联系人邮箱' }]}
+                />
+              </Col>
+            </Row>
         </Card>
-        <Card title={<FormattedMessage id='pages.borrower_form.shareholder_info'/>} className={styles.card} bordered={false}>
+        <Card title={<FormattedMessage id='pages.borrower_form.shareholder_info_cn'/>} className={styles.card} bordered={false} 
+        extra={ <Button type="primary" onClick={submitInfo}>提交</Button>}
+        >
           <Row gutter={16}>
             <Col lg={6} md={12} sm={24}>
               <ProFormText
-                label={<FormattedMessage id="pages.borrower_form.shareholder_info.mainland_legal_person_name" />}
-                name="mainland_legal_person_name"
-                rules={[{ required: false, message: '请输入' }]}
+                label={<FormattedMessage id="pages.borrower_form.shareholder_info_cn.lear_name" />}
+                name="lear_name"
+                rules={[{ required: false, message: '请输入法人名称' }]}
               />
             </Col>
             <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
               <ProFormText
-                label={<FormattedMessage id="pages.borrower_form.shareholder_info.phone" />}
-                name="phone"
-                rules={[{ required: false, message: '请选择' }]}
+                label={<FormattedMessage id="pages.borrower_form.shareholder_info_cn.lear_nationality" />}
+                name="lear_nationality"
+                rules={[{ required: false, message: '请输入法人国籍' }]}
               />
             </Col>
             <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
               <ProFormText
-                label={<FormattedMessage id="pages.borrower_form.shareholder_info.nationality" />}
-                name="nationality"
+                label={<FormattedMessage id="pages.borrower_form.shareholder_info_cn.lear_mobile" />}
+                name="lear_mobile"
                 rules={[{ required: false, message: '请输入电话号码' }]}
               />
             </Col>
           </Row>
           <Row gutter={16}>
             <Col lg={6} md={12} sm={24}>
-              <ProFormSelect
-                label={<FormattedMessage id="pages.borrower_form.shareholder_info.documents_class" />}
-                name="documents_class"
-                rules={[{ required: false, message: '请选择证件类型' }]}
-                options={[
-                  {
-                    label: '身份证',
-                    value: 'IDCard',
-                  },
-                  {
-                    label: '其他证件',
-                    value: 'OtherDocuments',
-                  },
-                ]}
-                placeholder="请选择证件类型"
-              />
-            </Col>
-            <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
-              <ProFormUploadButton
-                name="documents_photo"
-                label={<FormattedMessage id='pages.borrower_form.shareholder_info.documents_photo'/>}
-                max={2}
-                fieldProps={{
-                  name: 'documents_photo',
-                }}
-                rules={[{ required: false, message: '请上传证件照片' }]}
-                action="/upload.do"
-              />
-            </Col>
-            <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
               <ProFormText
-                label={<FormattedMessage id="pages.borrower_form.shareholder_info.email" />}
-                name="email"
+                label={<FormattedMessage id="pages.borrower_form.shareholder_info_cn.lear_email" />}
+                name="lear_email"
                 rules={[{ required: false, message: '请输入电邮' }]}
+                placeholder="请输入电邮"
               />
+            </Col>
+            <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
+              <ProFormText
+                label={<FormattedMessage id="pages.borrower_form.shareholder_info_cn.lear_address" />}
+                name="lear_address"
+                rules={[{ required: false, message: '请输入住宅地址' }]}
+              />
+            </Col>
+            <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
             </Col>
           </Row>
         </Card>
-        <Card title={<FormattedMessage id='pages.borrower_form.companyPublic_account.companyPublic_account_information_or_private_oneClass_account_information'/>} className={styles.card} bordered={false}>
-          <Row gutter={16}>
-            <Col lg={6} md={12} sm={24}>
-              <ProFormText
-                label={<FormattedMessage id="pages.borrower_form.companyPublic_account.companyPublic_account_name" />}
-                name="companyPublic_account_name"
-                rules={[{ required: false, message: '请输入' }]}
-              />
-            </Col>
-            <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
-              <ProFormText
-                label={<FormattedMessage id="pages.borrower_form.companyPublic_account.bank_account" />}
-                name="bank_account"
-                rules={[{ required: false, message: '请输入' }]}
-              />
-            </Col>
-            <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
-              <ProFormText
-                label={<FormattedMessage id="pages.borrower_form.companyPublic_account.bank_name" />}
-                name="bank_name"
-                rules={[{ required: false, message: '请输入银行名称' }]}
-              />
-            </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col lg={6} md={12} sm={24}>
-              <ProFormText
-                label={<FormattedMessage id="pages.borrower_form.companyPublic_account.openAccount_bank" />}
-                name="openAccount_bank"
-                rules={[{ required: false, message: '请输入开户行全称' }]}
-                placeholder="请输入开户行全称"
-              />
-            </Col>
-            <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
-              <ProFormText
-                label={<FormattedMessage id="pages.borrower_form.companyPublic_account.bankKey" />}
-                name="bankKey"
-                rules={[{ required: false, message: '请输入联行号' }]}
-                placeholder="请输入联行号"
-              />
-            </Col>
-            <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
-              <ProFormText
-                label={<FormattedMessage id="pages.borrower_form.companyPublic_account.bank_reserved_phone" />}
-                name="bank_reserved_phone"
-                rules={[{ required: false, message: '请输入银行预留手机号(仅个人一类户提供)' }]}
-              />
-            </Col>
-          </Row>
+        <Card title="董事信息" className={styles.card} bordered={true} extra={ <Button type="primary" onClick={submitInfo}>提交</Button>}>
+          <ProForm.Item name="director_person_hk">
+            <EditableProTable<TableFormDateType>
+              recordCreatorProps={{
+                record: () => {
+                  return {
+                    key: `0${Date.now()}`,
+                  };
+                },
+                creatorButtonText: '添加',
+              }}
+              columns={columnsDirector}
+              rowKey="key"
+            />
+          </ProForm.Item>
         </Card>
-        <Card title={<FormattedMessage id='pages.borrower_form.ultimate_beneficial_owner'/>} className={styles.card} bordered={false}>
-          <Row gutter={16}>
-            <Col lg={6} md={12} sm={24}>
-              <ProFormText
-                label={<FormattedMessage id="pages.borrower_form.ultimate_beneficial_owner.ultimate_beneficial_owner_name" />}
-                name="ultimate_beneficial_owner_name"
-                rules={[{ required: false, message: '请输入' }]}
-              />
-            </Col>
-            <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
-              <ProFormSelect
-                label={<FormattedMessage id="pages.borrower_form.ultimate_beneficial_owner.ultimate_beneficial_owner_countryOrDistrict" />}
-                name="ultimate_beneficial_owner_countryOrDistrict"
-                rules={[{ required: false, message: 'Please input the company_country.' }]}
-                placeholder="Please input the company_country."
-                valueEnum={{
-                  中国大陆: '中国大陆',
-                  中国香港: '中国香港',
-                }}
-              />
-            </Col>
-            <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
-              <ProFormSelect
-                label={<FormattedMessage id="pages.borrower_form.ultimate_beneficial_owner.ultimate_beneficial_owner_documentClass" />}
-                name="ultimate_beneficial_owner_documentClass"
-                rules={[{ required: false, message: '请选择证件类型' }]}
-                options={[
-                  {
-                    label: '大陆身份证',
-                    value: 'mainlandIDCard',
-                  },
-                  {
-                    label: '香港身份证',
-                    value: 'HKID',
-                  },
-                ]}
-                placeholder="请选择证件类型"
-              />
-            </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col lg={6} md={12} sm={24}>
-              <ProFormUploadButton
-                name="ultimate_beneficial_owner_document_photo"
-                label={<FormattedMessage id='pages.borrower_form.ultimate_beneficial_owner.ultimate_beneficial_owner_document_photo'/>}
-                max={2}
-                fieldProps={{
-                  name: 'ultimate_beneficial_owner_document_photo',
-                }}
-                rules={[{ required: false, message: '请上传证件照片' }]}
-                action="/upload.do"
-              />
-            </Col>
-            <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
-            </Col>
-            <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
-            </Col>
-          </Row>
+        <Card title={<FormattedMessage id='pages.borrower_form.shareholder_person_hk'/>} 
+        className={styles.card} 
+        bordered={false} 
+        extra={ <Button type="primary" onClick={submitInfo}>提交</Button>}>
+          <ProForm.Item name="shareholder_person_hk">
+            <EditableProTable<TableFormDateType>
+              recordCreatorProps={{
+                record: () => {
+                  return {
+                    key: `0${Date.now()}`,
+                  };
+                },
+                creatorButtonText: '添加',
+              }}
+              columns={columnsSharholder}
+              rowKey="key"
+            />
+          </ProForm.Item>
         </Card>
       </PageContainer>
     </ProForm>

@@ -512,7 +512,7 @@ export default {
     'pages.borrower_form.upload_doc.format':"只接受上傳 .jpeg/.jpg/.png/.xls/.xlsx/.doc/.docx/.odt/.pdf/.ppt/.pptx 格式之檔案",
     'pages.borrower_form.upload_doc.proof':"營業證明",
     'pages.borrower_form.upload_doc.certificate':"*商業登記證(香港公司)",
-    'pages.borrower_form.upload_doc.business_license':"*企業法人營業執照(中國公司)",
+    'pages.borrower_form.upload_doc.file_br_cn':"*企業法人營業執照(中國公司)",
     'pages.borrower_form.upload_doc.Association':"*公司章程(中國公司)",
     'pages.borrower_form.upload_doc.identity':"法人、自然人股東和董事身份證明*",
     'pages.borrower_form.upload_doc.passport':"*股東和董事身份證或護照(香港公司)",

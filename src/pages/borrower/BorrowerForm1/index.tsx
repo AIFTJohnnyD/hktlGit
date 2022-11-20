@@ -25,7 +25,6 @@ const CompanyForm: React.FC<BorrowerDataTypeProps> = () => {
   const { data, error, loading } = useRequest(() => {
     return request('/api/borrower/get_borrower');
   });
-
   const [stepData, setStepData] = useState<StepDataType>();
   const [current, setCurrent] = useState(0);
 
@@ -67,10 +66,10 @@ const CompanyForm: React.FC<BorrowerDataTypeProps> = () => {
         >
 
 
-            <BasicInformation></BasicInformation>
+            {/* <BasicInformation></BasicInformation> */}
 
 
-          <StepsForm.StepForm<StepDataType>
+          {/* <StepsForm.StepForm<StepDataType>
             title={<FormattedMessage id='pages.borrower_form.shareholder_info'/>}
             stepProps={{
               description: <FormattedMessage id='pages.borrower_form.must_provide'/>,
@@ -91,7 +90,7 @@ const CompanyForm: React.FC<BorrowerDataTypeProps> = () => {
             }}
           >
             <CompanyInformation></CompanyInformation>
-          </StepsForm.StepForm>
+          </StepsForm.StepForm> */}
 
           <StepsForm.StepForm<StepDataType>
             title={<FormattedMessage id='pages.borrower_form.document_upload'/>}

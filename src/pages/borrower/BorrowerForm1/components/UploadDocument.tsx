@@ -112,7 +112,7 @@ const UploadDocument = ({ loading, data }: { loading: boolean, data: any }) => {
             </Dragger>
           </div>
         </ProCard>
-        <ProCard title={<FormattedMessage id='pages.borrower_form.upload_doc.business_license'/>} colSpan="33%" style={{ height: 430 }}>
+        <ProCard title={<FormattedMessage id='pages.borrower_form.upload_doc.file_br_cn'/>} colSpan="33%" style={{ height: 430 }}>
           <div style={{ height: 120 }}>
             <Dragger {...props_br_cn}>
               <p className="ant-upload-drag-icon">

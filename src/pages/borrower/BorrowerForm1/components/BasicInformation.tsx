@@ -113,10 +113,10 @@ const BasicInformation: React.FC = () => {
             <Col xl={6} lg={6} md={12} sm={24}>      
               <ProFormUploadButton
                 name="upload"
-                label={<FormattedMessage id='pages.borrower_form.basic_information.business_license'/>}
+                label={<FormattedMessage id='pages.borrower_form.basic_information.file_br_cn'/>}
                 max={2}
                 fieldProps={{
-                  name: 'business_license',
+                  name: 'file_br_cn',
                 }}
                 rules={[{ required: true, message: '请上传营业执照' }]}
                 action="/upload.do"

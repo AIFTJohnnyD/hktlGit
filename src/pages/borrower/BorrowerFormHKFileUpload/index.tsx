@@ -1,7 +1,7 @@
 import { CloseCircleOutlined } from '@ant-design/icons';
 import { Card, Col, Popover, Row, message } from 'antd';
 
-import type { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { useState } from 'react';
 import ProForm, {
   ProFormDatePicker,
@@ -18,6 +18,7 @@ import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import { submitForm } from './service';
 import styles from './style.less';
 import { FormattedMessage, request, useRequest } from 'umi';
+import { UploadChangeParam, UploadFile } from 'antd/lib/upload';
 
 
 interface TableFormDateType {
@@ -72,9 +73,51 @@ interface ErrorField {
 }
 
 const AdvancedForm: FC<Record<string, any>> = () => {
-
-
+  let file_br_hk: UploadFile[] = [
+  ];
+  let file_ci_hk: UploadFile[] = [
+  ];
+  let file_nar1_hk: UploadFile[] = [
+  ];
+  let file_moa_hk: UploadFile[] = [
+  ];
+  let file_shareholder_cn: UploadFile[] = [
+  ];
+  let file_director_hk: UploadFile[] = [
+  ];
+  let file_address_proof_hk: UploadFile[] = [
+  ];
+  let file_director_credit_report_hk: UploadFile[] = [
+  ];
+  let file_financial_statements_hk: UploadFile[] = [
+  ];
+  let file_other_hk: UploadFile[] = [
+  ];
   const [error, setError] = useState<ErrorField[]>([]);
+  useEffect(() => {
+    console.log("useEffect");
+  }, []);
+  const { data, error1, loading } = useRequest(() => {
+    return request('/api/borrower/get_borrower');
+  });
+  console.log("filedata",typeof(data));
+  console.log("filedata",data);
+  if(typeof(data)!="undefined"){
+    //显示从index为12开始的数组
+    file_br_hk=data.file_br_hk.splice(12)
+    console.log("filedatatypeof(data)!=undefined");
+    console.log("filedatafileList",file_br_hk);
+    file_ci_hk=data.file_ci_hk.splice(0,2)
+    file_nar1_hk=data.file_nar1_hk.splice(0,2)
+    file_moa_hk=data.file_moa_hk.splice(0,2)
+    file_shareholder_cn=data.file_shareholder_cn.splice(0,2)
+    file_director_hk=data.file_director_hk.splice(0,2)
+    file_address_proof_hk=data.file_address_proof_hk.splice(0,2)
+    file_director_credit_report_hk=data.file_director_credit_report_hk.splice(0,2)
+    file_financial_statements_hk=data.file_financial_statements_hk.splice(0,2)
+    file_other_hk=data.file_other_hk.splice(0,2)
+    
+  }
   const getErrorInfo = (errors: ErrorField[]) => {
     console.log("getErrorInfo",errors);
     
@@ -127,7 +170,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
     console.log("valueserrorInfo",values);
     
     try {
-      await submitForm("full",values);
+      await submitForm(values);
       message.success('提交成功');
     } catch {
       console.log("onFinisherrorInfo提交失败")
@@ -200,40 +243,136 @@ const AdvancedForm: FC<Record<string, any>> = () => {
         <Card title={<FormattedMessage id='pages.borrower_form.HKfile_upload'/>} className={styles.card} bordered={false}>
           <Row gutter={16}>
             <Col lg={6} md={12} sm={24}>
-              <ProFormUploadButton  label={<FormattedMessage id='pages.borrower_form.HKfile_upload.business_registration_certificate'/>} name="business_registration_certificate" action="upload.do" />
+              <ProFormUploadButton  
+              label={<FormattedMessage id='pages.borrower_form.HKfile_upload.file_br_hk'/>} 
+              fileList={file_br_hk}
+              fieldProps={{
+                name: "file_br_hk",
+                action:"/api/borrower/upload_file",
+                onChange: (e) => {
+                  // handleChange(e)
+                },
+              }}
+               />
             </Col>
             <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
-              <ProFormUploadButton  label={<FormattedMessage id='pages.borrower_form.HKfile_upload.company_registration'/>} name="company_registration" action="upload.do" />
+              <ProFormUploadButton  
+              label={<FormattedMessage id='pages.borrower_form.HKfile_upload.file_ci_hk'/>} 
+              fileList={file_ci_hk}
+              fieldProps={{
+                name: "file_ci_hk",
+                action:"/api/borrower/upload_file",
+                onChange: (e) => {
+                  // handleChange(e)
+                },
+              }}
+              />
             </Col>
             <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
-              <ProFormUploadButton  label={<FormattedMessage id='pages.borrower_form.HKfile_upload.annual_return'/>} name="annual_return" action="upload.do" />
+              <ProFormUploadButton  
+              label={<FormattedMessage id='pages.borrower_form.HKfile_upload.file_nar1_hk'/>} 
+              fileList={file_nar1_hk}
+              fieldProps={{
+                name: "file_nar1_hk",
+                action:"/api/borrower/upload_file",
+                onChange: (e) => {
+                  // handleChange(e)
+                },
+              }}
+              />
             </Col>
           </Row>
           <Row gutter={16}>
             <Col lg={6} md={12} sm={24}>
-              <ProFormUploadButton  label={<FormattedMessage id='pages.borrower_form.HKfile_upload.corporation_by_laws'/>} name="corporation_by_laws" action="upload.do" />
+              <ProFormUploadButton  
+              label={<FormattedMessage id='pages.borrower_form.HKfile_upload.file_moa_hk'/>} 
+              fileList={file_moa_hk}
+              fieldProps={{
+                name: "file_moa_hk",
+                action:"/api/borrower/upload_file",
+                onChange: (e) => {
+                  // handleChange(e)
+                },
+              }}
+              />
             </Col>
             <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
-              <ProFormUploadButton  label={<FormattedMessage id='pages.borrower_form.HKfile_upload.shareholder_document'/>} name="shareholder_document" action="upload.do" />
+              <ProFormUploadButton  
+              label={<FormattedMessage id='pages.borrower_form.HKfile_upload.file_shareholder_cn'/>}
+              fileList={file_shareholder_cn}
+              fieldProps={{
+                name: "file_shareholder_cn",
+                action:"/api/borrower/upload_file",
+                onChange: (e) => {
+                  // handleChange(e)
+                },
+              }} />
             </Col>
             <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
-              <ProFormUploadButton  label={<FormattedMessage id='pages.borrower_form.HKfile_upload.director_document'/>} name="director_document" action="upload.do" />
+              <ProFormUploadButton  
+              label={<FormattedMessage id='pages.borrower_form.HKfile_upload.file_director_hk'/>} 
+              fileList={file_director_hk}
+              fieldProps={{
+                name: "file_director_hk",
+                action:"/api/borrower/upload_file",
+                onChange: (e) => {
+                  // handleChange(e)
+                },
+              }} />
             </Col>
           </Row>
           <Row gutter={16}>
             <Col lg={6} md={12} sm={24}>
-              <ProFormUploadButton  label={<FormattedMessage id='pages.borrower_form.HKfile_upload.shareholder_address_document'/>} name="shareholder_address_document" action="upload.do" />
+              <ProFormUploadButton  
+              label={<FormattedMessage id='pages.borrower_form.HKfile_upload.file_address_proof_hk'/>} 
+              fileList={file_address_proof_hk}
+              fieldProps={{
+                name: "file_address_proof_hk",
+                action:"/api/borrower/upload_file",
+                onChange: (e) => {
+                  // handleChange(e)
+                },
+              }}
+              />
             </Col>
             <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
-              <ProFormUploadButton  label={<FormattedMessage id='pages.borrower_form.HKfile_upload.shareholder_credit_history'/>} name="shareholder_credit_history" action="upload.do" />
+              <ProFormUploadButton  
+              label={<FormattedMessage id='pages.borrower_form.HKfile_upload.file_director_credit_report_hk'/>}
+              fileList={file_director_credit_report_hk}
+              fieldProps={{
+                name: "file_director_credit_report_hk",
+                action:"/api/borrower/upload_file",
+                onChange: (e) => {
+                  // handleChange(e)
+                },
+              }} />
             </Col>
             <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
-              <ProFormUploadButton  label={<FormattedMessage id='pages.borrower_form.HKfile_upload.hk_company_financial_statements'/>} name="hk_company_financial_statements" action="upload.do" />
+              <ProFormUploadButton  
+              label={<FormattedMessage id='pages.borrower_form.HKfile_upload.file_financial_statements_hk'/>} 
+              fileList={file_financial_statements_hk}
+              fieldProps={{
+                name: "file_financial_statements_hk",
+                action:"/api/borrower/upload_file",
+                onChange: (e) => {
+                  // handleChange(e)
+                },
+              }} />
             </Col>
           </Row>
           <Row gutter={16}>
-            <Col lg={6} md={12} sm={24}>
-              <ProFormUploadButton  label={<FormattedMessage id='pages.borrower_form.HKfile_upload.other_documents'/>} name="other_documents" action="upload.do" />
+          <Col lg={6} md={12} sm={24}>
+              <ProFormUploadButton  
+              label={<FormattedMessage id='pages.borrower_form.HKfile_upload.file_other_hk'/>} 
+              fileList={file_other_hk}
+              fieldProps={{
+                name: "file_other_hk",
+                action:"/api/borrower/upload_file",
+                onChange: (e) => {
+                  // handleChange(e)
+                },
+              }}
+              />
             </Col>
             <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
             </Col>
@@ -241,8 +380,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
             </Col>
           </Row>
         </Card>
-  
-      </PageContainer>
+        </PageContainer>
     </ProForm>
   );
 };

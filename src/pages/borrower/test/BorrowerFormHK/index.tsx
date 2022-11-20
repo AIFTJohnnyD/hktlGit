@@ -52,21 +52,17 @@ interface ErrorField {
 }
 
 const AdvancedForm: FC<Record<string, any>> = () => {
+  
   const { data, error1, loading } = useRequest(() => {
     return request('/api/borrower/get_borrower');
   });
   console.log("valueserrorInfoget_borrower_data",data);
   
-
   // 初始化数据
   function submitInfo(){
-    try {
-      console.log("valueserrorInfosubmitInfoformRef.current",formRef.current?.getFieldsValue?.());
-      submitForm(formRef.current?.getFieldsValue?.());
-      message.success('提交成功');
-    } catch {
-      console.log("onFinisherrorInfo提交失败")
-    }
+    console.log("submitInfoFunction被调用");
+    console.log("valueserrorInfosubmitInfoformRef.current",formRef.current?.getFieldsValue?.());
+    submitForm(formRef.current?.getFieldsValue?.());
   }
   const formRef = useRef<ProFormInstance>();
   
@@ -121,6 +117,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
   const onFinish = async (values: Record<string, any>) => {
     setError([]);
     console.log("valueserrorInfo",values);
+    
     try {
       await submitForm(values);
       message.success('提交成功');
@@ -135,7 +132,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
     
   };
 
-  const columnsDirector: ProColumnType<TableFormDateType>[] = [
+  const columns: ProColumnType<TableFormDateType>[] = [
     {
       title:<FormattedMessage id='pages.borrower_form.director_person_hk.director_person_name'/>,
       dataIndex: 'director_person_name',
@@ -271,7 +268,82 @@ const AdvancedForm: FC<Record<string, any>> = () => {
       },
     },
   ];
-  
+  // const columnsSharholder: ProColumnType<TableFormDateType>[] = [
+  //   {
+  //     title: '股东姓名',
+  //     dataIndex: 'name',
+  //     key: 'name',
+  //     width: '20%',
+  //   },
+  //   {
+  //     title: '性别',
+  //     dataIndex: 'gender',
+  //     key: 'gender',
+  //     width: '20%',
+  //   },
+  //   {
+  //     title: '出生日期',
+  //     dataIndex: 'birthday',
+  //     key: 'birthday',
+  //     width: '20%',
+  //   },
+  //   {
+  //     title: '联系电话',
+  //     dataIndex: 'workId',
+  //     key: 'workId',
+  //     width: '20%',
+  //     render: (dom, record) => (
+  //       <Space>
+  //         <span>{dom}</span>
+  //       </Space>
+  //     ),
+  //   },
+  //   {
+  //     title: '国籍',
+  //     dataIndex: 'department',
+  //     key: 'department',
+  //     width: '20%',
+  //   },
+  //   {
+  //     title: '证件号码',
+  //     dataIndex: 'country',
+  //     key: 'country',
+  //     width: '20%',
+  //   },
+  //   {
+  //     title: '邮箱',
+  //     dataIndex: 'email',
+  //     key: 'email',
+  //     width: '20%',
+  //   },
+  //   {
+  //     title: '居住地址',
+  //     dataIndex: 'address',
+  //     key: 'address',
+  //     width: '20%',
+  //   },
+  //   {
+  //     title: '操作',
+  //     key: 'action',
+  //     valueType: 'option',
+  //     width: '20%',
+  //     render: (_, record: TableFormDateType, index, action) => {
+  //       return [
+  //         <a
+  //           key="eidit"
+  //           onClick={() => {
+  //             console.log("record.key",record);
+  //             action?.startEditable(record.key);
+  //           }}
+  //         >
+
+  //           编辑
+  //         </a>,
+  //         // <ProFormUploadButton label="upload" name="upload" action="upload.do" />
+  //       ];
+  //     },
+  //   },
+  // ];
   const columnsEshop: ProColumnType<TableFormDateType>[] = [
     {
       title:<FormattedMessage id='pages.borrower_form.shop.platform'/>,
@@ -291,19 +363,18 @@ const AdvancedForm: FC<Record<string, any>> = () => {
       key: 'link',
       width: '20%',
     },
-    // API授权
-    // {
-    //   title: 'API授权',
-    //   dataIndex: 'APIButton',
-    //   valueType: 'radioButton',
-    //   key: 'APIButton',
-    //   width: '20%',
-    //   render: (dom, record) => (
-    //     <Space>
-    //         {/* <Button type="primary" onClick={submitInfo}>API授权</Button> */}
-    //     </Space>
-    //   ),
-    // },
+    {
+      title: 'API授权',
+      dataIndex: 'APIButton',
+      valueType: 'radioButton',
+      key: 'APIButton',
+      width: '20%',
+      render: (dom, record) => (
+        <Space>
+            <Button type="primary" onClick={submitInfo}>API授权</Button>
+        </Space>
+      ),
+    },
     {
       title: '操作',
       key: 'action',
@@ -342,8 +413,6 @@ const AdvancedForm: FC<Record<string, any>> = () => {
         },
       }}
       formRef={formRef}
-      initialValues={{
-      }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       request={async () => {           
@@ -459,6 +528,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
             </Row>
           </Card>
         </ProForm.Item>.
+        {/* table代码 */}
         <Card title="董事信息" className={styles.card} bordered={true} extra={ <Button type="primary" onClick={submitInfo}>提交</Button>}>
           <ProForm.Item name="director_person_hk">
             <EditableProTable<TableFormDateType>
@@ -470,15 +540,12 @@ const AdvancedForm: FC<Record<string, any>> = () => {
                 },
                 creatorButtonText: '添加',
               }}
-              columns={columnsDirector}
+              columns={columns}
               rowKey="key"
             />
           </ProForm.Item>
         </Card>
-        <Card title={<FormattedMessage id='pages.borrower_form.shareholder_person_hk'/>} 
-        className={styles.card} 
-        bordered={false} 
-        extra={ <Button type="primary" onClick={submitInfo}>提交</Button>}>
+        <Card title={<FormattedMessage id='pages.borrower_form.shareholder_person_hk'/>} className={styles.card} bordered={false} extra={ <Button type="primary" onClick={submitInfo}>提交</Button>}>
           <ProForm.Item name="shareholder_person_hk">
             <EditableProTable<TableFormDateType>
               recordCreatorProps={{
@@ -494,10 +561,46 @@ const AdvancedForm: FC<Record<string, any>> = () => {
             />
           </ProForm.Item>
         </Card>
-        <Card title={<FormattedMessage id='店铺信息'/>} 
-        className={styles.card} 
-        bordered={false} 
-        extra={ <Button type="primary"onClick={submitInfo}>提交</Button>}>
+        <Card title={<FormattedMessage id='pages.borrower_form.corporate_account'/>} className={styles.card} bordered={false} extra={ <Button type="primary">提交</Button>}>
+          <Row gutter={16}>
+            <Col lg={6} md={12} sm={24}>
+              <ProFormText
+                label={<FormattedMessage id="pages.borrower_form.corporate_account.account_name" />}
+                name="account_name"
+                rules={[{ required: false, message: '请输入' }]}
+              />
+            </Col>
+            <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
+              <ProFormText
+                label={<FormattedMessage id="pages.borrower_form.corporate_account.bank_account" />}
+                name="bank_account"
+                rules={[{ required: false, message: '请输入' }]}
+              />
+            </Col>
+            <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
+              <ProFormText
+                label={<FormattedMessage id="pages.borrower_form.corporate_account.bank_name" />}
+                name="bank_name"
+                rules={[{ required: false, message: '请输入银行名称' }]}
+              />
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col lg={6} md={12} sm={24}>
+              <ProFormText
+                label={<FormattedMessage id="pages.borrower_form.corporate_account.bank_swift_code" />}
+                name="bank_swift_code"
+                rules={[{ required: false, message: '请输入企业公户SwiftCode' }]}
+                placeholder="请输入银行国际代码"
+              />
+            </Col>
+            <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
+            </Col>
+            <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
+            </Col>
+          </Row>
+        </Card>
+        <Card title={<FormattedMessage id='店铺信息'/>} className={styles.card} bordered={false} extra={ <Button type="primary">提交</Button>}>
           <ProForm.Item name="shop">
             <EditableProTable<TableFormDateType>
               recordCreatorProps={{
@@ -511,47 +614,6 @@ const AdvancedForm: FC<Record<string, any>> = () => {
               columns={columnsEshop}
               rowKey="key"
             />
-          </ProForm.Item>
-        </Card>
-        <Card title={<FormattedMessage id='pages.borrower_form.corporate_account'/>} className={styles.card} bordered={false} extra={ <Button type="primary" onClick={submitInfo}>提交</Button>}>
-          <ProForm.Item name="corporate_account">
-            <Row gutter={16}>
-              <Col lg={6} md={12} sm={24}>
-                <ProFormText
-                  label={<FormattedMessage id="pages.borrower_form.corporate_account.account_name" />}
-                  name={['corporate_account', 0, 'account_name']}
-                  rules={[{ required: false, message: '请输入' }]}
-                />
-              </Col>
-              <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
-                <ProFormText
-                  label={<FormattedMessage id="pages.borrower_form.corporate_account.bank_account" />}
-                  name={['corporate_account', 0, 'bank_account']}
-                  rules={[{ required: false, message: '请输入' }]}
-                />
-              </Col>
-              <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
-                <ProFormText
-                  label={<FormattedMessage id="pages.borrower_form.corporate_account.bank_name" />}
-                  name={['corporate_account', 0, 'bank_name']}
-                  rules={[{ required: false, message: '请输入银行名称' }]}
-                />
-              </Col>
-            </Row>
-            <Row gutter={16}>
-              <Col lg={6} md={12} sm={24}>
-                <ProFormText
-                  label={<FormattedMessage id="pages.borrower_form.corporate_account.bank_swift_code" />}
-                  name={['corporate_account', 0, 'bank_swift_code']}
-                  rules={[{ required: false, message: '请输入企业公户SwiftCode' }]}
-                  placeholder="请输入银行国际代码"
-                />
-              </Col>
-              <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
-              </Col>
-              <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
-              </Col>
-            </Row>
           </ProForm.Item>
         </Card>
       </PageContainer>

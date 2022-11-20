@@ -514,7 +514,7 @@ export default {
     'pages.borrower_form.upload_doc.format':"Only accept upload in .jpeg/.jpg/.png/.xls/.xlsx/.doc/.docx/.odt/.pdf/.ppt/.pptx format",
     'pages.borrower_form.upload_doc.proof':"Business Proof",
     'pages.borrower_form.upload_doc.certificate':"*Business Registration Certificate (Hong Kong Company)",
-    'pages.borrower_form.upload_doc.business_license':"*Business License of Enterprise Legal Person (China Company)",
+    'pages.borrower_form.upload_doc.file_br_cn':"*Business License of Enterprise Legal Person (China Company)",
     'pages.borrower_form.upload_doc.Association':"*Articles of Association (China Company)",
     'pages.borrower_form.upload_doc.identity':"Legal person, natural person shareholder and director identity proof*",
     'pages.borrower_form.upload_doc.passport':"*Shareholder and director's ID card or passport (Hong Kong Company)",
