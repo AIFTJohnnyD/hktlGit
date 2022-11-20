@@ -25,21 +25,6 @@ interface TableFormDateType {
 }
 type InternalNamePath = (string | number)[];
 
-const fieldLabels = {
-  name: '仓库名',
-  url: '仓库域名',
-  owner: '仓库管理员',
-  approver: '审批人',
-  dateRange: '生效日期',
-  type: '仓库类型',
-  name2: '任务名',
-  url2: '任务描述',
-  owner2: '执行人',
-  approver2: '责任人',
-  dateRange2: '生效日期',
-  type2: '任务类型',
-};
-
 const tableData = [
   {
     key: '1',
@@ -86,8 +71,6 @@ const formRef = useRef<ProFormInstance>();
 
   const [error, setError] = useState<ErrorField[]>([]);
   const getErrorInfo = (errors: ErrorField[]) => {
-    console.log("getErrorInfo",errors);
-    
     const errorCount = errors.filter((item) => item.errors.length > 0).length;
     if (!errors || errorCount === 0) {
       return null;
@@ -107,7 +90,6 @@ const formRef = useRef<ProFormInstance>();
         <li key={key} className={styles.errorListItem} onClick={() => scrollToField(key)}>
           <CloseCircleOutlined className={styles.errorIcon} />
           <div className={styles.errorMessage}>{err.errors[0]}</div>
-          <div className={styles.errorField}>{fieldLabels[key]}</div>
         </li>
       );
     });
@@ -148,44 +130,6 @@ const formRef = useRef<ProFormInstance>();
     console.log("onFinishFailed中的errorInfo",errorInfo);
     
   };
-
-  const columns: ProColumnType<TableFormDateType>[] = [
-    {
-      title: '成员姓名',
-      dataIndex: 'name',
-      key: 'name',
-      width: '20%',
-    },
-    {
-      title: '工号',
-      dataIndex: 'workId',
-      key: 'workId',
-      width: '20%',
-    },
-    {
-      title: '所属部门',
-      dataIndex: 'department',
-      key: 'department',
-      width: '40%',
-    },
-    {
-      title: '操作',
-      key: 'action',
-      valueType: 'option',
-      render: (_, record: TableFormDateType, index, action) => {
-        return [
-          <a
-            key="eidit"
-            onClick={() => {
-              action?.startEditable(record.key);
-            }}
-          >
-            编辑
-          </a>,
-        ];
-      },
-    },
-  ];
 
   const columnsDirector: ProColumnType<TableFormDateType>[] = [
     {
@@ -323,6 +267,7 @@ const formRef = useRef<ProFormInstance>();
       },
     },
   ];
+
   return (
     <ProForm
       layout="vertical"
@@ -338,7 +283,7 @@ const formRef = useRef<ProFormInstance>();
         },
       }}
       formRef={formRef}
-      initialValues={{ members: tableData }}
+      initialValues={{  }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       request={async () => {           

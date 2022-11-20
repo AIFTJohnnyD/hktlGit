@@ -1,16 +1,12 @@
 import { CloseCircleOutlined } from '@ant-design/icons';
-import { Card, Col, Popover, Row, message, Space, Button } from 'antd';
+import { Card, Col, Popover, Row, message, Button } from 'antd';
 
 import { FC, useRef } from 'react';
 import { useState } from 'react';
 import ProForm, {
-  ProFormDatePicker,
-  ProFormDateRangePicker,
   ProFormInstance,
   ProFormSelect,
   ProFormText,
-  ProFormTimePicker,
-  ProFormUploadButton,
 } from '@ant-design/pro-form';
 import type { ProColumnType } from '@ant-design/pro-table';
 import { EditableProTable } from '@ant-design/pro-table';
@@ -31,33 +27,12 @@ interface TableFormDateType {
 }
 type InternalNamePath = (string | number)[];
 
-const fieldLabels = {
-  name: '仓库名',
-  url: '仓库域名',
-  owner: '仓库管理员',
-  approver: '审批人',
-  dateRange: '生效日期',
-  type: '仓库类型',
-  name2: '任务名',
-  url2: '任务描述',
-  owner2: '执行人',
-  approver2: '责任人',
-  dateRange2: '生效日期',
-  type2: '任务类型',
-};
-
 interface ErrorField {
   name: InternalNamePath;
   errors: string[];
 }
 
 const AdvancedForm: FC<Record<string, any>> = () => {
-  const { data, error1, loading } = useRequest(() => {
-    return request('/api/borrower/get_borrower');
-  });
-  console.log("valueserrorInfoget_borrower_data",data);
-  
-
   // 初始化数据
   function submitInfo(){
     try {
@@ -93,7 +68,6 @@ const AdvancedForm: FC<Record<string, any>> = () => {
         <li key={key} className={styles.errorListItem} onClick={() => scrollToField(key)}>
           <CloseCircleOutlined className={styles.errorIcon} />
           <div className={styles.errorMessage}>{err.errors[0]}</div>
-          <div className={styles.errorField}>{fieldLabels[key]}</div>
         </li>
       );
     });
@@ -271,7 +245,6 @@ const AdvancedForm: FC<Record<string, any>> = () => {
       },
     },
   ];
-  
   const columnsEshop: ProColumnType<TableFormDateType>[] = [
     {
       title:<FormattedMessage id='pages.borrower_form.shop.platform'/>,

@@ -21,14 +21,6 @@ import { FormattedMessage, request, useRequest } from 'umi';
 import { UploadChangeParam, UploadFile } from 'antd/lib/upload';
 
 
-interface TableFormDateType {
-  key: string;
-  workId?: string;
-  name?: string;
-  department?: string;
-  isNew?: boolean;
-  editable?: boolean;
-}
 type InternalNamePath = (string | number)[];
 
 const fieldLabels = {
@@ -46,33 +38,13 @@ const fieldLabels = {
   type2: '任务类型',
 };
 
-const tableData = [
-  {
-    key: '1',
-    workId: '00001',
-    name: 'John Brown',
-    department: 'New York No. 1 Lake Park',
-  },
-  {
-    key: '2',
-    workId: '00002',
-    name: 'Jim Green',
-    department: 'London No. 1 Lake Park',
-  },
-  {
-    key: '3',
-    workId: '00003',
-    name: 'Joe Black',
-    department: 'Sidney No. 1 Lake Park',
-  },
-];
-
 interface ErrorField {
   name: InternalNamePath;
   errors: string[];
 }
 
 const AdvancedForm: FC<Record<string, any>> = () => {
+  //使用这么冗长的方法的原因是 在照片提交时侯名字无法被修改 不知为何
   let file_br_hk: UploadFile[] = [
   ];
   let file_ci_hk: UploadFile[] = [
@@ -182,45 +154,6 @@ const AdvancedForm: FC<Record<string, any>> = () => {
     console.log("onFinishFailed中的errorInfo",errorInfo);
     
   };
-
-  const columns: ProColumnType<TableFormDateType>[] = [
-    {
-      title: '成员姓名',
-      dataIndex: 'name',
-      key: 'name',
-      width: '20%',
-    },
-    {
-      title: '工号',
-      dataIndex: 'workId',
-      key: 'workId',
-      width: '20%',
-    },
-    {
-      title: '所属部门',
-      dataIndex: 'department',
-      key: 'department',
-      width: '40%',
-    },
-    {
-      title: '操作',
-      key: 'action',
-      valueType: 'option',
-      render: (_, record: TableFormDateType, index, action) => {
-        return [
-          <a
-            key="eidit"
-            onClick={() => {
-              action?.startEditable(record.key);
-            }}
-          >
-            编辑
-          </a>,
-        ];
-      },
-    },
-  ];
-
   return (
     <ProForm
       layout="vertical"
@@ -235,25 +168,30 @@ const AdvancedForm: FC<Record<string, any>> = () => {
           );
         },
       }}
-      initialValues={{ members: tableData }}
+      initialValues={{ }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
+      request={async () => {           
+        const { data, error, loading } = await request('/api/borrower/get_borrower');
+        return data;
+      }}
     >
       <PageContainer content="">
         <Card title={<FormattedMessage id='pages.borrower_form.HKfile_upload'/>} className={styles.card} bordered={false}>
           <Row gutter={16}>
             <Col lg={6} md={12} sm={24}>
               <ProFormUploadButton  
-              label={<FormattedMessage id='pages.borrower_form.HKfile_upload.file_br_hk'/>} 
-              fileList={file_br_hk}
-              fieldProps={{
-                name: "file_br_hk",
-                action:"/api/borrower/upload_file",
-                onChange: (e) => {
-                  // handleChange(e)
-                },
-              }}
-               />
+                label={<FormattedMessage id='pages.borrower_form.HKfile_upload.file_br_hk'/>} 
+                // name='file_br_hk'
+                fileList={file_br_hk}
+                fieldProps={{
+                  name: "file_br_hk",
+                  action:"/api/borrower/upload_file",
+                  onChange: (e) => {
+                    // handleChange(e)
+                  },
+                }}
+                />
             </Col>
             <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
               <ProFormUploadButton  

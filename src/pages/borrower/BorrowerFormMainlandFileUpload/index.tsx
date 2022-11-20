@@ -1,33 +1,16 @@
 import { CloseCircleOutlined } from '@ant-design/icons';
 import { Card, Col, Popover, Row, message, UploadFile } from 'antd';
-
 import { FC, useEffect } from 'react';
 import { useState } from 'react';
 import ProForm, {
-  ProFormDatePicker,
-  ProFormDateRangePicker,
-  ProFormSelect,
-  ProFormText,
-  ProFormTimePicker,
   ProFormUploadButton,
-  ProFormUploadDragger,
 } from '@ant-design/pro-form';
 import type { ProColumnType } from '@ant-design/pro-table';
-import { EditableProTable } from '@ant-design/pro-table';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import { submitForm } from './service';
 import styles from './style.less';
 import { FormattedMessage, request, useRequest } from 'umi';
 
-
-interface TableFormDateType {
-  key: string;
-  workId?: string;
-  name?: string;
-  department?: string;
-  isNew?: boolean;
-  editable?: boolean;
-}
 type InternalNamePath = (string | number)[];
 
 const fieldLabels = {
@@ -44,27 +27,6 @@ const fieldLabels = {
   dateRange2: '生效日期',
   type2: '任务类型',
 };
-
-const tableData = [
-  {
-    key: '1',
-    workId: '00001',
-    name: 'John Brown',
-    department: 'New York No. 1 Lake Park',
-  },
-  {
-    key: '2',
-    workId: '00002',
-    name: 'Jim Green',
-    department: 'London No. 1 Lake Park',
-  },
-  {
-    key: '3',
-    workId: '00003',
-    name: 'Joe Black',
-    department: 'Sidney No. 1 Lake Park',
-  },
-];
 
 interface ErrorField {
   name: InternalNamePath;
@@ -180,44 +142,6 @@ const AdvancedForm: FC<Record<string, any>> = () => {
     
   };
 
-  const columns: ProColumnType<TableFormDateType>[] = [
-    {
-      title: '成员姓名',
-      dataIndex: 'name',
-      key: 'name',
-      width: '20%',
-    },
-    {
-      title: '工号',
-      dataIndex: 'workId',
-      key: 'workId',
-      width: '20%',
-    },
-    {
-      title: '所属部门',
-      dataIndex: 'department',
-      key: 'department',
-      width: '40%',
-    },
-    {
-      title: '操作',
-      key: 'action',
-      valueType: 'option',
-      render: (_, record: TableFormDateType, index, action) => {
-        return [
-          <a
-            key="eidit"
-            onClick={() => {
-              action?.startEditable(record.key);
-            }}
-          >
-            编辑
-          </a>,
-        ];
-      },
-    },
-  ];
-
   return (
     <ProForm
       layout="vertical"
@@ -232,7 +156,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
           );
         },
       }}
-      initialValues={{ members: tableData }}
+      initialValues={{   }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
     >
