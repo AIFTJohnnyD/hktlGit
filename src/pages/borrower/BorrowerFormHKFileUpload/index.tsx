@@ -10,7 +10,7 @@ import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import { submitForm } from './service';
 import styles from './style.less';
 import { FormattedMessage, request, useRequest } from 'umi';
-import { UploadFile } from 'antd/lib/upload';
+import { UploadChangeParam, UploadFile, UploadProps } from 'antd/lib/upload';
 
 
 type InternalNamePath = (string | number)[];
@@ -68,7 +68,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
   console.log("filedata",data);
   if(typeof(data)!="undefined"){
     //显示从index为12开始的数组
-    file_br_hk=data.file_br_hk.splice(12)
+    file_br_hk=data.file_br_hk
     console.log("filedatatypeof(data)!=undefined");
     console.log("filedatafileList",file_br_hk);
     file_ci_hk=data.file_ci_hk.splice(0,2)
@@ -129,6 +129,23 @@ const AdvancedForm: FC<Record<string, any>> = () => {
     );
   };
 
+  const handleChange: UploadProps['onChange'] = (info: UploadChangeParam<UploadFile>) => {
+   
+    if (info.file.status == 'removed') {
+      message.error('removed')
+      console.log("infodata",info);
+      
+    }
+    if (info.file.status === 'done') {
+      // Get this url from response in real world.
+      // 做成fileList的格式传回
+      message.error('done')
+    }
+    if (info.file.status == 'error') {
+      message.error('上传失败!请稍后再试')
+    }
+  };
+
   const onFinish = async (values: Record<string, any>) => {
     setError([]);
     console.log("valueserrorInfo",values);
@@ -168,7 +185,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
         return data;
       }}
     >
-      <PageContainer content="">
+        <PageContainer content="">
         <Card title={<FormattedMessage id='pages.borrower_form.HKfile_upload'/>} className={styles.card} bordered={false}>
           <Row gutter={16}>
             <Col lg={6} md={12} sm={24}>
@@ -179,9 +196,23 @@ const AdvancedForm: FC<Record<string, any>> = () => {
                 fieldProps={{
                   name: "file_br_hk",
                   action:"/api/borrower/upload_file",
-                  onChange: (e) => {
-                    // handleChange(e)
+                  showUploadList: {
+                    showDownloadIcon: true,
+                    downloadIcon: '下载',
+                    showRemoveIcon: true,
+                    // removeIcon: <StarOutlined onClick={(e) => console.log(e, 'custom removeIcon event')} />,
                   },
+                  onChange: (e) => {
+                    handleChange(e)
+                  },
+                  onRemove(file) {
+                    console.log("onRemoveDataFile",file);
+                    request('/api/borrower/delete_file?file_id='+ file.uid);
+                  },
+                  onDownload(file) {
+                    console.log("onDownloadDataFile",file);
+                    request('/api/borrower/download_file?file_id='+ file.uid);
+                  }
                 }}
                 />
             </Col>

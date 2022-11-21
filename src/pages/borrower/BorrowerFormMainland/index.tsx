@@ -133,43 +133,43 @@ const formRef = useRef<ProFormInstance>();
 
   const columnsDirector: ProColumnType<TableFormDateType>[] = [
     {
-      title:<FormattedMessage id='pages.borrower_form.director_person_hk.director_person_name'/>,
+      title:<FormattedMessage id='pages.borrower_form.director_person_cn.director_person_name'/>,
       dataIndex: 'director_person_name',
       key: 'director_person_name',
       width: '20%',
     },
     {
-      title:<FormattedMessage id='pages.borrower_form.director_person_hk.director_person_name_english'/>,
+      title:<FormattedMessage id='pages.borrower_form.director_person_cn.director_person_name_english'/>,
       dataIndex: 'director_person_name_english',
       key: 'director_person_name_english',
       width: '20%',
     },
     {
-      title:<FormattedMessage id='pages.borrower_form.director_person_hk.director_person_nationality'/>,
+      title:<FormattedMessage id='pages.borrower_form.director_person_cn.director_person_nationality'/>,
       dataIndex: 'director_person_nationality',
       key: 'director_person_nationality',
       width: '20%',
     },
     {
-      title:<FormattedMessage id='pages.borrower_form.director_person_hk.director_person_position'/>,
+      title:<FormattedMessage id='pages.borrower_form.director_person_cn.director_person_position'/>,
       dataIndex: 'director_person_position',
       key: 'director_person_position',
       width: '20%',
     },
     {
-      title:<FormattedMessage id='pages.borrower_form.director_person_hk.director_person_phone'/>,
+      title:<FormattedMessage id='pages.borrower_form.director_person_cn.director_person_phone'/>,
       dataIndex: 'director_person_phone',
       key: 'director_person_phone',
       width: '20%',
     },
     {
-      title:<FormattedMessage id='pages.borrower_form.director_person_hk.director_person_email'/>,
+      title:<FormattedMessage id='pages.borrower_form.director_person_cn.director_person_email'/>,
       dataIndex: 'director_person_email',
       key: 'director_person_email',
       width: '20%',
     },
     {
-      title:<FormattedMessage id='pages.borrower_form.director_person_hk.director_person_address'/>,
+      title:<FormattedMessage id='pages.borrower_form.director_person_cn.director_person_address'/>,
       dataIndex: 'director_person_address',
       key: 'director_person_address',
       width: '20%',
@@ -198,49 +198,49 @@ const formRef = useRef<ProFormInstance>();
   ];
   const columnsSharholder: ProColumnType<TableFormDateType>[] = [
     {
-      title:<FormattedMessage id='pages.borrower_form.shareholder_person_hk.shareholder_person_name'/>,
+      title:<FormattedMessage id='pages.borrower_form.shareholder_person_cn.shareholder_person_name'/>,
       dataIndex: 'shareholder_person_name',
       key: 'shareholder_person_name',
       width: '20%',
     },
     {
-      title:<FormattedMessage id='pages.borrower_form.shareholder_person_hk.shareholder_person_name_english'/>,
+      title:<FormattedMessage id='pages.borrower_form.shareholder_person_cn.shareholder_person_name_english'/>,
       dataIndex: 'shareholder_person_name_english',
       key: 'shareholder_person_name_english',
       width: '20%',
     },
     {
-      title:<FormattedMessage id='pages.borrower_form.shareholder_person_hk.shareholder_person_nationality'/>,
+      title:<FormattedMessage id='pages.borrower_form.shareholder_person_cn.shareholder_person_nationality'/>,
       dataIndex: 'shareholder_person_nationality',
       key: 'shareholder_person_nationality',
       width: '20%',
     },
     {
-      title:<FormattedMessage id='pages.borrower_form.shareholder_person_hk.shareholder_person_position'/>,
+      title:<FormattedMessage id='pages.borrower_form.shareholder_person_cn.shareholder_person_position'/>,
       dataIndex: 'shareholder_person_position',
       key: 'shareholder_person_position',
       width: '20%',
     },
     {
-      title:<FormattedMessage id='pages.borrower_form.shareholder_person_hk.shareholder_person_phone'/>,
+      title:<FormattedMessage id='pages.borrower_form.shareholder_person_cn.shareholder_person_phone'/>,
       dataIndex: 'shareholder_person_phone',
       key: 'shareholder_person_phone',
       width: '20%',
     },
     {
-      title:<FormattedMessage id='pages.borrower_form.shareholder_person_hk.shareholder_person_email'/>,
+      title:<FormattedMessage id='pages.borrower_form.shareholder_person_cn.shareholder_person_email'/>,
       dataIndex: 'shareholder_person_email',
       key: 'shareholder_person_email',
       width: '20%',
     },
     {
-      title:<FormattedMessage id='pages.borrower_form.shareholder_person_hk.shareholder_person_address'/>,
+      title:<FormattedMessage id='pages.borrower_form.shareholder_person_cn.shareholder_person_address'/>,
       dataIndex: 'shareholder_person_address',
       key: 'shareholder_person_address',
       width: '20%',
     },
     {
-      title:<FormattedMessage id='pages.borrower_form.shareholder_person_hk.shareholder_person_rate'/>,
+      title:<FormattedMessage id='pages.borrower_form.shareholder_person_cn.shareholder_person_rate'/>,
       dataIndex: 'shareholder_person_rate',
       key: 'shareholder_person_rate',
       width: '20%',
@@ -457,7 +457,7 @@ const formRef = useRef<ProFormInstance>();
           </Row>
         </Card>
         <Card title="董事信息" className={styles.card} bordered={true} extra={ <Button type="primary" onClick={submitInfo}>提交</Button>}>
-          <ProForm.Item name="director_person_hk">
+          <ProForm.Item name="director_person_cn">
             <EditableProTable<TableFormDateType>
               recordCreatorProps={{
                 record: () => {
@@ -472,11 +472,11 @@ const formRef = useRef<ProFormInstance>();
             />
           </ProForm.Item>
         </Card>
-        <Card title={<FormattedMessage id='pages.borrower_form.shareholder_person_hk'/>} 
+        <Card title={<FormattedMessage id='pages.borrower_form.shareholder_person_cn'/>} 
         className={styles.card} 
         bordered={false} 
         extra={ <Button type="primary" onClick={submitInfo}>提交</Button>}>
-          <ProForm.Item name="shareholder_person_hk">
+          <ProForm.Item name="shareholder_person_cn">
             <EditableProTable<TableFormDateType>
               recordCreatorProps={{
                 record: () => {

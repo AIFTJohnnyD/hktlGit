@@ -494,7 +494,7 @@ export default {
   //店铺信息
   'pages.borrower_form.shop':"店铺信息",
     'pages.borrower_form.shop.platform':"电商平台",
-    'pages.borrower_form.shop.id':"卖主编号",
+    'pages.borrower_form.shop.id':"卖家编号",
     'pages.borrower_form.shop.link':"店铺链接",
     
     'pages.borrower_form.shop.bank_swift_code':"银行国际代码",
