@@ -1,5 +1,5 @@
 import { CloseCircleOutlined } from '@ant-design/icons';
-import { Card, Col, Popover, Row, message, UploadFile } from 'antd';
+import { Card, Col, Popover, Row, message, UploadFile, UploadProps } from 'antd';
 import { FC, useEffect } from 'react';
 import { useState } from 'react';
 import ProForm, {
@@ -10,6 +10,7 @@ import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import { submitForm } from './service';
 import styles from './style.less';
 import { FormattedMessage, request, useRequest } from 'umi';
+import { UploadChangeParam } from 'antd/lib/upload';
 
 type InternalNamePath = (string | number)[];
 
@@ -66,16 +67,16 @@ const AdvancedForm: FC<Record<string, any>> = () => {
     
     console.log("filedatatypeof(data)!=undefined");
     console.log("filedatafileList");
-    file_br_cn=data.file_br_cn.splice(0,2)
-    file_policy_cn=data.file_policy_cn.splice(0,2)
-    file_director_cn=data.file_director_cn.splice(0,2)
+    file_br_cn=data.file_br_cn
+    file_policy_cn=data.file_policy_cn
+    file_director_cn=data.file_director_cn
 
-    file_shareholder_cn=data.file_shareholder_cn.splice(0,2)
-    file_director_credit_report_cn=data.file_director_credit_report_cn.splice(0,2)
-    file_company_credit_report_cn=data.file_company_credit_report_cn.splice(0,2)
+    file_shareholder_cn=data.file_shareholder_cn
+    file_director_credit_report_cn=data.file_director_credit_report_cn
+    file_company_credit_report_cn=data.file_company_credit_report_cn
 
-    file_financial_statements_cn=data.file_financial_statements_cn.splice(0,2)
-    file_other_cn=data.file_other_cn.splice(0,2)
+    file_financial_statements_cn=data.file_financial_statements_cn
+    file_other_cn=data.file_other_cn
   }
   const getErrorInfo = (errors: ErrorField[]) => {
     console.log("getErrorInfo",errors);
@@ -124,6 +125,20 @@ const AdvancedForm: FC<Record<string, any>> = () => {
     );
   };
 
+  const handleChange: UploadProps['onChange'] = (info: UploadChangeParam<UploadFile>) => {
+   
+    if (info.file.status == 'removed') {
+      console.log("removedinfodata",info);
+    }
+    if (info.file.status === 'done') {
+      // Get this url from response in real world.
+      // 做成fileList的格式传回
+    }
+    if (info.file.status == 'error') {
+      message.error('上传失败!请稍后再试')
+    }
+  };
+
   const onFinish = async (values: Record<string, any>) => {
     setError([]);
     console.log("valueserrorInfo",values);
@@ -162,40 +177,6 @@ const AdvancedForm: FC<Record<string, any>> = () => {
     >
       <PageContainer content="">
         <Card title={<FormattedMessage id='pages.borrower_form.Mainlandfile_upload'/>} className={styles.card} bordered={false}>
-          {/* <Row gutter={16}>
-            <Col lg={6} md={12} sm={24}>
-              <ProFormUploadButton  label={<FormattedMessage id='pages.borrower_form.Mainlandfile_upload.file_br_cn'/>} name="file_br_cn" action="upload.do" />
-            </Col>
-            <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
-              <ProFormUploadButton  label={<FormattedMessage id='pages.borrower_form.Mainlandfile_upload.file_policy_cn'/>} name="file_policy_cn" action="upload.do" />
-            </Col>
-            <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
-              <ProFormUploadButton  label={<FormattedMessage id='pages.borrower_form.Mainlandfile_upload.file_director_cn'/>} name="file_director_cn" action="upload.do" />
-            </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col lg={6} md={12} sm={24}>
-              <ProFormUploadButton  label={<FormattedMessage id='pages.borrower_form.Mainlandfile_upload.file_shareholder_cn'/>} name="file_shareholder_cn" action="upload.do" />
-            </Col>
-            <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
-              <ProFormUploadButton  label={<FormattedMessage id='pages.borrower_form.Mainlandfile_upload.file_director_credit_report_hk'/>} name="file_director_credit_report_hk" action="upload.do" />
-            </Col>
-            <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
-              <ProFormUploadButton  label={<FormattedMessage id='pages.borrower_form.Mainlandfile_upload.file_company_credit_report_cn'/>} name="file_company_credit_report_cn" action="upload.do" />
-            </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col lg={6} md={12} sm={24}>
-              <ProFormUploadButton  label={<FormattedMessage id='pages.borrower_form.Mainlandfile_upload.file_financial_statements_cn'/>} name="file_financial_statements_cn" action="upload.do" />
-            </Col>
-            <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
-              <ProFormUploadButton  label={<FormattedMessage id='pages.borrower_form.Mainlandfile_upload.file_other_cn'/>} name="file_other_cn" action="upload.do" />
-            </Col>
-            <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
-            </Col>
-          </Row> */}
-
-{/* /////////////////////////////// */}
           <Row gutter={16}>
             <Col lg={6} md={12} sm={24}>
               <ProFormUploadButton  
@@ -204,9 +185,23 @@ const AdvancedForm: FC<Record<string, any>> = () => {
               fieldProps={{
                 name: "file_br_cn",
                 action:"/api/borrower/upload_file",
-                onChange: (e) => {
-                  // handleChange(e)
-                },
+                  showUploadList: {
+                    showDownloadIcon: false,
+                    downloadIcon: '下载',
+                    showRemoveIcon: true,
+                    // removeIcon: <StarOutlined onClick={(e) => console.log(e, 'custom removeIcon event')} />,
+                  },
+                  onChange: (e) => {
+                    handleChange(e)
+                  },
+                  onRemove(file) {
+                    console.log("onRemoveDataFile",file);
+                    request('/api/borrower/delete_file?file_id='+ file.uid);
+                  },
+                  onDownload(file) {
+                    console.log("onDownloadDataFile",file);
+                    request('/api/borrower/download_file?file_id='+ file.uid);
+                  }
               }}
                />
             </Col>
@@ -217,9 +212,23 @@ const AdvancedForm: FC<Record<string, any>> = () => {
               fieldProps={{
                 name: "file_policy_cn",
                 action:"/api/borrower/upload_file",
-                onChange: (e) => {
-                  // handleChange(e)
-                },
+                  showUploadList: {
+                    showDownloadIcon: false,
+                    downloadIcon: '下载',
+                    showRemoveIcon: true,
+                    // removeIcon: <StarOutlined onClick={(e) => console.log(e, 'custom removeIcon event')} />,
+                  },
+                  onChange: (e) => {
+                    handleChange(e)
+                  },
+                  onRemove(file) {
+                    console.log("onRemoveDataFile",file);
+                    request('/api/borrower/delete_file?file_id='+ file.uid);
+                  },
+                  onDownload(file) {
+                    console.log("onDownloadDataFile",file);
+                    request('/api/borrower/download_file?file_id='+ file.uid);
+                  }
               }}
               />
             </Col>
@@ -230,9 +239,23 @@ const AdvancedForm: FC<Record<string, any>> = () => {
               fieldProps={{
                 name: "file_director_cn",
                 action:"/api/borrower/upload_file",
-                onChange: (e) => {
-                  // handleChange(e)
-                },
+                  showUploadList: {
+                    showDownloadIcon: false,
+                    downloadIcon: '下载',
+                    showRemoveIcon: true,
+                    // removeIcon: <StarOutlined onClick={(e) => console.log(e, 'custom removeIcon event')} />,
+                  },
+                  onChange: (e) => {
+                    handleChange(e)
+                  },
+                  onRemove(file) {
+                    console.log("onRemoveDataFile",file);
+                    request('/api/borrower/delete_file?file_id='+ file.uid);
+                  },
+                  onDownload(file) {
+                    console.log("onDownloadDataFile",file);
+                    request('/api/borrower/download_file?file_id='+ file.uid);
+                  }
               }}
               />
             </Col>
@@ -245,9 +268,23 @@ const AdvancedForm: FC<Record<string, any>> = () => {
               fieldProps={{
                 name: "file_shareholder_cn",
                 action:"/api/borrower/upload_file",
-                onChange: (e) => {
-                  // handleChange(e)
-                },
+                  showUploadList: {
+                    showDownloadIcon: false,
+                    downloadIcon: '下载',
+                    showRemoveIcon: true,
+                    // removeIcon: <StarOutlined onClick={(e) => console.log(e, 'custom removeIcon event')} />,
+                  },
+                  onChange: (e) => {
+                    handleChange(e)
+                  },
+                  onRemove(file) {
+                    console.log("onRemoveDataFile",file);
+                    request('/api/borrower/delete_file?file_id='+ file.uid);
+                  },
+                  onDownload(file) {
+                    console.log("onDownloadDataFile",file);
+                    request('/api/borrower/download_file?file_id='+ file.uid);
+                  }
               }}
               />
             </Col>
@@ -258,9 +295,23 @@ const AdvancedForm: FC<Record<string, any>> = () => {
               fieldProps={{
                 name: "file_director_credit_report_cn",
                 action:"/api/borrower/upload_file",
-                onChange: (e) => {
-                  // handleChange(e)
-                },
+                  showUploadList: {
+                    showDownloadIcon: false,
+                    downloadIcon: '下载',
+                    showRemoveIcon: true,
+                    // removeIcon: <StarOutlined onClick={(e) => console.log(e, 'custom removeIcon event')} />,
+                  },
+                  onChange: (e) => {
+                    handleChange(e)
+                  },
+                  onRemove(file) {
+                    console.log("onRemoveDataFile",file);
+                    request('/api/borrower/delete_file?file_id='+ file.uid);
+                  },
+                  onDownload(file) {
+                    console.log("onDownloadDataFile",file);
+                    request('/api/borrower/download_file?file_id='+ file.uid);
+                  }
               }} />
             </Col>
             <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
@@ -270,9 +321,23 @@ const AdvancedForm: FC<Record<string, any>> = () => {
               fieldProps={{
                 name: "file_company_credit_report_cn",
                 action:"/api/borrower/upload_file",
-                onChange: (e) => {
-                  // handleChange(e)
-                },
+                  showUploadList: {
+                    showDownloadIcon: false,
+                    downloadIcon: '下载',
+                    showRemoveIcon: true,
+                    // removeIcon: <StarOutlined onClick={(e) => console.log(e, 'custom removeIcon event')} />,
+                  },
+                  onChange: (e) => {
+                    handleChange(e)
+                  },
+                  onRemove(file) {
+                    console.log("onRemoveDataFile",file);
+                    request('/api/borrower/delete_file?file_id='+ file.uid);
+                  },
+                  onDownload(file) {
+                    console.log("onDownloadDataFile",file);
+                    request('/api/borrower/download_file?file_id='+ file.uid);
+                  }
               }} />
             </Col>
           </Row>
@@ -284,9 +349,23 @@ const AdvancedForm: FC<Record<string, any>> = () => {
               fieldProps={{
                 name: "file_financial_statements_cn",
                 action:"/api/borrower/upload_file",
-                onChange: (e) => {
-                  // handleChange(e)
-                },
+                  showUploadList: {
+                    showDownloadIcon: false,
+                    downloadIcon: '下载',
+                    showRemoveIcon: true,
+                    // removeIcon: <StarOutlined onClick={(e) => console.log(e, 'custom removeIcon event')} />,
+                  },
+                  onChange: (e) => {
+                    handleChange(e)
+                  },
+                  onRemove(file) {
+                    console.log("onRemoveDataFile",file);
+                    request('/api/borrower/delete_file?file_id='+ file.uid);
+                  },
+                  onDownload(file) {
+                    console.log("onDownloadDataFile",file);
+                    request('/api/borrower/download_file?file_id='+ file.uid);
+                  }
               }}
               />
             </Col>
@@ -297,9 +376,23 @@ const AdvancedForm: FC<Record<string, any>> = () => {
               fieldProps={{
                 name: "file_other_cn",
                 action:"/api/borrower/upload_file",
-                onChange: (e) => {
-                  // handleChange(e)
-                },
+                  showUploadList: {
+                    showDownloadIcon: false,
+                    downloadIcon: '下载',
+                    showRemoveIcon: true,
+                    // removeIcon: <StarOutlined onClick={(e) => console.log(e, 'custom removeIcon event')} />,
+                  },
+                  onChange: (e) => {
+                    handleChange(e)
+                  },
+                  onRemove(file) {
+                    console.log("onRemoveDataFile",file);
+                    request('/api/borrower/delete_file?file_id='+ file.uid);
+                  },
+                  onDownload(file) {
+                    console.log("onDownloadDataFile",file);
+                    request('/api/borrower/download_file?file_id='+ file.uid);
+                  }
               }} />
             </Col>
             <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>

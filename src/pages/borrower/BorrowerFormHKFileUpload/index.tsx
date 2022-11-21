@@ -67,19 +67,18 @@ const AdvancedForm: FC<Record<string, any>> = () => {
   console.log("filedata",typeof(data));
   console.log("filedata",data);
   if(typeof(data)!="undefined"){
-    //显示从index为12开始的数组
     file_br_hk=data.file_br_hk
     console.log("filedatatypeof(data)!=undefined");
     console.log("filedatafileList",file_br_hk);
-    file_ci_hk=data.file_ci_hk.splice(0,2)
-    file_nar1_hk=data.file_nar1_hk.splice(0,2)
-    file_moa_hk=data.file_moa_hk.splice(0,2)
-    file_shareholder_cn=data.file_shareholder_cn.splice(0,2)
-    file_director_hk=data.file_director_hk.splice(0,2)
-    file_address_proof_hk=data.file_address_proof_hk.splice(0,2)
-    file_director_credit_report_hk=data.file_director_credit_report_hk.splice(0,2)
-    file_financial_statements_hk=data.file_financial_statements_hk.splice(0,2)
-    file_other_hk=data.file_other_hk.splice(0,2)
+    file_ci_hk=data.file_ci_hk
+    file_nar1_hk=data.file_nar1_hk
+    file_moa_hk=data.file_moa_hk
+    file_shareholder_cn=data.file_shareholder_cn
+    file_director_hk=data.file_director_hk
+    file_address_proof_hk=data.file_address_proof_hk
+    file_director_credit_report_hk=data.file_director_credit_report_hk
+    file_financial_statements_hk=data.file_financial_statements_hk
+    file_other_hk=data.file_other_hk
     
   }
   const getErrorInfo = (errors: ErrorField[]) => {
@@ -132,14 +131,11 @@ const AdvancedForm: FC<Record<string, any>> = () => {
   const handleChange: UploadProps['onChange'] = (info: UploadChangeParam<UploadFile>) => {
    
     if (info.file.status == 'removed') {
-      message.error('removed')
-      console.log("infodata",info);
-      
+      console.log("removedinfodata",info);
     }
     if (info.file.status === 'done') {
       // Get this url from response in real world.
       // 做成fileList的格式传回
-      message.error('done')
     }
     if (info.file.status == 'error') {
       message.error('上传失败!请稍后再试')
@@ -197,7 +193,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
                   name: "file_br_hk",
                   action:"/api/borrower/upload_file",
                   showUploadList: {
-                    showDownloadIcon: true,
+                    showDownloadIcon: false,
                     downloadIcon: '下载',
                     showRemoveIcon: true,
                     // removeIcon: <StarOutlined onClick={(e) => console.log(e, 'custom removeIcon event')} />,
@@ -223,9 +219,23 @@ const AdvancedForm: FC<Record<string, any>> = () => {
               fieldProps={{
                 name: "file_ci_hk",
                 action:"/api/borrower/upload_file",
-                onChange: (e) => {
-                  // handleChange(e)
+                showUploadList: {
+                  showDownloadIcon: false,
+                  downloadIcon: '下载',
+                  showRemoveIcon: true,
+                  // removeIcon: <StarOutlined onClick={(e) => console.log(e, 'custom removeIcon event')} />,
                 },
+                onChange: (e) => {
+                  handleChange(e)
+                },
+                onRemove(file) {
+                  console.log("onRemoveDataFile",file);
+                  request('/api/borrower/delete_file?file_id='+ file.uid);
+                },
+                onDownload(file) {
+                  console.log("onDownloadDataFile",file);
+                  request('/api/borrower/download_file?file_id='+ file.uid);
+                }
               }}
               />
             </Col>
@@ -236,9 +246,23 @@ const AdvancedForm: FC<Record<string, any>> = () => {
               fieldProps={{
                 name: "file_nar1_hk",
                 action:"/api/borrower/upload_file",
-                onChange: (e) => {
-                  // handleChange(e)
+                showUploadList: {
+                  showDownloadIcon: false,
+                  downloadIcon: '下载',
+                  showRemoveIcon: true,
+                  // removeIcon: <StarOutlined onClick={(e) => console.log(e, 'custom removeIcon event')} />,
                 },
+                onChange: (e) => {
+                  handleChange(e)
+                },
+                onRemove(file) {
+                  console.log("onRemoveDataFile",file);
+                  request('/api/borrower/delete_file?file_id='+ file.uid);
+                },
+                onDownload(file) {
+                  console.log("onDownloadDataFile",file);
+                  request('/api/borrower/download_file?file_id='+ file.uid);
+                }
               }}
               />
             </Col>
@@ -251,9 +275,24 @@ const AdvancedForm: FC<Record<string, any>> = () => {
               fieldProps={{
                 name: "file_moa_hk",
                 action:"/api/borrower/upload_file",
-                onChange: (e) => {
-                  // handleChange(e)
-                },
+                  showUploadList: {
+                    showDownloadIcon: false,
+                    downloadIcon: '下载',
+                    showRemoveIcon: true,
+                    // removeIcon: <StarOutlined onClick={(e) => console.log(e, 'custom removeIcon event')} />,
+                  },
+                  onChange: (e) => {
+                    handleChange(e)
+                  },
+                  onRemove(file) {
+                    console.log("onRemoveDataFile",file);
+                    request('/api/borrower/delete_file?file_id='+ file.uid);
+                  },
+                  onDownload(file) {
+                    console.log("onDownloadDataFile",file);
+                    request('/api/borrower/download_file?file_id='+ file.uid);
+                  }
+                
               }}
               />
             </Col>
@@ -264,9 +303,23 @@ const AdvancedForm: FC<Record<string, any>> = () => {
               fieldProps={{
                 name: "file_shareholder_cn",
                 action:"/api/borrower/upload_file",
-                onChange: (e) => {
-                  // handleChange(e)
-                },
+                  showUploadList: {
+                    showDownloadIcon: false,
+                    downloadIcon: '下载',
+                    showRemoveIcon: true,
+                    // removeIcon: <StarOutlined onClick={(e) => console.log(e, 'custom removeIcon event')} />,
+                  },
+                  onChange: (e) => {
+                    handleChange(e)
+                  },
+                  onRemove(file) {
+                    console.log("onRemoveDataFile",file);
+                    request('/api/borrower/delete_file?file_id='+ file.uid);
+                  },
+                  onDownload(file) {
+                    console.log("onDownloadDataFile",file);
+                    request('/api/borrower/download_file?file_id='+ file.uid);
+                  }
               }} />
             </Col>
             <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
@@ -276,9 +329,24 @@ const AdvancedForm: FC<Record<string, any>> = () => {
               fieldProps={{
                 name: "file_director_hk",
                 action:"/api/borrower/upload_file",
-                onChange: (e) => {
-                  // handleChange(e)
-                },
+                  showUploadList: {
+                    showDownloadIcon: false,
+                    downloadIcon: '下载',
+                    showRemoveIcon: true,
+                    // removeIcon: <StarOutlined onClick={(e) => console.log(e, 'custom removeIcon event')} />,
+                  },
+                  onChange: (e) => {
+                    handleChange(e)
+                  },
+                  onRemove(file) {
+                    console.log("onRemoveDataFile",file);
+                    request('/api/borrower/delete_file?file_id='+ file.uid);
+                  },
+                  onDownload(file) {
+                    console.log("onDownloadDataFile",file);
+                    request('/api/borrower/download_file?file_id='+ file.uid);
+                  }
+                
               }} />
             </Col>
           </Row>
@@ -290,9 +358,24 @@ const AdvancedForm: FC<Record<string, any>> = () => {
               fieldProps={{
                 name: "file_address_proof_hk",
                 action:"/api/borrower/upload_file",
-                onChange: (e) => {
-                  // handleChange(e)
-                },
+                  showUploadList: {
+                    showDownloadIcon: false,
+                    downloadIcon: '下载',
+                    showRemoveIcon: true,
+                    // removeIcon: <StarOutlined onClick={(e) => console.log(e, 'custom removeIcon event')} />,
+                  },
+                  onChange: (e) => {
+                    handleChange(e)
+                  },
+                  onRemove(file) {
+                    console.log("onRemoveDataFile",file);
+                    request('/api/borrower/delete_file?file_id='+ file.uid);
+                  },
+                  onDownload(file) {
+                    console.log("onDownloadDataFile",file);
+                    request('/api/borrower/download_file?file_id='+ file.uid);
+                  }
+                
               }}
               />
             </Col>
@@ -303,9 +386,24 @@ const AdvancedForm: FC<Record<string, any>> = () => {
               fieldProps={{
                 name: "file_director_credit_report_hk",
                 action:"/api/borrower/upload_file",
-                onChange: (e) => {
-                  // handleChange(e)
-                },
+                  showUploadList: {
+                    showDownloadIcon: false,
+                    downloadIcon: '下载',
+                    showRemoveIcon: true,
+                    // removeIcon: <StarOutlined onClick={(e) => console.log(e, 'custom removeIcon event')} />,
+                  },
+                  onChange: (e) => {
+                    handleChange(e)
+                  },
+                  onRemove(file) {
+                    console.log("onRemoveDataFile",file);
+                    request('/api/borrower/delete_file?file_id='+ file.uid);
+                  },
+                  onDownload(file) {
+                    console.log("onDownloadDataFile",file);
+                    request('/api/borrower/download_file?file_id='+ file.uid);
+                  }
+                
               }} />
             </Col>
             <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
@@ -315,9 +413,24 @@ const AdvancedForm: FC<Record<string, any>> = () => {
               fieldProps={{
                 name: "file_financial_statements_hk",
                 action:"/api/borrower/upload_file",
-                onChange: (e) => {
-                  // handleChange(e)
-                },
+                  showUploadList: {
+                    showDownloadIcon: false,
+                    downloadIcon: '下载',
+                    showRemoveIcon: true,
+                    // removeIcon: <StarOutlined onClick={(e) => console.log(e, 'custom removeIcon event')} />,
+                  },
+                  onChange: (e) => {
+                    handleChange(e)
+                  },
+                  onRemove(file) {
+                    console.log("onRemoveDataFile",file);
+                    request('/api/borrower/delete_file?file_id='+ file.uid);
+                  },
+                  onDownload(file) {
+                    console.log("onDownloadDataFile",file);
+                    request('/api/borrower/download_file?file_id='+ file.uid);
+                  }
+                
               }} />
             </Col>
           </Row>
@@ -329,9 +442,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
               fieldProps={{
                 name: "file_other_hk",
                 action:"/api/borrower/upload_file",
-                onChange: (e) => {
-                  // handleChange(e)
-                },
+                
               }}
               />
             </Col>
