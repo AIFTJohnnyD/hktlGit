@@ -1,5 +1,5 @@
 import { CloseCircleOutlined } from '@ant-design/icons';
-import { Card, Col, Popover, Row, message, Button } from 'antd';
+import { Card, Col, Popover, Row, message, Button, Space } from 'antd';
 
 import { FC, useRef } from 'react';
 import { useState } from 'react';
@@ -42,6 +42,9 @@ const AdvancedForm: FC<Record<string, any>> = () => {
     } catch {
       console.log("onFinisherrorInfo提交失败")
     }
+  }
+  function ApiAuthorized(){
+    console.log("ApiAuthorized");
   }
   const formRef = useRef<ProFormInstance>();
   
@@ -265,18 +268,20 @@ const AdvancedForm: FC<Record<string, any>> = () => {
       width: '20%',
     },
     // API授权
-    // {
-    //   title: 'API授权',
-    //   dataIndex: 'APIButton',
-    //   valueType: 'radioButton',
-    //   key: 'APIButton',
-    //   width: '20%',
-    //   render: (dom, record) => (
-    //     <Space>
-    //         {/* <Button type="primary" onClick={submitInfo}>API授权</Button> */}
-    //     </Space>
-    //   ),
-    // },
+    {
+      title: 'API授权',
+      dataIndex: 'APIButton',
+      valueType: 'radioButton',
+      key: 'APIButton',
+      width: '20%',
+      render: (dom, record) => (
+        <Space>
+            <Button type="primary" 
+                    onClick={ApiAuthorized}
+                    >API授权</Button>
+        </Space>
+      ),
+    },
     {
       title: '操作',
       key: 'action',

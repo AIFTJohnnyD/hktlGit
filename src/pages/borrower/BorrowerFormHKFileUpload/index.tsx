@@ -4,21 +4,13 @@ import { Card, Col, Popover, Row, message } from 'antd';
 import { FC, useEffect } from 'react';
 import { useState } from 'react';
 import ProForm, {
-  ProFormDatePicker,
-  ProFormDateRangePicker,
-  ProFormSelect,
-  ProFormText,
-  ProFormTimePicker,
   ProFormUploadButton,
-  ProFormUploadDragger,
 } from '@ant-design/pro-form';
-import type { ProColumnType } from '@ant-design/pro-table';
-import { EditableProTable } from '@ant-design/pro-table';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import { submitForm } from './service';
 import styles from './style.less';
 import { FormattedMessage, request, useRequest } from 'umi';
-import { UploadChangeParam, UploadFile } from 'antd/lib/upload';
+import { UploadFile } from 'antd/lib/upload';
 
 
 type InternalNamePath = (string | number)[];
@@ -299,7 +291,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
             </Col>
           </Row>
           <Row gutter={16}>
-          <Col lg={6} md={12} sm={24}>
+            <Col lg={6} md={12} sm={24}>
               <ProFormUploadButton  
               label={<FormattedMessage id='pages.borrower_form.HKfile_upload.file_other_hk'/>} 
               fileList={file_other_hk}
