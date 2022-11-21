@@ -315,8 +315,16 @@ const formRef = useRef<ProFormInstance>();
                 name="company_type_cn"
                 rules={[{ required: false, message: 'Please input the company_type_cn.' }]}
                 valueEnum={{
-                  电商: '电商',
-                  非电商: '非电商',
+                  国有企业: '国有企业',
+                  集体所有制: '集体所有制',
+                  私营企业: '私营企业',
+                  股份制公司: '股份制公司',
+                  有限合伙企业: '有限合伙企业',
+                  联营企业: '联营企业',
+                  外商投资企业: '外商投资企业',
+                  个人独资企业: '个人独资企业',
+                  港澳台企业: '港澳台企业',
+                  股份合作企业: '股份合作企业',
                 }}
                 placeholder="Please input the company_type_cn."
               />
