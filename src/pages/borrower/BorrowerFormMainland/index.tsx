@@ -303,8 +303,10 @@ const formRef = useRef<ProFormInstance>();
                 rules={[{ required: false, message: 'Please input the location_cn.' }]}
                 placeholder="Please input the location_cn."
                 valueEnum={{
-                  中国大陆: '中国大陆',
-                  中国香港: '中国香港',
+                  中国: '中国',
+                  中国台湾: '中国台湾',
+                  中国香港特别行政区: '中国香港特别行政区',
+                  中国澳门特别行政区: '中国澳门特别行政区',
                 }}
               />
             </Col>

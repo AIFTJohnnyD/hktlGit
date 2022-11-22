@@ -345,8 +345,10 @@ const AdvancedForm: FC<Record<string, any>> = () => {
                   rules={[{ required: true, message: 'Please input the location_hk.' }]}
                   placeholder="Please input the location_hk."
                   valueEnum={{
-                    中国大陆: '中国大陆',
-                    中国香港: '中国香港',
+                    中国: '中国',
+                    中国台湾: '中国台湾',
+                    中国香港特别行政区: '中国香港特别行政区',
+                    中国澳门特别行政区: '中国澳门特别行政区',
                   }}
                 />
               </Col>
