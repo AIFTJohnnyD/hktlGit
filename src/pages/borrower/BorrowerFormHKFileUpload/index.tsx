@@ -137,6 +137,10 @@ const AdvancedForm: FC<Record<string, any>> = () => {
       // Get this url from response in real world.
       // 做成fileList的格式传回
     }
+    if (info.file.status == 'uploading') {
+     console.log("loading");
+      window.location.reload();
+    }
     if (info.file.status == 'error') {
       message.error('上传失败!请稍后再试')
     }
@@ -202,6 +206,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
                     handleChange(e)
                   },
                   onRemove(file) {
+                    window.location.reload();
                     console.log("onRemoveDataFile",file);
                     request('/api/borrower/delete_file?file_id='+ file.uid);
                   },
@@ -229,7 +234,8 @@ const AdvancedForm: FC<Record<string, any>> = () => {
                   handleChange(e)
                 },
                 onRemove(file) {
-                  console.log("onRemoveDataFile",file);
+                  window.location.reload();
+                    console.log("onRemoveDataFile",file);
                   request('/api/borrower/delete_file?file_id='+ file.uid);
                 },
                 onDownload(file) {
@@ -256,7 +262,8 @@ const AdvancedForm: FC<Record<string, any>> = () => {
                   handleChange(e)
                 },
                 onRemove(file) {
-                  console.log("onRemoveDataFile",file);
+                  window.location.reload();
+                    console.log("onRemoveDataFile",file);
                   request('/api/borrower/delete_file?file_id='+ file.uid);
                 },
                 onDownload(file) {
@@ -285,6 +292,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
                     handleChange(e)
                   },
                   onRemove(file) {
+                    window.location.reload();
                     console.log("onRemoveDataFile",file);
                     request('/api/borrower/delete_file?file_id='+ file.uid);
                   },
@@ -313,6 +321,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
                     handleChange(e)
                   },
                   onRemove(file) {
+                    window.location.reload();
                     console.log("onRemoveDataFile",file);
                     request('/api/borrower/delete_file?file_id='+ file.uid);
                   },
@@ -339,6 +348,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
                     handleChange(e)
                   },
                   onRemove(file) {
+                    window.location.reload();
                     console.log("onRemoveDataFile",file);
                     request('/api/borrower/delete_file?file_id='+ file.uid);
                   },
@@ -368,6 +378,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
                     handleChange(e)
                   },
                   onRemove(file) {
+                    window.location.reload();
                     console.log("onRemoveDataFile",file);
                     request('/api/borrower/delete_file?file_id='+ file.uid);
                   },
@@ -396,6 +407,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
                     handleChange(e)
                   },
                   onRemove(file) {
+                    window.location.reload();
                     console.log("onRemoveDataFile",file);
                     request('/api/borrower/delete_file?file_id='+ file.uid);
                   },
@@ -423,6 +435,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
                     handleChange(e)
                   },
                   onRemove(file) {
+                    window.location.reload();
                     console.log("onRemoveDataFile",file);
                     request('/api/borrower/delete_file?file_id='+ file.uid);
                   },
@@ -442,7 +455,24 @@ const AdvancedForm: FC<Record<string, any>> = () => {
               fieldProps={{
                 name: "file_other_hk",
                 action:"/api/borrower/upload_file",
-                
+                showUploadList: {
+                  showDownloadIcon: false,
+                  downloadIcon: '下载',
+                  showRemoveIcon: true,
+                  // removeIcon: <StarOutlined onClick={(e) => console.log(e, 'custom removeIcon event')} />,
+                },
+                onChange: (e) => {
+                  handleChange(e)
+                },
+                onRemove(file) {
+                  window.location.reload();
+                  console.log("onRemoveDataFile",file);
+                  request('/api/borrower/delete_file?file_id='+ file.uid);
+                },
+                onDownload(file) {
+                  console.log("onDownloadDataFile",file);
+                  request('/api/borrower/download_file?file_id='+ file.uid);
+                }
               }}
               />
             </Col>
