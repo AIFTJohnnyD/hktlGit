@@ -134,6 +134,10 @@ const AdvancedForm: FC<Record<string, any>> = () => {
       // Get this url from response in real world.
       // 做成fileList的格式传回
     }
+    if (info.file.status == 'uploading') {
+      console.log("loading");
+       window.location.reload();
+     }
     if (info.file.status == 'error') {
       message.error('上传失败!请稍后再试')
     }
@@ -195,6 +199,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
                     handleChange(e)
                   },
                   onRemove(file) {
+                    window.location.reload();
                     console.log("onRemoveDataFile",file);
                     request('/api/borrower/delete_file?file_id='+ file.uid);
                   },
@@ -222,6 +227,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
                     handleChange(e)
                   },
                   onRemove(file) {
+                    window.location.reload();
                     console.log("onRemoveDataFile",file);
                     request('/api/borrower/delete_file?file_id='+ file.uid);
                   },
@@ -249,6 +255,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
                     handleChange(e)
                   },
                   onRemove(file) {
+                    window.location.reload();
                     console.log("onRemoveDataFile",file);
                     request('/api/borrower/delete_file?file_id='+ file.uid);
                   },
@@ -278,6 +285,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
                     handleChange(e)
                   },
                   onRemove(file) {
+                    window.location.reload();
                     console.log("onRemoveDataFile",file);
                     request('/api/borrower/delete_file?file_id='+ file.uid);
                   },
@@ -305,6 +313,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
                     handleChange(e)
                   },
                   onRemove(file) {
+                    window.location.reload();
                     console.log("onRemoveDataFile",file);
                     request('/api/borrower/delete_file?file_id='+ file.uid);
                   },
@@ -331,6 +340,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
                     handleChange(e)
                   },
                   onRemove(file) {
+                    window.location.reload();
                     console.log("onRemoveDataFile",file);
                     request('/api/borrower/delete_file?file_id='+ file.uid);
                   },
@@ -359,6 +369,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
                     handleChange(e)
                   },
                   onRemove(file) {
+                    window.location.reload();
                     console.log("onRemoveDataFile",file);
                     request('/api/borrower/delete_file?file_id='+ file.uid);
                   },
@@ -386,6 +397,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
                     handleChange(e)
                   },
                   onRemove(file) {
+                    window.location.reload();
                     console.log("onRemoveDataFile",file);
                     request('/api/borrower/delete_file?file_id='+ file.uid);
                   },
