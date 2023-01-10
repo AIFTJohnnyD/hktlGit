@@ -62,7 +62,8 @@ export default {
   'menu.borrower.analysis': 'Merchant Analysis',
 
   'menu.amount': 'Credit Management',
-  'menu.amount.list': 'Merchant List',
+  'menu.amount.loan-product': 'Loan Product Management',
+  'menu.amount.borrower-list': 'Merchant List',
 
   //'menu.loan': 'Loan Indicator',
   //'menu.loan.input': 'New Loan',

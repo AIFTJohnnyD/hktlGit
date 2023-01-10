@@ -359,7 +359,7 @@ const SelectProduct = ({
         }}
         recordCreatorProps={false}
         scroll={{y: 500}}
-        //style={{height: 600}}  //wjx 加了这个提交按钮会在选择后被隐藏
+        //style={{height: 650}}
         rowSelection={{
           selections: [Table.SELECTION_ALL, Table.SELECTION_INVERT],
           onChange: (_, selectedRows) => {

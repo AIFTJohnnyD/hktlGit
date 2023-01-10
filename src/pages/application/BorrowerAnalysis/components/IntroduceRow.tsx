@@ -83,6 +83,7 @@ const IntroduceRow = ({ loading, seller, statistic, seller_score }:
     </Col>
 */}
 
+{/* ??????????????????
     <Col {...topColResponsiveProps}>
       <ChartCard
         bordered={false}
@@ -96,7 +97,7 @@ const IntroduceRow = ({ loading, seller, statistic, seller_score }:
         />
       </ChartCard>
     </Col>
-    
+*/}    
   </Row>
 );
 

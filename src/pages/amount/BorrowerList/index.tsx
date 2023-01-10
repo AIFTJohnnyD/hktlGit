@@ -1,13 +1,12 @@
-import { Button, DatePicker, Space } from 'antd';
+import { Button, Space } from 'antd';
 import React, { useState, useRef } from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
 import type { ProColumns, ActionType, ColumnsState } from '@ant-design/pro-table';
-import { company } from './service';
-import type { TableListItem, TableListPagination } from './data';
+import type { TableListItem } from './data';
 import styles from './style.less';
 import { request, FormattedMessage, useRequest } from 'umi';
 
-import { EditTwoTone, ProfileTwoTone } from '@ant-design/icons';
+import { EditTwoTone } from '@ant-design/icons';
 import { EditableProTable } from '@ant-design/pro-table';
 
 const TableList: React.FC = () => {
@@ -30,7 +29,7 @@ const TableList: React.FC = () => {
       dataIndex: 'key',
       sorter: (a, b) => a.key - b.key,
       readonly: true,
-      width: '4%',
+      width: '5%',
     },
     {
       title: (<FormattedMessage id='pages.lender_form.company_name'/>),
@@ -40,7 +39,7 @@ const TableList: React.FC = () => {
       width: '15%',
       render: (dom, entity) => {
         return (
-          <a href={"/application/borrower-analysis?borrower_id=" + entity.id}>
+          <a href={"/application/borrower-analysis?borrower_key=" + entity.key}>
             {dom}
           </a>
         );
@@ -305,7 +304,7 @@ const TableList: React.FC = () => {
           editableKeys,
           onSave: async (rowKey, newData, oldData) => {
             //console.log(rowKey, newData, oldData);
-            request('/api/amount/get_company_single?borrower_id='+ newData.id + '&half_month_cash_flow=' + newData.half_month_cash_flow + '&approved_amount=' + newData.approved_amount).then(
+            request('/api/amount/get_company_single?borrower_key='+ newData.key + '&half_month_cash_flow=' + newData.half_month_cash_flow + '&approved_amount=' + newData.approved_amount).then(
               ({data, error, loading}) => {
                   let dataIndex: number = -1;
                   for (let idx: number = 0; idx < listCompany?.length; idx++) {

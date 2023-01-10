@@ -194,6 +194,7 @@ const CompanyForm: FC<Record<string, any>> = () => {
               <Col xl={{ span: 6, offset: 0 }} lg={{ span: 6 }} md={{ span: 24 }} sm={24}>
                 <ProForm.Group title={<FormattedMessage id='pages.lender_form.phone'/>} size={8}>
                   <ProFormSelect
+                    allowClear={false}
                     name="phone_country_code"
                     rules={[{ required: true, message: 'Country code' }]}
                     valueEnum={{
@@ -265,6 +266,7 @@ const CompanyForm: FC<Record<string, any>> = () => {
               <Col xl={{ span: 6, offset: 0 }} lg={{ span: 6 }} md={{ span: 24 }} sm={24}>
                 <ProForm.Group title={<FormattedMessage id='pages.lender_form.office_phone'/>} size={8}>
                   <ProFormSelect
+                    allowClear={false}
                     name="person_office_phone_country_code"
                     rules={[{ required: true, message: 'Country code' }]}
                     valueEnum={{
@@ -284,6 +286,7 @@ const CompanyForm: FC<Record<string, any>> = () => {
               <Col xl={{ span: 6, offset: 2 }} lg={{ span: 6 }} md={{ span: 24 }} sm={24}>
                 <ProForm.Group title={<FormattedMessage id='pages.lender_form.mobile_phone'/>} size={8}>
                   <ProFormSelect
+                    allowClear={false}
                     name="person_mobile_phone_country_code"
                     rules={[{ required: true, message: 'Country code' }]}
                     valueEnum={{

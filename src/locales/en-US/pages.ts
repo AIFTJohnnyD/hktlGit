@@ -80,6 +80,11 @@ export default {
 
   'pages.util.edit': "Edit",
   'pages.util.reset': "Reset",
+  'pages.util.next_step' : "Next",
+  'pages.util.previous_step' : "Previous",
+  'pages.util.finish' : "Finish",
+
+  'pages.util.submit' : "Submit",
 
   //register result
   'pages.register_result.return_homepage': 'Return to Home page',
@@ -339,6 +344,11 @@ export default {
   'pages.loan_application.please_enter_repayment_amount' : "Please Enter Repayment Amount",
   'pages.loan_application.please_upload_payment_proof' : "Please upload Payment Proof",
   'pages.loan_application.repayment_installment_date' : "Installment Repayment Date",
+  'pages.loan_application.repayment_days' : "Loan Days",
+  'pages.loan_application.pending_for_approval' : "Pending For Approval",
+  'pages.loan_application.repayment.acceptreject' : "Accept / Reject",
+  'pages.loan_application.repayment.accept' : "Accept",
+  'pages.loan_application.repayment.reject' : "Reject",
 
   //loan-application-list
   'pages.loan_application_list.company_id': "Company ID",
@@ -354,7 +364,7 @@ export default {
   'pages.loan_application_list.loan_approval_details': "Loan Approval Details",
   'pages.loan_application_list.loan_approval': "Loan Approval",
 
-  'pages.loan_application_list.annual_interest_rate': "Annual Interest Rate",
+  'pages.loan_application_list.annual_interest_rate': "Annual Interest Rate(%)",
   'pages.loan_application_list.number_of_installments': "Number of Installments",
   //'pages.loan_application_list.loan_repayment_method': "Repayment Method",
   //'pages.loan_form.loan_rate': 'Loan rate',
@@ -368,9 +378,9 @@ export default {
   'pages.loan_application_list.day_approved': "Loan Period",
   //'pages.loan_application_list.loan_approval': "Loan Approval",
 
-  'pages.loan_application_list.annual_interest_rate_approved': "Approved Annual Interest Rate",
+  'pages.loan_application_list.annual_interest_rate_approved': "Approved Annual Interest Rate(%)",
   'pages.loan_application_list.number_of_installments_approved': "Approved Number of Installments",
-  'pages.loan_application_list.penalty_annual_interest_rate': "Penalty Annual Interest Rate",
+  'pages.loan_application_list.penalty_annual_interest_rate': "Penalty Annual Interest Rate(%)",
   //'pages.loan_application_list.loan_rate_approved': "Approved Loan Rate",
   //'pages.loan_application_list.loan_repayment_method_approved': "Approved Repayment Method",
 
@@ -448,12 +458,10 @@ export default {
     'pages.borrower_form.basic_information.mainland_company':"Mainland Company",
     'pages.borrower_form.basic_information.mainland_company_name':"Name of mainland company",
     'pages.borrower_form.basic_information.mainland_unified_social_credit_code':"Mainland Company Unified Social Credit Code",
-    'pages.borrower_form.basic_information.mainland_compnay_establishment_date':"Mainland Compnay Establishment Date",
     'pages.borrower_form.basic_information.mainland_company_address':"Office Address of Mainland Company",
     'pages.borrower_form.basic_information.HongKong_company':'Hong Kong Company',
     'pages.borrower_form.basic_information.HongKong_company_name':"Name of Hong Kong Company",
     'pages.borrower_form.basic_information.HongKong_unified_social_credit_code':"Hong Kong Company Business Registration Number",
-    'pages.borrower_form.basic_information.HongKong_compnay_establishment_date':"Hong Kong Compnay Establishment Date",
     'pages.borrower_form.basic_information.HongKong_company_address':"Hong Kong Office/Registered Address",
 
   //step 2
@@ -514,7 +522,7 @@ export default {
     'pages.borrower_form.upload_doc.format':"Only accept upload in .jpeg/.jpg/.png/.xls/.xlsx/.doc/.docx/.odt/.pdf/.ppt/.pptx format",
     'pages.borrower_form.upload_doc.proof':"Business Proof",
     'pages.borrower_form.upload_doc.certificate':"*Business Registration Certificate (Hong Kong Company)",
-    'pages.borrower_form.upload_doc.file_br_cn':"*Business License of Enterprise Legal Person (China Company)",
+    'pages.borrower_form.upload_doc.business_license':"*Business License of Enterprise Legal Person (China Company)",
     'pages.borrower_form.upload_doc.Association':"*Articles of Association (China Company)",
     'pages.borrower_form.upload_doc.identity':"Legal person, natural person shareholder and director identity proof*",
     'pages.borrower_form.upload_doc.passport':"*Shareholder and director's ID card or passport (Hong Kong Company)",
@@ -626,6 +634,8 @@ If the company's statement is false, the company agrees to bear all legal Liabil
   'pages.borrower_form.account_receivable.annual_interest_rate': "Annual Interest Rate",
   'pages.borrower_form.account_receivable.penalty_annual_interest_rate': "Penalty Annual Interest Rate",
 
+  'pages.borrower_form.account_receivable.admin_setting': "Admin Setting",
+
   //borrower-list
   'pages.borrower_list.borrower_list': "Merchant List",
 
@@ -650,6 +660,7 @@ If the company's statement is false, the company agrees to bear all legal Liabil
   'pages.borrower_list.borrower.inventory_finance': "Inventory Finance",
 
   'pages.borrower_list.borrower.lender_id_assign': "Lender ID Assigned",
+  'pages.borrower_list.borrower.lender_id_assign_name': "Lender Name Assigned",
 
   //upload file
   'pages.borrower_list.document_upload': "Uploaded Documents",
@@ -709,7 +720,7 @@ If the company's statement is false, the company agrees to bear all legal Liabil
   'pages.platform.borrower.history_apply_times': "History Applied Times",  
   'pages.platform.borrower.history_apply_approval_times': "History Applied Approval Times",  
 
-  'pages.postloan.repayment_installment': "Repayment",  
+  'pages.postloan.repayment_installment': "Repayment Installment",  
   'pages.postloan.repayment_amount': "Repayment Amount",  
 
   'pages.postloan.repayment_approval': "Repayment Approval",
@@ -762,4 +773,12 @@ If the company's statement is false, the company agrees to bear all legal Liabil
 
   'pages.amount.borrower_list.created_date': "Created Date",
   'pages.amount.borrower_list.approved_date': "Approved Date",
+
+  //loan product
+  'pages.amount.loan_product.title': "Loan Product Management",
+  'pages.amount.loan_product.merchandise_group': "Merchandise Group",
+  'pages.amount.loan_product.amount_limit': "Amount Limit (Monthly Revenue)",
+  'pages.amount.loan_product.annual_interest_rate': "Annual Interest Rate (%)",
+  'pages.amount.loan_product.probability_of_default': "Probability of Default Threshold (%)",
+
 };

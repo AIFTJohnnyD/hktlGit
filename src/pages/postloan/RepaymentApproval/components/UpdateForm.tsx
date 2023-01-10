@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Form, Input, Modal } from 'antd';
+import { Form, Input, Modal, Radio, RadioChangeEvent, Space } from 'antd';
 import ProForm, {
   ProFormSelect,
   ProFormText,
@@ -10,16 +10,17 @@ import ProForm, {
   ProFormMoney,
   ProFormDependency,
   ProFormField,
+  ProFormInstance,
 } from '@ant-design/pro-form';
 import type { TableListItem, RepaymentListItem } from '../data';
 
-import { Card, Row, Col, Result, Button, Descriptions, Divider, Alert, Statistic, Table } from 'antd';
+import { Card, Row, Col, Result, Tag, Button, Descriptions, Divider, Alert, Statistic, Table } from 'antd';
 import styles from './style.less';
 
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 
-import { FormattedMessage } from 'umi';
+import { FormattedMessage, useModel } from 'umi';
 import { useAccess } from 'umi';
 import moment from 'moment';
 
@@ -70,24 +71,25 @@ const columns_repayment: ProColumns<RepaymentListItem>[] = [
     valueType: 'textarea',
     render: (text, record, index) => {
       return (translate_status(record?.status))
-    },
+    }
   },
   {
     title: (<FormattedMessage id='pages.loan_application.repayment_proof'/>),
     dataIndex: 'name',
     valueType: 'option',
-    render: (dom, obj) => {
-      obj.file_url = "http://localhost:8000/api/borrower/download_file?file_id=br_hk__9"
-      obj.file_name = "还款凭证.png"
+    render: (dom, record, obj) => {
+      // console.log(record?.attached_files)
+      var attached_files = record?.attached_files;
+      const listItems = attached_files.map((file_name:string) => (
+        <>
+        <a href={'/api/loan_application/download_proof_file?file_name=' + file_name} download={file_name.split('_')[2]}>
+        {file_name.split('_')[2]}
+        </a><br/>
+        </>
+      ));      
       return (
         <>
-          <a href={obj.file_url} download={obj.file_name}>
-            {obj.file_name}
-          </a>
-          {/* <br/>
-          <a href={obj.file_url} download={obj.file_name}>
-            {obj.file_name}
-          </a> */}
+          {listItems}
         </>
       );
     }, 
@@ -96,15 +98,34 @@ const columns_repayment: ProColumns<RepaymentListItem>[] = [
 
 const UpdateForm: React.FC<UpdateFormProps> = (props) => {
 
+  const initialState = useModel('@@initialState');
+  const formRef = useRef<ProFormInstance>();
   var pendingForApproval: any[] = [];
   var installmentsApproved: any[] = [];
+  var installmentsRejected: any[] = [];
+
   for (let i = 0; i < props.values.list_replayment?.length; i++) {
     let item = props.values.list_replayment[i];
-    if (item.status !="ACCEPTED") {
+    // if (item.status !="ACCEPTED") {
+    if (item.status =="SUBMITTED") {  
       pendingForApproval.push(item);
-      installmentsApproved.push(item.installment.toString())
+      installmentsApproved.push(item.installment.toString());
     }
   }
+
+  const onChangeAcceptRejectRadio = (e: RadioChangeEvent) => {
+    installmentsApproved = [];
+    installmentsRejected = [];
+    for (let i = 0; i < pendingForApproval.length; i++) {
+      if (e.target.value == "Accept") {
+        installmentsApproved.push(JSON.parse(JSON.stringify(pendingForApproval[i])).installment.toString());
+      } else {
+        installmentsRejected.push(JSON.parse(JSON.stringify(pendingForApproval[i])).installment.toString());
+      }
+    }
+    formRef.current?.setFieldValue("installments_approved", installmentsApproved);
+    formRef.current?.setFieldValue("installments_rejected", installmentsRejected);
+  };
 
   function roundNumber(number: number) {
     return Math.round(number * 100) / 100
@@ -125,6 +146,8 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
     return statusesOverDue.includes(props.values.status);
   }
 
+  const [currentStep, setCurrentStep] = useState(0);
+
   const year = 360;
   const amountWithInterestRepayment = props.values.amount_approved + ((props.values.amount_approved * props.values.annual_interest_rate_approved * ((moment(props.values.end_date).diff(moment(props.values.start_date), 'days')) + 1)) / year);
   
@@ -137,7 +160,16 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
         totalAmountApproved += item.amount;
       }
     }
-  }  
+  }
+
+  const openBorrowerInfo = () => {
+    //console.log(props.values)
+    window.open('/postloan/repayment-approval-borrower-info?borrower_key='+props.values.borrower_key, 'newwindow','height=800, width=1500, top=160, left=350, toolbar=no, menubar=no, status=no');
+  }
+
+  useEffect(() => {
+    formRef.current?.setFieldValue("installments_approved", installmentsApproved);
+  }, []);
 
   return (
     <StepsForm
@@ -151,11 +183,12 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
             bodyStyle={{
               padding: '32px 40px 48px',
             }}
-            destroyOnClose
+            destroyOnClose={true}
             title={<FormattedMessage id='pages.util.update_info'/>}
             visible={props.updateModalVisible}
             footer={submitter}
             onCancel={() => {
+              setCurrentStep(0);
               props.onCancel();
             }}
           >
@@ -164,6 +197,39 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
         );
       }}
       onFinish={props.onSubmit}
+      formRef={formRef}
+      current={currentStep}
+      submitter={{
+        render: (props) => {
+          if (props.step === 0) {
+            return (
+              <Button 
+                type="primary" 
+                key="next" 
+                onClick={() => props.onSubmit?.()}
+              >
+                {<FormattedMessage id='pages.util.next_step'/>}
+              </Button>
+            );
+          }
+          return [
+            <Button
+              key="previous"
+              onClick={() => setCurrentStep((currentStep) => currentStep - 1)}
+            >
+              {<FormattedMessage id='pages.util.previous_step'/>}
+            </Button>,
+            <Button
+              type="primary"
+              key="submit"
+              onClick={() => props.onSubmit?.()}
+              //??? disabled={!initialState.initialState?.currentUser?.permissions?.includes(1)}
+            >
+              {<FormattedMessage id='pages.util.finish'/>}
+            </Button>
+          ];
+        }
+      }}
     >
 
       {/* <StepsForm.StepForm
@@ -187,14 +253,21 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
 
       <StepsForm.StepForm
         title={<FormattedMessage id='pages.loan_application.repayment_plan'/>}
+        onFinish={async () => {
+          setCurrentStep((currentStep) => currentStep + 1);
+          return true;
+        }}
       >
         <Card title="" className={styles.card} bordered={false}>
           <Row gutter={[16,24]}>
+            <Col span = {24}>
+              <Button type="primary" onClick={openBorrowerInfo}>电商信息</Button>
+            </Col>
             <Col span={12}>
                 <b><FormattedMessage id='pages.util.status'/></b><br/>{translate_status(props.values.status)}
             </Col>
             <Col span={12}>
-                <b>{<FormattedMessage id='pages.loan_application.repayment_id'/>}</b><br/>{props.values.key}
+                <b>{<FormattedMessage id='pages.loan_application.repayment_id'/>}</b><br/>{props.values.borrower_key}
             </Col>
             <Col span={12}>
                 <b>{<FormattedMessage id='pages.loan_application.application_amount'/>}</b><br/>{formatNumber(props.values.amount_approved)}
@@ -239,7 +312,10 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
         initialValues={{
           remark: props.values.remark,
         }}
-        title={<FormattedMessage id='pages.postloan.repayment_confirm_approved'/>}
+        title={<FormattedMessage id='pages.postloan.repayment_confirm_approved'/>}          
+        onFinish={async () => {
+           setCurrentStep(0);
+        }}
       >            
         <Card title={<FormattedMessage id='pages.util.approved'/>} className={styles.card} bordered={false}>
           <Row gutter={[16,24]}>
@@ -257,6 +333,18 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
                 <Form.Item name="installments_approved" noStyle initialValue={installmentsApproved}>
                   <Input type="hidden"></Input>
                 </Form.Item>
+                <Form.Item name="installments_rejected" noStyle initialValue={installmentsRejected}>
+                  <Input type="hidden"></Input>
+                </Form.Item>
+            </Col>
+            <Col span={24}>
+              <b>{<FormattedMessage id='pages.loan_application.repayment.acceptreject'/>}</b><br/>
+              <Radio.Group onChange={onChangeAcceptRejectRadio} defaultValue="Accept">
+                <Space direction="vertical">
+                  <Radio value={"Accept"}>{<FormattedMessage id='pages.loan_application.repayment.accept'/>}</Radio>
+                  <Radio value={"Reject"}>{<FormattedMessage id='pages.loan_application.repayment.reject'/>}</Radio>
+                </Space>
+              </Radio.Group>
             </Col>
           </Row>			
         </Card>      
@@ -267,3 +355,4 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
 };
 
 export default UpdateForm;
+

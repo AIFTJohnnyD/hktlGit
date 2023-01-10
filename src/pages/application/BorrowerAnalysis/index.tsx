@@ -1,24 +1,12 @@
-import { FC, useEffect } from 'react';
+import type { FC } from 'react';
 import { useRequest } from 'umi';
 import { Suspense, useState } from 'react';
 import { EllipsisOutlined } from '@ant-design/icons';
-import { Col, Descriptions, Dropdown, Menu, Row, Card, Slider } from 'antd';
+import { Col, Descriptions, Dropdown, Menu, Row, Card } from 'antd';
 import { GridContent } from '@ant-design/pro-layout';
 import type { RadioChangeEvent } from 'antd/es/radio';
 import type { RangePickerProps } from 'antd/es/date-picker/generatePicker';
 import type moment from 'moment';
-
-import ProForm, {
-  ProFormSelect,
-  ProFormText,
-  ProFormTextArea,
-  ProFormMoney,
-  ProFormDatePicker,
-  ProFormDigit,
-  ProFormSlider,
-  ProFormInstance,
-  ProFormDependency,
-} from '@ant-design/pro-form';
 
 import OpenToBuyBank from './components/OpenToBuyBank';
 import OpenToBuyRow from './components/OpenToBuyRow';
@@ -38,6 +26,8 @@ import GroupSalesCard from './components/GroupSalesCard';
 import TopSearch from './components/TopSearch';
 import ProportionReview from './components/ProportionReview';
 import SalesChartData from './components/SalesChartData';
+import PD_LGD_Data from './components/PD_LGD_Data';
+
 import { fakeChartData } from './service';
 import PageLoading from './components/PageLoading';
 import type { TimeType } from './components/SalesCard';
@@ -46,10 +36,9 @@ import type { AnalysisData } from './data.d';
 import styles from './style.less';
 
 import {parse} from 'querystring'
-import { request, history } from 'umi';
+import { request } from 'umi';
 
 import { FormattedMessage } from 'umi';
-import { ptBRIntl } from '@ant-design/pro-table';
 
 type ProductAnalysisProps = {
   productAnalysis: AnalysisData;
@@ -57,30 +46,16 @@ type ProductAnalysisProps = {
 };
 
 const ProductAnalysis: FC<ProductAnalysisProps> = () => {
+  //khwu
+  //http://localhost:8000/company/company-analysis?seller_id=A1057FBD44ECMO
+  //const { loading, data } = useRequest(fakeChartData);
   let urlParams = parse(window.location.href.split('?')[1])
-  console.log("urlParams",urlParams)
-  const borrower_id = urlParams.borrower_id;
-  console.log(borrower_id, history);
-  const [trigger,setTrigger] = useState(1);
-  let result = {}
-  result= useRequest(() => {
-    return request('/api/kyc/get_kyc?borrower_id='+ borrower_id+'&history='+ trigger);
+  const borrower_key = urlParams.borrower_key;
+  //console.log(company_id);
+  const { data, error, loading } = useRequest(() => {
+    return request('/api/kyc/get_kyc?borrower_key='+ borrower_key);
   });
-
-  useEffect(()=>{
-    result.run();
-    console.log("通过onSliderChange 事件trigger引发了useEffect");
-  },[trigger]);
-
-  let data = result.data
-  let loading = result.loading
-  let error = result.error
-
-  const onSliderChange = async (values: Record<string, any>) => {
-    //通过Slider传来的value进行修改trigger
-    setTrigger(values-1);
-  };
-
+  //console.log(data);
   if (data?.message == "Error") {
     return (
       <GridContent>
@@ -99,45 +74,15 @@ const ProductAnalysis: FC<ProductAnalysisProps> = () => {
     }
 
     return (
-      <GridContent>        
-        <div>      
+      <GridContent>
+        <>      
           <Suspense fallback={<PageLoading />}>
             <Descriptions title={company_name} />
           </Suspense>
-          <div className={styles.divline}></div>
-          <p></p>
 
-          <div style={{width:"1200px",height:"100px",margin:'20px'}}> 
-          <h3>请选择月份</h3>
-          <Slider
-            min = {0}
-            max = {12}
-            defaultValue = {12 - trigger}
-            onChange = {onSliderChange}
-            marks={{
-              0: 'Aug.2021',
-              1: 'Sep.2021',
-              2: 'Oct.2021',
-              3: 'Nov.2021',
-              4: 'Dec.2021',
-              5: 'Jan.2022',
-              6: 'Fub.2022',
-              7: 'Mar.2022',
-              8: 'Arp.2022',
-              9: 'May.2022',
-              10: 'Jun.2022',
-              11: 'Jul.2022',
-              12: 'Aug.2022',
-            }}
-          />
-          </div>
-       
-          <p></p>
-          <Suspense fallback={<PageLoading />}>
-            <Descriptions title={"KYC"} />
-          </Suspense>
-          
-          {data?.list_otb_plan.length > 0 && <div>       
+          {data?.list_otb_plan.length > 0 && <div>
+            <div className={styles.divline}></div>
+
             <Suspense fallback={null}>
               <OpenToBuyBank
                 loading={loading}
@@ -157,6 +102,15 @@ const ProductAnalysis: FC<ProductAnalysisProps> = () => {
               />
             </Suspense>
           </div>}
+
+  {/*
+          <Suspense fallback={<PageLoading />}>
+            <OpenToBuyRow loading={loading} 
+                  product={data?.product} 
+                  statistic={data?.statistic}
+                  openToBuy={data?.open_to_buy} />
+          </Suspense>  
+  */}
 
           <Suspense fallback={<PageLoading />}>
             <Descriptions title={"商家信息"} />
@@ -192,6 +146,15 @@ const ProductAnalysis: FC<ProductAnalysisProps> = () => {
                   revenue_month_on_month={data?.revenue_month_on_month || []} 
                   revenue_product_on_group={data?.revenue_product_on_group || []} 
                   statistic={data?.statistic} />
+          </Suspense>
+
+          <Suspense fallback={null}>
+            <PD_LGD_Data
+              loading={loading}
+              probability_of_default={data?.probability_of_default || []}
+              loss_given_default={data?.loss_given_default || []}
+              revenue_pd={data?.revenue_pd || []}
+            />
           </Suspense>
 
           <Suspense fallback={null}>
@@ -233,7 +196,7 @@ const ProductAnalysis: FC<ProductAnalysisProps> = () => {
             }}
           >        
           </Row>
-
+{/*
           <Suspense fallback={<PageLoading />}>
             <Descriptions title={"类别: " + data?.group.name} />
           </Suspense>
@@ -269,8 +232,8 @@ const ProductAnalysis: FC<ProductAnalysisProps> = () => {
               loading={loading}
             />
           </Suspense>
-
-        </div>
+*/}
+        </>
       </GridContent>
     );
   }

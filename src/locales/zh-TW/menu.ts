@@ -62,8 +62,9 @@ export default {
   'menu.borrower.analysis': '電商分析',
 
   'menu.amount': '授信管理',
-  'menu.amount.list': '電商列表',
-  
+  'menu.amount.loan-product': '信貸產品管理',
+  'menu.amount.borrower-list': '電商列表',
+
   //'menu.loan': '貸款指標',
   //'menu.loan.input': '輸入信息',
   //'menu.loan.list': '貸款產品列表',
@@ -74,6 +75,7 @@ export default {
   'menu.product.analysis': '商品分析',
 
   'menu.application': '融資管理',
+  'menu.application.analysis': '融資分析',
   'menu.application.input_inventory': '新建申請(貨物抵押融資)',  
   'menu.application.input_account_receivable': '新建申請(應收賬款融資)',
   'menu.application.list': '融資申請列表',

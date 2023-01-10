@@ -46,8 +46,6 @@ const SalesCard = ({
   var m12Val;
   var max = 0;
   
-  console.log(revenue);
-
   for(var a in revenue) { 
     total = total + revenue[a]['y'];
     mval[i] = revenue[a]['y'];
@@ -81,10 +79,11 @@ const SalesCard = ({
     revenue1.push(circle);
   }
 
-  //console.log(revenue1);
-
   return(
+    <Card loading={loading} className={styles.offlineCard} bordered={false} style={{ marginTop: 32 }} title="亚马逊销售、评论和访问数据详情">
+{/*
   <Card loading={loading} bordered={false} bodyStyle={{ padding: 0 }}>
+*/}
     <div className={styles.salesCard}>
       <Tabs
         size="large"
@@ -121,12 +120,13 @@ const SalesCard = ({
                       min: 0,
                       max: max
                     },
+                    //配合148行的meta实现隐藏右边轴
                     my: false
                   }}
+                  //修改图例的名字
                   legend={{
                     itemValue: {
                       formatter: (text, item) => {
-                        console.log(item);
                         if(item.value == "y"){
                           item.name = "销售金额";
                         }

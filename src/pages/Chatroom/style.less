@@ -1,26 +1,87 @@
-@import '~antd/dist/antd.css';
-
-.sendButton {
-    float:right;
-}
-
-.chatList {
-    width: 75%;
-}
-
-.header {
-    background-color: rgb(255, 255, 255);
-    text-align: center;
-}
-
-
-.siderBar {
-    background-color:rgb(255, 255, 255);
-    // transition:width 1s;
-    -moz-transition:width 1s; /* Firefox 4 */
-    -webkit-transition:width 1s; /* Safari and Chrome */
-    -o-transition:width 1s; /* Opera */
+@keyframes expand{
+  from{
     width: 20%;
-    height: 20%;
-    float: left;
+  }
+  to{
+    width: 100%;
+  }
 }
+
+::-webkit-scrollbar {
+    height:8px;
+    width: 8px; 
+  }
+::-webkit-scrollbar-thumb {
+    background-color: #eaecf1;
+    border-radius: 3px;
+}
+
+.cs-message__sender-name,
+.cs-message__sent-time {
+  display: block !important;
+}
+
+#components-select-demo-status .ant-select {
+  border-radius: 0.7em;
+}
+
+// .search-start-btn:hover {
+//   display: none;
+// }
+
+// .search-start-btn:hover > .search-history-bar {
+//   width: 100xp;
+// }
+
+.search-history-bar {
+  animation: expand 1s;
+}
+
+
+// .center-modal {
+//   border-radius: 0.7em;
+// }
+
+.search-box{
+  // display: flex;
+  // flex-direction: row;
+  // position: relative;
+  // top: 30px;
+  border-radius: 0.7em;
+  // padding: 0.2em 0.6em;
+  background-color: #c6e3fa;
+  // transform: translate(-50%,-50%);
+}
+// .search-box:hover > .search-txt{
+//   display: flex;
+//   flex-direction: row;
+//   // width: 120px;
+//   // padding: 0.2em 0.6em;
+// }
+// // .search-box:hover > .search-btn{
+// //   background: white;
+// // }
+// .search-btn{
+//   color:rgb(110, 169, 215) ;
+//   float: right;
+//   width: 1em;
+//   background: #c6e3fa;
+//   display: flex;
+//   transition: 0.4s;
+//   justify-content: center;
+//   align-items: center;
+//   margin-right: 0.5em
+// }
+// .search-txt{
+//   border: none;
+//   background: none;
+//   outline: none;
+//   float: left;
+//   padding: 0;
+//   color: black;
+//   font-size: .8em;
+//   font-family: inherit;
+//   transition: 0.4s;
+//   line-height: 2em;
+//   width: 0px;
+// }

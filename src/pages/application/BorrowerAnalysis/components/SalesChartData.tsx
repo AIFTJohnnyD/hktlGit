@@ -36,6 +36,7 @@ const SalesChartData = ({
         legend={{
           position: 'top',
         }}
+        smooth={true}
       />
     </div>
   </Card>

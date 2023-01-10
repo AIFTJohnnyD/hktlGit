@@ -506,7 +506,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
             <Col span={12}>
               <ProFormText
                 name="borrower_name"
-                label={<FormattedMessage id='pages.borrower_list.borrower.name_cn'/>}
+                label={<FormattedMessage id='pages.borrower_list.borrower.name'/>}
                 width="md"
                 disabled
               />
@@ -539,6 +539,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
             </Col>
             <Col span={12}>
               <ProFormSelect
+                allowClear={false}
                 name="currency"
                 label={<FormattedMessage id='pages.util.currency'/>}
                 width="md"
@@ -736,6 +737,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
             </Col>
             <Col span={12}>
               <ProFormSelect
+                allowClear={false}
                 name="currency"
                 label={<FormattedMessage id='pages.util.currency'/>}
                 width="md"
@@ -824,6 +826,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           <Row gutter={16}>
             <Col lg={12} md={12} sm={24}>
               <ProFormSelect
+                allowClear={false}
                 label={<FormattedMessage id='pages.util.status'/>}
                 width="md"
                 name="status"

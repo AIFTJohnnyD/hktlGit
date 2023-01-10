@@ -152,6 +152,9 @@ export interface AnalysisData {
   revenue_seller_on_group: DataItem[];
 
   sales_detail: DataItem[];
+  probability_of_default: DataItem[];
+  loss_given_default: DataItem[];
+  revenue_pd: DataItem[];
 
   group: DataItem[];
 

@@ -1,4 +1,4 @@
-import { Card, message, Row, Col, Table, Button, Descriptions, Checkbox} from 'antd';
+import { Card, message, Row, Col, Table, Button, Descriptions, Checkbox, Spin, Space} from 'antd';
 import ProForm, {
   ProFormDateRangePicker,
   ProFormDependency,
@@ -11,8 +11,8 @@ import ProForm, {
   ProFormDatePicker,  
 } from '@ant-design/pro-form';
 import { useRequest, history, request, FormattedMessage, useAccess } from 'umi';
-import type { FC } from 'react';
-import { PageContainer } from '@ant-design/pro-layout';
+import { FC, useEffect, useMemo, useState } from 'react';
+import { PageContainer, PageLoading } from '@ant-design/pro-layout';
 import { updateLoanApplication } from './service';
 import styles from './style.less';
 
@@ -21,106 +21,11 @@ import { parse } from 'querystring';
 import { CheckCircleTwoTone, ExclamationCircleTwoTone, CloseCircleTwoTone } from '@ant-design/icons';
 
 import type { BorrowerAmount, TableListItem, Shareholder_Person, Shareholder_Company, Director_Person, Director_Company } from './data';
-
-import { useState } from 'react';
-
-const columns_views_doc: ProColumns<Shareholder_Person>[] = [
-  {
-    title: (<FormattedMessage id='pages.borrower_form.sha'  defaultMessage='文件类型'/>),
-    dataIndex: '',
-    valueType: 'textarea',
-    render: (dom, obj) => {
-      if(obj.uid.indexOf('br_hk') != -1){
-        return (          
-          '商业登记证(香港公司)'
-        );
-      }
-      else if(obj.uid.indexOf('br_cn') != -1){
-        return (          
-          '企业法人营业执照(中国公司)'
-        );
-      } 
-      else if(obj.uid.indexOf('policy_cn') != -1){
-        return (          
-          '公司章程(中国公司)'
-        ); 
-      } 
-      else if(obj.uid.indexOf('director_hk') != -1){
-        return (          
-          '股东和董事身份证或护照(香港公司)'
-        ); 
-      } 
-      else if(obj.uid.indexOf('director_cn') != -1){
-        return (          
-          '法人、自然人股东和董事身份证正反面(中国公司)'
-        ); 
-      } 
-      else{
-        return (          
-          '其它未分类文件'
-        );
-      }
-    },
-  },       
-  {
-    title: (<FormattedMessage id='pages.borrower_form.sha'  defaultMessage='文件名称'/>),
-    dataIndex: 'name',
-    valueType: 'option',
-    render: (dom, obj) => {
-      return (
-        <a href={obj.url}>
-          {dom}
-        </a>
-      );
-    },
-  } 
-];
-
-const columns_shareholder_person: ProColumns<Shareholder_Person>[] = [
-  {
-    title: (<FormattedMessage id='pages.borrower_form.shareholder.person.name'/>),
-    dataIndex: 'shareholder_person_name',
-    valueType: 'textarea',
-  },       
-  {
-    title: (<FormattedMessage id='pages.borrower_form.shareholder.person.name_english'/>),
-    dataIndex: 'shareholder_person_name_english',
-    valueType: 'textarea',
-  },       
-
-  {
-    title: (<FormattedMessage id='pages.borrower_form.shareholder.person.nationality'/>),
-    dataIndex: 'shareholder_person_nationality',
-    valueType: 'textarea',
-  },       
-  {
-    title: (<FormattedMessage id='pages.borrower_form.shareholder.person.position'/>),
-    dataIndex: 'shareholder_person_position',
-    valueType: 'textarea',
-  },       
-
-  {
-    title: (<FormattedMessage id='pages.borrower_form.shareholder.person.phone'/>),
-    dataIndex: 'shareholder_person_phone',
-    valueType: 'textarea',
-  },       
-  {
-    title: (<FormattedMessage id='pages.borrower_form.shareholder.person.email'/>),
-    dataIndex: 'shareholder_person_email',
-    valueType: 'textarea',
-  },       
-
-  {
-    title: (<FormattedMessage id='pages.borrower_form.shareholder.person.rate'/>),
-    dataIndex: 'shareholder_person_rate',
-    valueType: 'textarea',
-  },       
-  {
-    title: (<FormattedMessage id='pages.borrower_form.shareholder.person.address'/>),
-    dataIndex: 'shareholder_person_address',
-    valueType: 'textarea',
-  },       
-];
+import { List } from 'lodash';
+import e from 'express';
+import BorrowerInfoDifference from './Components/BorrowerInfoDifference';
+//import Nonperforming_Loan from "../../application/LoanApplicationListLender_Approval/components/nonperforming_loan";
+import Nonperforming_Loan from "./Components/nonperforming_loan";
 
 const columns_shareholder_company: ProColumns<Shareholder_Company>[] = [
   {
@@ -153,47 +58,6 @@ const columns_shareholder_company: ProColumns<Shareholder_Company>[] = [
   {
     title: (<FormattedMessage id='pages.borrower_form.shareholder.company.address'/>),
     dataIndex: 'shareholder_company_address',
-    valueType: 'textarea',
-  },       
-];
-
-const columns_director_person: ProColumns<Director_Person>[] = [
-  {
-    title: (<FormattedMessage id='pages.borrower_form.director.person.name'/>),
-    dataIndex: 'director_person_name',
-    valueType: 'textarea',
-  },       
-  {
-    title: (<FormattedMessage id='pages.borrower_form.director.person.name_english'/>),
-    dataIndex: 'director_person_name_english',
-    valueType: 'textarea',
-  },       
-
-  {
-    title: (<FormattedMessage id='pages.borrower_form.director.person.nationality'/>),
-    dataIndex: 'director_person_nationality',
-    valueType: 'textarea',
-  },       
-  {
-    title: (<FormattedMessage id='pages.borrower_form.director.person.position'/>),
-    dataIndex: 'director_person_position',
-    valueType: 'textarea',
-  },       
-
-  {
-    title: (<FormattedMessage id='pages.borrower_form.director.person.phone'/>),
-    dataIndex: 'director_person_phone',
-    valueType: 'textarea',
-  },       
-  {
-    title: (<FormattedMessage id='pages.borrower_form.director.person.email'/>),
-    dataIndex: 'director_person_email',
-    valueType: 'textarea',
-  },       
-
-  {
-    title: (<FormattedMessage id='pages.borrower_form.director.person.address'/>),
-    dataIndex: 'director_person_address',
     valueType: 'textarea',
   },       
 ];
@@ -241,11 +105,16 @@ var dictStatusAmount: any = {
 };
 
 const ApprovalForm: FC<Record<string, any>> = () => {
+  let urlParams = parse(window.location.href.split('?')[1]);
+  const borrower_key = urlParams.borrower_key;
+  //console.log(borrower_key)
   //用于修改按钮的样式
   const [Style, setStyle] = useState(false);
   //控制提交按钮的disabled属性
   const [disabled, setDisabled] = useState(true);
   const [checkBoxDisabled, setCheckBoxDisabled] = useState(true);
+
+  const access = useAccess();
 
   const onCheckboxChange = () => {
     console.log('checked = ');
@@ -271,10 +140,13 @@ const ApprovalForm: FC<Record<string, any>> = () => {
   };
 
   const onFinish = async (values: Record<string, any>) => {
-    let urlParams = parse(window.location.href.split('?')[1]);
-    const borrower_id = urlParams.borrower_id;
-    values["key"] = borrower_id;
+    
+    //console.log(borrower_id);
 
+    //let urlParams = parse(window.location.href.split('?')[1]);
+    //const borrower_id = urlParams.borrower_id;
+    
+    values["key"] = borrower_key;
     console.log(values)
     run(values);
     await waitTime(1500);
@@ -287,15 +159,12 @@ const ApprovalForm: FC<Record<string, any>> = () => {
     window.close();
   };
 
-  let urlParams = parse(window.location.href.split('?')[1]);
-  const borrower_id = urlParams.borrower_id;
-  //console.log(borrower_id);
-
   const { data, error, loading } = useRequest(() => {
     return request(
-      '/api/borrower/get_borrower_from_id?borrower_id=' + borrower_id,
+      '/api/borrower/get_borrower_from_id?borrower_key=' + borrower_key,
     );
   });
+  let kyc_url:string = '/application/borrower-analysis-amount-approval?borrower_key=' + borrower_key
   //console.log(data)
 
   //const access = useAccess();
@@ -329,178 +198,16 @@ const ApprovalForm: FC<Record<string, any>> = () => {
         },
       }}            
     >
-
-      <Card
-        title={<FormattedMessage id='pages.loan_form.basic_info'/>}
-        className="styles.card"
-        bordered={false}
-        size= "small"
-        headStyle = {{color:'#2f54eb', fontSize: 16, fontWeight:'bold'}}
-        //style={{ marginLeft: 50 }}
-        >
-        <div style={{margin: 'auto', width: 1200}}>
-            <Descriptions style={{ marginBottom: 24 }} title={"内地公司基本信息"} column={3}>
-              <Descriptions.Item label={<FormattedMessage id='pages.borrower_list.borrower.name_cn'/>}>{data?.name_cn}</Descriptions.Item>
-              <Descriptions.Item label={<FormattedMessage id='pages.borrower_list.borrower.credit_code_cn'/>}>{data?.credit_code_cn}</Descriptions.Item>
-              <Descriptions.Item label={<FormattedMessage id='pages.borrower_list.borrower.address_cn'/>}>{data?.address_cn}</Descriptions.Item>
-            </Descriptions>
-
-            <Descriptions style={{ marginBottom: 24 }} title={"香港公司基本信息"} column={3}>
-              <Descriptions.Item label={<FormattedMessage id='pages.borrower_list.borrower.name_hk'/>}>{data?.name_hk}</Descriptions.Item>
-              <Descriptions.Item label={<FormattedMessage id='pages.borrower_list.borrower.br_code_hk'/>}>{data?.br_code_hk}</Descriptions.Item>
-              <Descriptions.Item label={<FormattedMessage id='pages.borrower_list.borrower.address_hk'/>}>{data?.address_hk}</Descriptions.Item>
-            </Descriptions>
-        </div>
-      </Card>
-
+      <BorrowerInfoDifference borrower_key={borrower_key} show_documents={true}/>
       <p></p>
 
-      <Card
-        title={<FormattedMessage id='pages.borrower_list.shareholder_director_information_cn'/>}
-        className="styles.card"
-        bordered={false}
-        size= "small"
-        headStyle = {{color:'#2f54eb', fontSize: 16, fontWeight:'bold'}}
-        //style={{ marginLeft: 50 }}
-      >
-        <Card title="" className={styles.card} bordered={false}>
-          <div style={{margin: 'auto', width: 1200}}>
-            <Table 
-              title={() => <FormattedMessage id='pages.borrower_list.shareholder_person'/>}
-              columns={columns_shareholder_person} 
-              dataSource={data?.shareholder_person_cn} 
-              size={"small"}
-              pagination={false}
-            />
-          </div>
-        </Card>
-
-        <Card title="" className={styles.card} bordered={false}>
-          <div style={{margin: 'auto', width: 1200}}>
-            <Table 
-              title={() => <FormattedMessage id='pages.borrower_list.shareholder_company'/>}
-              columns={columns_shareholder_company} 
-              dataSource={data?.shareholder_company_cn} 
-              size={"small"}
-              pagination={false}
-            />
-          </div>
-        </Card>
-
-        <Card title="" className={styles.card} bordered={false}>
-          <div style={{margin: 'auto', width: 1200}}>
-            <Table 
-              title={() => <FormattedMessage id='pages.borrower_list.director_person'/>}
-              columns={columns_director_person} 
-              dataSource={data?.director_person_cn} 
-              size={"small"}
-              pagination={false}
-            />
-          </div>
-        </Card>
-
-        <Card title="" className={styles.card} bordered={false}>
-          <div style={{margin: 'auto', width: 1200}}>
-            <Table 
-              title={() => <FormattedMessage id='pages.borrower_list.director_company'/>}
-              columns={columns_director_company} 
-              dataSource={data?.director_company_cn} 
-              size={"small"}
-              pagination={false}
-            />
-          </div>
-        </Card>
-      </Card>
-
+      <Nonperforming_Loan 
+        dict_nonperforming_loan = {data?.dict_nonperforming_loan}
+        name_cn = {data?.name_cn}
+      >      
+      </Nonperforming_Loan>
       <p></p>
 
-      <Card
-        title={<FormattedMessage id='pages.borrower_list.shareholder_director_information_hk'/>}
-        className="styles.card"
-        bordered={false}
-        size= "small"
-        headStyle = {{color:'#2f54eb', fontSize: 16, fontWeight:'bold'}}
-      >
-        <Card title="" className={styles.card} bordered={false}>
-          <div style={{margin: 'auto', width: 1200}}>
-            <Table 
-              title={() => <FormattedMessage id='pages.borrower_list.shareholder_person'/>}
-              columns={columns_shareholder_person} 
-              dataSource={data?.shareholder_person_hk} 
-              size={"small"}
-              pagination={false}
-            />
-          </div>
-        </Card>
-
-        <Card title="" className={styles.card} bordered={false}>
-          <div style={{margin: 'auto', width: 1200}}>
-            <Table 
-              title={() => <FormattedMessage id='pages.borrower_list.shareholder_company'/>}
-              columns={columns_shareholder_company} 
-              dataSource={data?.shareholder_company_hk} 
-              size={"small"}
-              pagination={false}
-            />
-          </div>
-        </Card>
-
-        <Card title="" className={styles.card} bordered={false}>
-          <div style={{margin: 'auto', width: 1200}}>
-            <Table 
-              title={() => <FormattedMessage id='pages.borrower_list.director_person'/>}
-              columns={columns_director_person} 
-              dataSource={data?.director_person_hk} 
-              size={"small"}
-              pagination={false}
-            />
-          </div>
-        </Card>
-
-        <Card title="" className={styles.card} bordered={false}>
-          <div style={{margin: 'auto', width: 1200}}>
-            <Table 
-              title={() => <FormattedMessage id='pages.borrower_list.director_company'/>}
-              columns={columns_director_company} 
-              dataSource={data?.director_company_hk} 
-              size={"small"}
-              pagination={false}
-            />
-          </div>
-        </Card>
-      </Card>
-
-      <Card
-        title={<FormattedMessage id='pages.borrower_list.document_upload'/>}
-        className="styles.card"
-        bordered={false}
-        size= "small"
-        headStyle = {{color:'#2f54eb', fontSize: 16, fontWeight:'bold'}}
-      >
-        <Card title="" className={styles.card} bordered={false}>
-          <div style={{margin: 'auto', width: 1200}}>
-            <Table 
-              title={() => <FormattedMessage id='pages.borrower_list.document_upload.company_hk'/>}
-              columns={columns_views_doc} 
-              dataSource={data?.br_hk.concat(data?.director_hk)} 
-              size={"small"}
-              pagination={false}
-            />
-          </div>
-        </Card>
-        <Card title="" className={styles.card} bordered={false}>
-          <div style={{margin: 'auto', width: 1200}}>
-            <Table 
-              title={() => <FormattedMessage id='pages.borrower_list.document_upload.company_cn'/>}
-              columns={columns_views_doc} 
-              dataSource={data?.br_cn.concat(data?.director_cn).concat(data?.policy_cn)} 
-              size={"small"}
-              pagination={false}
-            />
-          </div>
-        </Card>                 
-      </Card>
-      
       <Card
         title={<FormattedMessage id='pages.borrower_form.account_receivable.amount_setting'/>}
         className="styles.card"
@@ -512,6 +219,7 @@ const ApprovalForm: FC<Record<string, any>> = () => {
           <Row gutter={16}>
             <Col xl={6} lg={6} md={12} sm={24}>
               <ProFormSelect
+                allowClear={false}
                 label={<FormattedMessage id='pages.borrower_form.account_receivable.amount_monthly_ratio'/>}
                 width="md"
                 name="amount_monthly_ratio"
@@ -541,6 +249,7 @@ const ApprovalForm: FC<Record<string, any>> = () => {
 
             <Col xl={{ span: 6, offset: 2 }} lg={{ span: 6 }} md={{ span: 24 }} sm={24}>
               <ProFormSelect
+                allowClear={false}
                 label={<FormattedMessage id='pages.util.currency'/>}
                 width="md"
                 name="currency"
@@ -556,6 +265,7 @@ const ApprovalForm: FC<Record<string, any>> = () => {
           <Row gutter={16}>
             <Col xl={6} lg={6} md={12} sm={24}>
               <ProFormSelect
+                allowClear={false}
                 label={<FormattedMessage id='pages.borrower_form.account_receivable.duration'/>}
                 width="md"
                 name="duration"
@@ -566,6 +276,7 @@ const ApprovalForm: FC<Record<string, any>> = () => {
 
             <Col xl={{ span: 6, offset: 2 }} lg={{ span: 6 }} md={{ span: 12 }} sm={24}>
               <ProFormSelect
+                allowClear={false}
                 label={<FormattedMessage id='pages.borrower_form.account_receivable.annual_interest_rate'/>}
                 width="md"
                 name="annual_interest_rate"
@@ -587,6 +298,7 @@ const ApprovalForm: FC<Record<string, any>> = () => {
 
             <Col xl={{ span: 6, offset: 2 }} lg={{ span: 6 }} md={{ span: 24 }} sm={24}>
               <ProFormSelect
+                allowClear={false}
                 label={<FormattedMessage id='pages.borrower_form.account_receivable.penalty_annual_interest_rate'/>}
                 width="md"
                 name="penalty_annual_interest_rate"
@@ -607,6 +319,7 @@ const ApprovalForm: FC<Record<string, any>> = () => {
           <Row gutter={16}>
             <Col xl={6} lg={6} md={12} sm={24}>
               <ProFormSelect
+                allowClear={false}
                 label={<FormattedMessage id='pages.util.status'/>}
                 width="md"
                 name="status_lender"
@@ -617,6 +330,7 @@ const ApprovalForm: FC<Record<string, any>> = () => {
 
             <Col xl={{ span: 6, offset: 2 }} lg={{ span: 6 }} md={{ span: 12 }} sm={24}>
               <ProFormSelect
+                allowClear={false}
                 label={<FormattedMessage id='pages.borrower_list.borrower.finance_type'/>}
                 width="md"
                 name="finance_type"
@@ -650,9 +364,9 @@ const ApprovalForm: FC<Record<string, any>> = () => {
                     if(checkBoxDisabled){
                       setCheckBoxDisabled(!checkBoxDisabled);
                     }
-                    window.open('/application/borrower-analysis-amount-approval?borrower_id=1','KYCKYPwindow','height=900, width=1720, top=80, left=200, scrollbars =no,toolbar=no, menuRender=false, status=no')
+                    window.open(kyc_url,'KYC_Window','height=900, width=1720, top=80, left=200, scrollbars =no,toolbar=no, menuRender=false, status=no')
                   }}>
-                  请查看并确认客户KYC_KYP
+                  请查看并确认客户KYC
               </Button>
             </Col>
             <Col xl={{ span: 6, offset: 2 }} lg={{ span: 6 }} md={{ span: 12 }} sm={24}>
@@ -661,7 +375,7 @@ const ApprovalForm: FC<Record<string, any>> = () => {
                 disabled={checkBoxDisabled} 
                 onChange={onCheckboxChange}
                 >
-                确认KYC_KYP
+                确认KYC
               </Checkbox>
             </Col>
             <Col xl={{ span: 6, offset: 2 }} lg={{ span: 6 }} md={{ span: 24 }} sm={24}>
@@ -669,9 +383,37 @@ const ApprovalForm: FC<Record<string, any>> = () => {
             
           </Row>       
         </Card>      
-
       </Card>      
 
+      {access.canAdmin == true && (
+      <Card
+        title={<FormattedMessage id='pages.borrower_form.account_receivable.admin_setting'/>}
+        className="styles.card"
+        bordered={false}
+        size= "small"
+        headStyle = {{color:'#2f54eb', fontSize: 16, fontWeight:'bold'}}
+      >
+        <Card title="" className={styles.card} bordered={false}>
+          <Row gutter={16}>
+            <Col xl={6} lg={6} md={12} sm={24}>            
+              <ProFormSelect
+                allowClear={false}
+                label={<FormattedMessage id='pages.borrower_list.borrower.lender_id_assign_name'/>}
+                width="md"
+                name="lender_id_assign"
+                rules={[{ required: true, message: '' }]}
+                valueEnum={data?.dict_lender}
+              />
+            </Col>
+            <Col xl={{ span: 6, offset: 2 }} lg={{ span: 6 }} md={{ span: 12 }} sm={24}>
+            </Col>
+            <Col xl={{ span: 6, offset: 2 }} lg={{ span: 6 }} md={{ span: 24 }} sm={24}>
+            </Col>
+          </Row>       
+        </Card>      
+      </Card>
+      )}
+    
     </ProForm>
   );
 };

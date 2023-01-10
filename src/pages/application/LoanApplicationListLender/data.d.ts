@@ -1,6 +1,6 @@
 export type TableListItem = {
-  key: number;
-  borrower_id: number;
+  key: string;
+  borrower_key: string;
   borrower_name: string;
 
   loan_id: number;
@@ -69,8 +69,8 @@ export type TableListData = {
 };
 
 export type TableListParams = {
-  key?: number;
-  borrower_id?: number;
+  key?: string;
+  borrower_key?: string;
   borrower_name?: string;
 
   loan_id: number;

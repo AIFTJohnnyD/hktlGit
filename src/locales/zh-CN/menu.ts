@@ -58,26 +58,34 @@ export default {
   'menu.lender.list': '投资机构列表',
 
   'menu.borrower': '电商管理',
-  'menu.borrower.hk_input': '电商卖家/客户信息录入',
-  'menu.borrower.mainland_input': '关联公司信息录入',
+  //'menu.borrower.input': '输入(更新)信息',
+  'menu.borrower.input_hk': '香港公司输入(更新)信息',
+  'menu.borrower.input_mainland': '关联公司输入(更新)信息',
+  'menu.borrower.upload_file_hk': '香港公司文件上传',
+  'menu.borrower.upload_flie_mainland': '关联公司文件上传',
+  
+  'menu.borrower.hk_input': '香港公司输入(更新)信息',
+  'menu.borrower.mainland_input': '关联公司输入(更新)信息',
   'menu.borrower.hk_file_upload': '香港公司文件上传',
   'menu.borrower.mainland_file_upload': '关联公司文件上传',
   'menu.borrower.list': '电商列表',
   'menu.borrower.analysis': '电商分析',
 
   'menu.amount': '授信管理',
-  'menu.amount.list': '电商列表',
+  'menu.amount.loan-product': '信贷产品管理',
+  'menu.amount.borrower-list': '电商列表',
 
   //'menu.loan': '贷款指标',
   //'menu.loan.input': '输入信息',
   //'menu.loan.list': '贷款产品列表',
 
-  'menu.product': '订单商品管理',
+  'menu.product': '店铺管理',
   'menu.product.input': '输入信息',
   'menu.product.list': '商品列表',
   'menu.product.analysis': '商品分析',
 
   'menu.application': '融资管理',
+  'menu.application.analysis': '融资分析',
   'menu.application.input_inventory': '新建申请(货物抵押融资)',  
   'menu.application.input_account_receivable': '新建申请(应收账款融资)',
   'menu.application.list': '融资申请列表',
@@ -92,6 +100,11 @@ export default {
   'menu.postloan.repaymentapplication': '还款申请',
   'menu.postloan.repaymentList': '还款记录',
   'menu.postloan.repaymentapproval': '还款审批',
+
+  'menu.chatroom': '在线客服',
+
+  'menu.testing': 'testing',
+  'menu.testing.testing': 'test1',
 
   //'menu.approval': '贷款审批',
   //'menu.approval.credit_analysis': '信用分析',

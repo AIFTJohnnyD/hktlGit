@@ -13,7 +13,7 @@ import { EditableProTable } from '@ant-design/pro-table';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import { submitForm } from './service';
 import styles from './style.less';
-import { FormattedMessage, request, useRequest } from 'umi';
+import { FormattedMessage, request } from 'umi';
 
 
 interface TableFormDateType {
@@ -43,9 +43,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
       console.log("onFinisherrorInfo提交失败")
     }
   }
-  function ApiAuthorized(){
-    console.log("ApiAuthorized");
-  }
+
   const formRef = useRef<ProFormInstance>();
   
   const [error, setError] = useState<ErrorField[]>([]);
@@ -169,7 +167,6 @@ const AdvancedForm: FC<Record<string, any>> = () => {
               action?.startEditable(record.key);
             }}
           >
-
             编辑
           </a>,
           // <ProFormUploadButton label="upload" name="upload" action="upload.do" />
@@ -240,7 +237,6 @@ const AdvancedForm: FC<Record<string, any>> = () => {
               action?.startEditable(record.key);
             }}
           >
-
             编辑
           </a>,
           // <ProFormUploadButton label="upload" name="upload" action="upload.do" />
@@ -253,32 +249,40 @@ const AdvancedForm: FC<Record<string, any>> = () => {
       title:<FormattedMessage id='pages.borrower_form.shop.platform'/>,
       dataIndex: 'platform',
       key: 'platform',
-      width: '20%',
+      // width: '15%',
+    },
+    {
+      title:<FormattedMessage id='pages.borrower_form.shop.name'/>,
+      dataIndex: 'name',
+      key: 'name',
+      // width: '20%',
     },
     {
       title:<FormattedMessage id='pages.borrower_form.shop.id'/>,
       dataIndex: 'id',
       key: 'id',
-      width: '20%',
+      // width: '20%',
     },
     {
       title:<FormattedMessage id='pages.borrower_form.shop.link'/>,
       dataIndex: 'link',
       key: 'link',
-      width: '20%',
+      // width: '20%',
     },
-    // API授权
+    // 店铺API授权
     {
-      title: 'API授权',
+      title: '店铺授权',
       dataIndex: 'APIButton',
       valueType: 'radioButton',
       key: 'APIButton',
-      width: '20%',
+      // width: '20%',
       render: (dom, record) => (
         <Space>
             <Button type="primary" 
-                    onClick={ApiAuthorized}
-                    >API授权</Button>
+                    onClick={() => {
+                      window.open("https://sellercentral.amazon.com/apps/authorize/consent?application_id=amzn1.sp.solution.2364e294-9851-4572-a767-acd37af1187e&version=beta",'newwindow','height=800, width=1500, top=160, left=350, toolbar=no, menubar=no, status=no')
+                    }}
+                    >店铺授权</Button>
         </Space>
       ),
     },
@@ -286,7 +290,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
       title: '操作',
       key: 'action',
       valueType: 'option',
-      width: '20%',
+      // width: '20%',
       render: (_, record: TableFormDateType, index, action) => {
         return [
           <a
@@ -296,7 +300,69 @@ const AdvancedForm: FC<Record<string, any>> = () => {
               action?.startEditable(record.key);
             }}
           >
+            编辑
+          </a>,
+          // <ProFormUploadButton label="upload" name="upload" action="upload.do" />
+        ];
+      },
+    },
+  ];
 
+  const columnsWallet: ProColumnType<TableFormDateType>[] = [
+    {
+      title: '支付公司',
+      dataIndex: 'company',
+      key: 'account',
+      // width: '15%',
+    },
+    {
+      title: '卖家名称',
+      dataIndex: 'name',
+      key: 'name',
+      // width: '20%',
+    },
+    {
+      title: '账户号码',
+      dataIndex: 'account',
+      key: 'account',
+      // width: '20%',
+    },
+    {
+      title: '关联时间',
+      dataIndex: 'related_time',
+      key: 'related_time',
+      // width: '20%',
+    },
+    {
+      title: '账户授权',
+      dataIndex: 'APIButton',
+      valueType: 'radioButton',
+      key: 'APIButton',
+      // width: '20%',
+      render: (dom, record) => (
+        <Space>
+            <Button type="primary" 
+                    onClick={() => {
+                      window.open("https://business.skyee360.com/client/register",'newwindow','height=800, width=1500, top=160, left=350, toolbar=no, menubar=no, status=no')
+                    }}
+                    >账户授权</Button>
+        </Space>
+      ),
+    },
+    {
+      title: '操作',
+      key: 'action',
+      valueType: 'option',
+      // width: '20%',
+      render: (_, record: TableFormDateType, index, action) => {
+        return [
+          <a
+            key="eidit"
+            onClick={() => {
+              console.log("record.key",record);
+              action?.startEditable(record.key);
+            }}
+          >
             编辑
           </a>,
           // <ProFormUploadButton label="upload" name="upload" action="upload.do" />
@@ -309,19 +375,30 @@ const AdvancedForm: FC<Record<string, any>> = () => {
     <ProForm
       layout="vertical"
       requiredMark
+      // submitter={{
+      //   render: (props, dom) => {
+      //     return (
+      //       <FooterToolbar>
+      //         {getErrorInfo(error)}
+      //         {dom}
+      //       </FooterToolbar>
+      //     );
+      //   },
+      // }}
       submitter={{
-        render: (props, dom) => {
-          return (
-            <FooterToolbar>
-              {getErrorInfo(error)}
-              {dom}
-            </FooterToolbar>
-          );
+        resetButtonProps: {
+          style: {            
+            display: 'none',  // 隐藏重置按钮
+          },
+        },
+        submitButtonProps: {
+          style: {            
+            display: 'none',  // 隐藏重置按钮
+          },
         },
       }}
       formRef={formRef}
-      initialValues={{
-      }}
+      initialValues={{   }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       request={async () => {           
@@ -340,9 +417,10 @@ const AdvancedForm: FC<Record<string, any>> = () => {
             <Row gutter={16}>
               <Col lg={6} md={12} sm={24}>
                 <ProFormSelect
+                  allowClear={false}
                   label={<FormattedMessage id="pages.borrower_form.HKbasic_information.location_hk" />}
                   name="location_hk"
-                  rules={[{ required: true, message: 'Please input the location_hk.' }]}
+                  rules={[{ required: false, message: 'Please input the location_hk.' }]}
                   placeholder="Please input the location_hk."
                   valueEnum={{
                     中国: '中国',
@@ -438,7 +516,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
               </Col>
             </Row>
           </Card>
-        </ProForm.Item>.
+        </ProForm.Item>
         <Card title="董事信息" className={styles.card} bordered={true} extra={ <Button type="primary" onClick={submitInfo}>提交</Button>}>
           <ProForm.Item name="director_person_hk">
             <EditableProTable<TableFormDateType>
@@ -456,9 +534,9 @@ const AdvancedForm: FC<Record<string, any>> = () => {
           </ProForm.Item>
         </Card>
         <Card title={<FormattedMessage id='pages.borrower_form.shareholder_person_hk'/>} 
-        className={styles.card} 
-        bordered={false} 
-        extra={ <Button type="primary" onClick={submitInfo}>提交</Button>}>
+          className={styles.card} 
+          bordered={false} 
+          extra={ <Button type="primary" onClick={submitInfo}>提交</Button>}>
           <ProForm.Item name="shareholder_person_hk">
             <EditableProTable<TableFormDateType>
               recordCreatorProps={{
@@ -474,10 +552,10 @@ const AdvancedForm: FC<Record<string, any>> = () => {
             />
           </ProForm.Item>
         </Card>
-        <Card title={<FormattedMessage id='店铺信息'/>} 
-        className={styles.card} 
-        bordered={false} 
-        extra={ <Button type="primary"onClick={submitInfo}>提交</Button>}>
+        <Card title={'店铺信息'} 
+          className={styles.card} 
+          bordered={false} 
+          extra={ <Button type="primary"onClick={submitInfo}>提交</Button>}>
           <ProForm.Item name="shop">
             <EditableProTable<TableFormDateType>
               recordCreatorProps={{
@@ -493,6 +571,27 @@ const AdvancedForm: FC<Record<string, any>> = () => {
             />
           </ProForm.Item>
         </Card>
+
+        {/* <Card title={'支付钱包'} 
+          className={styles.card} 
+          bordered={false} 
+          extra={ <Button type="primary"onClick={submitInfo}>提交</Button>}>
+          <ProForm.Item name="wallet">
+            <EditableProTable<TableFormDateType>
+              recordCreatorProps={{
+                record: () => {
+                  return {
+                    key: `0${Date.now()}`,
+                  };
+                },
+                creatorButtonText: '添加',
+              }}
+              columns={columnsWallet}
+              rowKey="key"
+            />
+          </ProForm.Item>
+        </Card> */}
+
         <Card title={<FormattedMessage id='pages.borrower_form.corporate_account'/>} className={styles.card} bordered={false} extra={ <Button type="primary" onClick={submitInfo}>提交</Button>}>
           <ProForm.Item name="corporate_account">
             <Row gutter={16}>
@@ -528,6 +627,11 @@ const AdvancedForm: FC<Record<string, any>> = () => {
                 />
               </Col>
               <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
+                <ProFormText
+                  label={<FormattedMessage id="pages.borrower_form.corporate_account.bank_addr" />}
+                  name={['corporate_account', 0, 'bank_addr']}
+                  rules={[{ required: false, message: '请输入地址' }]}
+                />
               </Col>
               <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
               </Col>

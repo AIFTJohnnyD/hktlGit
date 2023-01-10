@@ -85,7 +85,7 @@ const columns_repayment: ProColumns<RepaymentListItem>[] = [
       var attached_files = record?.attached_files;
       const listItems = attached_files.map((file_name:string) => (
         <>
-        <a href={'http://localhost:8000/api/loan_application/download_proof_file?file_name=' + file_name} download={file_name.split('_')[2]}>
+        <a href={'/api/loan_application/download_proof_file?file_name=' + file_name} download={file_name.split('_')[2]}>
           {file_name.split('_')[2]}
         </a><br/>
         </>
@@ -257,7 +257,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
             </Col>
             <Col span={12}>
               <b>{<FormattedMessage id='pages.loan_application.repayment_id'/>}&nbsp;:</b>
-              <br/><p style={{color:'blue', marginLeft:30}}> {props.values.id_str}</p>
+              <br/><p style={{color:'blue', marginLeft:30}}> {props.values.key}</p>
             </Col>
             <Col span={12}>
               <b>{<FormattedMessage id='pages.loan_application.repayment_application_amout'/>}&nbsp;:</b>

@@ -213,7 +213,7 @@ const UserRegister: FC = () => {
                     name="country_code"
                     noStyle
                   >
-                    <Select size="large" value={prefix} onChange={changePrefix} style={{ width: '25%' }}>
+                    <Select allowClear={false} size="large" value={prefix} onChange={changePrefix} style={{ width: '25%' }}>
                       <Option value="+852">+852</Option>
                       <Option value="+86">+86</Option>
                     </Select>

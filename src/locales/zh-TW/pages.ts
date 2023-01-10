@@ -79,6 +79,11 @@ export default {
 
   'pages.util.edit': "編輯",
   'pages.util.reset': "重置",
+  'pages.util.next_step' : "下一步",
+  'pages.util.previous_step' : "上一步",
+  'pages.util.finish' : "提交",
+
+  'pages.util.submit' : "提交",
     
   //register result
   'pages.register_result.return_homepage': '返回主頁',
@@ -312,9 +317,9 @@ export default {
   'pages.loan_application.repayment_id' : "融資編號",
   'pages.loan_application.last_date' : "到期日",
   'pages.loan_application.repayment_date' : "還款日期",
-  'pages.loan_application.interest_today' : "截至今天本息",
-  'pages.loan_application.interest_full' : "利息金額（截至全額還款日）",  
-  'pages.loan_application.interest_on_repayment' : "到期利息",
+  'pages.loan_application.interest_today' : "當日還款額",
+  'pages.loan_application.interest_full' : "全部還款額",  
+  'pages.loan_application.interest_on_repayment' : "到期日还款额",
   'pages.loan_application.overdue_penalty' : "罰息 (如果改貸款逾期)",
   'pages.loan_application.repayment_history' : "還款記錄",
   'pages.loan_application.outstanding_balance' : "未結餘額",
@@ -325,7 +330,11 @@ export default {
   'pages.loan_application.please_enter_repayment_amount' : "請輸入還款金額",
   'pages.loan_application.please_upload_payment_proof' : "請上傳還款憑證",
   'pages.loan_application.repayment_installment_date' : "分期還款日期",
-
+  'pages.loan_application.repayment_days' : "融资期限",
+  'pages.loan_application.pending_for_approval' : "等待批准",
+  'pages.loan_application.repayment.acceptreject' : "批准 / 拒绝",
+  'pages.loan_application.repayment.accept' : "批准",
+  'pages.loan_application.repayment.reject' : "拒绝",
   'pages.loan_application.otb_plan': "採購計劃列表/貸款用途",
 
   //loan-application-list
@@ -367,9 +376,9 @@ export default {
   'pages.loan_application_list.day_approved': "審批貸款期限 (天)",
   //'pages.loan_application_list.loan_approval': "貸款批核",
 
-  'pages.loan_application_list.annual_interest_rate_approved': "審批年利率",
+  'pages.loan_application_list.annual_interest_rate_approved': "審批年利率(%)",
   'pages.loan_application_list.number_of_installments_approved': "審批還款期數",
-  'pages.loan_application_list.penalty_annual_interest_rate': "罚息率",
+  'pages.loan_application_list.penalty_annual_interest_rate': "罚息率(%)",
 
   'pages.loan_application_list.loan_overdue': "是否逾期",
   'pages.loan_application_list.loan_overdue_amount': "逾期金額",
@@ -412,7 +421,7 @@ export default {
   'pages.application.UNAPPROVED': "拒絕",
 
   'pages.application.ACCEPTED': "接受",
-  'pages.application.UNACCEPTED': "取消",
+  'pages.application.UNACCEPTED': "拒絕",
 
   'pages.application.GOODS_RECEIVED': "商品入倉",
   'pages.application.GOODS_DELIVERY': "商品出倉",
@@ -445,13 +454,10 @@ export default {
     'pages.borrower_form.basic_information.mainland_company':"內地公司",
     'pages.borrower_form.basic_information.mainland_company_name':"內地公司名稱",
     'pages.borrower_form.basic_information.mainland_unified_social_credit_code':"內地公司統一社會信用代碼",
-    'pages.borrower_form.basic_information.mainland_compnay_establishment_date':"內地公司成立日期",
-
     'pages.borrower_form.basic_information.mainland_company_address':"內地公司辦公地址",
     'pages.borrower_form.basic_information.HongKong_company':'香港公司',
     'pages.borrower_form.basic_information.HongKong_company_name':"香港公司名稱",
     'pages.borrower_form.basic_information.HongKong_unified_social_credit_code':"香港公司商業登記號碼",
-    'pages.borrower_form.basic_information.HongKong_compnay_establishment_date':"香港公司成立日期",
     'pages.borrower_form.basic_information.HongKong_company_address':"香港辦公室/註冊地址",
 
   //step 2
@@ -512,7 +518,7 @@ export default {
     'pages.borrower_form.upload_doc.format':"只接受上傳 .jpeg/.jpg/.png/.xls/.xlsx/.doc/.docx/.odt/.pdf/.ppt/.pptx 格式之檔案",
     'pages.borrower_form.upload_doc.proof':"營業證明",
     'pages.borrower_form.upload_doc.certificate':"*商業登記證(香港公司)",
-    'pages.borrower_form.upload_doc.file_br_cn':"*企業法人營業執照(中國公司)",
+    'pages.borrower_form.upload_doc.business_license':"*企業法人營業執照(中國公司)",
     'pages.borrower_form.upload_doc.Association':"*公司章程(中國公司)",
     'pages.borrower_form.upload_doc.identity':"法人、自然人股東和董事身份證明*",
     'pages.borrower_form.upload_doc.passport':"*股東和董事身份證或護照(香港公司)",
@@ -623,10 +629,12 @@ export default {
   'pages.borrower_form.account_receivable.annual_interest_rate': "年利率",
   'pages.borrower_form.account_receivable.penalty_annual_interest_rate': "罰息率 (年)",
 
+  'pages.borrower_form.account_receivable.admin_setting': "管理员审批",
+
   //borrower-list
   'pages.borrower_list.borrower_list': "電商列表",
 
-  'pages.borrower_list.borrower.name_cn': "內地公司名稱",
+  'pages.borrower_list.borrower.name': "公司名稱",
   'pages.borrower_list.borrower.credit_code_cn': "內地公司統一社會信用代碼",
   'pages.borrower_list.borrower.address_cn': "內地公司辦公地址",
 
@@ -647,6 +655,7 @@ export default {
   'pages.borrower_list.borrower.inventory_finance': "貨物抵押融資",
 
   'pages.borrower_list.borrower.lender_id_assign': "融資公司編號",
+  'pages.borrower_list.borrower.lender_id_assign_name': "融資公司",
   
   //upload file
   'pages.borrower_list.document_upload': "客戶文件",
@@ -760,4 +769,11 @@ export default {
 
   'pages.amount.borrower_list.created_date': "審批開始日期",
   'pages.amount.borrower_list.approved_date': "額度審批日期",
+
+  //loan product
+  'pages.amount.loan_product.title': "信貸產品管理",
+  'pages.amount.loan_product.merchandise_group': "電商組別",
+  'pages.amount.loan_product.amount_limit': "總額度 (月流水)",
+  'pages.amount.loan_product.annual_interest_rate': "年利率 (%)",
+  'pages.amount.loan_product.probability_of_default': "違約概率閾值 (%)",
 };

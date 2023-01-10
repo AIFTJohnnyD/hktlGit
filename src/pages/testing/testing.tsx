@@ -1,45 +1,74 @@
 import { Button, Drawer, Table, Popover } from 'antd';
-import React, { useState, useRef } from 'react';
-import { PageContainer } from '@ant-design/pro-layout';
-import type { ProColumns, ActionType, ColumnsState } from '@ant-design/pro-table';
-import ProTable from '@ant-design/pro-table';
-import type { ProDescriptionsItemProps } from '@ant-design/pro-descriptions';
-import ProDescriptions from '@ant-design/pro-descriptions';
-import { borrowerList } from './service';
-import type { TableListItem, TableListPagination } from './data';
-import styles from './style.less';
-import { useRequest, FormattedMessage, request, useAccess } from 'umi';
+import React, { useState, useEffect, useRef } from 'react';
+
+var test1:string = "1"
+var test2:string = "2"
+console.log(test1); 
+console.log(test2); 
+
+await fetch('/api/test_jsonresp', {
+  method: 'GET',
+})
+.then ((res) => res.json())
+.then ((res) => {
+    console.log(res);
+    test1 = res.data.toString();
+})
+.then((data) => {
+  console.log(data); 
+  console.log(test1);
+  const test2: string = data;
+  console.log(test2); 
+});
+
+async function test(){
+  await fetch('/api/test_jsonresp', {
+    method: 'GET',
+  })
+  .then ((res) => res.json())
+  .then ((res) => {
+      console.log(res);
+      test2 = res.data.toString();
+  })
+  .then((data) => {
+    console.log(data); 
+    console.log(test1);
+    const test2: string = data;
+    console.log(test2); 
+  });
+}
+
+
+console.log(test1); 
+console.log(test2); 
+
+// 并发 fetch 请求  await Promise.all([...]) 并发开始 fetch 请求，并等待直到所有的请求完成。
+async function fetchMoviesAndCategories() {
+  const [moviesResponse, categoriesResponse] = await Promise.all([
+    fetch('/movies'),
+    fetch('/categories'),
+  ]);
+
+  const movies = await moviesResponse.json();
+  const categories = await categoriesResponse.json();
+
+  return {
+    movies,
+    categories,
+  };
+}
+
+fetchMoviesAndCategories().then(({ movies, categories }) => {
+  movies; // fetched movies
+  categories; // fetched categories
+});
+
+
 
 const TableList: React.FC = () => {
-  // const [showDetail, setShowDetail] = useState<boolean>(false);
-  // const actionRef = useRef<ActionType>();
-  // const [currentRow, setCurrentRow] = useState<TableListItem>();
-
-  // function translate_status(status: string) {
-  //   return <FormattedMessage id={'pages.application.' + status}/>;
-  // }
-  
-  const { data, error, loading } = useRequest(() => {
-    //window.open("/application/borrower-analysis?borrower_id=1",'KYCwindow','height=800, width=1500, top=160, left=350, toolbar=no, menubar=no, status=no');
-
-    return request(
-      // '/api/borrower/get_borrower_from_id',
-      // '/api/currentUser',
-      //'/api/get_chatroom_user'
-      '/api/test_jsonresp'
-    );
-  });
-  console.log(data)
-  console.log(ownner)
-  const access = useAccess();
-  console.log(access)
-
-  return (
-    <PageContainer>
-      <div className={styles.divline}></div>
-
-    </PageContainer>
-  );
+  return  <div style={{width:"600px",height:"400px",margin:'20px'}}>
+          {test1}{test2}
+          </div>
 };
 
 export default TableList;

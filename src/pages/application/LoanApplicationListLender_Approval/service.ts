@@ -8,3 +8,4 @@ export async function updateLoanApplication(data: { [key: string]: any }, option
     ...(options || {}),
   });
 }
+

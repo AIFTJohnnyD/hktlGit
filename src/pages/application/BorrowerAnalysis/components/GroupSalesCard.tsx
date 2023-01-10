@@ -34,7 +34,7 @@ const GroupSalesCard = ({
 
   loading: boolean;
 }) => (
-  <Card loading={loading} bordered={false} bodyStyle={{ padding: 0 }}>
+  <Card loading={loading} bordered={false} bodyStyle={{ padding: 0 }} title="亚马逊类别数据详情">
     <div className={styles.salesCard}>
       <Tabs
         size="large"

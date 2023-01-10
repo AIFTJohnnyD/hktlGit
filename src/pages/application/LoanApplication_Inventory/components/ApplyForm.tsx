@@ -176,6 +176,7 @@ const ApplyForm: React.FC<ApplyFormProps> = (props) => {
             </Col>
             <Col span={12}>
               <ProFormSelect
+                allowClear={false}
                 label={<FormattedMessage id='pages.util.currency'/>}
                 width="md"
                 name="application_currency"

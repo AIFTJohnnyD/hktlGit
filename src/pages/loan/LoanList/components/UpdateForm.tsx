@@ -144,6 +144,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
 
             <Col xl={{ span: 6, offset: 2 }} lg={{ span: 6 }} md={{ span: 24 }} sm={24}>
               <ProFormSelect
+                allowClear={false}
                 label={<FormattedMessage id='pages.util.currency'/>}
                 width="md"
                 name="currency"
@@ -274,6 +275,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           <Row gutter={16}>
             <Col lg={12} md={12} sm={24}>
               <ProFormSelect
+                allowClear={false}
                 label={<FormattedMessage id='pages.util.status'/>}
                 width="md"
                 name="status"

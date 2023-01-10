@@ -59,7 +59,7 @@ const TableList: React.FC = () => {
   const columns: ProColumns<TableListItem>[] = [
     {
       title: (<FormattedMessage id='pages.util.id'/>),
-      dataIndex: 'id_str',
+      dataIndex: 'key',
       render: (dom, entity) => {
         return (
           <a
@@ -81,7 +81,7 @@ const TableList: React.FC = () => {
       valueType: 'digit',
     },    
     {
-      title: (<FormattedMessage id='pages.borrower_list.borrower.name_cn'/>),
+      title: (<FormattedMessage id='pages.borrower_list.borrower.name'/>),
       dataIndex: 'borrower_name',
       valueType: 'textarea',
       
@@ -194,11 +194,11 @@ const TableList: React.FC = () => {
         ]}
         request={loanApplicationPostloan}
         columns={columns}
-        rowSelection={{
-          onChange: (_, selectedRows) => {
-            setSelectedRows(selectedRows);
-          },
-        }}
+        // rowSelection={{
+        //   onChange: (_, selectedRows) => {
+        //     setSelectedRows(selectedRows);
+        //   },
+        // }}
       />
 
       {selectedRowsState?.length > 0 && (
@@ -231,6 +231,7 @@ const TableList: React.FC = () => {
       <UpdateForm
         onSubmit={async (value) => {
           const success = await handleUpdate(value, currentRow);
+
           if (success) {
             handleUpdateModalVisible(false);
             setCurrentRow(undefined);
@@ -239,6 +240,7 @@ const TableList: React.FC = () => {
               actionRef.current.reload();
             }
           }
+
           return true;
         }}
         onCancel={() => {

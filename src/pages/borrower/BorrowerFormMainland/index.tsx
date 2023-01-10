@@ -25,27 +25,6 @@ interface TableFormDateType {
 }
 type InternalNamePath = (string | number)[];
 
-const tableData = [
-  {
-    key: '1',
-    workId: '00001',
-    name: 'John Brown',
-    department: 'New York No. 1 Lake Park',
-  },
-  {
-    key: '2',
-    workId: '00002',
-    name: 'Jim Green',
-    department: 'London No. 1 Lake Park',
-  },
-  {
-    key: '3',
-    workId: '00003',
-    name: 'Joe Black',
-    department: 'Sidney No. 1 Lake Park',
-  },
-];
-
 interface ErrorField {
   name: InternalNamePath;
   errors: string[];
@@ -188,7 +167,6 @@ const formRef = useRef<ProFormInstance>();
               action?.startEditable(record.key);
             }}
           >
-
             编辑
           </a>,
           // <ProFormUploadButton label="upload" name="upload" action="upload.do" />
@@ -259,7 +237,6 @@ const formRef = useRef<ProFormInstance>();
               action?.startEditable(record.key);
             }}
           >
-
             编辑
           </a>,
           // <ProFormUploadButton label="upload" name="upload" action="upload.do" />
@@ -273,13 +250,15 @@ const formRef = useRef<ProFormInstance>();
       layout="vertical"
       hideRequiredMark
       submitter={{
-        render: (props, dom) => {
-          return (
-            <FooterToolbar>
-              {getErrorInfo(error)}
-              {dom}
-            </FooterToolbar>
-          );
+        resetButtonProps: {
+          style: {            
+            display: 'none',  // 隐藏重置按钮
+          },
+        },
+        submitButtonProps: {
+          style: {            
+            display: 'none',  // 隐藏重置按钮
+          },
         },
       }}
       formRef={formRef}
@@ -298,6 +277,7 @@ const formRef = useRef<ProFormInstance>();
           <Row gutter={16}>
             <Col lg={6} md={12} sm={24}>
               <ProFormSelect
+                allowClear={false}
                 label={<FormattedMessage id="pages.borrower_form.basic_information_cn.location_cn" />}
                 name="location_cn"
                 rules={[{ required: false, message: 'Please input the location_cn.' }]}
@@ -312,6 +292,7 @@ const formRef = useRef<ProFormInstance>();
             </Col>
             <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
               <ProFormSelect
+                allowClear={false}
                 label={<FormattedMessage id="pages.borrower_form.basic_information_cn.company_type_cn" />}
                 width="md"
                 name="company_type_cn"

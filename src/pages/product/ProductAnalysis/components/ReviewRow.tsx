@@ -32,7 +32,7 @@ const ReviewRow = ({ loading, rating = [], review = [], review_rate = [], visit 
           </Tooltip>
         }
         total={numeral(statistic?.avg_rating).format('0,0.0')}
-        footer={<Field label={<FormattedMessage id='pages.product_analysis.review_row.sclmonth_scoreore'/>} value={numeral(statistic?.last_rating).format('0,0.0')} />}
+        footer={<Field label={<FormattedMessage id='pages.product_analysis.review_row.lmonth_score'/>} value={numeral(statistic?.last_rating).format('0,0.0')} />}
         contentHeight={46}
       >
         <TinyArea

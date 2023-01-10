@@ -1,152 +1,36 @@
-import { CloseCircleOutlined } from '@ant-design/icons';
-import { Card, Col, Popover, Row, message, UploadFile, UploadProps } from 'antd';
-import { FC, useEffect } from 'react';
-import { useState } from 'react';
+import { Card, Col, Row, message, UploadFile, UploadProps } from 'antd';
+import { FC } from 'react';
 import ProForm, {
   ProFormUploadButton,
 } from '@ant-design/pro-form';
-import type { ProColumnType } from '@ant-design/pro-table';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import { submitForm } from './service';
 import styles from './style.less';
-import { FormattedMessage, request, useRequest } from 'umi';
+import { FormattedMessage, request } from 'umi';
 import { UploadChangeParam } from 'antd/lib/upload';
 
-type InternalNamePath = (string | number)[];
-
-const fieldLabels = {
-  name: '仓库名',
-  url: '仓库域名',
-  owner: '仓库管理员',
-  approver: '审批人',
-  dateRange: '生效日期',
-  type: '仓库类型',
-  name2: '任务名',
-  url2: '任务描述',
-  owner2: '执行人',
-  approver2: '责任人',
-  dateRange2: '生效日期',
-  type2: '任务类型',
-};
-
-interface ErrorField {
-  name: InternalNamePath;
-  errors: string[];
-}
-
 const AdvancedForm: FC<Record<string, any>> = () => {
-  let file_br_cn: UploadFile[] = [
-  ];
-  let file_policy_cn: UploadFile[] = [
-  ];
-  let file_director_cn: UploadFile[] = [
-  ];
-
-  let file_shareholder_cn: UploadFile[] = [
-  ];
-  let file_director_credit_report_cn: UploadFile[] = [
-  ];
-  let file_company_credit_report_cn: UploadFile[] = [
-  ];
-
-  let file_financial_statements_cn: UploadFile[] = [
-  ];
-  let file_other_cn: UploadFile[] = [
-  ];
-  const [error, setError] = useState<ErrorField[]>([]);
-  useEffect(() => {
-    console.log("useEffect");
-  }, []);
-  const { data, error1, loading } = useRequest(() => {
-    return request('/api/borrower/get_borrower');
-  });
-  console.log("filedata",typeof(data));
-  console.log("filedata",data);
-  if(typeof(data)!="undefined"){
-    //显示从index为12开始的数组
-    
-    console.log("filedatatypeof(data)!=undefined");
-    console.log("filedatafileList");
-    file_br_cn=data.file_br_cn
-    file_policy_cn=data.file_policy_cn
-    file_director_cn=data.file_director_cn
-
-    file_shareholder_cn=data.file_shareholder_cn
-    file_director_credit_report_cn=data.file_director_credit_report_cn
-    file_company_credit_report_cn=data.file_company_credit_report_cn
-
-    file_financial_statements_cn=data.file_financial_statements_cn
-    file_other_cn=data.file_other_cn
-  }
-  const getErrorInfo = (errors: ErrorField[]) => {
-    console.log("getErrorInfo",errors);
-    
-    const errorCount = errors.filter((item) => item.errors.length > 0).length;
-    if (!errors || errorCount === 0) {
-      return null;
+  //根据文件类型修改thumbUrl 函数
+  const thumbUrlMatchWithFileType = (file:RcFile)=>{
+    if(file.name.substring(file.name.length-3)=='pdf'){
+      return '/icons/pdf.png';
+    }else if(file.name.substring(file.name.length-3)=='doc' || file.name.substring(file.name.length-4)=='docx'){
+      return '/icons/doc.png';
+    }else if(file.name.substring(file.name.length-4)=='xlsx'||file.name.substring(file.name.length-3)=='xls'){
+      return '/icons/excel.png';
+    }else if(file.name.substring(file.name.length-3)=='zip' || file.name.substring(file.name.length-3)=='rar' || file.name.substring(file.name.length-2)=='7z'){
+      return '/icons/zip.png';
     }
-    const scrollToField = (fieldKey: string) => {
-      const labelNode = document.querySelector(`label[for="${fieldKey}"]`);
-      if (labelNode) {
-        labelNode.scrollIntoView(true);
-      }
-    };
-    const errorList = errors.map((err) => {
-      if (!err || err.errors.length === 0) {
-        return null;
-      }
-      const key = err.name[0] as string;
-      return (
-        <li key={key} className={styles.errorListItem} onClick={() => scrollToField(key)}>
-          <CloseCircleOutlined className={styles.errorIcon} />
-          <div className={styles.errorMessage}>{err.errors[0]}</div>
-          <div className={styles.errorField}>{fieldLabels[key]}</div>
-        </li>
-      );
-    });
-    return (
-      <span className={styles.errorIcon}>
-        <Popover
-          title="表单校验信息"
-          content={errorList}
-          overlayClassName={styles.errorPopover}
-          trigger="click"
-          getPopupContainer={(trigger: HTMLElement) => {
-            if (trigger && trigger.parentNode) {
-              return trigger.parentNode as HTMLElement;
-            }
-            return trigger;
-          }}
-        >
-          <CloseCircleOutlined />
-        </Popover>
-        {errorCount}
-      </span>
-    );
-  };
-
-  const handleChange: UploadProps['onChange'] = (info: UploadChangeParam<UploadFile>) => {
-   
-    if (info.file.status == 'removed') {
-      console.log("removedinfodata",info);
-    }
-    if (info.file.status === 'done') {
-      // Get this url from response in real world.
-      // 做成fileList的格式传回
-    }
-    if (info.file.status == 'uploading') {
-      console.log("loading");
-       window.location.reload();
-     }
-    if (info.file.status == 'error') {
-      message.error('上传失败!请稍后再试')
+    else if(file.name.substring(file.name.length-3)=='bmp'||file.name.substring(file.name.length-3)=='jpg'||file.name.substring(file.name.length-3)=='png'){
+      return;
+    }else {
+      return '/icons/note.png';
     }
   };
+
 
   const onFinish = async (values: Record<string, any>) => {
-    setError([]);
     console.log("valueserrorInfo",values);
-    
     try {
       await submitForm("full",values);
       message.success('提交成功');
@@ -155,261 +39,285 @@ const AdvancedForm: FC<Record<string, any>> = () => {
     }
   };
 
-  const onFinishFailed = (errorInfo: any) => {
-    setError(errorInfo.errorFields);
-    console.log("onFinishFailed中的errorInfo",errorInfo);
-    
-  };
-
   return (
     <ProForm
       layout="vertical"
       hideRequiredMark
       submitter={{
-        render: (props, dom) => {
-          return (
-            <FooterToolbar>
-              {getErrorInfo(error)}
-              {dom}
-            </FooterToolbar>
-          );
+        // 配置按钮的属性
+        resetButtonProps: {
+          style: {
+            // 隐藏重置按钮
+            display: 'none',
+          },
+        },
+        submitButtonProps: {
+          style: {
+            // 隐藏重置按钮
+            display: 'none',
+          },
         },
       }}
       initialValues={{   }}
       onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
+      request={async () => {           
+        const { data, error, loading } = await request('/api/borrower/get_borrower');
+        return data;
+      }}
     >
       <PageContainer content="">
         <Card title={<FormattedMessage id='pages.borrower_form.Mainlandfile_upload'/>} className={styles.card} bordered={false}>
-          <Row gutter={16}>
-            <Col lg={6} md={12} sm={24}>
-              <ProFormUploadButton  
-              label={<FormattedMessage id='pages.borrower_form.Mainlandfile_upload.file_br_cn'/>} 
-              fileList={file_br_cn}
-              fieldProps={{
-                name: "file_br_cn",
-                action:"/api/borrower/upload_file",
-                  showUploadList: {
-                    showDownloadIcon: false,
-                    downloadIcon: '下载',
-                    showRemoveIcon: true,
-                    // removeIcon: <StarOutlined onClick={(e) => console.log(e, 'custom removeIcon event')} />,
-                  },
-                  onChange: (e) => {
-                    handleChange(e)
-                  },
-                  onRemove(file) {
-                    window.location.reload();
-                    console.log("onRemoveDataFile",file);
-                    request('/api/borrower/delete_file?file_id='+ file.uid);
-                  },
-                  onDownload(file) {
-                    console.log("onDownloadDataFile",file);
-                    request('/api/borrower/download_file?file_id='+ file.uid);
-                  }
-              }}
-               />
-            </Col>
-            <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
-              <ProFormUploadButton  
-              label={<FormattedMessage id='pages.borrower_form.Mainlandfile_upload.file_policy_cn'/>} 
-              fileList={file_policy_cn}
-              fieldProps={{
-                name: "file_policy_cn",
-                action:"/api/borrower/upload_file",
-                  showUploadList: {
-                    showDownloadIcon: false,
-                    downloadIcon: '下载',
-                    showRemoveIcon: true,
-                    // removeIcon: <StarOutlined onClick={(e) => console.log(e, 'custom removeIcon event')} />,
-                  },
-                  onChange: (e) => {
-                    handleChange(e)
-                  },
-                  onRemove(file) {
-                    window.location.reload();
-                    console.log("onRemoveDataFile",file);
-                    request('/api/borrower/delete_file?file_id='+ file.uid);
-                  },
-                  onDownload(file) {
-                    console.log("onDownloadDataFile",file);
-                    request('/api/borrower/download_file?file_id='+ file.uid);
-                  }
-              }}
-              />
-            </Col>
-            <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
-              <ProFormUploadButton  
-              label={<FormattedMessage id='pages.borrower_form.Mainlandfile_upload.file_director_cn'/>} 
-              fileList={file_director_cn}
-              fieldProps={{
-                name: "file_director_cn",
-                action:"/api/borrower/upload_file",
-                  showUploadList: {
-                    showDownloadIcon: false,
-                    downloadIcon: '下载',
-                    showRemoveIcon: true,
-                    // removeIcon: <StarOutlined onClick={(e) => console.log(e, 'custom removeIcon event')} />,
-                  },
-                  onChange: (e) => {
-                    handleChange(e)
-                  },
-                  onRemove(file) {
-                    window.location.reload();
-                    console.log("onRemoveDataFile",file);
-                    request('/api/borrower/delete_file?file_id='+ file.uid);
-                  },
-                  onDownload(file) {
-                    console.log("onDownloadDataFile",file);
-                    request('/api/borrower/download_file?file_id='+ file.uid);
-                  }
-              }}
-              />
-            </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col lg={6} md={12} sm={24}>
-              <ProFormUploadButton  
-              label={<FormattedMessage id='pages.borrower_form.Mainlandfile_upload.file_shareholder_cn'/>} 
-              fileList={file_shareholder_cn}
-              fieldProps={{
-                name: "file_shareholder_cn",
-                action:"/api/borrower/upload_file",
-                  showUploadList: {
-                    showDownloadIcon: false,
-                    downloadIcon: '下载',
-                    showRemoveIcon: true,
-                    // removeIcon: <StarOutlined onClick={(e) => console.log(e, 'custom removeIcon event')} />,
-                  },
-                  onChange: (e) => {
-                    handleChange(e)
-                  },
-                  onRemove(file) {
-                    window.location.reload();
-                    console.log("onRemoveDataFile",file);
-                    request('/api/borrower/delete_file?file_id='+ file.uid);
-                  },
-                  onDownload(file) {
-                    console.log("onDownloadDataFile",file);
-                    request('/api/borrower/download_file?file_id='+ file.uid);
-                  }
-              }}
-              />
-            </Col>
-            <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
-              <ProFormUploadButton  
-              label={<FormattedMessage id='pages.borrower_form.Mainlandfile_upload.file_director_credit_report_cn'/>}
-              fileList={file_director_credit_report_cn}
-              fieldProps={{
-                name: "file_director_credit_report_cn",
-                action:"/api/borrower/upload_file",
-                  showUploadList: {
-                    showDownloadIcon: false,
-                    downloadIcon: '下载',
-                    showRemoveIcon: true,
-                    // removeIcon: <StarOutlined onClick={(e) => console.log(e, 'custom removeIcon event')} />,
-                  },
-                  onChange: (e) => {
-                    handleChange(e)
-                  },
-                  onRemove(file) {
-                    window.location.reload();
-                    console.log("onRemoveDataFile",file);
-                    request('/api/borrower/delete_file?file_id='+ file.uid);
-                  },
-                  onDownload(file) {
-                    console.log("onDownloadDataFile",file);
-                    request('/api/borrower/download_file?file_id='+ file.uid);
-                  }
-              }} />
-            </Col>
-            <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
-              <ProFormUploadButton  
-              label={<FormattedMessage id='pages.borrower_form.Mainlandfile_upload.file_company_credit_report_cn'/>} 
-              fileList={file_company_credit_report_cn}
-              fieldProps={{
-                name: "file_company_credit_report_cn",
-                action:"/api/borrower/upload_file",
-                  showUploadList: {
-                    showDownloadIcon: false,
-                    downloadIcon: '下载',
-                    showRemoveIcon: true,
-                    // removeIcon: <StarOutlined onClick={(e) => console.log(e, 'custom removeIcon event')} />,
-                  },
-                  onChange: (e) => {
-                    handleChange(e)
-                  },
-                  onRemove(file) {
-                    window.location.reload();
-                    console.log("onRemoveDataFile",file);
-                    request('/api/borrower/delete_file?file_id='+ file.uid);
-                  },
-                  onDownload(file) {
-                    console.log("onDownloadDataFile",file);
-                    request('/api/borrower/download_file?file_id='+ file.uid);
-                  }
-              }} />
-            </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col lg={6} md={12} sm={24}>
-              <ProFormUploadButton  
-              label={<FormattedMessage id='pages.borrower_form.Mainlandfile_upload.file_financial_statements_cn'/>} 
-              fileList={file_financial_statements_cn}
-              fieldProps={{
-                name: "file_financial_statements_cn",
-                action:"/api/borrower/upload_file",
-                  showUploadList: {
-                    showDownloadIcon: false,
-                    downloadIcon: '下载',
-                    showRemoveIcon: true,
-                    // removeIcon: <StarOutlined onClick={(e) => console.log(e, 'custom removeIcon event')} />,
-                  },
-                  onChange: (e) => {
-                    handleChange(e)
-                  },
-                  onRemove(file) {
-                    window.location.reload();
-                    console.log("onRemoveDataFile",file);
-                    request('/api/borrower/delete_file?file_id='+ file.uid);
-                  },
-                  onDownload(file) {
-                    console.log("onDownloadDataFile",file);
-                    request('/api/borrower/download_file?file_id='+ file.uid);
-                  }
-              }}
-              />
-            </Col>
-            <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
-              <ProFormUploadButton  
-              label={<FormattedMessage id='pages.borrower_form.Mainlandfile_upload.file_other_cn'/>}
-              fileList={file_other_cn}
-              fieldProps={{
-                name: "file_other_cn",
-                action:"/api/borrower/upload_file",
-                  showUploadList: {
-                    showDownloadIcon: false,
-                    downloadIcon: '下载',
-                    showRemoveIcon: true,
-                    // removeIcon: <StarOutlined onClick={(e) => console.log(e, 'custom removeIcon event')} />,
-                  },
-                  onChange: (e) => {
-                    handleChange(e)
-                  },
-                  onRemove(file) {
-                    window.location.reload();
-                    console.log("onRemoveDataFile",file);
-                    request('/api/borrower/delete_file?file_id='+ file.uid);
-                  },
-                  onDownload(file) {
-                    console.log("onDownloadDataFile",file);
-                    request('/api/borrower/download_file?file_id='+ file.uid);
-                  }
-              }} />
-            </Col>
-            <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
-            </Col>
-          </Row>
+          <Card>
+            <Row gutter={16}>
+              <Col lg={6} md={12} sm={24}>
+                <ProFormUploadButton  
+                label={<FormattedMessage id='pages.borrower_form.Mainlandfile_upload.file_br_cn'/>} 
+                name= "file_br_cn"
+                fieldProps={{
+                  name: "file_br_cn",
+                  action:"/api/borrower/upload_file",
+                    showUploadList: {
+                      showDownloadIcon: false,
+                      downloadIcon: '下载',
+                      showRemoveIcon: true,
+                      // removeIcon: <StarOutlined onClick={(e) => console.log(e, 'custom removeIcon event')} />,
+                    },
+                    beforeUpload: (e) => {
+                      e.thumbUrl = thumbUrlMatchWithFileType(e)
+                    },
+                    onChange: (e) => {
+                      if (e.file.status == 'done') {
+                        e.file.uid = e.file.response.data.uid;
+                      }
+                    },
+                    onRemove(file) {
+                      request('/api/borrower/delete_file?file_id='+ file.uid);
+                    },
+                    onDownload(file) {
+                      request('/api/borrower/download_file?file_id='+ file.uid);
+                    }
+                }}
+                />
+              </Col>
+              <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
+                <ProFormUploadButton  
+                label={<FormattedMessage id='pages.borrower_form.Mainlandfile_upload.file_policy_cn'/>} 
+                name= "file_policy_cn"
+                fieldProps={{
+                  name: "file_policy_cn",
+                  action:"/api/borrower/upload_file",
+                    showUploadList: {
+                      showDownloadIcon: false,
+                      downloadIcon: '下载',
+                      showRemoveIcon: true,
+                      // removeIcon: <StarOutlined onClick={(e) => console.log(e, 'custom removeIcon event')} />,
+                    },
+                    beforeUpload: (e) => {
+                      e.thumbUrl = thumbUrlMatchWithFileType(e)
+                    },
+                    onChange: (e) => {
+                      if (e.file.status == 'done') {
+                        e.file.uid = e.file.response.data.uid;
+                      }
+                    },
+                    onRemove(file) {
+                      request('/api/borrower/delete_file?file_id='+ file.uid);
+                    },
+                    onDownload(file) {
+                      request('/api/borrower/download_file?file_id='+ file.uid);
+                    }
+                }}
+                />
+              </Col>
+              <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
+                <ProFormUploadButton  
+                label={<FormattedMessage id='pages.borrower_form.Mainlandfile_upload.file_director_cn'/>} 
+                name= "file_director_cn"
+                fieldProps={{
+                  name: "file_director_cn",
+                  action:"/api/borrower/upload_file",
+                    showUploadList: {
+                      showDownloadIcon: false,
+                      downloadIcon: '下载',
+                      showRemoveIcon: true,
+                      // removeIcon: <StarOutlined onClick={(e) => console.log(e, 'custom removeIcon event')} />,
+                    },
+                    beforeUpload: (e) => {
+                      e.thumbUrl = thumbUrlMatchWithFileType(e)
+                    },
+                    onChange: (e) => {
+                      if (e.file.status == 'done') {
+                        e.file.uid = e.file.response.data.uid;
+                      }
+                    },
+                    onRemove(file) {
+                      request('/api/borrower/delete_file?file_id='+ file.uid);
+                    },
+                    onDownload(file) {
+                      request('/api/borrower/download_file?file_id='+ file.uid);
+                    }
+                }}
+                />
+              </Col>
+            </Row>
+          </Card>
+          <Card>
+            <Row gutter={16}>
+              <Col lg={6} md={12} sm={24}>
+                <ProFormUploadButton  
+                label={<FormattedMessage id='pages.borrower_form.Mainlandfile_upload.file_shareholder_cn'/>} 
+                name= "file_shareholder_cn"
+                fieldProps={{
+                  name: "file_shareholder_cn",
+                  action:"/api/borrower/upload_file",
+                    showUploadList: {
+                      showDownloadIcon: false,
+                      downloadIcon: '下载',
+                      showRemoveIcon: true,
+                      // removeIcon: <StarOutlined onClick={(e) => console.log(e, 'custom removeIcon event')} />,
+                    },
+                    beforeUpload: (e) => {
+                      e.thumbUrl = thumbUrlMatchWithFileType(e)
+                    },
+                    onChange: (e) => {
+                      if (e.file.status == 'done') {
+                        e.file.uid = e.file.response.data.uid;
+                      }
+                    },
+                    onRemove(file) {
+                      request('/api/borrower/delete_file?file_id='+ file.uid);
+                    },
+                    onDownload(file) {
+                      request('/api/borrower/download_file?file_id='+ file.uid);
+                    }
+                }}
+                />
+              </Col>
+              <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
+                <ProFormUploadButton  
+                label={<FormattedMessage id='pages.borrower_form.Mainlandfile_upload.file_director_credit_report_cn'/>}
+                name="file_director_credit_report_cn"
+                fieldProps={{
+                  name: "file_director_credit_report_cn",
+                  action:"/api/borrower/upload_file",
+                    showUploadList: {
+                      showDownloadIcon: false,
+                      downloadIcon: '下载',
+                      showRemoveIcon: true,
+                      // removeIcon: <StarOutlined onClick={(e) => console.log(e, 'custom removeIcon event')} />,
+                    },
+                    beforeUpload: (e) => {
+                      e.thumbUrl = thumbUrlMatchWithFileType(e)
+                    },
+                    onChange: (e) => {
+                      if (e.file.status == 'done') {
+                        e.file.uid = e.file.response.data.uid;
+                      }
+                    },
+                    onRemove(file) {
+                      request('/api/borrower/delete_file?file_id='+ file.uid);
+                    },
+                    onDownload(file) {
+                      request('/api/borrower/download_file?file_id='+ file.uid);
+                    }
+                }} />
+              </Col>
+              <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
+                <ProFormUploadButton  
+                label={<FormattedMessage id='pages.borrower_form.Mainlandfile_upload.file_company_credit_report_cn'/>} 
+                name= "file_company_credit_report_cn"
+                fieldProps={{
+                  name: "file_company_credit_report_cn",
+                  action:"/api/borrower/upload_file",
+                    showUploadList: {
+                      showDownloadIcon: false,
+                      downloadIcon: '下载',
+                      showRemoveIcon: true,
+                      // removeIcon: <StarOutlined onClick={(e) => console.log(e, 'custom removeIcon event')} />,
+                    },
+                    beforeUpload: (e) => {
+                      e.thumbUrl = thumbUrlMatchWithFileType(e)
+                    },
+                    onChange: (e) => {
+                      if (e.file.status == 'done') {
+                        e.file.uid = e.file.response.data.uid;
+                      }
+                    },
+                    onRemove(file) {
+                      request('/api/borrower/delete_file?file_id='+ file.uid);
+                    },
+                    onDownload(file) {
+                      request('/api/borrower/download_file?file_id='+ file.uid);
+                    }
+                }} />
+              </Col>
+            </Row>
+          </Card>
+          <Card>
+            <Row gutter={16}>
+              <Col lg={6} md={12} sm={24}>
+                <ProFormUploadButton  
+                label={<FormattedMessage id='pages.borrower_form.Mainlandfile_upload.file_financial_statements_cn'/>} 
+                name= "file_financial_statements_cn"
+                fieldProps={{
+                  name: "file_financial_statements_cn",
+                  action:"/api/borrower/upload_file",
+                    showUploadList: {
+                      showDownloadIcon: false,
+                      downloadIcon: '下载',
+                      showRemoveIcon: true,
+                      // removeIcon: <StarOutlined onClick={(e) => console.log(e, 'custom removeIcon event')} />,
+                    },
+                    beforeUpload: (e) => {
+                      e.thumbUrl = thumbUrlMatchWithFileType(e)
+                    },
+                    onChange: (e) => {
+                      if (e.file.status == 'done') {
+                        e.file.uid = e.file.response.data.uid;
+                      }
+                    },
+                    onRemove(file) {
+                      request('/api/borrower/delete_file?file_id='+ file.uid);
+                    },
+                    onDownload(file) {
+                      request('/api/borrower/download_file?file_id='+ file.uid);
+                    }
+                }}
+                />
+              </Col>
+              <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
+                <ProFormUploadButton  
+                label={<FormattedMessage id='pages.borrower_form.Mainlandfile_upload.file_other_cn'/>}
+                name= "file_other_cn"
+                fieldProps={{
+                  name: "file_other_cn",
+                  action:"/api/borrower/upload_file",
+                    showUploadList: {
+                      showDownloadIcon: false,
+                      downloadIcon: '下载',
+                      showRemoveIcon: true,
+                      // removeIcon: <StarOutlined onClick={(e) => console.log(e, 'custom removeIcon event')} />,
+                    },
+                    beforeUpload: (e) => {
+                      e.thumbUrl = thumbUrlMatchWithFileType(e)
+                    },
+                    onChange: (e) => {
+                      if (e.file.status == 'done') {
+                        e.file.uid = e.file.response.data.uid;
+                      }
+                    },
+                    onRemove(file) {
+                      request('/api/borrower/delete_file?file_id='+ file.uid);
+                    },
+                    onDownload(file) {
+                      request('/api/borrower/download_file?file_id='+ file.uid);
+                    }
+                }} />
+              </Col>
+              <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
+              </Col>
+            </Row>
+          </Card>
         </Card>
   
       </PageContainer>

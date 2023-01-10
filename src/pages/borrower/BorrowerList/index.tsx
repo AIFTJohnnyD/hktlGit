@@ -91,7 +91,7 @@ const TableList: React.FC = () => {
     },
 
     {
-      title: (<FormattedMessage id='pages.borrower_list.borrower.name_cn'/>),
+      title: (<FormattedMessage id='pages.borrower_list.borrower.name'/>),
       dataIndex: 'name_cn',
       valueType: 'textarea',
     },    
@@ -142,7 +142,7 @@ const TableList: React.FC = () => {
           }}
           */
           onClick={() => {
-            window.open("/borrower/borrower-approval?borrower_id=" + record?.key,'newwindow','height=800, width=1500, top=160, left=350, toolbar=no, menubar=no, status=no')
+            window.open("/borrower/borrower-approval?borrower_key=" + record?.key,'newwindow','height=800, width=1500, top=160, left=350, toolbar=no, menubar=no, status=no')
           }}         
         >
           <FormattedMessage id='pages.util.review'/>
@@ -166,11 +166,11 @@ const TableList: React.FC = () => {
         ]}
         request={getList}
         columns={columns}
-        rowSelection={{
-          onChange: (_, selectedRows) => {
-            setSelectedRows(selectedRows);
-          },
-        }}
+        // rowSelection={{
+        //   onChange: (_, selectedRows) => {
+        //     setSelectedRows(selectedRows);
+        //   },
+        // }}
       />
 
       {selectedRowsState?.length > 0 && (

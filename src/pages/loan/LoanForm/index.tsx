@@ -57,6 +57,7 @@ const CompanyForm: FC<Record<string, any>> = () => {
 
               <Col xl={{ span: 6, offset: 2 }} lg={{ span: 6 }} md={{ span: 24 }} sm={24}>
                 <ProFormSelect
+                  allowClear={false}
                   label={<FormattedMessage id='pages.util.currency'/>}
                   width="md"
                   name="currency"
@@ -172,6 +173,7 @@ const CompanyForm: FC<Record<string, any>> = () => {
 
               <Col xl={{ span: 6, offset: 2 }} lg={{ span: 6 }} md={{ span: 12 }} sm={24}>
                 <ProFormSelect
+                  allowClear={false}
                   label={<FormattedMessage id='pages.loan_form.other_cost_type'/>}
                   width="md"
                   name="other_cost_type"
@@ -199,6 +201,7 @@ const CompanyForm: FC<Record<string, any>> = () => {
             <Row gutter={16}>
               <Col xl={{ span: 16, offset: 0 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
                 <ProFormSelect
+                  allowClear={false}
                   label={<FormattedMessage id='pages.util.status'/>}
                   width="lg"
                   name="status"
