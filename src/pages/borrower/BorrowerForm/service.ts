@@ -8,7 +8,8 @@ export async function fakeSubmitForm(params: any) {
 }
 
 export async function submitForm(path:string, params: any) {
-  return request('/api/borrower/' + path, {
+  // return request('/api/borrower/' + path, {
+  return request('/api/borrower/post_borrower', {
     method: 'POST',
     data: params,
   });

@@ -52,29 +52,40 @@ export default {
   'menu.editor.koni': '拓扑编辑器',
 
   //khwu
-  'menu.lender': '投资机构管理',
-  'menu.lender.input': '输入(更新)信息',
-  'menu.lender.index': '更新指标',
+  'menu.lender': '用户管理',
+  'menu.lender.input': '用户信息',
+  'menu.lender.index': '风控指标',
   'menu.lender.list': '投资机构列表',
 
-  'menu.borrower': '跨境电商管理',
-  'menu.borrower.input': '输入(更新)信息',
+  'menu.borrower': '电商管理',
+  //'menu.borrower.input': '输入(更新)信息',
+  'menu.borrower.input_hk': '香港公司输入(更新)信息',
+  'menu.borrower.input_mainland': '关联公司输入(更新)信息',
+  'menu.borrower.upload_file_hk': '香港公司文件上传',
+  'menu.borrower.upload_flie_mainland': '关联公司文件上传',
+  
+  'menu.borrower.hk_input': '香港公司输入(更新)信息',
+  'menu.borrower.mainland_input': '关联公司输入(更新)信息',
+  'menu.borrower.hk_file_upload': '香港公司文件上传',
+  'menu.borrower.mainland_file_upload': '关联公司文件上传',
   'menu.borrower.list': '电商列表',
   'menu.borrower.analysis': '电商分析',
 
-  'menu.amount': '电商额度管理',
-  'menu.amount.list': '电商列表',
+  'menu.amount': '授信管理',
+  'menu.amount.loan-product': '信贷产品管理',
+  'menu.amount.borrower-list': '电商列表',
 
   //'menu.loan': '贷款指标',
   //'menu.loan.input': '输入信息',
   //'menu.loan.list': '贷款产品列表',
 
-  'menu.product': '订单商品管理',
+  'menu.product': '店铺管理',
   'menu.product.input': '输入信息',
   'menu.product.list': '商品列表',
   'menu.product.analysis': '商品分析',
 
-  'menu.application': '商户融资管理',
+  'menu.application': '融资管理',
+  'menu.application.analysis': '融资分析',
   'menu.application.input_inventory': '新建申请(货物抵押融资)',  
   'menu.application.input_account_receivable': '新建申请(应收账款融资)',
   'menu.application.list': '融资申请列表',
@@ -85,10 +96,15 @@ export default {
   'menu.platform.loanapplicationlist': '贷款申请列表',
   'menu.platform.borrowerlist': '电商列表',
 
-  'menu.postloan': '商户贷后管理',
+  'menu.postloan': '还款管理',
   'menu.postloan.repaymentapplication': '还款申请',
   'menu.postloan.repaymentList': '还款记录',
   'menu.postloan.repaymentapproval': '还款审批',
+
+  'menu.chatroom': '在线客服',
+
+  'menu.testing': 'testing',
+  'menu.testing.testing': 'test1',
 
   //'menu.approval': '贷款审批',
   //'menu.approval.credit_analysis': '信用分析',

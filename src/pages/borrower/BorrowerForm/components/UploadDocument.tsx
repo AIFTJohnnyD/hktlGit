@@ -56,19 +56,19 @@ const UploadDocument = ({ loading, data }: { loading: boolean, data: any }) => {
   };
   
   var props_br_hk = {...props};
-  props_br_hk.name = "br_hk";
+  props_br_hk.name = "file_br_hk";
   
   var props_br_cn = {...props};
-  props_br_cn.name = "br_cn";
+  props_br_cn.name = "file_br_cn";
   
   var props_policy_cn = {...props};
-  props_policy_cn.name = "policy_cn";
+  props_policy_cn.name = "file_policy_cn";
   
   var props_director_hk = {...props};
-  props_director_hk.name = "director_hk";
+  props_director_hk.name = "file_director_hk";
   
   var props_director_cn = {...props};
-  props_director_cn.name = "director_cn";
+  props_director_cn.name = "file_director_cn";
 
   if (data != null) {
     props_br_hk.defaultFileList = data.br_hk;

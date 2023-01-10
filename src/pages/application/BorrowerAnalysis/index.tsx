@@ -26,6 +26,8 @@ import GroupSalesCard from './components/GroupSalesCard';
 import TopSearch from './components/TopSearch';
 import ProportionReview from './components/ProportionReview';
 import SalesChartData from './components/SalesChartData';
+import PD_LGD_Data from './components/PD_LGD_Data';
+
 import { fakeChartData } from './service';
 import PageLoading from './components/PageLoading';
 import type { TimeType } from './components/SalesCard';
@@ -48,10 +50,10 @@ const ProductAnalysis: FC<ProductAnalysisProps> = () => {
   //http://localhost:8000/company/company-analysis?seller_id=A1057FBD44ECMO
   //const { loading, data } = useRequest(fakeChartData);
   let urlParams = parse(window.location.href.split('?')[1])
-  const borrower_id = urlParams.borrower_id;
+  const borrower_key = urlParams.borrower_key;
   //console.log(company_id);
   const { data, error, loading } = useRequest(() => {
-    return request('/api/kyc/get_kyc?borrower_id='+ borrower_id);
+    return request('/api/kyc/get_kyc?borrower_key='+ borrower_key);
   });
   //console.log(data);
   if (data?.message == "Error") {
@@ -147,6 +149,15 @@ const ProductAnalysis: FC<ProductAnalysisProps> = () => {
           </Suspense>
 
           <Suspense fallback={null}>
+            <PD_LGD_Data
+              loading={loading}
+              probability_of_default={data?.probability_of_default || []}
+              loss_given_default={data?.loss_given_default || []}
+              revenue_pd={data?.revenue_pd || []}
+            />
+          </Suspense>
+
+          <Suspense fallback={null}>
             <SalesCard
               revenue={data?.revenue || []} 
               sales={data?.sales || []} 
@@ -185,7 +196,7 @@ const ProductAnalysis: FC<ProductAnalysisProps> = () => {
             }}
           >        
           </Row>
-
+{/*
           <Suspense fallback={<PageLoading />}>
             <Descriptions title={"类别: " + data?.group.name} />
           </Suspense>
@@ -221,7 +232,7 @@ const ProductAnalysis: FC<ProductAnalysisProps> = () => {
               loading={loading}
             />
           </Suspense>
-
+*/}
         </>
       </GridContent>
     );

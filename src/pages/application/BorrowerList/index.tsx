@@ -22,7 +22,7 @@ const TableList: React.FC = () => {
   const columns: ProColumns<TableListItem>[] = [
     {
       title: (<FormattedMessage id='pages.util.id'/>),
-      dataIndex: 'id',
+      dataIndex: 'key',
       render: (dom, entity) => {
         return (
           <a
@@ -38,13 +38,13 @@ const TableList: React.FC = () => {
     },
 
     {
-      title: (<FormattedMessage id='pages.borrower_list.borrower.name_cn'/>),
+      title: (<FormattedMessage id='pages.borrower_list.borrower.name'/>),
       dataIndex: 'name_cn',
       key: 'name_cn',
 
       render: (dom, entity) => {
         return (
-          <a href={"/application/loan-application-list-lender?borrower_id=" + entity.id}>
+          <a href={"/application/loan-application-list-lender?borrower_key=" + entity.key}>
             {dom}
           </a>
         );

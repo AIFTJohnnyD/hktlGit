@@ -78,6 +78,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
             <Row gutter={16}>
               <Col span={12}>
                 <ProFormSelect
+                  allowClear={false}
                   label={<FormattedMessage id='pages.product_form.platform'/>}
                   width="md"
                   name="platform"
@@ -151,6 +152,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
             <Row gutter={16}>
               <Col xl={6} lg={6} md={12} sm={24}>
                 <ProFormSelect
+                  allowClear={false}
                   label={<FormattedMessage id='pages.product_form.category_level_0'/>}
                   width="md"
                   name="category_0"
@@ -165,6 +167,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
 
               <Col xl={{ span: 6, offset: 2 }} lg={{ span: 6 }} md={{ span: 12 }} sm={24}>
                 <ProFormSelect
+                  allowClear={false}
                   label={<FormattedMessage id='pages.product_form.category_level_1'/>}
                   width="md"
                   name="category_1"
@@ -178,6 +181,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
 
               <Col xl={{ span: 6, offset: 2 }} lg={{ span: 6 }} md={{ span: 24 }} sm={24}>
                 <ProFormSelect
+                  allowClear={false}
                   label={<FormattedMessage id='pages.product_form.category_level_2'/>}
                   width="md"
                   name="category_2"
@@ -193,6 +197,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
             <Row gutter={16}>
               <Col xl={6} lg={6} md={12} sm={24}>
                 <ProFormSelect
+                  allowClear={false}
                   label={<FormattedMessage id='pages.product_form.category_level_3'/>}
                   width="md"
                   name="category_3"
@@ -206,6 +211,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
 
               <Col xl={{ span: 6, offset: 2 }} lg={{ span: 6 }} md={{ span: 12 }} sm={24}>
                 <ProFormSelect
+                  allowClear={false}
                   label={<FormattedMessage id='pages.product_form.category_level_4'/>}
                   width="md"
                   name="category_4"
@@ -217,6 +223,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
 
               <Col xl={{ span: 6, offset: 2 }} lg={{ span: 6 }} md={{ span: 24 }} sm={24}>
                 <ProFormSelect
+                  allowClear={false}
                   label={<FormattedMessage id='pages.product_form.category_level_5'/>}
                   width="md"
                   name="category_5"
@@ -261,6 +268,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
 
             <Col xl={{ span: 6, offset: 2 }} lg={{ span: 6 }} md={{ span: 24 }} sm={24}>
               <ProFormSelect
+                allowClear={false}
                 label={<FormattedMessage id='pages.product_form.currency'/>}
                 width="md"
                 name="currency"
@@ -327,6 +335,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           <Row gutter={16}>
             <Col xl={{ span: 16, offset: 0 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
               <ProFormSelect
+                allowClear={false}
                 label={<FormattedMessage id='pages.util.status'/>}
                 width="lg"
                 name="status"

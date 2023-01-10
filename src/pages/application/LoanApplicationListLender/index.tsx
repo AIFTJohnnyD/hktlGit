@@ -67,7 +67,7 @@ const handleRemove = async (selectedRows: TableListItem[]) => {
 
 const TableList: React.FC = () => {
   let urlParams = parse(window.location.href.split('?')[1])
-  const borrower_id = urlParams.borrower_id;
+  const borrower_key = urlParams.borrower_key;
   //console.log(borrower_id);
 
   /** 分布更新窗口的弹窗 */
@@ -90,7 +90,6 @@ const TableList: React.FC = () => {
       title: (<FormattedMessage id='pages.util.id'/>),
       dataIndex: 'key',
       valueType: 'textarea',
-/*      
       render: (dom, entity) => {
         return (
           <a
@@ -102,22 +101,21 @@ const TableList: React.FC = () => {
             {dom}
           </a>
         );
-      },
-*/      
+      },    
     },
 
     {
       title: (<FormattedMessage id='pages.loan_application_list.company_id'/>),
-      dataIndex: 'borrower_id',
-      valueType: 'digit',
+      dataIndex: 'borrower_key',
+      valueType: 'textarea',
     },    
     {
-      title: (<FormattedMessage id='pages.borrower_list.borrower.name_cn'/>),
+      title: (<FormattedMessage id='pages.borrower_list.borrower.name'/>),
       dataIndex: 'borrower_name',
       valueType: 'textarea',
       render: (dom, entity) => {
         return (
-          <a href={"/application/borrower-analysis?borrower_id=" + entity.borrower_id}>
+          <a href={"/application/borrower-analysis?borrower_key=" + entity.borrower_key}>
             {dom}
           </a>
         );
@@ -198,7 +196,7 @@ const TableList: React.FC = () => {
               }}
               */
               onClick={() => {
-                window.open("/application/loan-application-approval?loan_application_id=" + record?.key,'newwindow','height=800, width=1500, top=160, left=350, toolbar=no, menubar=no, status=no')
+                window.open("/application/loan-application-approval?loan_application_key=" + record?.key,'newwindow','height=800, width=1500, top=160, left=350, toolbar=no, menubar=no, status=no')
               }}             
             >
               <FormattedMessage id='pages.util.approve'/>
@@ -218,10 +216,20 @@ const TableList: React.FC = () => {
       },
       {
         title: (<FormattedMessage id='pages.loan_application_list.outstanding_balance'/>),
-        dataIndex: 'outstanding_balance',
+        dataIndex: 'today_balance',
         valueType: {type: 'money', locale: "en-US"},
+        render: (text, record, index) => {
+          if(record?.today_balance < 0.01)
+            return('-')
+          else
+            return(text)
+        },  
       },
-
+      {
+        title: (<FormattedMessage id='pages.util.start_date'/>),
+        dataIndex: 'start_date_approved',
+        valueType: 'textarea',
+      },
       {
         title: (<FormattedMessage id='pages.loan_application_list.day_approved'/>),
         dataIndex: 'day_approved',
@@ -231,13 +239,23 @@ const TableList: React.FC = () => {
         title: (<FormattedMessage id='pages.loan_application_list.annual_interest_rate'/>),
         dataIndex: 'annual_interest_rate_approved',
         valueType: 'digit',
+        render: (text, record, index) => {
+          return (record?.annual_interest_rate_approved * 100 )
+        }, 
       },
-      {
+      /*{
         title: (<FormattedMessage id='pages.loan_application_list.number_of_installments'/>),
         dataIndex: 'number_of_installments_approved',
         valueType: 'digit',
+      },*/
+      {
+        title: (<FormattedMessage id='pages.loan_application_list.penalty_annual_interest_rate'/>),
+        dataIndex: 'penalty_annual_interest_rate',
+        valueType: 'digit',
+        render: (text, record, index) => {
+          return (record?.penalty_annual_interest_rate * 100 )
+        },  
       },
-
       {
         title: (<FormattedMessage id='pages.loan_application_list.loan_overdue'/>),
         dataIndex: 'loan_overdue',
@@ -246,11 +264,11 @@ const TableList: React.FC = () => {
           return (translate_boolean(record?.loan_overdue))
         },  
       },
-      {
+      /*{
         title: (<FormattedMessage id='pages.loan_application_list.loan_overdue_amount'/>),
         dataIndex: 'loan_overdue_amount',
         valueType: 'textarea',
-      },
+      },*/
       
       {
         title: (<FormattedMessage id='pages.util.status'/>),
@@ -261,16 +279,16 @@ const TableList: React.FC = () => {
         },
       },
       
-      {
-        title: (<FormattedMessage id='pages.loan_application_list.collateral_amount_original'/>),
-        dataIndex: 'collateral_amount_original',
-        valueType: {type: 'money', locale: "en-US"},
-      },
-      {
-        title: (<FormattedMessage id='pages.loan_application_list.collateral_amount_current'/>),
-        dataIndex: 'collateral_amount_current',
-        valueType: {type: 'money', locale: "en-US"},
-      },            
+      // {
+      //   title: (<FormattedMessage id='pages.loan_application_list.collateral_amount_original'/>),
+      //   dataIndex: 'collateral_amount_original',
+      //   valueType: {type: 'money', locale: "en-US"},
+      // },
+      // {
+      //   title: (<FormattedMessage id='pages.loan_application_list.collateral_amount_current'/>),
+      //   dataIndex: 'collateral_amount_current',
+      //   valueType: {type: 'money', locale: "en-US"},
+      // },            
     ]
   );
   columns_approved = columns_approved.concat(
@@ -299,6 +317,7 @@ const TableList: React.FC = () => {
             || record?.status == "DRAWDOWN" 
             || record?.status == "REPAID" || record?.status == "DELINQUENT" 
             || record?.status == "LIQUIDATED" || record?.status == "LOAN_SETTLEMENT"
+            || record?.loan_overdue == "True"
             ) {
             return (
             <a
@@ -310,7 +329,7 @@ const TableList: React.FC = () => {
               }}
               */
               onClick={() => {
-                window.open("/application/loan-application-approval?loan_application_id=" + record?.key,'newwindow','height=800, width=1500, top=160, left=350, toolbar=no, menubar=no, status=no')
+                window.open("/application/loan-application-approval?loan_application_key=" + record?.key,'newwindow','height=800, width=1500, top=160, left=350, toolbar=no, menubar=no, status=no')
               }}
             >
               <FormattedMessage id='pages.util.approve'/>
@@ -335,7 +354,7 @@ const TableList: React.FC = () => {
         toolBarRender={() => [
         ]}
         request={loanApplication_created}
-        params={{"borrower_id": borrower_id}}
+        params={{"borrower_key": borrower_key}}
         columns={columns}
       />
 
@@ -351,7 +370,7 @@ const TableList: React.FC = () => {
         toolBarRender={() => [
         ]}
         request={loanApplication_progress}
-        params={{"borrower_id": borrower_id}}
+        params={{"borrower_key": borrower_key}}
         columns={columns}
       />
 
@@ -367,7 +386,7 @@ const TableList: React.FC = () => {
         toolBarRender={() => [
         ]}
         request={loanApplication_approved}
-        params={{"borrower_id": borrower_id}}
+        params={{"borrower_key": borrower_key}}
         columns={columns_approved}
       />
 
@@ -395,7 +414,7 @@ const TableList: React.FC = () => {
         updateModalVisible={updateModalVisible}
         values={currentRow || {}}
       />
-{/*
+
       <Drawer
         width={600}
         visible={showDetail}
@@ -415,11 +434,11 @@ const TableList: React.FC = () => {
             params={{
               id: currentRow?.key,
             }}
-            columns={columns as ProDescriptionsItemProps<TableListItem>[]}
+            columns={columns_approved as ProDescriptionsItemProps<TableListItem>[]}
           />
         )}
       </Drawer>
-*/}      
+      
     </PageContainer>
   );
 };

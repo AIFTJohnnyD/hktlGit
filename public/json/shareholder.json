@@ -1,0 +1,942 @@
+[
+    [
+        "信贷交易信息提示",
+        [
+            {
+                "data": [
+                    {
+                        "business_sub_type": "个人住房贷款",
+                        "business_type": "贷款",
+                        "columns_name": "账户数",
+                        "number": 2
+                    },
+                    {
+                        "business_sub_type": "个人住房贷款",
+                        "business_type": "贷款",
+                        "columns_name": "首笔业务发放月份",
+                        "number": 2007.09
+                    },
+                    {
+                        "business_sub_type": "个人商用房贷款（包括商住两用房）",
+                        "business_type": "贷款",
+                        "columns_name": "账户数",
+                        "number": 1
+                    },
+                    {
+                        "business_sub_type": "个人商用房贷款（包括商住两用房）",
+                        "business_type": "贷款",
+                        "columns_name": "首笔业务发放月份",
+                        "number": 2007.09
+                    },
+                    {
+                        "business_sub_type": "其他类贷款",
+                        "business_type": "贷款",
+                        "columns_name": "账户数",
+                        "number": 2
+                    },
+                    {
+                        "business_sub_type": "其他类贷款",
+                        "business_type": "贷款",
+                        "columns_name": "首笔业务发放月份",
+                        "number": 2007.09
+                    },
+                    {
+                        "business_sub_type": "贷记卡",
+                        "business_type": "信用卡",
+                        "columns_name": "账户数",
+                        "number": 2
+                    },
+                    {
+                        "business_sub_type": "贷记卡",
+                        "business_type": "信用卡",
+                        "columns_name": "首笔业务发放月份",
+                        "number": 2007.09
+                    },
+                    {
+                        "business_sub_type": "准贷记卡",
+                        "business_type": "信用卡",
+                        "columns_name": "账户数",
+                        "number": 1
+                    },
+                    {
+                        "business_sub_type": "准贷记卡",
+                        "business_type": "信用卡",
+                        "columns_name": "首笔业务发放月份",
+                        "number": 2007.09
+                    },
+                    {
+                        "business_sub_type": "--",
+                        "business_type": "其他",
+                        "columns_name": "账户数",
+                        "number": 3
+                    },
+                    {
+                        "business_sub_type": "--",
+                        "business_type": "其他",
+                        "columns_name": "首笔业务发放月份",
+                        "number": 2007.09
+                    }
+                ],
+                "describe": "信贷交易信息提示",
+                "fields": {
+                    "columns": [
+                        "columns_name"
+                    ],
+                    "rows": [
+                        "business_type",
+                        "business_sub_type"
+                    ],
+                    "valueInCols": true,
+                    "values": [
+                        "number"
+                    ]
+                },
+                "meta": [
+                    {
+                        "field": "number",
+                        "name": "数值"
+                    },
+                    {
+                        "field": "business_type",
+                        "name": "业务类型"
+                    },
+                    {
+                        "field": "business_sub_type",
+                        "name": ""
+                    },
+                    {
+                        "field": "columns_name",
+                        "name": ""
+                    }
+                ],
+                "sheetType": "pivot"
+            }
+        ]
+    ],
+    [
+        "信贷交易违约信息概要",
+        [
+            {
+                "data": [
+                    {
+                        "business_type": "资产处置业务",
+                        "number": 1,
+                        "rows_name": "账户数"
+                    },
+                    {
+                        "business_type": "垫款业务",
+                        "number": 1,
+                        "rows_name": "账户数"
+                    },
+                    {
+                        "business_type": "合计",
+                        "number": 2,
+                        "rows_name": "账户数"
+                    },
+                    {
+                        "business_type": "资产处置业务",
+                        "number": "10,000.00",
+                        "rows_name": "余额"
+                    },
+                    {
+                        "business_type": "垫款业务",
+                        "number": "20,000.00",
+                        "rows_name": "余额"
+                    },
+                    {
+                        "business_type": "合计",
+                        "number": "30,000.00",
+                        "rows_name": "余额"
+                    }
+                ],
+                "describe": "被追款信息汇总",
+                "fields": {
+                    "columns": [
+                        "business_type"
+                    ],
+                    "rows": [
+                        "rows_name"
+                    ],
+                    "valueInCols": true,
+                    "values": [
+                        "number"
+                    ]
+                },
+                "meta": [
+                    {
+                        "field": "number",
+                        "name": "数值"
+                    },
+                    {
+                        "field": "rows_name",
+                        "name": ""
+                    },
+                    {
+                        "field": "business_type",
+                        "name": "业务类型"
+                    }
+                ],
+                "sheetType": "pivot"
+            },
+            {
+                "data": [
+                    {
+                        "account_total": 1,
+                        "balance": "170,000.00"
+                    }
+                ],
+                "describe": "呆账信息汇总",
+                "fields": {
+                    "columns": [
+                        "account_total",
+                        "balance"
+                    ]
+                },
+                "meta": [
+                    {
+                        "field": "account_total",
+                        "name": "账户数"
+                    },
+                    {
+                        "field": "balance",
+                        "name": "余额"
+                    }
+                ],
+                "sheetType": "table"
+            },
+            {
+                "data": [
+                    {
+                        "account_type": "非循环贷账户",
+                        "columns_name": "账户数",
+                        "number": 3
+                    },
+                    {
+                        "account_type": "非循环贷账户",
+                        "columns_name": "月份数",
+                        "number": 6
+                    },
+                    {
+                        "account_type": "非循环贷账户",
+                        "columns_name": "单月最高逾期/透支总额",
+                        "number": "5,500.00"
+                    },
+                    {
+                        "account_type": "循环贷账户一",
+                        "columns_name": "账户数",
+                        "number": 1
+                    },
+                    {
+                        "account_type": "循环贷账户一",
+                        "columns_name": "月份数",
+                        "number": 3
+                    },
+                    {
+                        "account_type": "循环贷账户一",
+                        "columns_name": "单月最高逾期/透支总额",
+                        "number": "2,500.00"
+                    },
+                    {
+                        "account_type": "循环贷账户二",
+                        "columns_name": "账户数",
+                        "number": 2
+                    },
+                    {
+                        "account_type": "循环贷账户二",
+                        "columns_name": "月份数",
+                        "number": 6
+                    },
+                    {
+                        "account_type": "循环贷账户二",
+                        "columns_name": "单月最高逾期/透支总额",
+                        "number": "5,500.00"
+                    },
+                    {
+                        "account_type": "贷记卡账户",
+                        "columns_name": "账户数",
+                        "number": 2
+                    },
+                    {
+                        "account_type": "贷记卡账户",
+                        "columns_name": "月份数",
+                        "number": 4
+                    },
+                    {
+                        "account_type": "贷记卡账户",
+                        "columns_name": "单月最高逾期/透支总额",
+                        "number": "5,500.00"
+                    },
+                    {
+                        "account_type": "准贷记卡账户",
+                        "columns_name": "账户数",
+                        "number": "--"
+                    },
+                    {
+                        "account_type": "准贷记卡账户",
+                        "columns_name": "月份数",
+                        "number": "--"
+                    },
+                    {
+                        "account_type": "准贷记卡账户",
+                        "columns_name": "单月最高逾期/透支总额",
+                        "number": "--"
+                    }
+                ],
+                "describe": "逾期（透支）信息汇总",
+                "fields": {
+                    "columns": [
+                        "columns_name"
+                    ],
+                    "rows": [
+                        "account_type"
+                    ],
+                    "valueInCols": true,
+                    "values": [
+                        "number"
+                    ]
+                },
+                "meta": [
+                    {
+                        "field": "account_type",
+                        "name": "账户类型"
+                    },
+                    {
+                        "field": "columns_name",
+                        "name": ""
+                    }
+                ],
+                "sheetType": "pivot"
+            }
+        ]
+    ],
+    [
+        "信贷交易授信及负债信息概要（未结清/未销户）",
+        [
+            {
+                "data": [
+                    {
+                        "columns_name": "管理机构数",
+                        "number": 2,
+                        "rows_name": "非循环贷账户信息汇总"
+                    },
+                    {
+                        "columns_name": "账户数",
+                        "number": 3,
+                        "rows_name": "非循环贷账户信息汇总"
+                    },
+                    {
+                        "columns_name": "授信总额",
+                        "number": "1,010,000.00",
+                        "rows_name": "非循环贷账户信息汇总"
+                    },
+                    {
+                        "columns_name": "最近6个月平均应还款",
+                        "number": "6,000.00",
+                        "rows_name": "非循环贷账户信息汇总"
+                    },
+                    {
+                        "columns_name": "管理机构数",
+                        "number": 1,
+                        "rows_name": "循环贷账户一信息汇总"
+                    },
+                    {
+                        "columns_name": "账户数",
+                        "number": 3,
+                        "rows_name": "循环贷账户一信息汇总"
+                    },
+                    {
+                        "columns_name": "授信总额",
+                        "number": "20,000.00",
+                        "rows_name": "循环贷账户一信息汇总"
+                    },
+                    {
+                        "columns_name": "最近6个月平均应还款",
+                        "number": "2,000.00",
+                        "rows_name": "循环贷账户一信息汇总"
+                    },
+                    {
+                        "columns_name": "管理机构数",
+                        "number": 2,
+                        "rows_name": "循环贷账户二信息汇总"
+                    },
+                    {
+                        "columns_name": "账户数",
+                        "number": 3,
+                        "rows_name": "循环贷账户二信息汇总"
+                    },
+                    {
+                        "columns_name": "授信总额",
+                        "number": "610,000.00",
+                        "rows_name": "循环贷账户二信息汇总"
+                    },
+                    {
+                        "columns_name": "最近6个月平均应还款",
+                        "number": "8,000.00",
+                        "rows_name": "循环贷账户二信息汇总"
+                    }
+                ],
+                "describe": "",
+                "fields": {
+                    "columns": [
+                        "columns_name"
+                    ],
+                    "rows": [
+                        "rows_name"
+                    ],
+                    "valueInCols": true,
+                    "values": [
+                        "number"
+                    ]
+                },
+                "meta": [
+                    {
+                        "field": "rows_name",
+                        "name": ""
+                    },
+                    {
+                        "field": "columns_name",
+                        "name": ""
+                    }
+                ],
+                "sheetType": "pivot"
+            },
+            {
+                "data": [
+                    {
+                        "accounts": 4,
+                        "avg_quota": "4,000.00",
+                        "card_issuers": 2,
+                        "credit_granted_max": "30,000.00",
+                        "credit_granted_total": "80,000.00",
+                        "used_quota": "15,000.00"
+                    }
+                ],
+                "describe": "贷记卡账户信息汇总",
+                "fields": {
+                    "columns": [
+                        "card_issuers",
+                        "accounts",
+                        "credit_granted_total",
+                        "credit_granted_max",
+                        "used_quota",
+                        "avg_quota"
+                    ]
+                },
+                "meta": [
+                    {
+                        "field": "card_issuers",
+                        "name": "发卡机构数"
+                    },
+                    {
+                        "field": "accounts",
+                        "name": "账户数"
+                    },
+                    {
+                        "field": "credit_granted_total",
+                        "name": "授信总额"
+                    },
+                    {
+                        "field": "credit_granted_max",
+                        "name": "单家机构最高授信额"
+                    },
+                    {
+                        "field": "used_quota",
+                        "name": "已用额度"
+                    },
+                    {
+                        "field": "avg_quota",
+                        "name": "最近6个月平均使用额度"
+                    }
+                ],
+                "sheetType": "table"
+            },
+            {
+                "data": [
+                    {
+                        "accounts": 4,
+                        "avg_quota": "2,000.00",
+                        "card_issuers": 3,
+                        "credit_granted_max": "30,000.00",
+                        "credit_granted_total": "95,000.00",
+                        "used_quota": "12,000.00"
+                    }
+                ],
+                "describe": "贷记卡账户信息汇总",
+                "fields": {
+                    "columns": [
+                        "card_issuers",
+                        "accounts",
+                        "credit_granted_total",
+                        "credit_granted_max",
+                        "overdraft_balance",
+                        "avg_overdraft_balance"
+                    ]
+                },
+                "meta": [
+                    {
+                        "field": "card_issuers",
+                        "name": "发卡机构数"
+                    },
+                    {
+                        "field": "accounts",
+                        "name": "账户数"
+                    },
+                    {
+                        "field": "credit_granted_total",
+                        "name": "授信总额"
+                    },
+                    {
+                        "field": "credit_granted_max",
+                        "name": "单家机构最高授信额"
+                    },
+                    {
+                        "field": "overdraft_balance",
+                        "name": "透支余额"
+                    },
+                    {
+                        "field": "avg_overdraft_balance",
+                        "name": "最近6个月平均透支余额"
+                    }
+                ],
+                "sheetType": "table"
+            },
+            {
+                "data": [
+                    {
+                        "col_names": "账户数",
+                        "for_who": "为个人",
+                        "number": 1,
+                        "one_rows": "",
+                        "responsibility": "担保责任"
+                    },
+                    {
+                        "col_names": "担保金额",
+                        "for_who": "为个人",
+                        "number": "200,000.00",
+                        "one_rows": "",
+                        "responsibility": "担保责任"
+                    },
+                    {
+                        "col_names": "余额",
+                        "for_who": "为个人",
+                        "number": "100,000.00",
+                        "one_rows": "",
+                        "responsibility": "担保责任"
+                    },
+                    {
+                        "col_names": "账户数",
+                        "for_who": "为个人",
+                        "number": 3,
+                        "one_rows": "",
+                        "responsibility": "其他还款责任人"
+                    },
+                    {
+                        "col_names": "余额",
+                        "for_who": "为个人",
+                        "number": "500,000.00",
+                        "one_rows": "",
+                        "responsibility": "其他还款责任人"
+                    },
+                    {
+                        "col_names": "账户数",
+                        "for_who": "为企业",
+                        "number": 1,
+                        "one_rows": "",
+                        "responsibility": "担保责任"
+                    },
+                    {
+                        "col_names": "担保金额",
+                        "for_who": "为企业",
+                        "number": "200,000.00",
+                        "one_rows": "",
+                        "responsibility": "担保责任"
+                    },
+                    {
+                        "col_names": "余额",
+                        "for_who": "为企业",
+                        "number": "100,000.00",
+                        "one_rows": "",
+                        "responsibility": "担保责任"
+                    },
+                    {
+                        "col_names": "账户数",
+                        "for_who": "为企业",
+                        "number": 3,
+                        "one_rows": "",
+                        "responsibility": "其它相关还款责任"
+                    },
+                    {
+                        "col_names": "还款责任金额",
+                        "for_who": "为企业",
+                        "number": "900,000.00",
+                        "one_rows": "",
+                        "responsibility": "其它相关还款责任"
+                    },
+                    {
+                        "col_names": "余额",
+                        "for_who": "为企业",
+                        "number": "500,000.00",
+                        "one_rows": "",
+                        "responsibility": "其它相关还款责任"
+                    }
+                ],
+                "describe": "相关还款责任信息汇总",
+                "fields": {
+                    "columns": [
+                        "for_who",
+                        "responsibility",
+                        "col_names"
+                    ],
+                    "rows": [
+                        "one_row"
+                    ],
+                    "valueInCols": true,
+                    "values": [
+                        "number"
+                    ]
+                },
+                "meta": [
+                    {
+                        "field": "for_who",
+                        "name": ""
+                    },
+                    {
+                        "field": "responsibility",
+                        "name": ""
+                    },
+                    {
+                        "field": "col_names",
+                        "name": ""
+                    },
+                    {
+                        "field": "one_row",
+                        "name": ""
+                    }
+                ],
+                "sheetType": "pivot"
+            }
+        ]
+    ],
+    [
+        "非信贷交易信息概要",
+        [
+            {
+                "data": [
+                    {
+                        "accounts": 1,
+                        "business_type": "电信业务",
+                        "money": "10,000.00"
+                    },
+                    {
+                        "accounts": 1,
+                        "business_type": "水电气等公用事业",
+                        "money": "200.00"
+                    }
+                ],
+                "describe": "后付费业务欠费信息汇总",
+                "fields": {
+                    "columns": [
+                        "business_type",
+                        "accounts",
+                        "money"
+                    ]
+                },
+                "meta": [
+                    {
+                        "field": "business_type",
+                        "name": "业务类型"
+                    },
+                    {
+                        "field": "accounts",
+                        "name": "账户数"
+                    },
+                    {
+                        "field": "money",
+                        "name": "欠费金额"
+                    }
+                ],
+                "sheetType": "table"
+            }
+        ]
+    ],
+    [
+        "公共信息概要",
+        [
+            {
+                "data": [
+                    {
+                        "info_type": "欠税信息",
+                        "money": "10,000.00",
+                        "record_num": 1
+                    },
+                    {
+                        "info_type": "民事判决信息",
+                        "money": "10,000.00",
+                        "record_num": 1
+                    },
+                    {
+                        "info_type": "强制执行信息",
+                        "money": "10,000.00",
+                        "record_num": 1
+                    },
+                    {
+                        "info_type": "行政处罚信息",
+                        "money": "10,000.00",
+                        "record_num": 1
+                    }
+                ],
+                "describe": "公共信息汇总",
+                "fields": {
+                    "columns": [
+                        "info_type",
+                        "record_num",
+                        "money"
+                    ]
+                },
+                "meta": [
+                    {
+                        "field": "info_type",
+                        "name": "信息类型"
+                    },
+                    {
+                        "field": "record_num",
+                        "name": "记录数"
+                    },
+                    {
+                        "field": "money",
+                        "name": "涉及金额"
+                    }
+                ],
+                "sheetType": "table"
+            }
+        ]
+    ],
+    [
+        "查询记录概要",
+        [
+            {
+                "data": [
+                    {
+                        "approval": "贷款审批",
+                        "check": "最近1个月内的查询机构数",
+                        "number": 0,
+                        "one_row": ""
+                    },
+                    {
+                        "approval": "信用卡审批",
+                        "check": "最近1个月内的查询机构数",
+                        "number": 0,
+                        "one_row": ""
+                    },
+                    {
+                        "approval": "贷款审批",
+                        "check": "最近1个月内的查询次数",
+                        "number": 0,
+                        "one_row": ""
+                    },
+                    {
+                        "approval": "信用卡审批",
+                        "check": "最近1个月内的查询次数",
+                        "number": 0,
+                        "one_row": ""
+                    },
+                    {
+                        "approval": "贷后管理",
+                        "check": "最近2年内查询次数",
+                        "number": 7,
+                        "one_row": ""
+                    },
+                    {
+                        "approval": "担保资格审查",
+                        "check": "最近2年内查询次数",
+                        "number": 1,
+                        "one_row": ""
+                    },
+                    {
+                        "approval": "特约商户实名审查",
+                        "check": "最近2年内查询次数",
+                        "number": 1,
+                        "one_row": ""
+                    }
+                ],
+                "describe": "",
+                "fields": {
+                    "columns": [
+                        "check",
+                        "approval"
+                    ],
+                    "rows": [
+                        "one_row"
+                    ],
+                    "valueInCols": true,
+                    "values": [
+                        "number"
+                    ]
+                },
+                "meta": [
+                    {
+                        "field": "check",
+                        "name": ""
+                    },
+                    {
+                        "field": "approval",
+                        "name": ""
+                    },
+                    {
+                        "field": "one_row",
+                        "name": ""
+                    }
+                ],
+                "sheetType": "pivot"
+            },
+            {
+                "data": [
+                    {
+                        "date": "2014.07.22",
+                        "dissent_marker": "信贷交易信息提示正处于异议处理中。"
+                    }
+                ],
+                "describe": "异议及说明信息",
+                "fields": {
+                    "columns": [
+                        "dissent_marker",
+                        "date"
+                    ]
+                },
+                "meta": [
+                    {
+                        "field": "dissent_marker",
+                        "name": "异议标注"
+                    },
+                    {
+                        "field": "date",
+                        "name": "添加日期"
+                    }
+                ],
+                "sheetType": "table"
+            }
+        ]
+    ],
+    [
+        "机构查询记录明细",
+        [
+            {
+                "data": [
+                    {
+                        "date": "2015.05.31",
+                        "order": 1,
+                        "org": "中国工商银行",
+                        "reason": "贷款审批"
+                    },
+                    {
+                        "date": "2015.04.14",
+                        "order": 2,
+                        "org": "中国招商银行",
+                        "reason": "信用卡审批"
+                    },
+                    {
+                        "date": "2014.11.16",
+                        "order": 3,
+                        "org": "中国工商银行",
+                        "reason": "特约商户实名审查"
+                    },
+                    {
+                        "date": "2014.10.10",
+                        "order": 4,
+                        "org": "平安财险",
+                        "reason": "保前审查"
+                    },
+                    {
+                        "date": "2013.09.10",
+                        "order": 5,
+                        "org": "交银金融租赁公司",
+                        "reason": "融资审批"
+                    }
+                ],
+                "describe": "",
+                "fields": {
+                    "columns": [
+                        "order",
+                        "date",
+                        "org",
+                        "reason"
+                    ]
+                },
+                "meta": [
+                    {
+                        "field": "order",
+                        "name": "编号"
+                    },
+                    {
+                        "field": "date",
+                        "name": "查询日期"
+                    },
+                    {
+                        "field": "org",
+                        "name": "查询机构"
+                    },
+                    {
+                        "field": "reason",
+                        "name": "查询原因"
+                    }
+                ],
+                "sheetType": "table"
+            }
+        ]
+    ],
+    [
+        "本人查询记录明细",
+        [
+            {
+                "data": [
+                    {
+                        "date": "2015.05.14",
+                        "order": 1,
+                        "org": "本人",
+                        "reason": "本人查询（互联网个人信用信息服务平台）"
+                    },
+                    {
+                        "date": "2014.11.14",
+                        "order": 2,
+                        "org": "本人",
+                        "reason": "本人查询（商业银行网上银行）"
+                    },
+                    {
+                        "date": "2014.01.10",
+                        "order": 3,
+                        "org": "中国人民银行营业管理部",
+                        "reason": "本人查询（临柜）"
+                    }
+                ],
+                "describe": "",
+                "fields": {
+                    "columns": [
+                        "order",
+                        "date",
+                        "org",
+                        "reason"
+                    ]
+                },
+                "meta": [
+                    {
+                        "field": "order",
+                        "name": "编号"
+                    },
+                    {
+                        "field": "date",
+                        "name": "查询日期"
+                    },
+                    {
+                        "field": "org",
+                        "name": "查询机构"
+                    },
+                    {
+                        "field": "reason",
+                        "name": "查询原因"
+                    }
+                ],
+                "sheetType": "table"
+            }
+        ]
+    ]
+]

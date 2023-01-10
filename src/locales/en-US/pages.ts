@@ -66,7 +66,7 @@ export default {
   'pages.util.currency': "Currency",
   'pages.util.loan_term': "Loan Days",
   'pages.util.start_date': "Start Date",
-  'pages.util.end_date': "Last Date",
+  'pages.util.end_date': "End Date",
 
   'pages.util.analysis': "Analysis",
 
@@ -80,6 +80,11 @@ export default {
 
   'pages.util.edit': "Edit",
   'pages.util.reset': "Reset",
+  'pages.util.next_step' : "Next",
+  'pages.util.previous_step' : "Previous",
+  'pages.util.finish' : "Finish",
+
+  'pages.util.submit' : "Submit",
 
   //register result
   'pages.register_result.return_homepage': 'Return to Home page',
@@ -322,6 +327,29 @@ export default {
   'pages.loan_application.repayment_installment_id': "Installment",
   'pages.loan_application.repayment_amount': "Amount",
 
+  'pages.loan_application.repayment_status' : "Repayment Status",
+  'pages.loan_application.repayment_id' : "ID",
+  'pages.loan_application.last_date' : "Last Date",
+  'pages.loan_application.repayment_date' : "Repayment Date",
+  'pages.loan_application.interest_today' : "Amount with Interest (As of Today)",
+  'pages.loan_application.interest_full' : "Amount with Interest (As of Full Repayment Date)",
+  'pages.loan_application.interest_on_repayment' : "Amount with Interest (On Repayment Date)",
+  'pages.loan_application.overdue_penalty' : "Penalty Interest",
+  'pages.loan_application.repayment_history' : "Repayment History",
+  'pages.loan_application.outstanding_balance' : "Outstanding Balance",
+  'pages.loan_application.repayment_repayment_amount' : "Repayment Amount",
+  'pages.loan_application.repayment_proof' : "Repayment Proof",
+  'pages.loan_application.upload_proof' : "Upload",
+  'pages.loan_application.match_outstanding_amount' : "Match Outstanding Amount",
+  'pages.loan_application.please_enter_repayment_amount' : "Please Enter Repayment Amount",
+  'pages.loan_application.please_upload_payment_proof' : "Please upload Payment Proof",
+  'pages.loan_application.repayment_installment_date' : "Installment Repayment Date",
+  'pages.loan_application.repayment_days' : "Loan Days",
+  'pages.loan_application.pending_for_approval' : "Pending For Approval",
+  'pages.loan_application.repayment.acceptreject' : "Accept / Reject",
+  'pages.loan_application.repayment.accept' : "Accept",
+  'pages.loan_application.repayment.reject' : "Reject",
+
   //loan-application-list
   'pages.loan_application_list.company_id': "Company ID",
   'pages.loan_application_list.loan_id': "Loan ID",
@@ -336,7 +364,7 @@ export default {
   'pages.loan_application_list.loan_approval_details': "Loan Approval Details",
   'pages.loan_application_list.loan_approval': "Loan Approval",
 
-  'pages.loan_application_list.annual_interest_rate': "Annual Interest Rate",
+  'pages.loan_application_list.annual_interest_rate': "Annual Interest Rate(%)",
   'pages.loan_application_list.number_of_installments': "Number of Installments",
   //'pages.loan_application_list.loan_repayment_method': "Repayment Method",
   //'pages.loan_form.loan_rate': 'Loan rate',
@@ -350,8 +378,9 @@ export default {
   'pages.loan_application_list.day_approved': "Loan Period",
   //'pages.loan_application_list.loan_approval': "Loan Approval",
 
-  'pages.loan_application_list.annual_interest_rate_approved': "Approved Annual Interest Rate",
+  'pages.loan_application_list.annual_interest_rate_approved': "Approved Annual Interest Rate(%)",
   'pages.loan_application_list.number_of_installments_approved': "Approved Number of Installments",
+  'pages.loan_application_list.penalty_annual_interest_rate': "Penalty Annual Interest Rate(%)",
   //'pages.loan_application_list.loan_rate_approved': "Approved Loan Rate",
   //'pages.loan_application_list.loan_repayment_method_approved': "Approved Repayment Method",
 
@@ -416,6 +445,11 @@ export default {
 
   'pages.application.SUBMITTED': "SUBMITTED",
   'pages.application.UNSUBMITTED': "UNSUBMITTED",
+
+  'pages.application.PARTIAL_REPAYMENT' : "PARTIAL REPAYMENT",
+  'pages.application.EARLY_REPAYMENT' : "EARLY REPAYMENT",
+  'pages.application.FULL_REPAYMENT' : "FULL REPAYMENT",
+  'pages.application.OVERDUE_REPAYMENT' : "OVERDUE REPAYMENT",
 
   //borrower-form
   //step 1
@@ -513,6 +547,7 @@ export default {
   'pages.borrower_form.store_info.seller_id': "Seller ID",
   'pages.borrower_form.store_info.mws_code': "MWS authorization code",
   'pages.borrower_form.store_info.area': "Area",
+  'pages.borrower_form.store_info.authorize': "Amazon API Authorized",
   'pages.borrower_form.store_info.payment_platform': "Third-party payment platform",
   'pages.borrower_form.store_info.bank_num': "Bank account number of the payment platform account corresponding to the store.",
   'pages.borrower_form.store_info.add_store': "Add Store",
@@ -590,6 +625,16 @@ If the company's statement is false, the company agrees to bear all legal Liabil
 
   //Borrower_Lender
   'pages.borrower_form.account_receivable.amount_setting': "Amount Setting",
+  'pages.borrower_form.account_receivable.amount_monthly_ratio': "Amount Monthly Ratio",
+  'pages.borrower_form.account_receivable.amount_limit': "Amount Limited",
+  'pages.borrower_form.account_receivable.amount_remain': "Amount Remained",
+  'pages.borrower_form.account_receivable.currency': "Currency",
+
+  'pages.borrower_form.account_receivable.duration': "Duration (Day)",
+  'pages.borrower_form.account_receivable.annual_interest_rate': "Annual Interest Rate",
+  'pages.borrower_form.account_receivable.penalty_annual_interest_rate': "Penalty Annual Interest Rate",
+
+  'pages.borrower_form.account_receivable.admin_setting': "Admin Setting",
 
   //borrower-list
   'pages.borrower_list.borrower_list': "Merchant List",
@@ -615,6 +660,7 @@ If the company's statement is false, the company agrees to bear all legal Liabil
   'pages.borrower_list.borrower.inventory_finance': "Inventory Finance",
 
   'pages.borrower_list.borrower.lender_id_assign': "Lender ID Assigned",
+  'pages.borrower_list.borrower.lender_id_assign_name': "Lender Name Assigned",
 
   //upload file
   'pages.borrower_list.document_upload': "Uploaded Documents",
@@ -727,4 +773,12 @@ If the company's statement is false, the company agrees to bear all legal Liabil
 
   'pages.amount.borrower_list.created_date': "Created Date",
   'pages.amount.borrower_list.approved_date': "Approved Date",
+
+  //loan product
+  'pages.amount.loan_product.title': "Loan Product Management",
+  'pages.amount.loan_product.merchandise_group': "Merchandise Group",
+  'pages.amount.loan_product.amount_limit': "Amount Limit (Monthly Revenue)",
+  'pages.amount.loan_product.annual_interest_rate': "Annual Interest Rate (%)",
+  'pages.amount.loan_product.probability_of_default': "Probability of Default Threshold (%)",
+
 };

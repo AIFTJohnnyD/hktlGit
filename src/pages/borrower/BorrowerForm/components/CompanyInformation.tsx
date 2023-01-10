@@ -65,7 +65,7 @@ const CompanyInformation: React.FC = () => {
                 name="lear_country_code"
                 noStyle
               >              
-              <Select value={prefix} onChange={changePrefix} style={{ width: '100px' }}>
+              <Select allowClear={false} value={prefix} onChange={changePrefix} style={{ width: '100px' }}>
                 <Option value="+86">+86</Option>
                 <Option value="+852">+852</Option>
               </Select>

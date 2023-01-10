@@ -39,7 +39,7 @@ export default {
 
   'pages.util.basic_info': "基本信息",
 
-  'pages.util.review_info': "审批信息",
+  'pages.util.review_info': "额度信息",
   'pages.util.admin_review_info': "平台审批信息",
   'pages.util.status': "状态",
   'pages.util.remark': "注释",
@@ -67,6 +67,8 @@ export default {
   'pages.util.loan_term': "融资天数",
   'pages.util.start_date': "开始日期",
   'pages.util.end_date': "还款日期",
+  'pages.util.start_date_approved': "放款日期",
+  'pages.util.end_date_approved': "还款日期",
 
   'pages.util.analysis': "分析",
 
@@ -80,6 +82,11 @@ export default {
 
   'pages.util.edit': "编辑",
   'pages.util.reset': "重置",
+  'pages.util.next_step' : "下一步",
+  'pages.util.previous_step' : "上一步",
+  'pages.util.finish' : "提交",
+
+  'pages.util.submit' : "提交",
 
   //register result
   'pages.register_result.return_homepage': '返回主页',
@@ -132,6 +139,8 @@ export default {
 
   'pages.loan_form.loan_name': "贷款名称",
   'pages.loan_form.total_amount': "总金额",
+  'pages.loan_form.application_amount': "融资申请金额",
+  'pages.loan_form.application_purpose': "资金用途",
 
   'pages.loan_form.start_date': "开始日期",
   'pages.loan_form.end_date': "结束日期",
@@ -318,6 +327,30 @@ export default {
   'pages.loan_application.repayment_installment_id': "分期编号",
   'pages.loan_application.repayment_amount': "金额",
 
+  'pages.loan_application.repayment_status' : "还款状态",
+  'pages.loan_application.repayment_id' : "融资编号",
+  'pages.loan_application.last_date' : "到期日",
+  'pages.loan_application.repayment_date' : "还款日期",
+  'pages.loan_application.interest_today' : "当日还款额",
+  'pages.loan_application.interest_full' : "全部还款额",
+  'pages.loan_application.interest_on_repayment' : "到期日还款额",
+  'pages.loan_application.overdue_penalty' : "罚息(如果改贷款逾期)",
+  'pages.loan_application.repayment_history' : "还款记录",
+  'pages.loan_application.outstanding_balance' : "未结余额",
+  'pages.loan_application.repayment_repayment_amount' : "还款金额",
+  'pages.loan_application.repayment_proof' : "还款凭证",
+  'pages.loan_application.upload_proof' : "上传",
+  'pages.loan_application.match_outstanding_amount' : "全部还款",
+  'pages.loan_application.please_enter_repayment_amount' : "请输入还款金额",
+  'pages.loan_application.please_upload_payment_proof' : "请上传还款凭证",
+  'pages.loan_application.repayment_installment_date' : "分期还款日期",
+  'pages.loan_application.repayment_application_amout' : "融资金额",
+  'pages.loan_application.repayment_days' : "融资期限(天)",
+  'pages.loan_application.pending_for_approval' : "等待批准",
+  'pages.loan_application.repayment.acceptreject' : "批准 / 拒绝",
+  'pages.loan_application.repayment.accept' : "批准",
+  'pages.loan_application.repayment.reject' : "拒绝",
+
   //loan-application-list
   'pages.loan_application_list.company_id': "公司编号",
   'pages.loan_application_list.loan_id': "贷款产品编号",
@@ -334,7 +367,7 @@ export default {
   'pages.loan_application_list.loan_approval_details': "贷款审核详情",
   'pages.loan_application_list.loan_approval': "贷款批核",
 
-  'pages.loan_application_list.annual_interest_rate': "年利率",
+  'pages.loan_application_list.annual_interest_rate': "年利率(%)",
   'pages.loan_application_list.number_of_installments': "还款期数",
   //'pages.loan_application_list.loan_repayment_method': "还款方式",
   //'pages.loan_form.loan_rate': '贷款利率',
@@ -344,12 +377,13 @@ export default {
   'pages.loan_application_list.purpose': "贷款用途",
   'pages.loan_application_list.days': "贷款期限（天）",
   'pages.loan_application_list.amount_approved': "审批贷款金额",
-  'pages.loan_application_list.outstanding_balance': "未偿贷款金额",
+  'pages.loan_application_list.outstanding_balance': "未偿贷款本息",
   'pages.loan_application_list.day_approved': "审批贷款期限 (天)",
   //'pages.loan_application_list.loan_approval': "贷款批核",
   
-  'pages.loan_application_list.annual_interest_rate_approved': "审批年利率",
+  'pages.loan_application_list.annual_interest_rate_approved': "审批年利率 (%)",
   'pages.loan_application_list.number_of_installments_approved': "审批还款期数",
+  'pages.loan_application_list.penalty_annual_interest_rate': "罚息率 (%)",
 
   'pages.loan_application_list.loan_overdue': "是否逾期",
   'pages.loan_application_list.loan_overdue_amount': "逾期金额",
@@ -392,7 +426,7 @@ export default {
   'pages.application.UNAPPROVED': "拒绝",
 
   'pages.application.ACCEPTED': "接受",
-  'pages.application.UNACCEPTED': "取消",
+  'pages.application.UNACCEPTED': "拒绝",
 
   'pages.application.GOODS_RECEIVED': "商品入仓",
   'pages.application.GOODS_DELIVERY': "商品出仓",
@@ -403,7 +437,7 @@ export default {
   'pages.application.DRAWDOWN': "放款",
 
   'pages.application.REPAID': "回款",
-  'pages.application.DELINQUENT': "欠款",
+  'pages.application.DELINQUENT': "逾期",
 
   'pages.application.LIQUIDATED': "清算",
   'pages.application.LOAN_SETTLEMENT': "结算完成",
@@ -413,38 +447,302 @@ export default {
   'pages.application.SUBMITTED': "提交",
   'pages.application.UNSUBMITTED': "取消",
 
+  'pages.application.PARTIAL_REPAYMENT' : "部分还款",
+  'pages.application.EARLY_REPAYMENT' : "提前还款",
+  'pages.application.FULL_REPAYMENT' : "到期日全额还款",
+  'pages.application.OVERDUE_REPAYMENT' : "逾期还款",
+
+
+
   //borrower-form
   //step 1
-  'pages.borrower_form.base_info': "公司基本信息",
+  'pages.borrower_form.base_info': "企业基础资料",
+    'pages.borrower_form.basic_information.company_country':"所属国家或者地区",
+    'pages.borrower_form.basic_information.company_business':"企业属性",
+    'pages.borrower_form.basic_information.mainland_unified_social_credit_code':"关联公司统一社会信用代码",
+    'pages.borrower_form.basic_information.mainland_company_name':"关联公司名称",
+    'pages.borrower_form.basic_information.mainland_store_link':"店铺链接",
+    'pages.borrower_form.basic_information.mainland_company_contact_name':"企业联系人姓名",
+    'pages.borrower_form.basic_information.mainland_company_contact_phone':"企业联系人电话",
+    'pages.borrower_form.basic_information.mainland_company_contact_email':"企业联系邮箱",
+    'pages.borrower_form.basic_information.mainland_company_address':"关联公司办公地址",
+    'pages.borrower_form.basic_information.mainland_company_postalcode':"邮政编码",
+    'pages.borrower_form.basic_information.business_license':"营业执照",
     'pages.borrower_form.basic_information.business_proof':"营业证明",
-    'pages.borrower_form.basic_information.mainland_company':"内地公司",
-    'pages.borrower_form.basic_information.mainland_company_name':"内地公司名称",
-    'pages.borrower_form.basic_information.mainland_unified_social_credit_code':"内地公司统一社会信用代码",
-    'pages.borrower_form.basic_information.mainland_company_address':"内地公司办公地址",
+    'pages.borrower_form.basic_information.mainland_company':"关联公司",
+    'pages.borrower_form.basic_information.mainland_compnay_establishment_date':"关联公司成立日期",
     'pages.borrower_form.basic_information.HongKong_company':'香港公司',
     'pages.borrower_form.basic_information.HongKong_company_name':"香港公司名称",
     'pages.borrower_form.basic_information.HongKong_unified_social_credit_code':"香港公司商业登记号码",
+    'pages.borrower_form.basic_information.HongKong_compnay_establishment_date':"香港公司成立日期",
     'pages.borrower_form.basic_information.HongKong_company_address':"香港办公室/注册地址",
 
   //step 2
-  'pages.borrower_form.shareholder_info': "法人、股东及董事资料",
-    'pages.borrower_form.shareholder_info.mainland_legal_person':"内地公司法人资料",
-    'pages.borrower_form.shareholder_info.mainland_legal_person_name':"內地公司法定代表人名称",
+  'pages.borrower_form.shareholder_info': "法人资料",
+    'pages.borrower_form.shareholder_info.mainland_legal_person':"关联公司法人资料",    
+    'pages.borrower_form.shareholder_info.mainland_legal_person_name':"关联公司法定代表人名称",
     'pages.borrower_form.shareholder_info.please_input_mainland_legal_person_name':"请输入內地公司法定代表人名称",
-    'pages.borrower_form.shareholder_info.nationality':"国籍",
-    'pages.borrower_form.shareholder_info.please_input_nationality':"请输入国籍!",
     'pages.borrower_form.shareholder_info.phone':"手提电话号码",
     'pages.borrower_form.shareholder_info.please_input_phone':"请输入手机号码!",
     'pages.borrower_form.shareholder_info.wrong_phone':"手机号码格式错误!",
+    'pages.borrower_form.shareholder_info.nationality':"国籍",
+    'pages.borrower_form.shareholder_info.please_input_nationality':"请输入国籍!",
+
+    'pages.borrower_form.shareholder_info.documents_class':"证件类型",
+    'pages.borrower_form.shareholder_info.documents_photo':"证件照片",
     'pages.borrower_form.shareholder_info.email':"电邮",
     'pages.borrower_form.shareholder_info.please_input_email':"请输入电邮!",
     'pages.borrower_form.shareholder_info.wrong_email':"邮箱地址格式错误!",
+
+    'pages.borrower_form.companyPublic_account.companyPublic_account_information_or_private_oneClass_account_information':"企业公户信息或个人一类户信息(仅融资主体企业提供)",
+    'pages.borrower_form.companyPublic_account.companyPublic_account_name':"企业公户户名(持卡人姓名)",
+    'pages.borrower_form.companyPublic_account.bank_account':"银行账号",
+    'pages.borrower_form.companyPublic_account.bank_name':"银行名称",
+    'pages.borrower_form.companyPublic_account.openAccount_bank':"开户行全称",
+    'pages.borrower_form.companyPublic_account.bankKey':"联行号",
+    'pages.borrower_form.companyPublic_account.bank_reserved_phone':"银行预留手机号(仅个人一类户提供)",
+    //最终受益人
+    'pages.borrower_form.ultimate_beneficial_owner':"最终受益人(持有公司25%以上股份的人)",
+    'pages.borrower_form.ultimate_beneficial_owner.ultimate_beneficial_owner_name':"姓名",
+    'pages.borrower_form.ultimate_beneficial_owner.ultimate_beneficial_owner_countryOrDistrict':"证件所属国家/地区",
+    'pages.borrower_form.ultimate_beneficial_owner.ultimate_beneficial_owner_documentClass':"证件类型",
+    'pages.borrower_form.ultimate_beneficial_owner.ultimate_beneficial_owner_document_photo':"证件照片",
+
+    //香港企业信息输入
+    'pages.borrower_form.HKbase_info': "企业基础资料",
+    //////////////
+    'pages.borrower_form.HKbasic_information.location_hk':"所属国家或者地区",
+    'pages.borrower_form.HKbasic_information.br_code_hk':"商业登记证号码",
+    'pages.borrower_form.HKbasic_information.ci_code_hk':"企业注册证书号码",
+    //////////
+    'pages.borrower_form.HKbasic_information.name_hk':"企业名称",
+    'pages.borrower_form.HKbasic_information.company_link_hk':"公司网址",
+    'pages.borrower_form.HKbasic_information.address_hk':"企业经营地址",
+
+    'pages.borrower_form.HKbasic_information.contact_hk.name':"企业联系人姓名",
+    'pages.borrower_form.HKbasic_information.contact_hk.phone':"企业联系人电话",
+    'pages.borrower_form.HKbasic_information.contact_hk.email':"企业联系邮箱",
+    
+    'pages.borrower_form.HKbasic_information.contact_hk.position':"企业联系人职位",
+    //董事信息
+    'pages.borrower_form.director_person_hk': "董事信息",
+
+    'pages.borrower_form.director_person_hk.director_person_name':"董事姓名",
+    'pages.borrower_form.director_person_hk.director_person_name_english':"英文名称",
+    'pages.borrower_form.director_person_hk.director_person_nationality':"国籍",
+
+    'pages.borrower_form.director_person_hk.director_person_position':"职位",
+    'pages.borrower_form.director_person_hk.director_person_phone':"手提电话号码",
+    'pages.borrower_form.director_person_hk.director_person_email':"邮箱",
+
+    'pages.borrower_form.director_person_hk.director_person_address':"住宅地址",
+  
+    //股东信息
+    'pages.borrower_form.shareholder_person_hk':"股东信息(持有公司25%以上股份的人)",
+    'pages.borrower_form.shareholder_person_hk.shareholder_person_name':"股东姓名",
+    'pages.borrower_form.shareholder_person_hk.shareholder_person_name_english':"英文姓名",
+    'pages.borrower_form.shareholder_person_hk.shareholder_person_nationality':"国籍",
+
+    'pages.borrower_form.shareholder_person_hk.shareholder_person_position':"职位",
+    'pages.borrower_form.shareholder_person_hk.shareholder_person_phone':"手提电话号码",
+    'pages.borrower_form.shareholder_person_hk.shareholder_person_email':"邮箱",
+
+    'pages.borrower_form.shareholder_person_hk.shareholder_person_address':"住宅地址",
+    'pages.borrower_form.shareholder_person_hk.shareholder_person_rate':"股权比例",
+    // 'pages.borrower_form.shareholder_person_hk.HKultimate_beneficial_owner_document_photo':"证件照片",
+
+  //银行账户信息
+    'pages.borrower_form.corporate_account':"银行账户信息",
+    'pages.borrower_form.corporate_account.account_name':"户名",
+    'pages.borrower_form.corporate_account.bank_name':"银行名称",
+    'pages.borrower_form.corporate_account.bank_account':"银行账号",    
+    'pages.borrower_form.corporate_account.bank_swift_code':"银行国际代码(swift code)",
+    'pages.borrower_form.corporate_account.bank_addr':"银行地址",
+
+  //店铺信息
+    'pages.borrower_form.shop':"店铺信息",
+    'pages.borrower_form.shop.platform':"电商平台",
+    'pages.borrower_form.shop.name':"电商名称",
+    'pages.borrower_form.shop.id':"卖家编号",
+    'pages.borrower_form.shop.link':"店铺链接",
+    'pages.borrower_form.shop.bank_swift_code':"银行国际代码",
+
+  //关联公司信息输入
+    'pages.borrower_form.basic_information_cn': "企业基础资料",
+    //////////////
+    'pages.borrower_form.basic_information_cn.location_cn':"所属国家或者地区",
+    'pages.borrower_form.basic_information_cn.company_type_cn':"企业属性",
+    'pages.borrower_form.basic_information_cn.credit_code_cn': "统一社会信用代码",
+
+    'pages.borrower_form.basic_information_cn.name_cn':"企业名称",
+    'pages.borrower_form.basic_information_cn.address_cn':"企业经营地址",
+    'pages.borrower_form.basic_information_cn.post_code_cn': "公司地址邮编",
+
+    'pages.borrower_form.basic_information_cn.establishment_date_cn': "成立日期",
+    'pages.borrower_form.basic_information_cn.company_link_cn': "公司网址",
+
+
+    'pages.borrower_form.shareholder_info_cn': "法人资料",
+
+    'pages.borrower_form.shareholder_info_cn.lear_name': "名称",
+    'pages.borrower_form.shareholder_info_cn.lear_nationality': "国籍",
+    'pages.borrower_form.shareholder_info_cn.lear_mobile': "手机号码",
+
+    'pages.borrower_form.shareholder_info_cn.lear_email': "电邮",
+    'pages.borrower_form.shareholder_info_cn.lear_address': "住宅地址",
+
+    'pages.borrower_form.basic_information_cn.br_code_cn':"商业登记证号码",
+    'pages.borrower_form.basic_information_cn.ci_code_cn':"企业注册证书号码",
+    //////////
+    'pages.borrower_form.basic_information_cn.contact_cn.name':"企业联系人姓名",
+    'pages.borrower_form.basic_information_cn.contact_cn.phone':"企业联系人电话",
+    'pages.borrower_form.basic_information_cn.contact_cn.email':"企业联系邮箱",
+    
+    'pages.borrower_form.basic_information_cn.contact_cn.position':"企业联系人职位",
+  //董事信息
+    'pages.borrower_form.director_person_cn': "董事资料",
+
+    'pages.borrower_form.director_person_cn.director_person_name':"董事姓名",
+    'pages.borrower_form.director_person_cn.director_person_name_english':"英文名称",
+    'pages.borrower_form.director_person_cn.director_person_nationality':"国籍",
+
+    'pages.borrower_form.director_person_cn.director_person_position':"职位",
+    'pages.borrower_form.director_person_cn.director_person_phone':"手提电话号码",
+    'pages.borrower_form.director_person_cn.director_person_email':"邮箱",
+
+    'pages.borrower_form.director_person_cn.director_person_address':"住宅地址",
+  
+//股东信息
+    'pages.borrower_form.shareholder_person_cn':"股东资料(持有公司25%以上股份的人)",
+    'pages.borrower_form.shareholder_person_cn.shareholder_person_name':"股东姓名",
+    'pages.borrower_form.shareholder_person_cn.shareholder_person_name_english':"英文姓名",
+    'pages.borrower_form.shareholder_person_cn.shareholder_person_nationality':"国籍",
+
+    'pages.borrower_form.shareholder_person_cn.shareholder_person_position':"职位",
+    'pages.borrower_form.shareholder_person_cn.shareholder_person_phone':"手提电话号码",
+    'pages.borrower_form.shareholder_person_cn.shareholder_person_email':"邮箱",
+
+    'pages.borrower_form.shareholder_person_cn.shareholder_person_address':"住宅地址",
+    'pages.borrower_form.shareholder_person_cn.shareholder_person_rate':"股权比例",
+  // //银行账户信息
+  //   'pages.borrower_form.corporate_account':"银行账户信息",
+  //   'pages.borrower_form.corporate_account.account_name':"户名",
+  //   'pages.borrower_form.corporate_account.bank_name':"银行名称",
+  //   'pages.borrower_form.corporate_account.bank_account':"银行账号",
+    
+  //   'pages.borrower_form.corporate_account.bank_swift_code':"银行国际代码",
+
+
+
+//香港文件上传
+    //'pages.borrower_form.HKfile_upload':"香港文件上传",
+    'pages.borrower_form.HKfile_upload.file_br_hk':"商业登记证(BR)",
+    'pages.borrower_form.HKfile_upload.file_ci_hk':"公司注册证书(CI)",
+    'pages.borrower_form.HKfile_upload.file_nar1_hk':"周年申报表(NAR1)",
+
+    'pages.borrower_form.HKfile_upload.file_moa_hk':"公司章程(MOA)",
+    'pages.borrower_form.HKfile_upload.file_shareholder_cn':"公司股东/实控人(超过25%股份)身份证明文件",
+    'pages.borrower_form.HKfile_upload.file_director_hk':"董事身份证明文件+手持证件照片",
+
+    'pages.borrower_form.HKfile_upload.file_address_proof_hk':"公司股东/实控人(超过25%股份)地址证明(非中国境内居民)",
+    'pages.borrower_form.HKfile_upload.file_director_credit_report_hk':"公司股东/实控人人行信贷报告(中国境内居民)",
+    'pages.borrower_form.HKfile_upload.file_financial_statements_hk':"香港公司财务报表(审计报表/管理报表)",
+    
+    'pages.borrower_form.HKfile_upload.file_other_hk':"其他文件",
+
+
+//关联企业文件上传
+    //'pages.borrower_form.Mainlandfile_upload':"关联企业文件上传",
+
+    'pages.borrower_form.Mainlandfile_upload.file_br_cn':"营业执照",
+    'pages.borrower_form.Mainlandfile_upload.file_policy_cn':"章程",
+    'pages.borrower_form.Mainlandfile_upload.file_director_cn':"法人身份证",
+
+    'pages.borrower_form.Mainlandfile_upload.file_shareholder_cn':"股东/实控人(超过25% 以上股份/实控人身份证明)",
+    'pages.borrower_form.Mainlandfile_upload.file_director_credit_report_cn':"法人及股东/实控人人行信贷报告",
+    'pages.borrower_form.Mainlandfile_upload.file_company_credit_report_cn':"企业信用报告",
+
+    'pages.borrower_form.Mainlandfile_upload.file_financial_statements_cn':"境内公司财务报表(审计报表/管理报表)",
+    'pages.borrower_form.Mainlandfile_upload.file_other_cn':"其他文件",
+
+  
+  
+  
+    //////////////
+    'pages.borrower_form.HKbasic_information.company_country':"所属国家或者地区",
+    'pages.borrower_form.HKbasic_information.business_registration_certificate_number':"商业登记证号码",
+    'pages.borrower_form.HKbasic_information.company_registration_number':"企业注册证书号码",
+    //////////
+    'pages.borrower_form.HKbasic_information.hk_company_name':"企业名称",
+    'pages.borrower_form.HKbasic_information.hk_store_link':"店铺链接",
+    'pages.borrower_form.HKbasic_information.hk_company_contact_name':"企业联系人姓名",
+    //////////
+    'pages.borrower_form.HKbasic_information.hk_company_contact_phone':"企业联系人电话",
+    'pages.borrower_form.HKbasic_information.hk_company_contact_email':"企业联系邮箱",
+    'pages.borrower_form.HKbasic_information.hk_company_address':"企业经营地址",
+
+  'pages.borrower_form.HKshareholder_info': "董事信息",
+
+    'pages.borrower_form.HKshareholder_info.HKshareholder_info_name':"董事姓名",
+    'pages.borrower_form.HKshareholder_info.HKshareholder_info_phone_number':"联系电话",
+    'pages.borrower_form.HKshareholder_info.HKshareholder_info_document_country_district1':"证件所属国家或者地区",
+    'pages.borrower_form.HKshareholder_info.HKshareholder_info_document_country_district':"国籍",
+
+    'pages.borrower_form.HKshareholder_info.HKshareholder_info_document_class':"证件类型",
+
+  'pages.borrower_form.HKcompanyPublic_account.HKcompanyPublic_account_information_or_private_oneClass_account_information':"企业公户信息(仅融资主体企业提供)",
+    'pages.borrower_form.HKcompanyPublic_account.HKcompanyPublic_account_name':"企业公户户名",
+    'pages.borrower_form.HKcompanyPublic_account.HKbank_account':"银行账号",
+    'pages.borrower_form.HKcompanyPublic_account.HKbank_name':"银行名称",
+    
+    'pages.borrower_form.HKcompanyPublic_account.HKcompanyPublic_account_SwiftCode':"企业公户SwiftCode",
+
+//最终受益人
+  'pages.borrower_form.HKultimate_beneficial_owner':"最终受益人(持有公司25%以上股份的人)",
+    'pages.borrower_form.HKultimate_beneficial_owner.HKultimate_beneficial_owner_name':"姓名",
+    'pages.borrower_form.HKultimate_beneficial_owner.HKultimate_beneficial_owner_countryOrDistrict':"证件所属国家/地区",
+    'pages.borrower_form.HKultimate_beneficial_owner.HKultimate_beneficial_owner_documentClass':"证件类型",
+    // 'pages.borrower_form.HKultimate_beneficial_owner.HKultimate_beneficial_owner_document_photo':"证件照片",
+
+//香港文件上传
+ 'pages.borrower_form.HKfile_upload':"香港公司文件上传",
+    'pages.borrower_form.HKfile_upload.business_registration_certificate':"商业登记证(BR)",
+    'pages.borrower_form.HKfile_upload.company_registration':"公司注册证书(CI)",
+    'pages.borrower_form.HKfile_upload.annual_return':"周年申报表(NAR1)",
+
+    'pages.borrower_form.HKfile_upload.corporation_by_laws':"公司章程",
+    'pages.borrower_form.HKfile_upload.shareholder_document':" 公司股东/实控人(超过25%股份)身份证明文件",
+    'pages.borrower_form.HKfile_upload.director_document':"董事身份证明文件+手持证件照片",
+
+    'pages.borrower_form.HKfile_upload.shareholder_address_document':"公司股东/实控人(超过25%股份)地址证明",
+    'pages.borrower_form.HKfile_upload.shareholder_credit_history':"公司股东/实控人人行信贷报告",
+    'pages.borrower_form.HKfile_upload.hk_company_financial_statements':"香港公司财务报表(审计报表/管理报表)",
+    
+    'pages.borrower_form.HKfile_upload.other_documents':"其他文件",
+
+
+//大陆关联企业文件上传
+'pages.borrower_form.Mainlandfile_upload':"关联企业文件上传",
+
+    'pages.borrower_form.Mainlandfile_upload.business_license':"营业执照",
+    'pages.borrower_form.Mainlandfile_upload.bylaws':"章程",
+    'pages.borrower_form.Mainlandfile_upload.legal_person_id':"法人身份证",
+
+    'pages.borrower_form.Mainlandfile_upload.shareholder_document':"股东/实控人(超过25% 以上股份/实控人身份证明)",
+    'pages.borrower_form.Mainlandfile_upload.shareholder_credit_history':"人行信贷报告",
+    'pages.borrower_form.Mainlandfile_upload.mainland_company_financial_statements':"境内公司财务报表(审计报表/管理报表)",
+    
+    'pages.borrower_form.Mainlandfile_upload.other_documents':"其他文件",
+
+
+
+
     'pages.borrower_form.shareholder_info.address':"住宅地址",
     'pages.borrower_form.shareholder_info.please_input_address':"请输入住宅地址!",
     //'pages.borrower_form.shareholder_info.':"内地",
     //'pages.borrower_form.shareholder_info.':"香港",
     //ShareHolderDirector
-    'pages.borrower_form.shareholder_info.mainland_shareholder_info':"内地公司股东资料",
+    'pages.borrower_form.shareholder_info.mainland_shareholder_info':"关联公司股东资料",
     'pages.borrower_form.shareholder_info.HongKong_shareholder_info':"香港公司股东资料",
     'pages.borrower_form.shareholder_info.individual':"个人",
     'pages.borrower_form.shareholder_info.add_individual_shareholder':"添加个人股东",
@@ -457,10 +755,11 @@ export default {
     'pages.borrower_form.shareholder_info.formgroup_Company_person_name':"名称",
     'pages.borrower_form.shareholder_info.company_register_address':"注册地址",
     'pages.borrower_form.shareholder_info.company_country':"注册国家",
+    'pages.borrower_form.shareholder_info.location_hk':"注册国家",
     'pages.borrower_form.shareholder_info.shareholder_company_equity_ratio': "股权比例 %",
     'pages.borrower_form.shareholder_info.company_address':"办公地址",
     'pages.borrower_form.shareholder_info.HongKong_company_director_info':"香港公司董事资料",
-    'pages.borrower_form.shareholder_info.mainland_company_director_info':"内地公司董事资料",
+    'pages.borrower_form.shareholder_info.mainland_company_director_info':"关联公司董事资料",
     'pages.borrower_form.shareholder_info.company_director_individual':"个人",
     'pages.borrower_form.shareholder_info.add_individual_director':"添加个人董事",
     'pages.borrower_form.shareholder_info.individual_director_name':"名称",
@@ -480,6 +779,7 @@ export default {
     'pages.borrower_form.shareholder_info.director_address':"办公地址",
 
   //step 3
+/*  
   'pages.borrower_form.document_upload': "上载文档",
     'pages.borrower_form.upload_doc.format':"只接受上传.jpeg/.jpg/.png/.xls/.xlsx/.doc/.docx/.odt/.pdf/.ppt/.pptx 格式的档案",
     'pages.borrower_form.upload_doc.proof':"营业证明",
@@ -509,6 +809,7 @@ export default {
   'pages.borrower_form.store_info.seller_id': "卖家ID",
   'pages.borrower_form.store_info.mws_code': "MWS授权码",
   'pages.borrower_form.store_info.area': "区域",
+  'pages.borrower_form.store_info.authorize': "亚马逊API授信管理",
   'pages.borrower_form.store_info.payment_platform': "第三方支付平台",
   'pages.borrower_form.store_info.bank_num': "店铺对应之收款平台账号银行户口号码",
   'pages.borrower_form.store_info.add_store': "添加店铺",
@@ -541,7 +842,7 @@ export default {
     'pages.borrower_form.confirm_info.check_box1': "本公司明白及同意以上条款",
     'pages.borrower_form.confirm_info.check_box2': "本公司已详阅并同意以上声明真实及正确。本公司同意受以上声明所列的所有条款约束。如本公司声明不实，本公司同意承担所有法律责任以及向XXXXX赔偿一切直接或间接引起的损失。",
   'pages.borrower_form.must_provide': "*必须提供",
-  
+*/  
  //Shareholder_Person
  'pages.borrower_form.shareholder.person.name': "名称",
  'pages.borrower_form.shareholder.person.name_english': "英文名称",
@@ -557,7 +858,7 @@ export default {
 
   //Shareholder_Company
   'pages.borrower_form.shareholder.company.name': "名称",
-  'pages.borrower_form.shareholder.company.business_register_code': "内地公司统一社会信用代码/香港公司商业登记号码",
+  'pages.borrower_form.shareholder.company.business_register_code': "关联公司统一社会信用代码/香港公司商业登记号码",
 
   'pages.borrower_form.shareholder.company.register_address': "注册地址",
   'pages.borrower_form.shareholder.company.country': "注册国家",
@@ -579,38 +880,48 @@ export default {
 
   //Director_Company
   'pages.borrower_form.director.company.name': "名称",
-  'pages.borrower_form.director.company.business_register_code': "内地公司统一社会信用代码/香港公司商业登记号码",
+  'pages.borrower_form.director.company.business_register_code': "关联公司统一社会信用代码/香港公司商业登记号码",
 
   'pages.borrower_form.director.company.address': "办公地址",
   
   //Borrower_Lender
+  'pages.borrower_form.account_receivable.application_info': "融资申请信息",
   'pages.borrower_form.account_receivable.amount_setting': "应收账款融资审批",
   'pages.borrower_form.account_receivable.amount_monthly_ratio': "额度和月平均销售比例",
-  'pages.borrower_form.account_receivable.amount_limit': "审批额度",
-  'pages.borrower_form.account_receivable.amount_remain': "剩余额度",
+  'pages.borrower_form.account_receivable.amount_limit': "总额度",
+  'pages.borrower_form.account_receivable.amount_remain': "可使用额度",
   'pages.borrower_form.account_receivable.currency': "币种",
 
   'pages.borrower_form.account_receivable.duration': "期限 (天)",
   'pages.borrower_form.account_receivable.annual_interest_rate': "年利率",
   'pages.borrower_form.account_receivable.penalty_annual_interest_rate': "罚息率 (年)",
 
+  'pages.borrower_form.account_receivable.admin_setting': "管理员审批",
+
   //borrower-list
   'pages.borrower_list.borrower_list': "电商列表",
 
-  'pages.borrower_list.borrower.name_cn': "内地公司名称",
-  'pages.borrower_list.borrower.credit_code_cn': "内地公司统一社会信用代码",
-  'pages.borrower_list.borrower.address_cn': "内地公司办公地址",
-
+  'pages.borrower_list.borrower.name': "公司名称",
+  'pages.borrower_list.borrower.name_cn': "公司名称",
+  'pages.borrower_list.borrower.br_code_hk': "商业登记证号码",
+  'pages.borrower_list.borrower.credit_code_cn': "关联公司统一社会信用代码",
+  'pages.borrower_list.borrower.address': "办公地址",
+  'pages.borrower_list.borrower.link': "公司网址",
+  'pages.borrower_list.borrower.contact.name':"联系人姓名",
+  'pages.borrower_list.borrower.contact.phone':"联系人电话",
+  'pages.borrower_list.borrower.contact.email':"邮箱",  
+  'pages.borrower_list.borrower.contact.position':"联系人职位",
   'pages.borrower_list.borrower.name_hk': "香港公司名称",
-  'pages.borrower_list.borrower.br_code_hk': "香港公司商业登记号码",
-  'pages.borrower_list.borrower.address_hk': "香港办公室/注册地址",
+  'pages.borrower_list.borrower.address_hk': "香港办公地址",
+  'pages.borrower_list.borrower.address_cn': "关联公司办公地址",
+ 
 
-  'pages.borrower_list.shareholder_director_information_cn': "股东及董事资料(内地)",
-  'pages.borrower_list.shareholder_director_information_hk': "股东及董事资料(香港)",
+  'pages.borrower_list.shareholder_director_information_cn': "股东及董事资料(关联公司)",
+  'pages.borrower_list.shareholder_director_information_hk': "股东及董事资料(香港公司)",
 
-  'pages.borrower_list.shareholder_person': "个人股东",
+  'pages.borrower_list.shareholder_person': "股东信息",
   'pages.borrower_list.shareholder_company': "公司股东",
-  'pages.borrower_list.director_person': "个人董事",
+  'pages.borrower_list.director_person': "董事信息",
   'pages.borrower_list.director_company': "公司董事",
 
   'pages.borrower_list.borrower.finance_type': "融资类型",
@@ -618,11 +929,12 @@ export default {
   'pages.borrower_list.borrower.inventory_finance': "货物抵押融资",
 
   'pages.borrower_list.borrower.lender_id_assign': "融资公司编号",
+  'pages.borrower_list.borrower.lender_id_assign_name': "融资公司",
 
   //upload file
   'pages.borrower_list.document_upload': "客户文件",
   'pages.borrower_list.document_upload.company_hk': "香港公司",
-  'pages.borrower_list.document_upload.company_cn': "内地公司",
+  'pages.borrower_list.document_upload.company_cn': "关联公司",
 
   //pages.application
   'pages.application.otbplan_index.table_name': "采购计划进销存指标",
@@ -678,7 +990,7 @@ export default {
   'pages.platform.borrower.history_apply_times': "历史申请贷款次数",  
   'pages.platform.borrower.history_apply_approval_times': "历史申请贷款通过次数",  
 
-  'pages.postloan.repayment_installment': "分期还款",  
+  'pages.postloan.repayment_installment': "还款",  
   'pages.postloan.repayment_amount': "还款金额",  
 
   'pages.postloan.repayment_approval': "还款审批",  
@@ -731,4 +1043,11 @@ export default {
 
   'pages.amount.borrower_list.created_date': "审批开始日期",
   'pages.amount.borrower_list.approved_date': "额度审批日期",
+
+  //loan product
+  'pages.amount.loan_product.title': "信贷产品管理",
+  'pages.amount.loan_product.merchandise_group': "电商组别",
+  'pages.amount.loan_product.amount_limit': "总额度 (月流水)",
+  'pages.amount.loan_product.annual_interest_rate': "年利率 (%)",
+  'pages.amount.loan_product.probability_of_default': "违约概率阈值 (%)",
 };

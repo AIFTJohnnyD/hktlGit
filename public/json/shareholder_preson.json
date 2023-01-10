@@ -1,0 +1,1830 @@
+[
+  [
+    "个人信用报告“数字解读”",
+    [
+      [
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "数字解读"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "相对位置"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "说明"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 2,
+            "info": "468"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 2,
+            "info": ">10%"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "影响因素1：存在逾期还款记录"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "影响因素2：无"
+          }
+        ]
+      ]
+    ]
+  ],
+  [
+    "信贷交易信息提示",
+    [
+      [
+        [
+          {
+            "align": "center",
+            "colSpan": 2,
+            "rowSpan": 1,
+            "info": "业务类型"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "账户数"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "首笔业务发放月份"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 3,
+            "info": "贷款"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "个人住房贷款"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "2"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "2007.09"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "个人商用房贷款（包括商住两用房）"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "1"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "2007.09"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "其他类贷款"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "2"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "2007.09"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 2,
+            "info": "信用卡"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "贷记卡"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "2"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "2007.09"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "准贷记卡"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "1"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "2007.09"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "其他"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "--"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "3"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "2007.09"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 2,
+            "rowSpan": 1,
+            "info": "合计"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "11"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "--"
+          }
+        ]
+      ]
+    ]
+  ],
+  [
+    "信贷交易违约信息概要",
+    [
+      [
+        [
+          {
+            "align": "center",
+            "colSpan": 3,
+            "rowSpan": 1,
+            "info": "被追偿信息汇总"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "业务类型"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "账户数"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "余额"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "资产处置业务"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "1"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "10,000"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "垫款业务"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "1"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "20,000"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "合计"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "2"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "30,000"
+          }
+        ]
+      ],
+      [
+        [
+          {
+            "align": "center",
+            "colSpan": 2,
+            "rowSpan": 1,
+            "info": "呆账信息汇总"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "账户数"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "余额"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "1"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "170,000"
+          }
+        ]
+      ],
+      [
+        [
+          {
+            "align": "center",
+            "colSpan": 5,
+            "rowSpan": 1,
+            "info": "逾期（透支）信息汇总"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "账户类型"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "账户数"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "月份数"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "单月最高逾期/透支总额"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "最长逾期/透支月数"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "非循环贷账户"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "3"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "6"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "5,500"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "2"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "循环贷账户一"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "1"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "3"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "2,500"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "1"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "循环贷账户二"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "2"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "6"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "5,500"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "2"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "贷记卡账户"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "2"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "4"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "5,500"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "4"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "准贷记卡账户"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "--"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "--"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "--"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "--"
+          }
+        ]
+      ]
+    ]
+  ],
+  [
+    "信贷交易授信及负债信息概要（未结清/未销户）",
+    [
+      [
+        [
+          {
+            "align": "center",
+            "colSpan": 5,
+            "rowSpan": 1,
+            "info": "非循环贷账户信息汇总"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "管理机构数"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "账户数"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "授信总额"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "余额"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "最近6个月平均应还款"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "2"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "3"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "1,010,000"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "551,000"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "6,000"
+          }
+        ]
+      ],
+      [
+        [
+          {
+            "align": "center",
+            "colSpan": 5,
+            "rowSpan": 1,
+            "info": "循环贷账户一信息汇总"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "管理机构数"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "账户数"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "授信总额"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "余额"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "最近6个月平均应还款"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "1"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "3"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "20,000"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "12,000"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "2,000"
+          }
+        ]
+      ],
+      [
+        [
+          {
+            "align": "center",
+            "colSpan": 5,
+            "rowSpan": 1,
+            "info": "循环贷账户二信息汇总"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "管理机构数"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "账户数"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "授信总额"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "余额"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "最近6个月平均应还款"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "2"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "3"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "610,000"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "50,000"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "8,000"
+          }
+        ]
+      ],
+      [
+        [
+          {
+            "align": "center",
+            "colSpan": 7,
+            "rowSpan": 1,
+            "info": "贷记卡账户信息汇总"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "发卡机构数"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "账户数"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "授信总额"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "单家机构 \n最高授信额"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "单家机构 \n最低授信额"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "已用额度"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "最近6个月平\n均使用额度"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "2"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "4"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "80,000"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "30,000"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "20,000"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "15,000"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "4,000"
+          }
+        ]
+      ],
+      [
+        [
+          {
+            "align": "center",
+            "colSpan": 7,
+            "rowSpan": 1,
+            "info": "准贷记卡账户信息汇总"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "发卡机构数"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "账户数"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "授信总额"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "单家机构 \n最高授信额"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "单家机构 \n最低授信额"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "透支余额"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "最近6个月平 \n均透支余额"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "3"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "4"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "95,000"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "30,000"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "5,000"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "12,000"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "2,000"
+          }
+        ]
+      ],
+      [
+        [
+          {
+            "align": "center",
+            "colSpan": 6,
+            "rowSpan": 1,
+            "info": "相关还款责任信息汇总"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 6,
+            "rowSpan": 1,
+            "info": "为个人"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 3,
+            "rowSpan": 1,
+            "info": "担保责任"
+          },
+          {
+            "align": "center",
+            "colSpan": 3,
+            "rowSpan": 1,
+            "info": "其他相关还款责任"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "账户数"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "担保金额"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "余额"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "账户数"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "还款责任金额"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "余额"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "1"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "200,000"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "100,000"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "3"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "900,000"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "500,000"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 6,
+            "rowSpan": 1,
+            "info": "为企业"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 3,
+            "rowSpan": 1,
+            "info": "担保责任"
+          },
+          {
+            "align": "center",
+            "colSpan": 3,
+            "rowSpan": 1,
+            "info": "其他相关还款责任"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "账户数"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "担保金额"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "余额"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "账户数"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "还款责任金额"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "余额"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "1"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "200,000"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "100,000"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "3"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "900,000"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "500,000"
+          }
+        ]
+      ]
+    ]
+  ],
+  [
+    "非信贷交易信息概要",
+    [
+      [
+        [
+          {
+            "align": "center",
+            "colSpan": 3,
+            "rowSpan": 1,
+            "info": "后付费业务欠费信息汇总"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "业务类型"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "账户数"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "欠费金额"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "电信业务"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "1"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "10,000"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "水电气等公用事业"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "1"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "200"
+          }
+        ]
+      ]
+    ]
+  ],
+  [
+    "公共信息概要",
+    [
+      [
+        [
+          {
+            "align": "center",
+            "colSpan": 3,
+            "rowSpan": 1,
+            "info": "公共信息汇总"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "信息类型"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "记录数"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "涉及金额"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "欠税信息"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "1"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "10,000"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "民事判决信息"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "1"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "10,000"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "强制执行信息"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "1"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "10,000"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "行政处罚信息"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "1"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "10,000"
+          }
+        ]
+      ]
+    ]
+  ],
+  [
+    "查询记录概要",
+    [
+      [
+        [
+          {
+            "align": "center",
+            "colSpan": 2,
+            "rowSpan": 1,
+            "info": "最近1个月内的查询机构数"
+          },
+          {
+            "align": "center",
+            "colSpan": 3,
+            "rowSpan": 1,
+            "info": "最近1个月内的查询次数"
+          },
+          {
+            "align": "center",
+            "colSpan": 3,
+            "rowSpan": 1,
+            "info": "最近2年内的查询次数"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "贷款审批"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "信用卡审批"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "贷款审批"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "信用卡审批"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "本人查询"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "贷后管理"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "担保资格 \n审查"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "特约商户 \n实名审查"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "0"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "0"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "0"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "0"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "3"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "7"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "1"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "1"
+          }
+        ]
+      ],
+      [
+        [
+          {
+            "align": "center",
+            "colSpan": 2,
+            "rowSpan": 1,
+            "info": "异议及说明信息"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "异议标注"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "添加日期"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "信贷交易信息提示正处于异议处理中。"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "2014.07.22"
+          }
+        ]
+      ]
+    ]
+  ],
+  [
+    "查询记录",
+    [
+      [
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "编号"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "查询日期"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "查询机构"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "查询原因"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "1"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "2015.05.31"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "中国工商银行"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "贷款审批"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "2"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "2015.04.14"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "中国招商银行"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "信用卡审批"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "3"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "2014.11.16"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "中国工商银行"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "特约商户实名审查"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "4"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "2014.10.10"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "平安财险"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "保前审查"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "5"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "2013.09.10"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "交银金融租赁公司"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "融资审批"
+          }
+        ]
+      ],
+      [
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "编号"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "查询日期"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "查询机构"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "查询原因"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "1"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "2015.05.14"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "本人"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "本人查询（互联网个人信用信息服务平台）"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "2"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "2014.11.14"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "本人"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "本人查询（商业银行网上银行）"
+          }
+        ],
+        [
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "3"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "2014.01.10"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "中国人民银行营业管理部"
+          },
+          {
+            "align": "center",
+            "colSpan": 1,
+            "rowSpan": 1,
+            "info": "本人查询（临柜）"
+          }
+        ]
+      ]
+    ]
+  ]
+]

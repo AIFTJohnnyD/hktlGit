@@ -12,8 +12,8 @@ export type RepaymentListItem = {
 }
 
 export type TableListItem = {
-  key: number;
-  borrower_id: number;
+  key: string;
+  borrower_key: string;
   borrower_name: string;
 
   plan_name: number;
@@ -43,8 +43,8 @@ export type TableListData = {
 };
 
 export type TableListParams = {
-  key?: number;
-  borrower_id?: number;
+  key?: string;
+  borrower_key?: string;
   borrower_name?: string;
 
   plan_name: number;

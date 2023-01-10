@@ -20,13 +20,12 @@ import { FormattedMessage } from 'umi';
  * @param fields
  */
 
-const handleUpdate = async (fields: FormValueType, currentRow?: TableListItem) => {
+const handleUpdate = async (currentRow?: TableListItem) => {
   const hide = message.loading('Updating');
 
   try {
     await updateLoanApplication({
       ...currentRow,
-      ...fields,
     });
     hide();
     message.success('Update successfully!');
@@ -80,6 +79,7 @@ const TableList: React.FC = () => {
     {
       title: (<FormattedMessage id='pages.util.id'/>),
       dataIndex: 'key',
+      valueType: 'textarea',
       render: (dom, entity) => {
         return (
           <a
@@ -96,8 +96,8 @@ const TableList: React.FC = () => {
 
     {
       title: (<FormattedMessage id='pages.loan_application_list.company_id'/>),
-      dataIndex: 'borrower_id',
-      valueType: 'digit',
+      dataIndex: 'borrower_key',
+      valueType: 'textarea',
     },    
     {
       title: (<FormattedMessage id='pages.borrower_list.borrower.name_cn'/>),
@@ -171,8 +171,7 @@ const TableList: React.FC = () => {
       dataIndex: 'option',
       valueType: 'option',
       render: (_, record) => {
-        if (record?.status == "CREATED" || record?.status == "PENDING" 
-            || record?.status == "APPROVED" ) {
+        if (record?.status == "CREATED" || record?.status == "PENDING" || record?.status == "APPROVED" ) {
           return (
             <a
               key="config"
@@ -203,11 +202,11 @@ const TableList: React.FC = () => {
         ]}
         request={loanApplication}
         columns={columns}
-        rowSelection={{
-          onChange: (_, selectedRows) => {
-            setSelectedRows(selectedRows);
-          },
-        }}
+        // rowSelection={{
+        //   onChange: (_, selectedRows) => {
+        //     setSelectedRows(selectedRows);
+        //   },
+        // }}
       />
 
       {selectedRowsState?.length > 0 && (
@@ -238,8 +237,8 @@ const TableList: React.FC = () => {
       )}
       
       <UpdateForm
-        onSubmit={async (value) => {
-          const success = await handleUpdate(value, currentRow);
+        onSubmit={async () => {
+          const success = await handleUpdate(currentRow);
 
           if (success) {
             handleUpdateModalVisible(false);

@@ -1,5 +1,5 @@
 export type TableListItem = {
-  id: React.Key;
+  key: React.Key;
 
   name_cn: string;
   credit_code_cn: string;
@@ -42,7 +42,7 @@ export type TableListData = {
 };
 
 export type TableListParams = {
-  id: React.Key;
+  key: React.Key;
 
   name_cn: string;
   credit_code_cn: string;

@@ -28,20 +28,3 @@ export async function company(
   });
 }
 
-/** 新建 PUT /api/lender */
-export async function updateCompany(data: { [key: string]: any }, options?: { [key: string]: any }) {
-  return request<TableListItem>('/api/amount/company', {
-    data,
-    method: 'PUT',
-    ...(options || {}),
-  });
-}
-
-/** 删除 DELETE /api/lender */
-export async function removeLender(data: { key: number[] }, options?: { [key: string]: any }) {
-  return request<Record<string, any>>('/api/amount/company', {
-    data,
-    method: 'DELETE',
-    ...(options || {}),
-  });
-}

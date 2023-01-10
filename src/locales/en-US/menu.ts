@@ -51,18 +51,19 @@ export default {
   'menu.editor.koni': 'Koni Editor',
 
   //khwu
-  'menu.lender': 'Investment Institution',
-  'menu.lender.input': 'Input(Update) Information',
-  'menu.lender.index': 'Update Index',
+  'menu.lender': 'User Management',
+  'menu.lender.input': 'User Information',
+  'menu.lender.index': 'Risk-Control Index',
   'menu.lender.list': 'Investment Institution List',
 
-  'menu.borrower': 'Cross-border E-commerce',
+  'menu.borrower': 'E-commerce Client',
   'menu.borrower.input': 'Input(Update) Information',
   'menu.borrower.list': 'Merchant List',
   'menu.borrower.analysis': 'Merchant Analysis',
 
-  'menu.amount': 'Merchant Amount Management',
-  'menu.amount.list': 'Merchant List',
+  'menu.amount': 'Credit Management',
+  'menu.amount.loan-product': 'Loan Product Management',
+  'menu.amount.borrower-list': 'Merchant List',
 
   //'menu.loan': 'Loan Indicator',
   //'menu.loan.input': 'New Loan',
@@ -73,7 +74,7 @@ export default {
   'menu.product.list': 'Product List',
   'menu.product.analysis': 'Product Analysis',
 
-  'menu.application': 'Loan Application',
+  'menu.application': 'Financing Management',
   'menu.application.input_inventory': 'New Application (Inventory Finance)',
   'menu.application.input_account_receivable': 'New Application (Account Receivable Finance)',
   'menu.application.list': 'Loan Application List',
@@ -84,7 +85,7 @@ export default {
   'menu.platform.loanapplicationlist': 'Loan Application List',
   'menu.platform.borrowerlist': 'Borrower List',
 
-  'menu.postloan': 'Post-Loan Management',
+  'menu.postloan': 'Repayment Management',
   'menu.postloan.repaymentapplication': 'Repayment Application',
   'menu.postloan.repaymentList': 'Repayment List',
   'menu.postloan.repaymentapproval': 'Repayment Approval',

@@ -14,6 +14,7 @@ import Footer from '@/components/Footer';
 import { login } from '@/services/ant-design-pro/api';
 import { getFakeCaptcha } from '@/services/ant-design-pro/login';
 import styles from './index.less';
+import publicKey from './public_key';
 
 import { request } from 'umi';
 export async function sendSmsCode(country_code: string, mobile: string) {
@@ -76,9 +77,21 @@ const Login: React.FC = () => {
     }
   };
 
+  function encryptPassword(password: string | undefined) {
+    var forge = require('node-forge');
+    var public_key = forge.pki.publicKeyFromPem(publicKey);
+    var encrypted = public_key.encrypt(password, "RSA-OAEP", {
+        md: forge.md.sha256.create(),
+        mgf1: forge.mgf1.create()
+    });
+    var base64 = forge.util.encode64(encrypted);
+    return base64;
+  }
+
   const handleSubmit = async (values: API.LoginParams) => {
     setSubmitting(true);
     try {
+      values.encryptedPassword = encryptPassword(values.password)
       // 登录
       const msg = await login({ ...values, type });
       if (msg.status === 'ok') {
@@ -242,6 +255,7 @@ const Login: React.FC = () => {
                     <InputGroup compact>
                       <FormItem name="country_code" noStyle>
                         <Select
+                          allowClear={false}
                           size="large"
                           value={prefix}
                           onChange={changePrefix}

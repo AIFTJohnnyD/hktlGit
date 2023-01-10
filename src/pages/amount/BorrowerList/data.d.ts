@@ -1,6 +1,6 @@
 export type TableListItem = {
-  key: number;
-  id: number;
+  key: string;
+  id: string;
 
   name_cn: string;  
 
@@ -49,8 +49,8 @@ export type TableListData = {
 };
 
 export type TableListParams = {
-  key?: number;
-  id: number;
+  key?: string;
+  id: string;
 
   name_cn?: string;  
   

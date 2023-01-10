@@ -95,6 +95,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
               <Col xl={{ span: 12, offset: 0 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
                 <ProForm.Group title={<FormattedMessage id='pages.lender_form.phone'/>} size={8}>
                   <ProFormSelect
+                    allowClear={false}
                     name="phone_country_code"
                     rules={[{ required: true, message: 'Country code' }]}
                     valueEnum={{
@@ -180,6 +181,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
               <Col xl={{ span: 12, offset: 0 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
                 <ProForm.Group title={<FormattedMessage id='pages.lender_form.office_phone'/>} size={8}>
                   <ProFormSelect
+                    allowClear={false}
                     name="person_office_phone_country_code"
                     rules={[{ required: true, message: 'Country code' }]}
                     valueEnum={{
@@ -199,6 +201,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
               <Col xl={{ span: 12, offset: 0 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
                 <ProForm.Group title={<FormattedMessage id='pages.lender_form.mobile_phone'/>} size={8}>
                   <ProFormSelect
+                    allowClear={false}
                     name="person_mobile_phone_country_code"
                     rules={[{ required: true, message: 'Country code' }]}
                     valueEnum={{
@@ -255,6 +258,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           <Row gutter={16}>
             <Col xl={{ span: 12, offset: 0 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
               <ProFormSelect
+                allowClear={false}
                 label={<FormattedMessage id='pages.util.status'/>}
                 width="md"
                 name="status"

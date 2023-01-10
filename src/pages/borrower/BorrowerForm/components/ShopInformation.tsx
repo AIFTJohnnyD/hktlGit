@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { DownloadOutlined, ApiOutlined } from '@ant-design/icons';
 import ProCard from '@ant-design/pro-card';
 import RcResizeObserver from 'rc-resize-observer';
 import { FormattedMessage } from 'umi';
-import { Divider, Alert, Row, Col, Card, Button, message} from 'antd';
+import { Divider, Alert, Row, Col, Button } from 'antd';
+import { DownloadOutlined, ApiOutlined } from '@ant-design/icons';
 import styles from '../style.less';
 
 import { ProFormText, ProFormList, ProFormSelect, ProFormGroup } from '@ant-design/pro-form';
@@ -56,10 +56,8 @@ const ShopInformation: React.FC = () => {
           }}          
         >
           <ProFormGroup key="formgroup_shop">
-          <Card bordered={false}>
             <Row gutter={16}>
-              {/* <Col span={10}> */}
-              <Col lg={6} md={12} sm={24}>
+              <Col span={12}>
                 <ProFormText
                   label={<FormattedMessage id='pages.borrower_form.store_info.Amazon_name'/>}
                   width="md"
@@ -67,8 +65,7 @@ const ShopInformation: React.FC = () => {
                   rules={[{ required: true, message: '' }]}
                 />
               </Col>
-              {/* <Col span={10}> */}
-              <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
+              <Col span={12}>
                 <ProFormText
                   label={<FormattedMessage id='pages.borrower_form.store_info.seller_id'/>}
                   width="md"
@@ -76,14 +73,10 @@ const ShopInformation: React.FC = () => {
                   rules={[{ required: true, message: '' }]}
                 />                
               </Col>
-              <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
-                
-              </Col>
             </Row>
-
+{/*
             <Row gutter={16}>
-              {/* <Col span={10}> */}
-              <Col lg={6} md={12} sm={24}>
+              <Col span={12}>
                 <ProFormText
                   label={<FormattedMessage id='pages.borrower_form.store_info.mws_code'/>}
                   width="md"
@@ -91,8 +84,7 @@ const ShopInformation: React.FC = () => {
                   rules={[{ required: true, message: '' }]}
                 />
               </Col>
-              {/* <Col span={10}> */}
-              <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
+              <Col span={12}>
                 <ProFormText
                   label={<FormattedMessage id='pages.borrower_form.store_info.area'/>}
                   width="md"
@@ -100,26 +92,27 @@ const ShopInformation: React.FC = () => {
                   rules={[{ required: true, message: '' }]}
                 />                
               </Col>
-              <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 24 }} sm={24}>
-                <Button                   
+            </Row>
+*/}
+            <Row gutter={16}>
+              <Col span={24}>
+                <Button
+                  //size="large"         ???
                   type="primary"
-                  size="large"
                   shape="round" 
-                  block
-                  // href="https://www.google.com"
+                  //block                ???
                   icon={<ApiOutlined />}
                   onClick={() => {
                     window.open("https://sellercentral.amazon.com/apps/authorize/consent?application_id=amzn1.sp.solution.2364e294-9851-4572-a767-acd37af1187e&version=beta",'newwindow','height=800, width=1500, top=160, left=350, toolbar=no, menubar=no, status=no')
                   }}
                 >
-                  {<FormattedMessage id='pages.borrower_form.store_info.areasdfa' defaultMessage=" API授信管理"/>}
+                  {<FormattedMessage id='pages.borrower_form.store_info.authorize'/>}
                 </Button>
-              </Col> 
+              </Col>
             </Row>
 
             <Row gutter={16}>
-              {/* <Col span={10}> */}
-              <Col lg={6} md={12} sm={24}>
+              <Col span={12}>
                 <ProFormText
                   label={<FormattedMessage id='pages.borrower_form.store_info.payment_platform'/>}
                   width="md"
@@ -127,8 +120,7 @@ const ShopInformation: React.FC = () => {
                   rules={[{ required: true, message: '' }]}
                 /> 
               </Col>
-              {/* <Col span={10}> */}
-              <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
+              <Col span={12}>
                 <ProFormText
                   label={<FormattedMessage id='pages.borrower_form.store_info.bank_num'/>}
                   width="md"
@@ -136,11 +128,8 @@ const ShopInformation: React.FC = () => {
                   rules={[{ required: true, message: '' }]}
                 />               
               </Col>
-              <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
-
-              </Col> 
             </Row>
-          </Card>
+
           </ProFormGroup>
         </ProFormList>
       </ProCard>

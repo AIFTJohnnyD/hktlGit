@@ -1,8 +1,10 @@
+// @ts-ignore
+/* eslint-disable */
 import { request } from 'umi';
 import { TableListItem } from './data';
 
-/** 获取列表 GET /api/loan_application */
-export async function loanApplication(
+/** 获取列表 GET /api/company */
+export async function company(
   params: {
     // query
     /** 当前的页码 */
@@ -17,26 +19,12 @@ export async function loanApplication(
     /** 列表的内容总数 */
     total?: number;
     success?: boolean;
-  }>('/api/loan_application', {
+  }>('/api/amount/list', {
     method: 'GET',
     params: {
       ...params,
     },
     ...(options || {}),
-  });
-}
-
-export async function fakeSubmitForm(params: any) {
-  return request('/api/application', {
-    method: 'PUT',
-    data: params,
-  });
-}
-
-export async function getBorrowerId(params: any) {
-  return request('/api/Borrower/get_id', {
-    method: 'PUT',
-    data: params,
   });
 }
 

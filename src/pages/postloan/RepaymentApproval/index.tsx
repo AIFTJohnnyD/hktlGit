@@ -77,7 +77,7 @@ const TableList: React.FC = () => {
       valueType: 'digit',
     },    
     {
-      title: (<FormattedMessage id='pages.borrower_list.borrower.name_cn'/>),
+      title: (<FormattedMessage id='pages.borrower_list.borrower.name'/>),
       dataIndex: 'borrower_name',
       valueType: 'textarea',
       
@@ -177,11 +177,11 @@ const TableList: React.FC = () => {
         ]}
         request={loanApplicationPostloan}
         columns={columns}
-        rowSelection={{
-          onChange: (_, selectedRows) => {
-            setSelectedRows(selectedRows);
-          },
-        }}
+        // rowSelection={{
+        //   onChange: (_, selectedRows) => {
+        //     setSelectedRows(selectedRows);
+        //   },
+        // }}
       />
 
       {selectedRowsState?.length > 0 && (

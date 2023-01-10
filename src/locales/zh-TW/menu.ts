@@ -51,19 +51,20 @@ export default {
   'menu.editor.koni': '拓撲編輯器',
   
   //khwu
-  'menu.lender': '投資機構管理',
-  'menu.lender.input': '輸入(更新)資訊',
-  'menu.lender.index': '更新指標',  
+  'menu.lender': '用戶管理',
+  'menu.lender.input': '用戶信息',
+  'menu.lender.index': '風控指標',
   'menu.lender.list': '投資機構列表',
 
-  'menu.borrower': '跨境電商管理',
+  'menu.borrower': '電商管理',
   'menu.borrower.input': '輸入(更新)資訊',
   'menu.borrower.list': '電商列表',
   'menu.borrower.analysis': '電商分析',
 
-  'menu.amount': '電商額度管理',
-  'menu.amount.list': '電商列表',
-  
+  'menu.amount': '授信管理',
+  'menu.amount.loan-product': '信貸產品管理',
+  'menu.amount.borrower-list': '電商列表',
+
   //'menu.loan': '貸款指標',
   //'menu.loan.input': '輸入信息',
   //'menu.loan.list': '貸款產品列表',
@@ -73,7 +74,8 @@ export default {
   'menu.product.list': '商品列表',
   'menu.product.analysis': '商品分析',
 
-  'menu.application': '商戶融資管理',
+  'menu.application': '融資管理',
+  'menu.application.analysis': '融資分析',
   'menu.application.input_inventory': '新建申請(貨物抵押融資)',  
   'menu.application.input_account_receivable': '新建申請(應收賬款融資)',
   'menu.application.list': '融資申請列表',
@@ -88,7 +90,7 @@ export default {
   'menu.platform.loanapplicationlist': '貸款申請列表',  
   'menu.platform.borrowerlist': '電商列表',
 
-  'menu.postloan': '商戶貸後管理',
+  'menu.postloan': '還款管理',
   'menu.postloan.repaymentapplication': '還款申請',
   'menu.postloan.repaymentList': '還款記錄',  
   'menu.postloan.repaymentapproval': '還款審批',

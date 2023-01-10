@@ -300,7 +300,7 @@ const UserRegister: FC = () => {
                   label = "类别"
                   rules={[{ required: true, message: intl.formatMessage({ id: 'pages.login.company.type', defaultMessage: '请输入公司性质 (跨境电商 / 投资机构).',}) }]}
                 >
-                  <Select size="large">
+                  <Select allowClear={false} size="large">
                     <Option value="borrower">跨境电商</Option>
                     <Option value="lender">投资机构</Option>              
                   </Select>
@@ -328,7 +328,7 @@ const UserRegister: FC = () => {
                     name="country_code"
                     noStyle
                   >
-                    <Select size="large" value={prefix} onChange={changePrefix} style={{ width: '25%' }}>
+                    <Select allowClear={false} size="large" value={prefix} onChange={changePrefix} style={{ width: '25%' }}>
                       <Option value="+852">+852</Option>
                       <Option value="+86">+86</Option>
                     </Select>

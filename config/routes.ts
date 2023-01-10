@@ -44,6 +44,12 @@ export default [
     redirect: '/welcome',
   },
   {
+    path: '/chatroom',
+    name: 'chatroom',
+    icon: 'smile',
+    component: './Chatroom',
+  },
+  {
     path: '/lender',
     name: 'lender',
     icon: 'table',
@@ -76,33 +82,81 @@ export default [
     name: 'borrower',
     icon: 'table',
     routes: [
+      // {
+      //   name: 'input',
+      //   icon: 'table',
+      //   path: '/borrower/borrower-form-step',
+      //   component: './borrower/BorrowerForm',
+      //   access: 'canBorrowerNew',
+      // },
+
+      //香港公司输入信息
       {
-        name: 'input',
+        name: 'hk_input',
         icon: 'table',
-        path: '/borrower/borrower-form',
-        component: './borrower/BorrowerForm',
+        path: '/borrower/borrower-formhk',
+        component: './borrower/BorrowerFormHK',
         access: 'canBorrowerNew',
       },
+      //关联公司输入信息
+      {
+        name: 'mainland_input',
+        icon: 'table',
+        path: '/borrower/borrower-form',
+        component: './borrower/BorrowerFormMainland',
+        access: 'canBorrowerNew',
+      },
+      //香港公司文件上传
+      {
+        name: 'hk_file_upload',
+        icon: 'table',
+        path: '/borrower/borrower-form-hk_file_upload',
+        component: './borrower/BorrowerFormHKFileUpload',
+        access: 'canBorrowerNew',
+      },
+      //关联公司文件上传
+      {
+        name: 'mainland_file_upload',
+        icon: 'table',
+        path: '/borrower/borrower-form-mainland_file_upload',
+        component: './borrower/BorrowerFormMainlandFileUpload',
+        access: 'canBorrowerNew',
+      },
+
       {
         name: 'list',
         icon: 'table',
         path: '/borrower/borrower-list',
         component: './borrower/BorrowerList',
         access: 'canLenderAndAdmin',
-      },      
+      },
+
       {
         name: 'list',
         hideInMenu: true,
         icon: 'table',
         path: '/borrower/borrower-approval',
-        component: './borrower/BorrowerList_Approval',
+        component: './borrower/BorrowerList_Approval',   
         access: 'canLenderAndAdmin',
         layout: {
           hideMenu: true,
           hideNav: true,
           hideFooter: true,
-        },        
-      },      
+        },
+      },
+      {
+        name: 'list',
+        hideInMenu: true,
+        icon: 'table',
+        path: '/borrower/borrower_shareholder_info',
+        component: './borrower/BorrowerList_Approval/ShareholderInfo',
+        access: 'canLenderAndAdmin',
+        layout: {
+          hideMenu: true,
+          hideNav: true,
+          hideFooter: true,
+        },
+      },
     ],
   },
 
@@ -112,7 +166,14 @@ export default [
     icon: 'table',
     routes: [
       {
-        name: 'list',
+        name: 'loan-product',
+        icon: 'table',
+        path: '/amount/loan-product',
+        component: './amount/LoanProduct',
+        access: 'canLenderAndAdmin',
+      },      
+      {
+        name: 'borrower-list',
         icon: 'table',
         path: '/amount/borrower-list',
         component: './amount/BorrowerList',
@@ -220,18 +281,13 @@ export default [
         path: '/application/borrower-analysis',
         component: './application/BorrowerAnalysis',
         access: 'canLenderAndAdmin',
-        // layout: {
-        //   hideMenu: true,
-        //   hideNav: true,
-        //   hideFooter: true,
-        // }, 
-      }, 
-      //用于给hktl展示的商户信息页面：隐藏菜单栏等      
+      },
+      //用于先查看KYC再审批额度，隐藏菜单栏显示
       {
         name: 'analysis',
         hideInMenu: true,
         icon: 'smile',
-        path: '/application/borrower-analysis-test',
+        path: '/application/borrower-analysis-amount-approval',
         component: './application/BorrowerAnalysis',
         access: 'canLenderAndAdmin',
         layout: {
@@ -239,7 +295,7 @@ export default [
           hideNav: true,
           hideFooter: true,
         }, 
-      },      
+      },         
       {
         name: 'approval',
         hideInMenu: true,
@@ -262,6 +318,7 @@ export default [
     icon: 'table',
     access: 'canAdmin',
     routes: [
+      /*
       {
         name: 'loanapplicationlist',
         icon: 'table',
@@ -269,6 +326,7 @@ export default [
         path: '/platform/loan-application-list',
         component: './platform/LoanApplicationList',
       },
+      */
       {
         name: 'borrowerlist',
         icon: 'table',
@@ -298,6 +356,35 @@ export default [
         access: 'canLender',
         path: '/postloan/repayment-approval',
         component: './postloan/RepaymentApproval',
+      },
+      {
+        name: 'repaymentapprovalborrowerinfo',
+        hideInMenu: true,
+        icon: 'table',
+        access: 'canLenderAndAdmin',
+        path: '/postloan/repayment-approval-borrower-info',
+        component: './postloan/RepaymentApproval/components/UpdateFormBorrowerInfo.tsx',
+        layout: {
+          hideMenu: true,
+          hideNav: true,
+          hideFooter: true,
+        },
+      },
+    ],
+  },
+
+  {
+    path: '/testing',
+    name: 'testing',
+    icon: 'table',
+    access: 'canLenderAndBorrowerAndAdmin',
+    routes: [
+      {
+        name: 'testing',
+        icon: 'table',
+        access: 'canLenderAndBorrowerAndAdmin',
+        path: '/testing/testing',
+        component: './testing/testing.tsx',
       },
     ],
   },

@@ -81,6 +81,7 @@ const TableList: React.FC = () => {
     {
       title: (<FormattedMessage id='pages.util.id'/>),
       dataIndex: 'key',
+      width: '5%',
       render: (dom, entity) => {
         return (
           <a
@@ -207,11 +208,11 @@ const TableList: React.FC = () => {
         ]}
         request={product}
         columns={columns}
-        rowSelection={{
-          onChange: (_, selectedRows) => {
-            setSelectedRows(selectedRows);
-          },
-        }}
+        // rowSelection={{
+        //   onChange: (_, selectedRows) => {
+        //     setSelectedRows(selectedRows);
+        //   },
+        // }}
       />
 
       {selectedRowsState?.length > 0 && (
@@ -272,15 +273,15 @@ const TableList: React.FC = () => {
         }}
         closable={false}
       >
-        {currentRow?.product_id && (
+        {currentRow?.key && (
           <ProDescriptions<TableListItem>
             column={2}
-            title={currentRow?.product_id}
+            title={currentRow?.key}
             request={async () => ({
               data: currentRow || {},
             })}
             params={{
-              id: currentRow?.product_id,
+              key: currentRow?.key,
             }}
             columns={columns as ProDescriptionsItemProps<TableListItem>[]}
           />

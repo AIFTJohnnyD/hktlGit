@@ -1,8 +1,10 @@
-import { Button, message, Drawer } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
+import { Button, message, Input, Drawer } from 'antd';
 import React, { useState, useRef } from 'react';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
+import { ModalForm, ProFormText, ProFormTextArea } from '@ant-design/pro-form';
 import type { ProDescriptionsItemProps } from '@ant-design/pro-descriptions';
 import ProDescriptions from '@ant-design/pro-descriptions';
 import type { FormValueType } from './components/UpdateForm';
@@ -15,7 +17,7 @@ import { FormattedMessage } from 'umi';
 /**
  * 更新节点
  *
- * @param   
+ * @param fields
  */
 
 const handleUpdate = async (fields: FormValueType, currentRow?: TableListItem) => {
@@ -89,7 +91,7 @@ const TableList: React.FC = () => {
     },
 
     {
-      title: (<FormattedMessage id='pages.borrower_list.borrower.name_cn'/>),
+      title: (<FormattedMessage id='pages.borrower_list.borrower.name'/>),
       dataIndex: 'name_cn',
       valueType: 'textarea',
     },    
@@ -140,8 +142,7 @@ const TableList: React.FC = () => {
           }}
           */
           onClick={() => {
-            window.open("/borrower/borrower-approval?borrower_id=" + record?.key,'newwindow','height=800, width=1500, top=160, left=350, toolbar=no, menubar=no, status=no')
-            // window.open("/application/borrower-analysis?borrower_id=1" ,'newwindow','height=800, width=1500, top=160, left=350, toolbar=yes, menubar=yes, status=no')
+            window.open("/borrower/borrower-approval?borrower_key=" + record?.key,'newwindow','height=800, width=1500, top=160, left=350, toolbar=no, menubar=no, status=no')
           }}         
         >
           <FormattedMessage id='pages.util.review'/>
@@ -165,11 +166,11 @@ const TableList: React.FC = () => {
         ]}
         request={getList}
         columns={columns}
-        rowSelection={{
-          onChange: (_, selectedRows) => {
-            setSelectedRows(selectedRows);
-          },
-        }}
+        // rowSelection={{
+        //   onChange: (_, selectedRows) => {
+        //     setSelectedRows(selectedRows);
+        //   },
+        // }}
       />
 
       {selectedRowsState?.length > 0 && (

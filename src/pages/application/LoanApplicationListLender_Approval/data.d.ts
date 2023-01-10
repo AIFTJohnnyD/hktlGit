@@ -1,6 +1,6 @@
 export type TableListItem = {
     key: number;
-    borrower_id: number;
+    borrower_key: number;
     borrower_name: string;
   
     loan_id: number;
@@ -24,6 +24,7 @@ export type TableListItem = {
   
     amount_approved: number;
     outstanding_balance: number;
+    outstanding_balance_interest_date: string;
   
     day_approved: number;
   
@@ -47,6 +48,9 @@ export type TableListItem = {
     list_company_index: [];
   
     list_price_elasticity: [];
+    
+    dict_borrower_amount:any;
+    dict_nonperforming_loan:any;
   
   /*
     history_apply_times: number;

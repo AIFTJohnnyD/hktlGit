@@ -262,7 +262,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
             <Col xl={6} lg={6} md={12} sm={24}>
               <ProFormText
                 name="name_cn"
-                label={<FormattedMessage id='pages.borrower_list.borrower.name_cn'/>}
+                label={<FormattedMessage id='pages.borrower_list.borrower.name'/>}
                 width="md"
                 rules={[
                   {
@@ -475,6 +475,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           <Row gutter={16}>
             <Col xl={6} lg={6} md={12} sm={24}>
               <ProFormSelect
+                allowClear={false}
                 label={<FormattedMessage id='pages.borrower_form.account_receivable.amount_monthly_ratio'/>}
                 width="md"
                 name="amount_monthly_ratio"
@@ -504,6 +505,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
 
             <Col xl={{ span: 6, offset: 2 }} lg={{ span: 6 }} md={{ span: 24 }} sm={24}>
               <ProFormSelect
+                allowClear={false}
                 label={<FormattedMessage id='pages.util.currency'/>}
                 width="md"
                 name="currency"
@@ -511,7 +513,6 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
                 valueEnum={{
                   USD: 'USD',
                   HKD: 'HKD',
-                  CNY: 'CNY',
                 }}
               />
             </Col>            
@@ -520,6 +521,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           <Row gutter={16}>
             <Col xl={6} lg={6} md={12} sm={24}>
               <ProFormSelect
+                allowClear={false}
                 label={<FormattedMessage id='pages.borrower_form.account_receivable.duration'/>}
                 width="md"
                 name="duration"
@@ -530,6 +532,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
 
             <Col xl={{ span: 6, offset: 2 }} lg={{ span: 6 }} md={{ span: 12 }} sm={24}>
               <ProFormSelect
+                allowClear={false}
                 label={<FormattedMessage id='pages.borrower_form.account_receivable.annual_interest_rate'/>}
                 width="md"
                 name="annual_interest_rate"
@@ -551,6 +554,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
 
             <Col xl={{ span: 6, offset: 2 }} lg={{ span: 6 }} md={{ span: 24 }} sm={24}>
               <ProFormSelect
+                allowClear={false}
                 label={<FormattedMessage id='pages.borrower_form.account_receivable.penalty_annual_interest_rate'/>}
                 width="md"
                 name="penalty_annual_interest_rate"
@@ -571,6 +575,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           <Row gutter={16}>
             <Col lg={12} md={12} sm={24}>
               <ProFormSelect
+                allowClear={false}
                 label={<FormattedMessage id='pages.util.status'/>}
                 width="md"
                 name="status_lender"
@@ -614,6 +619,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           <Row gutter={16}>
             <Col lg={12} md={12} sm={24}>
               <ProFormSelect
+                allowClear={false}
                 label={<FormattedMessage id='pages.borrower_list.borrower.finance_type'/>}
                 width="md"
                 name="finance_type"
@@ -639,6 +645,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           <Row gutter={16}>
             <Col lg={12} md={12} sm={24}>
               <ProFormSelect
+                allowClear={false}
                 label={<FormattedMessage id='pages.util.status'/>}
                 width="md"
                 name="status"

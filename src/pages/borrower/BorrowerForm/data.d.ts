@@ -1,12 +1,12 @@
 export interface StepDataType {
   key: string;
 
-  br_hk: string,  
-  br_cn: string,  
-  policy_cn: string,  
+  file_br_hk: string,  
+  file_br_cn: string,  
+  file_policy_cn: string,  
 
-  director_hk: string,  
-  director_cn: string,
+  file_director_hk: string,  
+  file_director_cn: string,
 
   name_cn: string;  
   credit_code_cn: string;

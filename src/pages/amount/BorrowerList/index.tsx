@@ -1,78 +1,17 @@
-import { PlusOutlined } from '@ant-design/icons';
-import { Button, message, Input, Drawer } from 'antd';
+import { Button, Space } from 'antd';
 import React, { useState, useRef } from 'react';
-import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
+import { PageContainer } from '@ant-design/pro-layout';
 import type { ProColumns, ActionType, ColumnsState } from '@ant-design/pro-table';
-import ProTable from '@ant-design/pro-table';
-import { ModalForm, ProFormText, ProFormTextArea } from '@ant-design/pro-form';
-import type { ProDescriptionsItemProps } from '@ant-design/pro-descriptions';
-import ProDescriptions from '@ant-design/pro-descriptions';
-import type { FormValueType } from './components/UpdateForm';
-import UpdateForm from './components/UpdateForm';
-import { company, updateCompany, removeLender } from './service';
-import type { TableListItem, TableListPagination } from './data';
+import type { TableListItem } from './data';
 import styles from './style.less';
-import { request, FormattedMessage } from 'umi';
+import { request, FormattedMessage, useRequest } from 'umi';
 
-import { EditTwoTone, ProfileTwoTone } from '@ant-design/icons';
+import { EditTwoTone } from '@ant-design/icons';
 import { EditableProTable } from '@ant-design/pro-table';
-
-
-//打印company所产生的数据 最后修改完可以注释或者删除
-const dataSource_company = company();
-console.log("dataSource_company",dataSource_company);
-
-const handleUpdate = async (fields: FormValueType, currentRow?: TableListItem) => {
-  const hide = message.loading('Updating');
-
-  try {
-    await updateCompany({
-      ...currentRow,
-      ...fields,
-    });
-    hide();
-    message.success('Update successfully!');
-    return true;
-  } catch (error) {
-    hide();
-    message.error('Update failed. Please try again!');
-    return false;
-  }
-};
-
-/**
- * 删除节点
- *
- * @param selectedRows
- */
-
-const handleRemove = async (selectedRows: TableListItem[]) => {
-  const hide = message.loading('Deleting');
-  if (!selectedRows) return true;
-
-  try {
-    await removeLender({
-      key: selectedRows.map((row) => row.key),
-    });
-    hide();
-    message.success('Delete successfully!');
-    return true;
-  } catch (error) {
-    hide();
-    message.error('Delete failed. Please try again!');
-    return false;
-  }
-};
 
 const TableList: React.FC = () => {
 
-  /** 分布更新窗口的弹窗 */
-  const [updateModalVisible, handleUpdateModalVisible] = useState<boolean>(false);
-  const [showDetail, setShowDetail] = useState<boolean>(false);
   const actionRef = useRef<ActionType>();
-  const [currentRow, setCurrentRow] = useState<TableListItem>();
-  const [selectedRowsState, setSelectedRows] = useState<TableListItem[]>([]);
-  /** 国际化配置 */
 
   const [editableKeys, setEditableRowKeys] = useState<React.Key[]>([]);
 
@@ -88,23 +27,9 @@ const TableList: React.FC = () => {
     {
       title: (<FormattedMessage id='pages.util.id'/>),
       dataIndex: 'key',
-      /*
-      render: (dom, entity) => {
-        return (
-          <a
-            onClick={() => {
-              setCurrentRow(entity);
-              setShowDetail(true);
-            }}
-          >
-            {dom}
-          </a>
-        );
-      },
-      */
       sorter: (a, b) => a.key - b.key,
       readonly: true,
-      width: '4%',
+      width: '5%',
     },
     {
       title: (<FormattedMessage id='pages.lender_form.company_name'/>),
@@ -114,7 +39,7 @@ const TableList: React.FC = () => {
       width: '15%',
       render: (dom, entity) => {
         return (
-          <a href={"/application/borrower-analysis?borrower_id=" + entity.id}>
+          <a href={"/application/borrower-analysis?borrower_key=" + entity.key}>
             {dom}
           </a>
         );
@@ -302,28 +227,7 @@ const TableList: React.FC = () => {
           </font>
         </a>,
       ],
-    },
-/*
-    {
-      title: (<FormattedMessage id='pages.util.operation'/>),
-      dataIndex: 'option',
-      valueType: 'option',
-      render: (_, record) => [
-        <a
-          key="config"
-          onClick={() => {
-            handleUpdateModalVisible(true);
-            setCurrentRow(record);
-          }}
-        >
-          <ProfileTwoTone />
-          <font color="red">
-            <FormattedMessage id='pages.util.approve'/>
-          </font>
-        </a>,
-      ],
-    },
-*/    
+    },    
   ];
 
   const [columnsStateMap, setColumnsStateMap] = useState<Record<string, ColumnsState>>({
@@ -333,7 +237,6 @@ const TableList: React.FC = () => {
     loan_settlement_number: {
       show: false
     },
-
     liquidated_amount: {
       show: false
     },
@@ -348,10 +251,31 @@ const TableList: React.FC = () => {
     },
   });
 
+
+  const { data, error, loading } = useRequest(() => {
+    return request('/api/amount/list');
+  });
+
+  var [listCompany, setListCompany] = useState<TableListItem[]>([]);
+  listCompany = data;
+
+  /*
+  const onChangeMonth = (date, dateString) => {
+    request('/api/amount/list?date=' + dateString).then(
+      ({data, error, loading}) => {
+        console.log(data);
+        setListCompany(data);
+      }
+    );
+
+    setListCompany(data);
+  };
+  */
+
   return (
     <PageContainer>
       <div className={styles.divline}></div>
-      <EditableProTable<TableListItem, TableListPagination>
+      <EditableProTable<TableListItem>
         headerTitle={<FormattedMessage id='pages.lender_list.company_list'/>}
         actionRef={actionRef}
         rowKey="key"
@@ -361,13 +285,16 @@ const TableList: React.FC = () => {
         search={false}
         toolBarRender={() => [
         ]}
-        request={company}
+        //request={company}
+        request={async () => ({
+          data: listCompany,
+          total: listCompany?.length,
+          success: true,
+        })}        
+        value={listCompany}
+        onChange={setListCompany}
+
         columns={columns}
-        rowSelection={{
-          onChange: (_, selectedRows) => {
-            setSelectedRows(selectedRows);
-          },
-        }}
         columnsState={{
           value: columnsStateMap,
           onChange: setColumnsStateMap,
@@ -377,107 +304,55 @@ const TableList: React.FC = () => {
           editableKeys,
           onSave: async (rowKey, newData, oldData) => {
             //console.log(rowKey, newData, oldData);
-            request('/api/amount/get_company_single?borrower_id='+ newData.id + '&half_month_cash_flow=' + newData.half_month_cash_flow + '&approved_amount=' + newData.approved_amount).then(
+            request('/api/amount/get_company_single?borrower_key='+ newData.key + '&half_month_cash_flow=' + newData.half_month_cash_flow + '&approved_amount=' + newData.approved_amount).then(
               ({data, error, loading}) => {
-                  //newData.probability_of_default = data.probability_of_default;
-                  //newData.loss_given_default = data.loss_given_default;
+                  let dataIndex: number = -1;
+                  for (let idx: number = 0; idx < listCompany?.length; idx++) {
+                    if (listCompany[idx].key == rowKey) {
+                      dataIndex = idx;
+                      break;
+                    }
+                  }
 
-                  window.location.reload();
+                  if (dataIndex != -1) {
+                    listCompany[dataIndex].half_month_cash_flow = data.half_month_cash_flow;
+                    listCompany[dataIndex].approved_amount = data.approved_amount;
+
+                    listCompany[dataIndex].probability_of_default = data.probability_of_default;
+                    listCompany[dataIndex].loss_given_default = data.loss_given_default;
+
+                    setListCompany(listCompany);
+                  }  
               }
             )            
           },
           onChange: setEditableRowKeys,
-          deleteText: " ", 
+          deleteText: " ",
         }}
-        recordCreatorProps={false}                 
+        recordCreatorProps={false}
+        
+        pagination={{
+          pageSize: 20,
+          //onChange: (page) => console.log(page),
+        }}        
       />
 
-      <Button
-        onClick={async () => {
-          request('/api/amount/get_company_single?cmd=clear').then(
-            ()=>{
-                window.location.reload();
-            });          
-        }}
-      >
-        <FormattedMessage id='pages.util.reset'/>
-      </Button>
-
-
-      {selectedRowsState?.length > 0 && (
-        <FooterToolbar
-          extra={
-            <div>
-              Selected{' '}
-              <a
-                style={{
-                  fontWeight: 600,
-                }}
-              >
-                {selectedRowsState.length}
-              </a>{' '}
-              items 
-            </div>
-          }
+      <Space direction="vertical">
+        <Button
+          onClick={async () => {
+            request('/api/amount/get_company_single?cmd=clear').then(
+              ()=>{
+                  window.location.reload();
+              });          
+          }}
         >
-          <Button
-            onClick={async () => {
-              await handleRemove(selectedRowsState);
-              setSelectedRows([]);
-              actionRef.current?.reloadAndRest?.();
-            }}
-          >
-            <FormattedMessage id='pages.util.delete'/>
-          </Button>
-        </FooterToolbar>
-      )}
-      
-      <UpdateForm
-        onSubmit={async (value) => {
-          const success = await handleUpdate(value, currentRow);
+          <FormattedMessage id='pages.util.reset'/>
+        </Button>
+{/*
+        <DatePicker onChange={onChangeMonth} picker="month" />
+*/}
+      </Space>
 
-          if (success) {
-            handleUpdateModalVisible(false);
-            setCurrentRow(undefined);
-
-            if (actionRef.current) {
-              actionRef.current.reload();
-            }
-          }
-
-          return true;
-        }}
-        onCancel={() => {
-          handleUpdateModalVisible(false);
-          setCurrentRow(undefined);
-        }}
-        updateModalVisible={updateModalVisible}
-        values={currentRow || {}}
-      />
-
-      <Drawer
-        width={600}
-        visible={showDetail}
-        onClose={() => {
-          setCurrentRow(undefined);
-          setShowDetail(false);
-        }}
-        closable={false}
-      >
-        {currentRow?.name && (
-          <ProDescriptions<TableListItem>
-            column={2}
-            title={currentRow?.name}
-            request={async () => ({
-              data: currentRow || {},
-            })}
-            params={{
-              id: currentRow?.name,
-            }}
-            columns={columns as ProDescriptionsItemProps<TableListItem>[]}
-          />
-        )}
-      </Drawer>
     </PageContainer>
   );
 };
