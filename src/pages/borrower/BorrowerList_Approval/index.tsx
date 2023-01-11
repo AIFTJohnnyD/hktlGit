@@ -165,7 +165,7 @@ const ApprovalForm: FC<Record<string, any>> = () => {
     );
   });
   let kyc_url:string = '/application/borrower-analysis-amount-approval?borrower_key=' + borrower_key
-  //console.log(data)
+  let kyp_url:string = '/product/product-analysis'
 
   //const access = useAccess();
 
@@ -370,6 +370,19 @@ const ApprovalForm: FC<Record<string, any>> = () => {
               </Button>
             </Col>
             <Col xl={{ span: 6, offset: 2 }} lg={{ span: 6 }} md={{ span: 12 }} sm={24}>
+              <Button type={Style? 'default':'primary'} 
+                  onClick={() => {
+                    setStyle(!Style)
+                    //点击按钮后保持checkBoxDisabled为false
+                    if(checkBoxDisabled){
+                      setCheckBoxDisabled(!checkBoxDisabled);
+                    }
+                    window.open(kyp_url,'KYC_Window','height=900, width=1720, top=80, left=200, scrollbars =no,toolbar=no, menuRender=false, status=no')
+                  }}>
+                  请查看并确认客户KYP
+              </Button>
+            </Col>
+            <Col xl={{ span: 6, offset: 2 }} lg={{ span: 6 }} md={{ span: 24 }} sm={24}>
               <Checkbox  
                 // hecked={checked} 
                 disabled={checkBoxDisabled} 
@@ -377,8 +390,6 @@ const ApprovalForm: FC<Record<string, any>> = () => {
                 >
                 确认KYC
               </Checkbox>
-            </Col>
-            <Col xl={{ span: 6, offset: 2 }} lg={{ span: 6 }} md={{ span: 24 }} sm={24}>
             </Col>
             
           </Row>       

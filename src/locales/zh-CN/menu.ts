@@ -74,6 +74,7 @@ export default {
   'menu.amount': '授信管理',
   'menu.amount.loan-product': '信贷产品管理',
   'menu.amount.borrower-list': '电商列表',
+  'menu.amount.amount-approval': '额度管理',
 
   //'menu.loan': '贷款指标',
   //'menu.loan.input': '输入信息',

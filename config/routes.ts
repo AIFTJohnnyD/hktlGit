@@ -179,6 +179,13 @@ export default [
         component: './amount/BorrowerList',
         access: 'canLenderAndAdmin',
       },      
+      {
+        name: 'amount-approval',
+        icon: 'table',
+        path: '/amount/amount-approval',
+        component: './amount/AmountApproval',
+        access: 'canLenderAndAdmin',
+      },      
     ],
   },
 
