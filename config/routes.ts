@@ -166,12 +166,39 @@ export default [
     icon: 'table',
     routes: [
       {
+        name: 'amountList',
+        hideInMenu: true,
+        icon: 'table',
+        path: '/amount/borrower-approval',
+        component: './amount/BorrowerList_Approval',   
+        access: 'canLenderAndAdmin',
+        layout: {
+          hideMenu: true,
+          hideNav: true,
+          hideFooter: true,
+        },
+      },
+      //product/product-analysis
+      {
+        name: 'AmountAnalysis',
+        hideInMenu: true,
+        icon: 'smile',
+        access: 'canLenderAndAdmin',
+        path: '/amount/product-analysis',
+        component: './amount/ProductAnalysis',
+        layout: {
+          hideMenu: true,
+          hideNav: true,
+          hideFooter: true,
+        },
+      },
+      {
         name: 'loan-product',
         icon: 'table',
         path: '/amount/loan-product',
         component: './amount/LoanProduct',
         access: 'canLenderAndAdmin',
-      },      
+      },
       {
         name: 'borrower-list',
         icon: 'table',

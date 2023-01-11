@@ -154,7 +154,7 @@ const TableList: React.FC = () => {
           }}
           */
           onClick={() => {
-            window.open("/borrower/borrower-approval?borrower_key=" + record?.key,'newwindow','height=800, width=1500, top=160, left=350, toolbar=no, menubar=no, status=no')
+            window.open("/amount/borrower-approval?borrower_key=" + record?.key,'newwindow','height=800, width=1500, top=160, left=350, toolbar=no, menubar=no, status=no')
           }}         
         >
           <FormattedMessage id='pages.util.review'/>
