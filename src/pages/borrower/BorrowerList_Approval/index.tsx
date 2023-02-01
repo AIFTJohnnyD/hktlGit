@@ -184,19 +184,17 @@ const ApprovalForm: FC<Record<string, any>> = () => {
       }}
       
       submitter={{
-        render: (props, doms) => {
-          return [
-            <button type="button" key="rest" onClick={() => props.form?.resetFields()}>
-              重置
-            </button>,
-            <button disabled ={disabled}
-              type="button" key="submit" onClick={() => props.form?.submit?.()}>
-              提交
-            </button>,
-            
-          ];
+        resetButtonProps: {
+          style: {            
+            display: 'none',  // 隐藏重置按钮
+          },
         },
-      }}            
+        submitButtonProps: {
+          style: {            
+            display: 'none',  // 隐藏重置按钮
+          },
+        },
+      }}           
     >
       <BorrowerInfoDifference borrower_key={borrower_key} show_documents={true}/>
       <p></p>
@@ -227,7 +225,7 @@ const ApprovalForm: FC<Record<string, any>> = () => {
                     }
                     window.open(kyc_url,'KYC_Window','height=900, width=1720, top=80, left=200, scrollbars =no,toolbar=no, menuRender=false, status=no')
                   }}>
-                  请查看并确认客户KYC
+                  查看客户KYC
               </Button>
             </Col>
             <Col xl={{ span: 6, offset: 2 }} lg={{ span: 6 }} md={{ span: 12 }} sm={24}>
@@ -240,17 +238,17 @@ const ApprovalForm: FC<Record<string, any>> = () => {
                     }
                     window.open(kyp_url,'KYC_Window','height=900, width=1720, top=80, left=200, scrollbars =no,toolbar=no, menuRender=false, status=no')
                   }}>
-                  请查看并确认客户KYP
+                  查看客户KYP
               </Button>
             </Col>
             <Col xl={{ span: 6, offset: 2 }} lg={{ span: 6 }} md={{ span: 24 }} sm={24}>
-              <Checkbox  
+              {/* <Checkbox  
                 // hecked={checked} 
                 disabled={checkBoxDisabled} 
                 onChange={onCheckboxChange}
                 >
                 确认KYC
-              </Checkbox>
+              </Checkbox> */}
             </Col>
             
           </Row>       
