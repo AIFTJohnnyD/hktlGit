@@ -7,8 +7,8 @@ import ProTable from '@ant-design/pro-table';
 import { ModalForm, ProFormText, ProFormTextArea } from '@ant-design/pro-form';
 import type { ProDescriptionsItemProps } from '@ant-design/pro-descriptions';
 import ProDescriptions from '@ant-design/pro-descriptions';
-import type { FormValueType } from './components/UpdateForm';
-import UpdateForm from './components/UpdateForm';
+// import type { FormValueType } from './components/UpdateForm';
+// import UpdateForm from './components/UpdateForm';
 import { getList, updateItem, removeItem } from './service';
 import type { TableListItem, TableListPagination } from './data';
 import styles from './style.less';
@@ -20,23 +20,23 @@ import { FormattedMessage } from 'umi';
  * @param fields
  */
 
-const handleUpdate = async (fields: FormValueType, currentRow?: TableListItem) => {
-  const hide = message.loading('Updating');
+// const handleUpdate = async (fields: FormValueType, currentRow?: TableListItem) => {
+//   const hide = message.loading('Updating');
 
-  try {
-    await updateItem({
-      ...currentRow,
-      ...fields,
-    });
-    hide();
-    message.success('Update successfully!');
-    return true;
-  } catch (error) {
-    hide();
-    message.error('Update failed. Please try again!');
-    return false;
-  }
-};
+//   try {
+//     await updateItem({
+//       ...currentRow,
+//       ...fields,
+//     });
+//     hide();
+//     message.success('Update successfully!');
+//     return true;
+//   } catch (error) {
+//     hide();
+//     message.error('Update failed. Please try again!');
+//     return false;
+//   }
+// };
 
 /**
  * 删除节点
@@ -72,13 +72,8 @@ const TableList: React.FC = () => {
   const [selectedRowsState, setSelectedRows] = useState<TableListItem[]>([]);
   /** 国际化配置 */
 
-  const timeRequest = async () => [
-    { label: '全部', value: 'all' },
-    { label: '未解决', value: 'open' },
-    { label: '已解决', value: 'closed' },
-    { label: '解决中', value: 'processing' },
-  ];
   const columns: ProColumns<TableListItem>[] = [
+    //编号
     {
       title: (<FormattedMessage id='pages.util.id'/>),
       dataIndex: 'key',
@@ -95,39 +90,36 @@ const TableList: React.FC = () => {
         );
       },
     },
-
+    // 公司名称
     {
       title: (<FormattedMessage id='pages.borrower_list.borrower.name'/>),
       dataIndex: 'name_cn',
       valueType: 'textarea',
-    },    
+    },  
+    // 当前额度 amount_limit 
     {
-      title: (<FormattedMessage id='pages.borrower_list.borrower.credit_code_cn'/>),
-      dataIndex: 'credit_code_cn',
+      title: (<FormattedMessage id='当前额度'/>),
+      dataIndex: ['borrower_amount','amount_limit'],
+      valueType: 'textarea',
+    },  
+    // 额度比例 amount_monthly_ratio 
+    {
+      title: (<FormattedMessage id='额度比例'/>),
+      dataIndex: ['borrower_amount','amount_monthly_ratio'],
+      valueType: 'textarea',
+    },  
+    // 标准利率 annual_interest_rate
+    {
+      title: (<FormattedMessage id='标准利率'/>),
+      dataIndex: ['borrower_amount','annual_interest_rate'],
+      valueType: 'textarea',
+    },  
+    // 逾期利率 penalty_annual_interest_rate
+    {
+      title: (<FormattedMessage id='逾期利率'/>),
+      dataIndex: ['borrower_amount','penalty_annual_interest_rate'],
       valueType: 'textarea',
     },    
-    {
-      title: (<FormattedMessage id='pages.borrower_list.borrower.address_cn'/>),
-      dataIndex: 'address_cn',
-      valueType: 'textarea',
-    },    
-
-    {
-      title: (<FormattedMessage id='pages.borrower_list.borrower.name_hk'/>),
-      dataIndex: 'name_hk',
-      valueType: 'textarea',
-    },    
-    {
-      title: (<FormattedMessage id='pages.borrower_list.borrower.br_code_hk'/>),
-      dataIndex: 'br_code_hk',
-      valueType: 'textarea',
-    },    
-    {
-      title: (<FormattedMessage id='pages.borrower_list.borrower.address_hk'/>),
-      dataIndex: 'address_hk',
-      valueType: 'textarea',
-    },    
-
     {
       title: '额度审批时间',
       dataIndex: 'modified_datetime',
@@ -157,7 +149,7 @@ const TableList: React.FC = () => {
             window.open("/amount/borrower-approval?borrower_key=" + record?.key,'newwindow','height=800, width=1500, top=160, left=350, toolbar=no, menubar=no, status=no')
           }}         
         >
-          <FormattedMessage id='pages.util.review'/>
+          <FormattedMessage id='审批'/>
         </a>,
       ],
     },
@@ -213,7 +205,7 @@ const TableList: React.FC = () => {
         </FooterToolbar>
       )}
       
-      <UpdateForm
+      {/* <UpdateForm
         onSubmit={async (value) => {
           const success = await handleUpdate(value, currentRow);
 
@@ -234,7 +226,7 @@ const TableList: React.FC = () => {
         }}
         updateModalVisible={updateModalVisible}
         values={currentRow || {}}
-      />
+      /> */}
 
       <Drawer
         width={600}

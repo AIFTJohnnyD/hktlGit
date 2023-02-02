@@ -1,93 +1,21 @@
-import { Card, message, Row, Col, Table, Button, Descriptions, Checkbox, Spin, Space} from 'antd';
+import { Card, message, Row, Col, Button, Checkbox} from 'antd';
 import ProForm, {
-  ProFormDateRangePicker,
   ProFormDependency,
   ProFormDigit,
-  ProFormRadio,
   ProFormSelect,
-  ProFormText,
-  ProFormTextArea,
-  ProFormMoney,
-  ProFormDatePicker,  
+  ProFormTextArea,  
 } from '@ant-design/pro-form';
 import { useRequest, history, request, FormattedMessage, useAccess } from 'umi';
-import { FC, useEffect, useMemo, useState } from 'react';
-import { PageContainer, PageLoading } from '@ant-design/pro-layout';
+import { FC, useState } from 'react';
 import { updateLoanApplication } from './service';
 import styles from './style.less';
 
-import type { ProColumns } from '@ant-design/pro-table';
 import { parse } from 'querystring';
-import { CheckCircleTwoTone, ExclamationCircleTwoTone, CloseCircleTwoTone } from '@ant-design/icons';
 
-import type { BorrowerAmount, TableListItem, Shareholder_Person, Shareholder_Company, Director_Person, Director_Company } from './data';
-import { List } from 'lodash';
-import e from 'express';
 import BorrowerInfoDifference from './Components/BorrowerInfoDifference';
-//import Nonperforming_Loan from "../../application/LoanApplicationListLender_Approval/components/nonperforming_loan";
 import Nonperforming_Loan from "./Components/nonperforming_loan";
 
-const columns_shareholder_company: ProColumns<Shareholder_Company>[] = [
-  {
-    title: (<FormattedMessage id='pages.borrower_form.shareholder.company.name'/>),
-    dataIndex: 'shareholder_company_name',
-    valueType: 'textarea',
-  },       
-  {
-    title: (<FormattedMessage id='pages.borrower_form.shareholder.company.business_register_code'/>),
-    dataIndex: 'shareholder_company_business_register_code',
-    valueType: 'textarea',
-  },       
 
-  {
-    title: (<FormattedMessage id='pages.borrower_form.shareholder.company.register_address'/>),
-    dataIndex: 'shareholder_company_register_address',
-    valueType: 'textarea',
-  },       
-  {
-    title: (<FormattedMessage id='pages.borrower_form.shareholder.company.country'/>),
-    dataIndex: 'shareholder_company_country',
-    valueType: 'textarea',
-  },       
-
-  {
-    title: (<FormattedMessage id='pages.borrower_form.shareholder.company.rate'/>),
-    dataIndex: 'shareholder_company_rate',
-    valueType: 'textarea',
-  },       
-  {
-    title: (<FormattedMessage id='pages.borrower_form.shareholder.company.address'/>),
-    dataIndex: 'shareholder_company_address',
-    valueType: 'textarea',
-  },       
-];
-
-const columns_director_company: ProColumns<Director_Company>[] = [
-  {
-    title: (<FormattedMessage id='pages.borrower_form.director.company.name'/>),
-    dataIndex: 'director_company_name',
-    valueType: 'textarea',
-  },  
-  {
-    title: (<FormattedMessage id='pages.borrower_form.director.company.business_register_code'/>),
-    dataIndex: 'director_company_business_register_code',
-    valueType: 'textarea',
-  },  
-  {
-    title: (<FormattedMessage id='pages.borrower_form.director.company.address'/>),
-    dataIndex: 'director_company_address',
-    valueType: 'textarea',
-  },  
-];
-
-var dictStatus: any = {
-  CREATED: <FormattedMessage id='pages.application.CREATED'/>,
-
-  APPROVED: <FormattedMessage id='pages.application.APPROVED'/>,
-  UNAPPROVED: <FormattedMessage id='pages.application.UNAPPROVED'/>,
-
-  CLOSED: <FormattedMessage id='pages.application.CLOSED'/>,
-};
 
 var dictFinanceType: any = {
   ACCOUNT_RECEIVABLE_FINANCE: <FormattedMessage id='pages.borrower_list.borrower.account_receivable_finance'/>,
@@ -107,9 +35,9 @@ var dictStatusAmount: any = {
 const ApprovalForm: FC<Record<string, any>> = () => {
   let urlParams = parse(window.location.href.split('?')[1]);
   const borrower_key = urlParams.borrower_key;
-  //console.log(borrower_key)
   //用于修改按钮的样式
-  const [Style, setStyle] = useState(false);
+  const [KYCStyle, setKYCStyle] = useState(false);
+  const [KYPStyle, setKYPStyle] = useState(false);
   //控制提交按钮的disabled属性
   const [disabled, setDisabled] = useState(true);
   const [checkBoxDisabled, setCheckBoxDisabled] = useState(true);
@@ -153,13 +81,8 @@ const ApprovalForm: FC<Record<string, any>> = () => {
     window.close();    
   };
   
-  const onExit = () => {
-    window.opener = null;
-    window.open('', '_self');
-    window.close();
-  };
 
-  const { data, error, loading } = useRequest(() => {
+  const { data } = useRequest(() => {
     return request(
       '/api/borrower/get_borrower_from_id?borrower_key=' + borrower_key,
     );
@@ -184,15 +107,19 @@ const ApprovalForm: FC<Record<string, any>> = () => {
       }}
       
       submitter={{
-        render: (props, doms) => {
+        render: (props) => {
           return [
-            <button type="button" key="rest" onClick={() => props.form?.resetFields()}>
+            <Button 
+              type="primary" 
+              key="rest" 
+              onClick={() => props.form?.resetFields()}>
               重置
-            </button>,
-            <button disabled ={disabled}
-              type="button" key="submit" onClick={() => props.form?.submit?.()}>
+            </Button>,
+            <Button disabled ={disabled}
+              type="primary"
+              key="submit" onClick={() => props.form?.submit?.()}>
               提交
-            </button>,
+            </Button>,
             
           ];
         },
@@ -357,9 +284,9 @@ const ApprovalForm: FC<Record<string, any>> = () => {
 
           <Row gutter={16}>
             <Col xl={6} lg={6} md={12} sm={24}>            
-              <Button type={Style? 'default':'primary'} 
+              <Button type={KYCStyle? 'default':'primary'} 
                   onClick={() => {
-                    setStyle(!Style)
+                    setKYCStyle(!KYCStyle)
                     //点击按钮后保持checkBoxDisabled为false
                     if(checkBoxDisabled){
                       setCheckBoxDisabled(!checkBoxDisabled);
@@ -370,13 +297,9 @@ const ApprovalForm: FC<Record<string, any>> = () => {
               </Button>
             </Col>
             <Col xl={{ span: 6, offset: 2 }} lg={{ span: 6 }} md={{ span: 12 }} sm={24}>
-              <Button type={Style? 'default':'primary'} 
+              <Button type={KYPStyle? 'default':'primary'} 
                   onClick={() => {
-                    setStyle(!Style)
-                    //点击按钮后保持checkBoxDisabled为false
-                    if(checkBoxDisabled){
-                      setCheckBoxDisabled(!checkBoxDisabled);
-                    }
+                    setKYPStyle(!KYPStyle)
                     window.open(kyp_url,'KYC_Window','height=900, width=1720, top=80, left=200, scrollbars =no,toolbar=no, menuRender=false, status=no')
                   }}>
                   请查看并确认客户KYP

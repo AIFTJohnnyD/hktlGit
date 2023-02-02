@@ -1,28 +1,16 @@
-import { Card, message, Row, Col, Table, Button, Descriptions, Checkbox, Spin, Space} from 'antd';
+import { Card, message, Row, Col, Button} from 'antd';
 import ProForm, {
-  ProFormDateRangePicker,
-  ProFormDependency,
-  ProFormDigit,
-  ProFormRadio,
-  ProFormSelect,
-  ProFormText,
-  ProFormTextArea,
-  ProFormMoney,
-  ProFormDatePicker,  
+  ProFormSelect,  
 } from '@ant-design/pro-form';
 import { useRequest, history, request, FormattedMessage, useAccess } from 'umi';
-import { FC, useEffect, useMemo, useState } from 'react';
-import { PageContainer, PageLoading } from '@ant-design/pro-layout';
+import { FC, useState } from 'react';
 import { updateLoanApplication } from './service';
 import styles from './style.less';
 
 import type { ProColumns } from '@ant-design/pro-table';
 import { parse } from 'querystring';
-import { CheckCircleTwoTone, ExclamationCircleTwoTone, CloseCircleTwoTone } from '@ant-design/icons';
 
-import type { BorrowerAmount, TableListItem, Shareholder_Person, Shareholder_Company, Director_Person, Director_Company } from './data';
-import { List } from 'lodash';
-import e from 'express';
+import type { Shareholder_Company, Director_Company } from './data';
 import BorrowerInfoDifference from './Components/BorrowerInfoDifference';
 //import Nonperforming_Loan from "../../application/LoanApplicationListLender_Approval/components/nonperforming_loan";
 import Nonperforming_Loan from "./Components/nonperforming_loan";

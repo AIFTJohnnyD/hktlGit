@@ -1,12 +1,8 @@
 import type { FC } from 'react';
 import { FormattedMessage, useRequest } from 'umi';
-import { Suspense, useState } from 'react';
-import { EllipsisOutlined } from '@ant-design/icons';
-import { Col, Descriptions, Dropdown, Menu, Row } from 'antd';
+import { Suspense } from 'react';
+import { Descriptions, Row } from 'antd';
 import { GridContent } from '@ant-design/pro-layout';
-import type { RadioChangeEvent } from 'antd/es/radio';
-import type { RangePickerProps } from 'antd/es/date-picker/generatePicker';
-import type moment from 'moment';
 import { PageContainer } from '@ant-design/pro-layout';
 import SelectProduct from './components/SelectProduct';
 import OpenToBuyRow from './components/OpenToBuyRow';
@@ -22,13 +18,8 @@ import GroupRow from './components/GroupRow';
 import GroupRow_CV_Slope from './components/GroupRow_cv_slope';
 import GroupSalesCard from './components/GroupSalesCard';
 
-import TopSearch from './components/TopSearch';
-import ProportionReview from './components/ProportionReview';
 import SalesChartData from './components/SalesChartData';
-import { fakeChartData } from './service';
 import PageLoading from './components/PageLoading';
-import type { TimeType } from './components/SalesCard';
-import { getTimeDistance } from './utils/utils';
 import type { AnalysisData } from './data.d';
 import styles from './style.less';
 
